@@ -1,0 +1,7 @@
+
+- better/enhanced relationship mappings
+- all criteria examples + strong typed criteria
+- entity graphs
+- hibernate envers
+
+data types
