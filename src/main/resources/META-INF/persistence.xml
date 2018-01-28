@@ -30,6 +30,8 @@
 
         <class>entities.relationships.many.to.many.list.M</class>
         <class>entities.relationships.many.to.many.list.N</class>
+        <class>entities.relationships.many.to.many.list.cascade.CascadeM</class>
+        <class>entities.relationships.many.to.many.list.cascade.CascadeN</class>
         <class>entities.relationships.many.to.many.map.MMap</class>
         <class>entities.relationships.many.to.many.map.NMap</class>
 
