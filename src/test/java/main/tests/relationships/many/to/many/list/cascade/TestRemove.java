@@ -66,10 +66,7 @@ public class TestRemove extends TransactionalSetup {
 
         // verify final
         {
-            CascadeM m = em.find(CascadeM.class, 1);
-            Assert.assertNull(m);
-            CascadeN n = em.find(CascadeN.class, 1);
-            Assert.assertNull(n);
+            verifyRemoveComplete();
         }
 
     }
@@ -95,12 +92,16 @@ public class TestRemove extends TransactionalSetup {
 
         // verify final
         {
-            CascadeM m = em.find(CascadeM.class, 1);
-            Assert.assertNull(m);
-            CascadeN n = em.find(CascadeN.class, 1);
-            Assert.assertNull(n);
+            verifyRemoveComplete();
         }
 
+        }
+
+    private void verifyRemoveComplete() {
+        CascadeM m = em.find(CascadeM.class, 1);
+        Assert.assertNull(m);
+        CascadeN n = em.find(CascadeN.class, 1);
+        Assert.assertNull(n);
     }
 
 }
