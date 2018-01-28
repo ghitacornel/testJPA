@@ -46,7 +46,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveLink() {
+    public void testRemoveLinkFromTheOwningSide() {
 
         // verify initial
         {
@@ -63,9 +63,8 @@ public class TestRemoveLink extends TransactionalSetup {
             Assert.assertNotNull(n);
             Assert.assertEquals(1, n.getListWithMs().size());
 
-            // XXX remove from both ways otherwise it won't work
+            // remove link from the owning side M
             M m = n.getListWithMs().get(0);
-            n.getListWithMs().remove(m);
             m.getListWithNs().remove(n);
 
             flushAndClear();
@@ -94,5 +93,47 @@ public class TestRemoveLink extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testRemoveLinkFromTheNonOwningSide() {
+
+        // verify initial
+        {
+            List<N> listN = em.createQuery("select t from N t", N.class).getResultList();
+            ReflectionAssert.assertReflectionEquals(model.subList(0, 1), listN, ReflectionComparatorMode.LENIENT_ORDER);
+            List<M> listM = em.createQuery("select t from M t", M.class).getResultList();
+            ReflectionAssert.assertReflectionEquals(model.subList(1, 2), listM, ReflectionComparatorMode.LENIENT_ORDER);
+            flushAndClear();
+        }
+
+        // remove link
+        {
+            N n = em.find(N.class, 1);
+            Assert.assertNotNull(n);
+            Assert.assertEquals(1, n.getListWithMs().size());
+
+            // remove link from the non owning side N
+            M m = n.getListWithMs().get(0);
+            n.getListWithMs().remove(m);
+
+            flushAndClear();
+        }
+
+        // validate link not removed
+        {
+            N n = em.find(N.class, 1);
+            Assert.assertNotNull(n);
+            Assert.assertEquals(1, n.getListWithMs().size());
+
+            M m = em.find(M.class, 1);
+            Assert.assertNotNull(m);
+            Assert.assertEquals(1, m.getListWithNs().size());
+
+            Assert.assertEquals(n.getListWithMs().get(0), m);
+            Assert.assertEquals(m.getListWithNs().get(0), n);
+
+            flushAndClear();
+        }
+
+    }
 
 }
