@@ -173,6 +173,13 @@
             <properties>
                 <build.profile.id>h2</build.profile.id>
             </properties>
+            <build>
+                <filters>
+                    <filter>
+                        src/test/resources/profiles/${build.profile.id}/config.properties
+                    </filter>
+                </filters>
+            </build>
         </profile>
         <profile>
             <id>hsqldb</id>
@@ -189,6 +196,13 @@
             <properties>
                 <build.profile.id>hsqldb</build.profile.id>
             </properties>
+            <build>
+                <filters>
+                    <filter>
+                        src/test/resources/profiles/${build.profile.id}/config.properties
+                    </filter>
+                </filters>
+            </build>
         </profile>
         <profile>
             <id>derby</id>
@@ -205,14 +219,21 @@
             <properties>
                 <build.profile.id>derby</build.profile.id>
             </properties>
+            <build>
+                <filters>
+                    <filter>
+                        src/test/resources/profiles/${build.profile.id}/config.properties
+                    </filter>
+                </filters>
+            </build>
         </profile>
         <profile>
-            <id>test</id>
+            <id>postgres</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
-                <build.profile.id>test</build.profile.id>
+                <build.profile.id>postgres</build.profile.id>
             </properties>
         </profile>
     </profiles>
