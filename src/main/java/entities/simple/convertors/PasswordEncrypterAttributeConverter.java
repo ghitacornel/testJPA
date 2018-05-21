@@ -6,7 +6,10 @@ import javax.persistence.AttributeConverter;
 import java.security.Key;
 import java.util.Base64;
 
-public class PasswordEncryptorAttributeConverter implements AttributeConverter<String, String> {
+/**
+ * Encrypt / decrypt a password upon storing in the database
+ */
+public class PasswordEncrypterAttributeConverter implements AttributeConverter<String, String> {
 
     /**
      * The algorithm used for encryption

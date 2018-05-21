@@ -2,6 +2,9 @@ package entities.simple.convertors;
 
 import javax.persistence.AttributeConverter;
 
+/**
+ * convert a boolean to Y / N
+ */
 public class BooleanAttributeConverter implements AttributeConverter<Boolean, String> {
 
     @Override
