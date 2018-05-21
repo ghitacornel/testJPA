@@ -6,9 +6,16 @@ import javax.persistence.AttributeConverter;
 import java.security.Key;
 import java.util.Base64;
 
-public class PasswordEncriptorAttributeConverter implements AttributeConverter<String, String> {
+public class PasswordEncryptorAttributeConverter implements AttributeConverter<String, String> {
 
+    /**
+     * The algorithm used for encryption
+     */
     private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
+
+    /**
+     * Private KEY used for encryption
+     */
     private static final byte[] KEY = "MySuperSecretKey".getBytes();
 
     @Override

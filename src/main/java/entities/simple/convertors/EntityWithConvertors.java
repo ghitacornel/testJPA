@@ -13,7 +13,7 @@ public class EntityWithConvertors {
     private Boolean booleanValue;
 
     @Column(nullable = false)
-    @Convert(converter = PasswordEncriptorAttributeConverter.class)
+    @Convert(converter = PasswordEncryptorAttributeConverter.class)
     private String password;
 
     public Integer getId() {
