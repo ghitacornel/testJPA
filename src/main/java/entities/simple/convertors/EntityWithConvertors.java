@@ -9,11 +9,11 @@ public class EntityWithConvertors {
     private Integer id;
 
     @Column(nullable = false)
-    @Convert(converter = BooleanConverter.class)
+    @Convert(converter = BooleanAttributeConverter.class)
     private Boolean booleanValue;
 
     @Column(nullable = false)
-    @Convert(converter = CryptoConverter.class)
+    @Convert(converter = PasswordEncriptorAttributeConverter.class)
     private String password;
 
     public Integer getId() {

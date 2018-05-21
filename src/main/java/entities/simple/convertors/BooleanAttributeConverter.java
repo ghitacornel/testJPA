@@ -2,7 +2,7 @@ package entities.simple.convertors;
 
 import javax.persistence.AttributeConverter;
 
-public class BooleanConverter implements AttributeConverter<Boolean, String> {
+public class BooleanAttributeConverter implements AttributeConverter<Boolean, String> {
 
     @Override
     public String convertToDatabaseColumn(Boolean value) {
