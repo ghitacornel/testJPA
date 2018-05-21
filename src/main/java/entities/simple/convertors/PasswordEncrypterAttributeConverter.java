@@ -17,7 +17,7 @@ public class PasswordEncrypterAttributeConverter implements AttributeConverter<S
     private static final String ALGORITHM = "AES/ECB/PKCS5Padding";
 
     /**
-     * Private KEY used for encryption
+     * The private KEY used for encryption
      */
     private static final byte[] KEY = "MySuperSecretKey".getBytes();
 

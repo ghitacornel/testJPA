@@ -1,4 +1,4 @@
-package main.tests.simple.convertors;
+package main.tests.simple.converters;
 
 import entities.simple.convertors.EntityWithAttributeConverters;
 import main.tests.TransactionalSetup;
@@ -6,6 +6,8 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+
+import java.util.List;
 
 public class TestCRUD extends TransactionalSetup {
 
@@ -27,6 +29,20 @@ public class TestCRUD extends TransactionalSetup {
         em.persist(entity1);
         flushAndClear();
 
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id,booleanValue,password from EntityWithAttributeConverters t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("Y", objects[1]);
+
+                // text must match since we use a fixed algorithm and private key
+                Assert.assertEquals("TvZEM7lqd+QNaJKAz5/Gkw==", objects[2]);
+
+            }
+        }
+
         // verify
         EntityWithAttributeConverters entity2 = em.find(EntityWithAttributeConverters.class, entity1.getId());
         Assert.assertNotNull(entity2);
@@ -34,9 +50,23 @@ public class TestCRUD extends TransactionalSetup {
 
         // update
         entity2.setBooleanValue(false);
-        entity1.setPassword("secret2");
+        entity2.setPassword("secret2");
         em.merge(entity2);
         flushAndClear();
+
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id,booleanValue,password from EntityWithAttributeConverters t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("N", objects[1]);
+
+                // text must match since we use a fixed algorithm and private key
+                Assert.assertEquals("xDhSabqx5D/k0xImrZxPEg==", objects[2]);
+
+            }
+        }
 
         // verify
         EntityWithAttributeConverters entity3 = em.find(EntityWithAttributeConverters.class, entity1.getId());
