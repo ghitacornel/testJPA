@@ -5,7 +5,8 @@ import javax.persistence.Id;
 
 /**
  * Good practice :<br>
- * Use primitives whenever a not null with default value column must be mapped
+ * Use primitives whenever a not null with default value column must be mapped<br>
+ * this practice enforce a cleaner model and saves some null checks
  */
 @Entity
 public class EntityWithPrimitives {
