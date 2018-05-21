@@ -184,7 +184,7 @@
         <profile>
             <id>hsqldb</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
@@ -230,7 +230,7 @@
         <profile>
             <id>postgres</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <properties>
                 <build.profile.id>postgres</build.profile.id>
