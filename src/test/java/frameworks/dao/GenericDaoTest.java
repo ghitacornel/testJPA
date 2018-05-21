@@ -1,7 +1,6 @@
 package frameworks.dao;
 
 import entities.simple.Entity;
-import entities.simple.SimpleEnum;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Test;
@@ -25,8 +24,6 @@ public class GenericDaoTest extends TransactionalSetup {
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name1");
-        entity1.setEnum1(SimpleEnum.ONE);
-        entity1.setEnum2(SimpleEnum.TWO);
         entity1.setBooleanValue(true);
 
         // persist
@@ -40,8 +37,6 @@ public class GenericDaoTest extends TransactionalSetup {
 
         // update model
         entity2.setName("name2");
-        entity2.setEnum1(SimpleEnum.THREE);
-        entity2.setEnum2(SimpleEnum.THREE);
         entity2.setBooleanValue(false);
 
         // update database
@@ -71,8 +66,6 @@ public class GenericDaoTest extends TransactionalSetup {
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name1");
-        entity1.setEnum1(SimpleEnum.ONE);
-        entity1.setEnum2(SimpleEnum.TWO);
         entity1.setBooleanValue(true);
 
         // persist
@@ -102,8 +95,6 @@ public class GenericDaoTest extends TransactionalSetup {
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name1");
-        entity1.setEnum1(SimpleEnum.ONE);
-        entity1.setEnum2(SimpleEnum.TWO);
         entity1.setBooleanValue(true);
 
         // persist

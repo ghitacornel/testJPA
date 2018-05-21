@@ -1,7 +1,6 @@
 package main.tests.simple;
 
 import entities.simple.Entity;
-import entities.simple.SimpleEnum;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,8 +21,6 @@ public class TestInsert extends TransactionalSetup {
         // create new entity
         Entity entity = new Entity();
         entity.setName("name");
-        entity.setEnum1(SimpleEnum.ONE);
-        entity.setEnum2(SimpleEnum.TWO);
         entity.setBooleanValue(true);
 
         // persist with id 1

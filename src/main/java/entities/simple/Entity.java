@@ -22,22 +22,12 @@ public class Entity {
     @Column(nullable = false)
     private String name;
 
+    @Basic
+    private Integer value;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "simpleDate")
     private Date simpleDate;
-
-    /**
-     * safe, recommended, has performance degradation due to text column usage
-     */
-    @Enumerated(EnumType.STRING)
-    private SimpleEnum enum1;
-
-    /**
-     * unsafe when order of values change in enum definition, performance is
-     * better due to integer column usage
-     */
-    @Enumerated(EnumType.ORDINAL)
-    private SimpleEnum enum2;
 
     @Transient
     private Integer notMapped;
@@ -74,22 +64,6 @@ public class Entity {
         this.notMapped = notMapped;
     }
 
-    public SimpleEnum getEnum1() {
-        return enum1;
-    }
-
-    public void setEnum1(SimpleEnum enum1) {
-        this.enum1 = enum1;
-    }
-
-    public SimpleEnum getEnum2() {
-        return enum2;
-    }
-
-    public void setEnum2(SimpleEnum enum2) {
-        this.enum2 = enum2;
-    }
-
     public Date getSimpleDate() {
         return simpleDate;
     }
@@ -112,5 +86,13 @@ public class Entity {
 
     public void setFileContent(byte[] fileContent) {
         this.fileContent = fileContent;
+    }
+
+    public Integer getValue() {
+        return value;
+    }
+
+    public void setValue(Integer value) {
+        this.value = value;
     }
 }

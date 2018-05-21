@@ -22,8 +22,6 @@ public class TestSimpleInsert extends TransactionalSetup {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName("name");
-        entity.setEnum1(SimpleEnum.ONE);
-        entity.setEnum2(SimpleEnum.TWO);
         entity.setBooleanValue(true);
         entity.setFileContent(new byte[]{1, 2, 3});
 

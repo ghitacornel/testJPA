@@ -1,7 +1,6 @@
 package main.tests.queries;
 
 import entities.simple.Entity;
-import entities.simple.SimpleEnum;
 import main.tests.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
@@ -21,7 +20,7 @@ public class TestQueryAdvanced extends TransactionalSetup {
             entity.setId(i);
             entity.setName("name " + i);
             if (i > 3) {
-                entity.setEnum1(SimpleEnum.ONE);
+                entity.setValue(1);
             }
             list.add(entity);
         }
@@ -37,10 +36,7 @@ public class TestQueryAdvanced extends TransactionalSetup {
     @Test
     public void testWithNotNullParameter() {
 
-        List<Entity> list = em
-                .createQuery("select e from Entity e where e.enum1 = :enum1",
-                        Entity.class).setParameter("enum1", SimpleEnum.ONE)
-                .getResultList();
+        List<Entity> list = em.createQuery("select e from Entity e where e.value = :value", Entity.class).setParameter("value", 1).getResultList();
 
         List<Entity> expected = new ArrayList<>();
         expected.add(model.get(3));
@@ -51,16 +47,11 @@ public class TestQueryAdvanced extends TransactionalSetup {
     @Test
     public void testWithNullParameter() {
 
-        List<Entity> list1 = em
-                .createQuery("select e from Entity e where e.enum1 = :enum1",
-                        Entity.class).setParameter("enum1", null)
-                .getResultList();
+        List<Entity> list1 = em.createQuery("select e from Entity e where e.value = :value", Entity.class).setParameter("value", null).getResultList();
 
         ReflectionAssert.assertReflectionEquals(new ArrayList<>(), list1);
 
-        List<Entity> list2 = em
-                .createQuery("select e from Entity e where e.enum1 IS NULL",
-                        Entity.class).getResultList();
+        List<Entity> list2 = em.createQuery("select e from Entity e where e.value IS NULL", Entity.class).getResultList();
 
         List<Entity> expected = new ArrayList<>();
         expected.add(model.get(0));
