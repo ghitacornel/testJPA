@@ -16,6 +16,8 @@ public class EntityListener {
         entity.setPreUpdate("preUpdate");
     }
 
-    // and check for many other hook methods
+    // TODO check for other hook methods
+    // TODO check for difference between PRE vs POST
+    // TODO check similarities and differences between entity listeners and database triggers
 
 }
