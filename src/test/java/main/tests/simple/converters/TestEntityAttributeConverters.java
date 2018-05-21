@@ -9,7 +9,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.List;
 
-public class TestCRUD extends TransactionalSetup {
+public class TestEntityAttributeConverters extends TransactionalSetup {
 
     @Before
     public void before() {
@@ -17,7 +17,7 @@ public class TestCRUD extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testCRU() {
 
         // create new entity
         EntityWithAttributeConverters entity1 = new EntityWithAttributeConverters();
@@ -72,13 +72,6 @@ public class TestCRUD extends TransactionalSetup {
         EntityWithAttributeConverters entity3 = em.find(EntityWithAttributeConverters.class, entity1.getId());
         Assert.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
-
-        // delete
-        em.remove(entity3);
-        flushAndClear();
-
-        // verify
-        Assert.assertNull(em.find(EntityWithAttributeConverters.class, entity3.getId()));
 
     }
 

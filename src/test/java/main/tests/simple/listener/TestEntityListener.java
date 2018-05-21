@@ -6,7 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-public class TestSimpleInsert extends TransactionalSetup {
+public class TestEntityListener extends TransactionalSetup {
 
     @Before
     public void before() {
@@ -14,22 +14,22 @@ public class TestSimpleInsert extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testCRU() {
 
         // create new entity
-        EntityWithListener initialEntity = new EntityWithListener();
-        initialEntity.setId(1);
-        initialEntity.setName("name");
+        EntityWithListener entity1 = new EntityWithListener();
+        entity1.setId(1);
+        entity1.setName("name");
 
         // persist
-        em.persist(initialEntity);
+        em.persist(entity1);
         flushAndClear();
 
         // verify
         EntityWithListener entity2 = em.find(EntityWithListener.class, 1);
         Assert.assertNotNull(entity2);
-        Assert.assertEquals(entity2.getId(), initialEntity.getId());
-        Assert.assertEquals(entity2.getName(), initialEntity.getName());
+        Assert.assertEquals(entity2.getId(), entity1.getId());
+        Assert.assertEquals(entity2.getName(), entity1.getName());
 
         // verify listener filled fields
         Assert.assertEquals("prePersist", entity2.getPrePersist());
@@ -43,7 +43,7 @@ public class TestSimpleInsert extends TransactionalSetup {
         // verify
         EntityWithListener entity3 = em.find(EntityWithListener.class, 1);
         Assert.assertNotNull(entity3);
-        Assert.assertEquals(entity3.getId(), initialEntity.getId());
+        Assert.assertEquals(entity3.getId(), entity1.getId());
         Assert.assertEquals(entity3.getName(), entity2.getName());
 
         // verify listener filled fields
