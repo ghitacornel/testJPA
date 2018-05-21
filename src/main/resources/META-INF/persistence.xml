@@ -44,7 +44,7 @@
         <class>entities.relationships.one.to.one.bidirectional.A</class>
         <class>entities.relationships.one.to.one.bidirectional.B</class>
 
-        <class>entities.simple.convertors.EntityWithConvertors</class>
+        <class>entities.simple.convertors.EntityWithAttributeConverters</class>
         <class>entities.simple.listener.EntityWithListener</class>
         <class>entities.simple.version.VersionedEntity</class>
         <class>entities.simple.Entity</class>

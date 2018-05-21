@@ -3,7 +3,7 @@ package entities.simple.convertors;
 import javax.persistence.*;
 
 @Entity
-public class EntityWithConvertors {
+public class EntityWithAttributeConverters {
 
     @Id
     private Integer id;

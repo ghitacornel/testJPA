@@ -1,6 +1,6 @@
 package main.tests.simple.convertors;
 
-import entities.simple.convertors.EntityWithConvertors;
+import entities.simple.convertors.EntityWithAttributeConverters;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
@@ -11,14 +11,14 @@ public class TestCRUD extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityWithConvertors t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from EntityWithAttributeConverters t").getResultList().isEmpty());
     }
 
     @Test
     public void test() {
 
         // create new entity
-        EntityWithConvertors entity1 = new EntityWithConvertors();
+        EntityWithAttributeConverters entity1 = new EntityWithAttributeConverters();
         entity1.setId(1);
         entity1.setBooleanValue(true);
         entity1.setPassword("secret1");
@@ -28,7 +28,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        EntityWithConvertors entity2 = em.find(EntityWithConvertors.class, entity1.getId());
+        EntityWithAttributeConverters entity2 = em.find(EntityWithAttributeConverters.class, entity1.getId());
         Assert.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(entity1, entity2);
 
@@ -39,7 +39,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        EntityWithConvertors entity3 = em.find(EntityWithConvertors.class, entity1.getId());
+        EntityWithAttributeConverters entity3 = em.find(EntityWithAttributeConverters.class, entity1.getId());
         Assert.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
@@ -48,7 +48,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        Assert.assertNull(em.find(EntityWithConvertors.class, entity3.getId()));
+        Assert.assertNull(em.find(EntityWithAttributeConverters.class, entity3.getId()));
 
     }
 
