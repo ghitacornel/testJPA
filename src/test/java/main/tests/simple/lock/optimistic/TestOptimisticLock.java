@@ -74,13 +74,14 @@ public class TestOptimisticLock extends Setup {
         } catch (RollbackException e) {
             if (e.getCause() instanceof OptimisticLockException) {
 
-                // second transaction failed with lock exception
-                // test success
-                // optimistic lock tested
+                Assert.assertEquals("Error while committing the transaction", e.getMessage());
+
+                // second transaction failed with expected lock exception and error message => test successful
                 return;
 
+            } else {
+                Assert.fail("Unexpected cause " + e.getCause());
             }
-            throw e;
         } finally {
             entityManager2.close();
         }
