@@ -38,7 +38,6 @@ public class TestMerge extends Setup {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName("name");
-        entity.setBooleanValue(true);
         return entity;
     }
 
@@ -54,7 +53,6 @@ public class TestMerge extends Setup {
         // update model
         Entity entity = buildModel();// original updated model is detached
         entity.setName("newName1");
-        entity.setBooleanValue(false);
 
         // merge model to the database
         Entity entity1 = em.merge(entity);
@@ -93,7 +91,6 @@ public class TestMerge extends Setup {
         // update model
         Entity entity = em.find(Entity.class, model.getId());
         entity.setName("newName1");
-        entity.setBooleanValue(false);
 
         // merge model to the database
         Entity entity1 = em.merge(entity);

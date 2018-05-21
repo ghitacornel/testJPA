@@ -32,10 +32,6 @@ public class Entity {
     @Transient
     private Integer notMapped;
 
-    @Basic(optional = false)
-    @Column(nullable = false)
-    private boolean booleanValue;
-
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private byte[] fileContent;
@@ -70,14 +66,6 @@ public class Entity {
 
     public void setSimpleDate(Date simpleDate) {
         this.simpleDate = simpleDate;
-    }
-
-    public boolean isBooleanValue() {
-        return booleanValue;
-    }
-
-    public void setBooleanValue(boolean booleanValue) {
-        this.booleanValue = booleanValue;
     }
 
     public byte[] getFileContent() {

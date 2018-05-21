@@ -21,7 +21,6 @@ public class TestInsert extends TransactionalSetup {
         // create new entity
         Entity entity = new Entity();
         entity.setName("name");
-        entity.setBooleanValue(true);
 
         // persist with id 1
         entity.setId(1);

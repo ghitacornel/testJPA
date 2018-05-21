@@ -24,7 +24,6 @@ public class GenericDaoTest extends TransactionalSetup {
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name1");
-        entity1.setBooleanValue(true);
 
         // persist
         dao.persist(entity1);
@@ -37,7 +36,6 @@ public class GenericDaoTest extends TransactionalSetup {
 
         // update model
         entity2.setName("name2");
-        entity2.setBooleanValue(false);
 
         // update database
         em.merge(entity2);
@@ -66,7 +64,6 @@ public class GenericDaoTest extends TransactionalSetup {
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name1");
-        entity1.setBooleanValue(true);
 
         // persist
         dao.persist(entity1);
@@ -95,7 +92,6 @@ public class GenericDaoTest extends TransactionalSetup {
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name1");
-        entity1.setBooleanValue(true);
 
         // persist
         dao.persist(entity1);

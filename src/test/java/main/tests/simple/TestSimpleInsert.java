@@ -1,7 +1,6 @@
 package main.tests.simple;
 
 import entities.simple.Entity;
-import entities.simple.SimpleEnum;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
@@ -22,7 +21,6 @@ public class TestSimpleInsert extends TransactionalSetup {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName("name");
-        entity.setBooleanValue(true);
         entity.setFileContent(new byte[]{1, 2, 3});
 
         // persist
