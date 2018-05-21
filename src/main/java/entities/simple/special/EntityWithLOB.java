@@ -8,6 +8,9 @@ public class EntityWithLOB {
     @Id
     private Integer id;
 
+    /**
+     * TODO note the LAZY marker is just a hint, it does not enforce lazy loading
+     */
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private byte[] fileContent;
