@@ -14,7 +14,7 @@ import javax.persistence.Table;
  * @author Cornel
  */
 @javax.persistence.Entity
-@Table(name = "SimpleEntity")
+@Table(name = "SimpleEntity")// TODO note we override default table name
 public class Entity {
 
     @Id
@@ -25,6 +25,7 @@ public class Entity {
     private String name;
 
     @Basic
+    @Column(name = "nullableValue")// TODO note we override default column name
     private Integer value;
 
     public Integer getId() {
