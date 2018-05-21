@@ -14,7 +14,7 @@ public class TestEntityWithEnums extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from Entity t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from EntityWithEnums t").getResultList().isEmpty());
     }
 
     @Test
