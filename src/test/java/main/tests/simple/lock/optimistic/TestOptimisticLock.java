@@ -86,8 +86,7 @@ public class TestOptimisticLock extends Setup {
             entityManager2.close();
         }
 
-        // if this step is reached then no exception was raised hence the test
-        // failed
+        // if this step is reached => no exception was raised => the test failed
         Assert.fail("No exception was raised");
 
     }
