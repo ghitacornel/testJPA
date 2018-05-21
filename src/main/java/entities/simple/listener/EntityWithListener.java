@@ -15,8 +15,11 @@ public class EntityWithListener {
     private String name;
 
     @Basic(optional = false)
-    @Column(name = "data_creare", nullable = false)
-    private Date creationDate;
+    @Column(nullable = false)
+    private String prePersist;
+
+    @Basic
+    private String preUpdate;
 
     public Integer getId() {
         return id;
@@ -34,12 +37,19 @@ public class EntityWithListener {
         this.name = name;
     }
 
-    public Date getCreationDate() {
-        return creationDate;
+    public String getPrePersist() {
+        return prePersist;
     }
 
-    public void setCreationDate(Date creationDate) {
-        this.creationDate = creationDate;
+    public void setPrePersist(String prePersist) {
+        this.prePersist = prePersist;
     }
 
+    public String getPreUpdate() {
+        return preUpdate;
+    }
+
+    public void setPreUpdate(String preUpdate) {
+        this.preUpdate = preUpdate;
+    }
 }

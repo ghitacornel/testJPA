@@ -17,29 +17,38 @@ public class TestSimpleInsert extends TransactionalSetup {
     public void test() {
 
         // create new entity
-        EntityWithListener entitate = new EntityWithListener();
-        entitate.setId(1);
-        entitate.setName("name");
-
-        // specify null to ensure the entity is
-        // persisted with null value for this
-        // property
-        entitate.setCreationDate(null);
+        EntityWithListener initialEntity = new EntityWithListener();
+        initialEntity.setId(1);
+        initialEntity.setName("name");
 
         // persist
-        em.persist(entitate);
-
-        // mandatory clear cache (entity managers act as caches also)
+        em.persist(initialEntity);
         flushAndClear();
 
         // verify
-        EntityWithListener persisted = em.find(EntityWithListener.class, 1);
-        Assert.assertNotNull(persisted);
-        Assert.assertEquals(entitate.getId(), persisted.getId());
-        Assert.assertEquals(entitate.getName(), persisted.getName());
+        EntityWithListener entity2 = em.find(EntityWithListener.class, 1);
+        Assert.assertNotNull(entity2);
+        Assert.assertEquals(entity2.getId(), initialEntity.getId());
+        Assert.assertEquals(entity2.getName(), initialEntity.getName());
 
-        // the listeners fills this field
-        Assert.assertNotNull(persisted.getCreationDate());
+        // verify listener filled fields
+        Assert.assertEquals("prePersist", entity2.getPrePersist());
+        Assert.assertNull(entity2.getPreUpdate());
+
+        // update the entity
+        entity2.setName("new name");
+        em.merge(entity2);
+        flushAndClear();
+
+        // verify
+        EntityWithListener entity3 = em.find(EntityWithListener.class, 1);
+        Assert.assertNotNull(entity3);
+        Assert.assertEquals(entity3.getId(), initialEntity.getId());
+        Assert.assertEquals(entity3.getName(), entity2.getName());
+
+        // verify listener filled fields
+        Assert.assertEquals("prePersist", entity3.getPrePersist());
+        Assert.assertEquals("preUpdate", entity3.getPreUpdate());
 
     }
 
