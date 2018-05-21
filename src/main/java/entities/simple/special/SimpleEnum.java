@@ -1,4 +1,4 @@
-package entities.simple;
+package entities.simple.special;
 
 public enum SimpleEnum {
 

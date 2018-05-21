@@ -1,6 +1,6 @@
 package main.tests.simple.special;
 
-import entities.simple.SimpleEnum;
+import entities.simple.special.SimpleEnum;
 import entities.simple.special.EntityWithEnums;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;

@@ -1,9 +1,6 @@
 package entities.simple.special;
 
-import entities.simple.SimpleEnum;
-
 import javax.persistence.*;
-import java.util.Date;
 
 /**
  * Good practice :<br>
