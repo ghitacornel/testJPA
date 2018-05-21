@@ -29,9 +29,6 @@ public class Entity {
     @Column(name = "simpleDate")
     private Date simpleDate;
 
-    @Transient
-    private Integer notMapped;
-
     @Basic(fetch = FetchType.LAZY)
     @Lob
     private byte[] fileContent;
@@ -50,14 +47,6 @@ public class Entity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getNotMapped() {
-        return notMapped;
-    }
-
-    public void setNotMapped(Integer notMapped) {
-        this.notMapped = notMapped;
     }
 
     public Date getSimpleDate() {
