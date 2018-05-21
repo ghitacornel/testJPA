@@ -1,7 +1,9 @@
 package entities.simple;
 
-import javax.persistence.*;
-import java.util.Date;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * a simple {@link javax.persistence.Entity}<br>
@@ -25,10 +27,6 @@ public class Entity {
     @Basic
     private Integer value;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "simpleDate")
-    private Date simpleDate;
-
     public Integer getId() {
         return id;
     }
@@ -43,14 +41,6 @@ public class Entity {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Date getSimpleDate() {
-        return simpleDate;
-    }
-
-    public void setSimpleDate(Date simpleDate) {
-        this.simpleDate = simpleDate;
     }
 
     public Integer getValue() {
