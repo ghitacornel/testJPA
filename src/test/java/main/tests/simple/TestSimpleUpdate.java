@@ -20,7 +20,6 @@ public class TestSimpleUpdate extends TransactionalSetup {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName("name");
-        entity.setFileContent(new byte[]{1, 2, 3});
         return entity;
     }
 
@@ -35,12 +34,6 @@ public class TestSimpleUpdate extends TransactionalSetup {
 
         // update model
         entity.setName("newName");
-
-        // XXX Lazy loading on attributes does not work
-        boolean loaded = entityManagerFactory.getPersistenceUnitUtil().isLoaded(entity, "fileContent");
-        Assert.assertTrue(loaded);
-
-        entity.setFileContent(new byte[]{4, 5, 6});
 
         // update database
         em.merge(entity);

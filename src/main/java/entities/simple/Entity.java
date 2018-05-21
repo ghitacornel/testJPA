@@ -29,10 +29,6 @@ public class Entity {
     @Column(name = "simpleDate")
     private Date simpleDate;
 
-    @Basic(fetch = FetchType.LAZY)
-    @Lob
-    private byte[] fileContent;
-
     public Integer getId() {
         return id;
     }
@@ -55,14 +51,6 @@ public class Entity {
 
     public void setSimpleDate(Date simpleDate) {
         this.simpleDate = simpleDate;
-    }
-
-    public byte[] getFileContent() {
-        return fileContent;
-    }
-
-    public void setFileContent(byte[] fileContent) {
-        this.fileContent = fileContent;
     }
 
     public Integer getValue() {

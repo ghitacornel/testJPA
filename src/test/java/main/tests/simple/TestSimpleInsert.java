@@ -21,7 +21,6 @@ public class TestSimpleInsert extends TransactionalSetup {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName("name");
-        entity.setFileContent(new byte[]{1, 2, 3});
 
         // persist
         em.persist(entity);
