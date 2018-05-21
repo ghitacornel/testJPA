@@ -1,12 +1,8 @@
 package entities.simple.convertors;
 
-import javax.persistence.Column;
-import javax.persistence.Convert;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
-@javax.persistence.Entity
-@Table(name = "EntityConvertors")
+@Entity
 public class EntityWithConvertors {
 
     @Id
