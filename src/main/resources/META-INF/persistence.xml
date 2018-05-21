@@ -49,6 +49,7 @@
         <class>entities.simple.special.EntityWithPrimitives</class>
         <class>entities.simple.special.EntityWithTransient</class>
         <class>entities.simple.special.EntityWithLOB</class>
+        <class>entities.simple.special.EntityWithDate</class>
         <class>entities.simple.convertors.EntityWithAttributeConverters</class>
         <class>entities.simple.listener.EntityWithListener</class>
         <class>entities.simple.version.VersionedEntity</class>
