@@ -5,6 +5,11 @@ import entities.simple.SimpleEnum;
 import javax.persistence.*;
 import java.util.Date;
 
+/**
+ * Good practice :<br>
+ * Ensure proper database CHECK constraints are in place when using enums<br>
+ * Enums are excellent replacements for dictionary tables for which values we hard code business logic
+ */
 @Entity
 public class EntityWithEnums {
 
@@ -13,14 +18,14 @@ public class EntityWithEnums {
 
     /**
      * recommended<br>
-     * safe when adding or removing enum elements<br>
+     * safe when adding, removing or changing order of enum elements<br>
      * increases memory usage + slower performance due to text column usage
      */
     @Enumerated(EnumType.STRING)
     private SimpleEnum enum1;
 
     /**
-     * unsafe when order of values change in enum definition<br>
+     * raise problems when adding, removing or chaning order of enum values<br>
      * better performance and disk usage due to integer column usage
      */
     @Enumerated(EnumType.ORDINAL)
