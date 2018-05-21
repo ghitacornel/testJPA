@@ -19,14 +19,14 @@ public class EntityWithEnums {
     /**
      * recommended<br>
      * safe when adding, removing or changing order of enum elements<br>
-     * increases memory usage + slower performance due to text column usage
+     * increase memory usage + slower performance due to text column usage
      */
     @Enumerated(EnumType.STRING)
     private SimpleEnum enum1;
 
     /**
-     * raise problems when adding, removing or chaning order of enum values<br>
-     * better performance and disk usage due to integer column usage
+     * raise problems when adding, removing or changing order of enum values<br>
+     * better performance + better memory usage due to integer column usage
      */
     @Enumerated(EnumType.ORDINAL)
     private SimpleEnum enum2;
