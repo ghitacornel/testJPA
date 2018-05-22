@@ -1,8 +1,8 @@
 package main.tests.inheritance.single.table;
 
-import entities.inheritance.single.table.InheritanceSingleTableConcreteClassA;
-import entities.inheritance.single.table.InheritanceSingleTableConcreteClassB;
-import entities.inheritance.single.table.InheritanceSingleTableSuperClass;
+import entities.inheritance.single.InheritanceSingleTableConcreteClassA;
+import entities.inheritance.single.InheritanceSingleTableConcreteClassB;
+import entities.inheritance.single.InheritanceSingleTableSuperClass;
 import main.tests.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;

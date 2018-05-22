@@ -20,9 +20,9 @@
         <class>entities.inheritance.joined.InheritanceJoinedTablesConcreteClassA</class>
         <class>entities.inheritance.joined.InheritanceJoinedTablesConcreteClassB</class>
         <class>entities.inheritance.joined.InheritanceJoinedTablesSuperClass</class>
-        <class>entities.inheritance.single.table.InheritanceSingleTableConcreteClassA</class>
-        <class>entities.inheritance.single.table.InheritanceSingleTableConcreteClassB</class>
-        <class>entities.inheritance.single.table.InheritanceSingleTableSuperClass</class>
+        <class>entities.inheritance.single.InheritanceSingleTableConcreteClassA</class>
+        <class>entities.inheritance.single.InheritanceSingleTableConcreteClassB</class>
+        <class>entities.inheritance.single.InheritanceSingleTableSuperClass</class>
         <class>entities.inheritance.InheritanceMappedSuperClass</class>
 
         <class>entities.relationships.embedded.EmbeddableBean</class>
@@ -67,10 +67,10 @@
         <class>frameworks.versionable.tests.model.Model</class>
         <class>frameworks.versionable.tests.model.ModelVersion</class>
 
-        <class>entities.inheritance.single.table.mixed.ConcreteClassA</class>
-        <class>entities.inheritance.single.table.mixed.ConcreteClassB</class>
-        <class>entities.inheritance.single.table.mixed.ConcreteSuperClass</class>
-        <class>entities.inheritance.single.table.mixed.MixedContainer</class>
+        <class>entities.inheritance.single.mixed.ConcreteClassA</class>
+        <class>entities.inheritance.single.mixed.ConcreteClassB</class>
+        <class>entities.inheritance.single.mixed.ConcreteSuperClass</class>
+        <class>entities.inheritance.single.mixed.MixedContainer</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

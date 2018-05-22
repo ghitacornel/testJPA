@@ -1,7 +1,7 @@
 package main.tests.inheritance.single.table.mixed;
 
-import entities.inheritance.single.table.mixed.ConcreteClassB;
-import entities.inheritance.single.table.mixed.MixedContainer;
+import entities.inheritance.single.mixed.ConcreteClassB;
+import entities.inheritance.single.mixed.MixedContainer;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;

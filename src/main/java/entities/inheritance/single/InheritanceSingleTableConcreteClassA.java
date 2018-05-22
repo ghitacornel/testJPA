@@ -1,18 +1,12 @@
-package entities.inheritance.single.table.mixed;
+package entities.inheritance.single;
 
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
-/**
- * if @DiscriminatorValue is not specified a default value as specified by specs
- * is used
- *
- * @author Cornel
- */
 @Entity
 @DiscriminatorValue("A")
-public class ConcreteClassA extends ConcreteSuperClass {
+public class InheritanceSingleTableConcreteClassA extends InheritanceSingleTableSuperClass {
 
     @Basic
     // cannot be not null since it'a a one table per hierarchy strategy
@@ -24,12 +18,6 @@ public class ConcreteClassA extends ConcreteSuperClass {
 
     public void setSpecificA(String specificA) {
         this.specificA = specificA;
-    }
-
-    @Override
-    public String toString() {
-        return super.toString() + "[id=" + getId() + ", name=" + getName()
-                + ", specificA=" + specificA + "]";
     }
 
 }

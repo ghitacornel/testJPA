@@ -1,4 +1,4 @@
-package entities.inheritance.single.table;
+package entities.inheritance.single;
 
 import entities.inheritance.InheritanceMappedSuperClass;
 
