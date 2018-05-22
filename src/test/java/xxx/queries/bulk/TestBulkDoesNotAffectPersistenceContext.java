@@ -1,4 +1,4 @@
-package main.tests.queries.bulk;
+package xxx.queries.bulk;
 
 import entities.simple.Entity;
 import main.tests.TransactionalSetup;
@@ -10,7 +10,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestBulk extends TransactionalSetup {
+public class TestBulkDoesNotAffectPersistenceContext extends TransactionalSetup {
 
     private static List<Entity> buildModel() {
         List<Entity> list = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TestBulk extends TransactionalSetup {
     }
 
     @Test
-    public void testBulk() {
+    public void testBulkUpdateDoesNotAffectPersistenceContext() {
 
         // first fetch and verify
         Entity existing1 = em.find(Entity.class, 1);
