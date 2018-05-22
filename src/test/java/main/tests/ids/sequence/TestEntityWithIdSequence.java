@@ -9,7 +9,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.List;
 
-public class TestIdSequence extends TransactionalSetup {
+public class TestEntityWithIdSequence extends TransactionalSetup {
 
     private static final String SELECT_ALL = "select t from EntityWithIdSequence t";
 
@@ -24,12 +24,9 @@ public class TestIdSequence extends TransactionalSetup {
         // create new entity
         EntityWithIdSequence model = new EntityWithIdSequence();
         Assert.assertNull(model.getId());
-        Assert.assertNull(model.getDefaultInt());
 
         // persist
         em.persist(model);
-
-        // mandatory clear cache (entity managers act as caches also)
         flushAndClear();
 
         // verify
@@ -38,12 +35,6 @@ public class TestIdSequence extends TransactionalSetup {
         EntityWithIdSequence existing = list.get(0);
 
         Assert.assertNotNull(existing.getId());
-
-        // XXX hibernate + mysql looks to have an issue with default
-        // XXX default in mysql has no effect
-        // XXX not null mysql column forces hibernate to check for null values
-        // XXX why checking it since a default exists
-        Assert.assertNull(existing.getDefaultInt());
 
         ReflectionAssert.assertReflectionEquals(model, existing);
     }

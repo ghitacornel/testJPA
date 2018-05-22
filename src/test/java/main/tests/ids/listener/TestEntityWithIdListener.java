@@ -9,7 +9,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.List;
 
-public class TestEntityWithIdSequence extends TransactionalSetup {
+public class TestEntityWithIdListener extends TransactionalSetup {
 
     private static final String SELECT_ALL = "select t from EntityWithIdListener t";
 
@@ -23,7 +23,6 @@ public class TestEntityWithIdSequence extends TransactionalSetup {
 
         // create new entity
         EntityWithIdListener model = new EntityWithIdListener();
-        model.setName("name");
         Assert.assertNull(model.getId());
 
         // persist
