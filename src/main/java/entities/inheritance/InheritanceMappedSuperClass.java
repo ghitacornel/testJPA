@@ -9,9 +9,11 @@ import java.util.UUID;
  * this mapped superclass has no value other than specifying some mapped inherited properties<br>
  * A {@link MappedSuperclass} cannot be queried, it is not an {@link Entity}<br>
  * <p>
- * a good practice is to have such 1 class as a parent for all your entities.
- * This class will hold the id mapping and generation policy for all your
- * entities.
+ * A good practice :
+ * - have 1 such class as a parent for all your entities<br>
+ * - ensure this class holds the id mapping and generation policy for all your entities<br>
+ * - ensure this class provides default "equals" and "hashCode" methods based only on entity ID<br>
+ * - ensure this class provides default "toString" method based only on entity ID<br>
  *
  * @author Cornel
  */
