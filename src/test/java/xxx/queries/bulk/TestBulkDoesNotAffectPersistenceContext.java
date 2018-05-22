@@ -41,24 +41,36 @@ public class TestBulkDoesNotAffectPersistenceContext extends TransactionalSetup 
         em.createQuery("update Entity e set e.name = 'dummy test bulk'").executeUpdate();
 
         // verify bulk update didn't affect already fetched entities
-        Entity existing2 = em.find(Entity.class, 1);
         ReflectionAssert.assertReflectionEquals(existing1, buildModel().get(0));
+
+        // verify bulk update won't affect newly fetched entities taken from persistence context
+        Entity existing2 = em.find(Entity.class, 1);
         ReflectionAssert.assertReflectionEquals(existing2, buildModel().get(0));
 
         // flush and clear
         flushAndClear();
 
-        // verify bulk update didn't affect already fetched entities again
+        // verify bulk update will affect newly fetched entities taken from persistence context after a clear
+        {
+            Entity existing = em.find(Entity.class, 1);
+            Entity expected = buildModel().get(0);
+            expected.setName("dummy test bulk");
+            ReflectionAssert.assertReflectionEquals(expected, existing);
+        }
+
+        // verify bulk update didn't affect previously fetched entities again
         ReflectionAssert.assertReflectionEquals(existing1, buildModel().get(0));
         ReflectionAssert.assertReflectionEquals(existing2, buildModel().get(0));
 
         // verify bulk affected all expected entities not fetched yet
-        List<Entity> fetchedEntities = em.createQuery("select e from Entity e", Entity.class).getResultList();
-        List<Entity> expectedEntities = buildModel();
-        for (Entity entity : expectedEntities) {
-            entity.setName("dummy test bulk");
+        {
+            List<Entity> existingEntities = em.createQuery("select e from Entity e", Entity.class).getResultList();
+            List<Entity> expectedEntities = buildModel();
+            for (Entity entity : expectedEntities) {
+                entity.setName("dummy test bulk");
+            }
+            ReflectionAssert.assertReflectionEquals(expectedEntities, existingEntities, ReflectionComparatorMode.LENIENT_ORDER);
         }
-        ReflectionAssert.assertReflectionEquals(expectedEntities, fetchedEntities, ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
@@ -72,15 +84,19 @@ public class TestBulkDoesNotAffectPersistenceContext extends TransactionalSetup 
         // second issue a bulk update
         em.createQuery("delete from Entity e").executeUpdate();
 
-        // verify bulk update didn't affect already fetched entities
-        Entity existing2 = em.find(Entity.class, 1);
+        // verify bulk delete didn't affect already fetched entities
         ReflectionAssert.assertReflectionEquals(existing1, buildModel().get(0));
+
+        // verify bulk delete didn't affect already fetched entities
+        em.flush();
+        Entity existing2 = em.find(Entity.class, 1);
         ReflectionAssert.assertReflectionEquals(existing2, buildModel().get(0));
 
-        // flush and clear
+        // verify bulk delete will affect newly fetched entities
         flushAndClear();
+        Assert.assertNull(em.find(Entity.class, 1));
 
-        // verify bulk update didn't affect already fetched entities again
+        // verify bulk delete didn't affect previously fetched entities again
         ReflectionAssert.assertReflectionEquals(existing1, buildModel().get(0));
         ReflectionAssert.assertReflectionEquals(existing2, buildModel().get(0));
 
