@@ -9,7 +9,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
 
 import java.util.List;
 
-public class TestIdListener extends TransactionalSetup {
+public class TestEntityWithIdSequence extends TransactionalSetup {
 
     private static final String SELECT_ALL = "select t from EntityWithIdListener t";
 
@@ -28,8 +28,6 @@ public class TestIdListener extends TransactionalSetup {
 
         // persist
         em.persist(model);
-
-        // mandatory clear cache (entity managers act as caches also)
         flushAndClear();
 
         // verify
