@@ -160,4 +160,20 @@ public class TestSimpleQueries extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(buildModel().get(4), entity);
 
     }
+
+    @Test
+    public void testWithNullParameter() {
+
+        // an equality check is performed against null => FAILURE
+        List<SimpleQueryEntity> list1 = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
+        ReflectionAssert.assertReflectionEquals(new ArrayList<>(), list1);
+
+
+        // CORRECT way to check for nulls
+        List<SimpleQueryEntity> list2 = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
+        List<SimpleQueryEntity> expected = new ArrayList<>();
+        expected.add(buildModel().get(5));
+        ReflectionAssert.assertReflectionEquals(expected, list2);
+
+    }
 }
