@@ -19,10 +19,8 @@ public class TestIdTableGeneration extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityIdA t")
-                .getResultList().isEmpty());
-        Assert.assertTrue(em.createQuery("select t from EntityIdB t")
-                .getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from EntityIdA t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from EntityIdB t").getResultList().isEmpty());
     }
 
     @Test
@@ -49,10 +47,12 @@ public class TestIdTableGeneration extends TransactionalSetup {
         // verify
         List<EntityIdA> listA = em.createQuery("select t from EntityIdA t", EntityIdA.class).getResultList();
         Assert.assertEquals(1, listA.size());
+        Assert.assertNotNull(entitateA.getId());
         ReflectionAssert.assertReflectionEquals(listA.get(0), entitateA);
 
         List<EntityIdB> listB = em.createQuery("select t from EntityIdB t", EntityIdB.class).getResultList();
         Assert.assertEquals(1, listB.size());
+        Assert.assertNotNull(entitateB.getId());
         ReflectionAssert.assertReflectionEquals(listB.get(0), entitateB);
 
     }
