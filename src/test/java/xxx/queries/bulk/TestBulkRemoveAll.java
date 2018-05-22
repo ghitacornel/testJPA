@@ -1,4 +1,4 @@
-package main.tests.simple;
+package xxx.queries.bulk;
 
 import entities.simple.Entity;
 import main.tests.TransactionalSetup;
