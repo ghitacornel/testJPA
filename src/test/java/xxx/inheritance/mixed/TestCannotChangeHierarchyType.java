@@ -45,6 +45,7 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
         MixedContainer containerInitial = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
         ReflectionAssert.assertReflectionEquals(model, containerInitial, ReflectionComparatorMode.LENIENT_ORDER);
 
+        // try to change instance hierarchic type
         containerInitial.getConcreteClassBs().get(1).setDiscriminator("A");
         em.merge(containerInitial.getConcreteClassBs().get(1));
         flushAndClear();
