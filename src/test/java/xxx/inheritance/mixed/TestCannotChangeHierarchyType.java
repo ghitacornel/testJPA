@@ -13,7 +13,7 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
 
     private MixedContainer model = buildInitialModel();
 
-    static MixedContainer buildInitialModel() {
+    private static MixedContainer buildInitialModel() {
 
         MixedContainer container = new MixedContainer();
         container.setName("concrete container name");
@@ -43,7 +43,6 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
     public void test() {
 
         MixedContainer containerInitial = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
-
         ReflectionAssert.assertReflectionEquals(model, containerInitial, ReflectionComparatorMode.LENIENT_ORDER);
 
         containerInitial.getConcreteClassBs().get(1).setDiscriminator("A");
@@ -51,7 +50,6 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
         flushAndClear();
 
         MixedContainer containerFinal = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
-
         Assert.assertEquals(2, containerFinal.getConcreteSuperClass().size());
 
         // should be 1 but hierarchy cannot be changed
