@@ -1,7 +1,6 @@
 package main.tests.queries;
 
 import entities.simple.Entity;
-import entities.simple.EntityProjection;
 import entities.simple.Entity_;
 import main.tests.TransactionalSetup;
 import org.junit.Before;
@@ -66,19 +65,6 @@ public class TestQuery extends TransactionalSetup {
                 .getSingleResult();
 
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
-    }
-
-    @Test
-    public void testProjection() {
-
-        EntityProjection expectedProjection = new EntityProjection(1, "name 1");
-
-        EntityProjection projection = em
-                .createQuery("select new entities.simple.EntityProjection(e.id,e.name) from Entity e where e.name = ?1",
-                        EntityProjection.class).setParameter(1, "name 1")
-                .getSingleResult();
-
-        ReflectionAssert.assertReflectionEquals(expectedProjection, projection);
     }
 
     @Test

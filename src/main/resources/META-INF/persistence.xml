@@ -52,6 +52,7 @@
         <class>entities.simple.special.EntityWithDate</class>
         <class>entities.simple.converters.EntityWithAttributeConverters</class>
         <class>entities.simple.listener.EntityWithListener</class>
+        <class>entities.simple.projection.EntityWithProjection</class>
         <class>entities.simple.version.VersionedEntity</class>
 
         <class>queries.named.nativ.NamedNativeQueriesDefinition</class>

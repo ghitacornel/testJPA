@@ -1,15 +1,15 @@
-package entities.simple;
+package entities.simple.projection;
 
 /**
  * an entity projection is not a JPA entity
  */
-public class EntityProjection {
+public class Projection1OfEntityWithProjection {
 
     private Integer id;
 
     private String name;
 
-    public EntityProjection(Integer id, String name) {
+    public Projection1OfEntityWithProjection(Integer id, String name) {
         this.id = id;
         this.name = name;
     }
