@@ -10,9 +10,9 @@
         <!--<provider></provider>-->
 
         <class>entities.ids.sequence.EntityWithIdSequence</class>
-        <class>entities.ids.table.EntityIdA</class>
-        <class>entities.ids.table.EntityIdB</class>
         <class>entities.ids.listener.EntityWithIdListener</class>
+        <class>entities.ids.table.EntityAWithIdGeneratedFromTable</class>
+        <class>entities.ids.table.EntityBWithIdGeneratedFromTable</class>
 
         <class>entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassA</class>
         <class>entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassB</class>

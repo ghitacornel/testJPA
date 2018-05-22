@@ -1,7 +1,7 @@
 package xxx.entities.ids.table;
 
-import entities.ids.table.EntityIdA;
-import entities.ids.table.EntityIdB;
+import entities.ids.table.EntityAWithIdGeneratedFromTable;
+import entities.ids.table.EntityBWithIdGeneratedFromTable;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
@@ -19,23 +19,19 @@ public class TestIdTableGeneration extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityIdA t").getResultList().isEmpty());
-        Assert.assertTrue(em.createQuery("select t from EntityIdB t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from EntityAWithIdGeneratedFromTable t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from EntityBWithIdGeneratedFromTable t").getResultList().isEmpty());
     }
 
     @Test
     public void test() {
 
         // create new entities
-        EntityIdA entityA = new EntityIdA();
+        EntityAWithIdGeneratedFromTable entityA = new EntityAWithIdGeneratedFromTable();
         Assert.assertNull(entityA.getId());
-        Assert.assertNull(entityA.getName());
-        entityA.setName(entityA.toString());
 
-        EntityIdB entityB = new EntityIdB();
+        EntityBWithIdGeneratedFromTable entityB = new EntityBWithIdGeneratedFromTable();
         Assert.assertNull(entityB.getId());
-        Assert.assertNull(entityB.getName());
-        entityB.setName(entityB.toString());
 
         // persist
         em.persist(entityA);
@@ -45,12 +41,12 @@ public class TestIdTableGeneration extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        List<EntityIdA> listA = em.createQuery("select t from EntityIdA t", EntityIdA.class).getResultList();
+        List<EntityAWithIdGeneratedFromTable> listA = em.createQuery("select t from EntityAWithIdGeneratedFromTable t", EntityAWithIdGeneratedFromTable.class).getResultList();
         Assert.assertEquals(1, listA.size());
         Assert.assertNotNull(entityA.getId());
         ReflectionAssert.assertReflectionEquals(listA.get(0), entityA);
 
-        List<EntityIdB> listB = em.createQuery("select t from EntityIdB t", EntityIdB.class).getResultList();
+        List<EntityBWithIdGeneratedFromTable> listB = em.createQuery("select t from EntityBWithIdGeneratedFromTable t", EntityBWithIdGeneratedFromTable.class).getResultList();
         Assert.assertEquals(1, listB.size());
         Assert.assertNotNull(entityB.getId());
         ReflectionAssert.assertReflectionEquals(listB.get(0), entityB);
