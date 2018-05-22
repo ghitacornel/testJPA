@@ -12,11 +12,11 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestSelectAll extends TransactionalSetup {
+public class TestInheritanceSingleTableStrategy extends TransactionalSetup {
 
     private List<InheritanceSingleTableSuperClass> model = buildModel();
 
-    static List<InheritanceSingleTableSuperClass> buildModel() {
+    private static List<InheritanceSingleTableSuperClass> buildModel() {
         List<InheritanceSingleTableSuperClass> list = new ArrayList<>();
         long i;
         for (i = 1; i <= 3; i++) {
@@ -41,11 +41,42 @@ public class TestSelectAll extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testSelectAllEntitiesAsRootClass() {
 
         List<InheritanceSingleTableSuperClass> list = em.createQuery("select t from InheritanceSingleTableSuperClass t", InheritanceSingleTableSuperClass.class).getResultList();
         ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
+    @Test
+    public void testSelectAllSpecificEntitiesOfTypeAFromHierarchy() {
+
+        List<InheritanceSingleTableConcreteClassA> list = em.createQuery("select t from InheritanceSingleTableConcreteClassA t", InheritanceSingleTableConcreteClassA.class).getResultList();
+        ReflectionAssert.assertReflectionEquals(model.subList(0, 3), list, ReflectionComparatorMode.LENIENT_ORDER);
+
+    }
+
+    @Test
+    public void testSelectAllSpecificEntitiesOfTypeBFromHierarchy() {
+
+        List<InheritanceSingleTableConcreteClassB> list = em.createQuery("select t from InheritanceSingleTableConcreteClassB t", InheritanceSingleTableConcreteClassB.class).getResultList();
+        ReflectionAssert.assertReflectionEquals(model.subList(3, model.size()), list, ReflectionComparatorMode.LENIENT_ORDER);
+
+    }
+
+    @Test
+    public void testSelectSpecificEntityOfTypeAFromHierarchy() {
+
+        InheritanceSingleTableSuperClass result = em.find(InheritanceSingleTableSuperClass.class, model.get(0).getId());
+        ReflectionAssert.assertReflectionEquals(model.get(0), result);
+
+    }
+
+    @Test
+    public void testSelectSpecificEntityOfTypeBFromHierarchy() {
+
+        InheritanceSingleTableSuperClass result = em.find(InheritanceSingleTableSuperClass.class, model.get(3).getId());
+        ReflectionAssert.assertReflectionEquals(model.get(3), result);
+
+    }
 }
