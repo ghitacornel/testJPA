@@ -10,7 +10,7 @@ import javax.persistence.*;
  * if @DiscriminatorColumn is not specified then check defaults specified by the specification<br>
  * the discriminator column values are managed only by the JPA<br>
  * the discriminator column must not be mapped to a property<br>
- * the parent class of the hierarchy can be a concrete class
+ * the parent class of the hierarchy can be a concrete or abstract class<br>
  *
  * @author Cornel
  */
