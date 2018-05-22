@@ -27,7 +27,6 @@ public class TestSelectById extends TransactionalSetup {
     public void testSubclassA() {
 
         InheritanceSingleTableSuperClass result = em.find(InheritanceSingleTableSuperClass.class, model.get(0).getId());
-
         ReflectionAssert.assertReflectionEquals(model.get(0), result);
 
     }
@@ -36,7 +35,6 @@ public class TestSelectById extends TransactionalSetup {
     public void testSubclassB() {
 
         InheritanceSingleTableSuperClass result = em.find(InheritanceSingleTableSuperClass.class, model.get(3).getId());
-
         ReflectionAssert.assertReflectionEquals(model.get(3), result);
 
     }

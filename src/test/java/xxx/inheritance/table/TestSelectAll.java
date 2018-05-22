@@ -20,16 +20,16 @@ public class TestSelectAll extends TransactionalSetup {
         List<InheritanceSingleTableSuperClass> list = new ArrayList<>();
         long i;
         for (i = 1; i <= 3; i++) {
-            InheritanceSingleTableConcreteClassA entitate = new InheritanceSingleTableConcreteClassA();
-            entitate.setName("name " + i);
-            entitate.setSpecificA("specific a " + i);
-            list.add(entitate);
+            InheritanceSingleTableConcreteClassA entity = new InheritanceSingleTableConcreteClassA();
+            entity.setName("name " + i);
+            entity.setSpecificA("specific a " + i);
+            list.add(entity);
         }
         for (; i <= 6; i++) {
-            InheritanceSingleTableConcreteClassB entitate = new InheritanceSingleTableConcreteClassB();
-            entitate.setName("name " + i);
-            entitate.setSpecificB("specific b " + i);
-            list.add(entitate);
+            InheritanceSingleTableConcreteClassB entity = new InheritanceSingleTableConcreteClassB();
+            entity.setName("name " + i);
+            entity.setSpecificB("specific b " + i);
+            list.add(entity);
         }
         return list;
     }
@@ -43,10 +43,7 @@ public class TestSelectAll extends TransactionalSetup {
     @Test
     public void test() {
 
-        List<InheritanceSingleTableSuperClass> list = em.createQuery(
-                "select t from InheritanceSingleTableSuperClass t", InheritanceSingleTableSuperClass.class)
-                .getResultList();
-
+        List<InheritanceSingleTableSuperClass> list = em.createQuery("select t from InheritanceSingleTableSuperClass t", InheritanceSingleTableSuperClass.class).getResultList();
         ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
 
     }

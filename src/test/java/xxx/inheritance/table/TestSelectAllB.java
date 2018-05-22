@@ -23,10 +23,7 @@ public class TestSelectAllB extends TransactionalSetup {
     @Test
     public void test() {
 
-        List<InheritanceSingleTableConcreteClassB> list = em.createQuery(
-                "select t from InheritanceSingleTableConcreteClassB t", InheritanceSingleTableConcreteClassB.class)
-                .getResultList();
-
+        List<InheritanceSingleTableConcreteClassB> list = em.createQuery("select t from InheritanceSingleTableConcreteClassB t", InheritanceSingleTableConcreteClassB.class).getResultList();
         ReflectionAssert.assertReflectionEquals(model.subList(3, model.size()), list, ReflectionComparatorMode.LENIENT_ORDER);
 
     }
