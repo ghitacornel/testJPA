@@ -13,9 +13,10 @@ import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-public class TestQuery extends TransactionalSetup {
+public class TestSimpleQueries extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();
@@ -79,7 +80,32 @@ public class TestQuery extends TransactionalSetup {
     }
 
     @Test
-    public void testSelectAllWithNamedParameters() {
+    public void testSelectAllWithOrder() {
+
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by id desc", SimpleQueryEntity.class).getResultList();
+
+        // verify, order is important
+        List<SimpleQueryEntity> expected = buildModel();
+        Collections.reverse(expected);
+        ReflectionAssert.assertReflectionEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSelectAllWithOrderAndBoundaries() {
+
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by id desc", SimpleQueryEntity.class).setFirstResult(1).setMaxResults(3).getResultList();
+
+        // verify, order is important
+        List<SimpleQueryEntity> expected = buildModel();
+        Collections.reverse(expected);
+        expected = expected.subList(1, 4);
+        ReflectionAssert.assertReflectionEquals(expected, actual);
+
+    }
+
+    @Test
+    public void testSelectAllWithNamedParameter() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name = :name", SimpleQueryEntity.class).setParameter("name", "name 1").getResultList();
 
@@ -90,7 +116,7 @@ public class TestQuery extends TransactionalSetup {
     }
 
     @Test
-    public void testSelectAllWithOrderParameters() {
+    public void testSelectAllWithOrderParameter() {
 
         SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
