@@ -1,4 +1,4 @@
-package xxx.entities.simple.listener;
+package xxx.entities.listener;
 
 import entities.simple.listener.EntityWithListener;
 import main.tests.TransactionalSetup;

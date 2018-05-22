@@ -13,7 +13,10 @@ public class TestEntityCRUD extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from Entity t").getResultList().isEmpty());
+        // verify database state with a native query
+        {
+            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
+        }
     }
 
     @Test
