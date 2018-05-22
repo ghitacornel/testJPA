@@ -1,10 +1,10 @@
 package xxx.queries.bulk;
 
-import entities.simple.Entity;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import queries.bulk.BulkQueryEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,10 +17,10 @@ public class TestBulkRemoveAll extends TransactionalSetup {
         flushAndClear();
     }
 
-    private List<Entity> buildModel() {
-        List<Entity> list = new ArrayList<>();
+    private List<BulkQueryEntity> buildModel() {
+        List<BulkQueryEntity> list = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
-            Entity entity = new Entity();
+            BulkQueryEntity entity = new BulkQueryEntity();
             entity.setId(i);
             entity.setName("name " + i);
             list.add(entity);
@@ -31,10 +31,10 @@ public class TestBulkRemoveAll extends TransactionalSetup {
     @Test
     public void test() {
 
-        em.createQuery("delete from Entity").executeUpdate();
+        em.createQuery("delete from BulkQueryEntity").executeUpdate();
         flushAndClear();
 
-        Assert.assertTrue(em.createQuery("select t from Entity t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from BulkQueryEntity t").getResultList().isEmpty());
 
     }
 

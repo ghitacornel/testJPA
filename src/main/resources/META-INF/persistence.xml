@@ -73,6 +73,7 @@
         <class>entities.inheritance.mixed.MixedContainer</class>
 
         <class>queries.simple.SimpleQueryEntity</class>
+        <class>queries.bulk.BulkQueryEntity</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 

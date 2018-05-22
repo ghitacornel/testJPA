@@ -1,11 +1,11 @@
 package xxx.queries.bulk;
 
-import entities.simple.Entity;
 import main.tests.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import queries.bulk.BulkQueryEntity;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,10 +18,10 @@ public class TestBulkUpdateAll extends TransactionalSetup {
         flushAndClear();
     }
 
-    private List<Entity> buildModel() {
-        List<Entity> list = new ArrayList<>();
+    private List<BulkQueryEntity> buildModel() {
+        List<BulkQueryEntity> list = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
-            Entity entity = new Entity();
+            BulkQueryEntity entity = new BulkQueryEntity();
             entity.setId(i);
             entity.setName("name " + i);
             list.add(entity);
@@ -33,15 +33,15 @@ public class TestBulkUpdateAll extends TransactionalSetup {
     public void test() {
 
         // update
-        em.createQuery("update Entity t set t.name=concat(t.name,t.name)").executeUpdate();
+        em.createQuery("update BulkQueryEntity t set t.name=concat(t.name,t.name)").executeUpdate();
         flushAndClear();
 
         // fetch
-        List<Entity> list = em.createQuery("select t from Entity t", Entity.class).getResultList();
+        List<BulkQueryEntity> list = em.createQuery("select t from BulkQueryEntity t", BulkQueryEntity.class).getResultList();
 
         // verify, order is ignored
-        List<Entity> model = buildModel();
-        for (Entity entity : model) {
+        List<BulkQueryEntity> model = buildModel();
+        for (BulkQueryEntity entity : model) {
             entity.setName(entity.getName() + entity.getName());
         }
         ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
