@@ -16,8 +16,7 @@ public class SimpleQueryEntity {
     @Column(nullable = false)
     private String name;
 
-    @Basic(optional = false)
-    @Column(nullable = false)
+    @Basic
     private Integer value;
 
     public Integer getId() {

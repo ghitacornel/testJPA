@@ -59,7 +59,7 @@ public class TestSimpleQueries extends TransactionalSetup {
             SimpleQueryEntity entity = new SimpleQueryEntity();
             entity.setId(6);
             entity.setName("name 6");
-            entity.setValue(1);
+            entity.setValue(null);
             list.add(entity);
         }
         return list;
