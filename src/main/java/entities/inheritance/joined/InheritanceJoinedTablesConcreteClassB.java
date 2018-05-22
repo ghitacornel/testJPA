@@ -1,16 +1,13 @@
 package entities.inheritance.joined;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.PrimaryKeyJoinColumn;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "IerarhieJoinedB")
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 public class InheritanceJoinedTablesConcreteClassB extends InheritanceJoinedTablesSuperClass {
 
-    @Basic
+    @Column(nullable = false)
     private String specificB;
 
     public String getSpecificB() {
@@ -21,9 +18,4 @@ public class InheritanceJoinedTablesConcreteClassB extends InheritanceJoinedTabl
         this.specificB = specificB;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "[id=" + getId() + ",name=" + getName()
-                + ",specificB=" + specificB + "]";
-    }
 }
