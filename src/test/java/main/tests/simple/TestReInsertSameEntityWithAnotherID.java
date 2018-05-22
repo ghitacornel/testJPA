@@ -7,12 +7,11 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 
-public class TestInsert extends TransactionalSetup {
+public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from Entity t")
-                .getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from Entity t").getResultList().isEmpty());
     }
 
     @Test

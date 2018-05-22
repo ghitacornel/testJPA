@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 
-public class TestMerge extends Setup {
+public class TestUpdateIsDoneAndMergeIsRedundant extends Setup {
 
     @Before
     public void before() {
