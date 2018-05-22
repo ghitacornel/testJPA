@@ -67,10 +67,10 @@
         <class>frameworks.versionable.tests.model.Model</class>
         <class>frameworks.versionable.tests.model.ModelVersion</class>
 
-        <class>entities.inheritance.single.mixed.ConcreteClassA</class>
-        <class>entities.inheritance.single.mixed.ConcreteClassB</class>
-        <class>entities.inheritance.single.mixed.ConcreteSuperClass</class>
-        <class>entities.inheritance.single.mixed.MixedContainer</class>
+        <class>entities.inheritance.mixed.ConcreteClassA</class>
+        <class>entities.inheritance.mixed.ConcreteClassB</class>
+        <class>entities.inheritance.mixed.ConcreteSuperClass</class>
+        <class>entities.inheritance.mixed.MixedContainer</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
