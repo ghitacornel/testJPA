@@ -1,5 +1,6 @@
 package xxx.inheritance.mixed;
 
+import entities.inheritance.mixed.ConcreteClassA;
 import entities.inheritance.mixed.ConcreteClassB;
 import entities.inheritance.mixed.MixedContainer;
 import main.tests.TransactionalSetup;
@@ -21,15 +22,19 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
         {
             ConcreteClassB concreteClassB1 = new ConcreteClassB();
             concreteClassB1.setName("concrete class B 1");
-            concreteClassB1.setDiscriminator("B");
+            container.getConcreteClassBs().add(concreteClassB1);
             ConcreteClassB concreteClassB2 = new ConcreteClassB();
             concreteClassB2.setName("concrete class B 2");
-            concreteClassB2.setDiscriminator("B");
-            container.getConcreteClassBs().add(concreteClassB1);
             container.getConcreteClassBs().add(concreteClassB2);
+        }
+        {
+            ConcreteClassA concreteClassA1 = new ConcreteClassA();
+            concreteClassA1.setName("concrete class A 1");
+            container.getConcreteClassAs().add(concreteClassA1);
         }
 
         container.getConcreteSuperClass().addAll(container.getConcreteClassBs());
+        container.getConcreteSuperClass().addAll(container.getConcreteClassAs());
         return container;
     }
 
@@ -43,19 +48,28 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
     public void test() {
 
         MixedContainer containerInitial = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
+
+        // discriminators are set automatically so in order to check the data models we need to ensure initial model has them set properly
+        for (ConcreteClassB concreteClassB : model.getConcreteClassBs()) {
+            concreteClassB.setDiscriminator("B");
+        }
+        for (ConcreteClassA concreteClassA : model.getConcreteClassAs()) {
+            concreteClassA.setDiscriminator("A");
+        }
         ReflectionAssert.assertReflectionEquals(model, containerInitial, ReflectionComparatorMode.LENIENT_ORDER);
 
-        // try to change instance hierarchic type
+        // try to change an instance hierarchic type
         containerInitial.getConcreteClassBs().get(1).setDiscriminator("A");
         em.merge(containerInitial.getConcreteClassBs().get(1));
         flushAndClear();
 
+        // verify changed type operation has no success
         MixedContainer containerFinal = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
-        Assert.assertEquals(2, containerFinal.getConcreteSuperClass().size());
+        Assert.assertEquals(3, containerFinal.getConcreteSuperClass().size());
 
         // should be 1 but hierarchy cannot be changed
         Assert.assertEquals(2, containerFinal.getConcreteClassBs().size());
-        Assert.assertEquals(0, containerFinal.getConcreteClassAs().size());
+        Assert.assertEquals(1, containerFinal.getConcreteClassAs().size());
 
     }
 

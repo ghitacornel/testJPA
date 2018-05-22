@@ -26,10 +26,4 @@ public class ConcreteClassA extends ConcreteSuperClass {
         this.specificA = specificA;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "[id=" + getId() + ", name=" + getName()
-                + ", specificA=" + specificA + "]";
-    }
-
 }

@@ -32,7 +32,6 @@ public class MixedContainer extends InheritanceMappedSuperClass {
         this.name = name;
     }
 
-
     public List<ConcreteClassB> getConcreteClassBs() {
         return concreteClassBs;
     }
