@@ -72,6 +72,8 @@
         <class>entities.inheritance.mixed.ConcreteSuperClass</class>
         <class>entities.inheritance.mixed.MixedContainer</class>
 
+        <class>queries.simple.SimpleQueryEntity</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
