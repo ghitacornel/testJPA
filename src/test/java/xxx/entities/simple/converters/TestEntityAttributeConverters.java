@@ -1,4 +1,4 @@
-package main.tests.simple.converters;
+package xxx.entities.simple.converters;
 
 import entities.simple.convertors.EntityWithAttributeConverters;
 import main.tests.TransactionalSetup;

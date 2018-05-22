@@ -1,4 +1,4 @@
-package main.tests.simple.special;
+package xxx.entities.simple.special;
 
 import entities.simple.special.EntityWithPrimitives;
 import main.tests.TransactionalSetup;
