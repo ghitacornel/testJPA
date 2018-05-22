@@ -1,4 +1,4 @@
-package main.tests.ids.sequence;
+package xxx.entities.ids.sequence;
 
 import entities.ids.sequence.EntityWithIdSequence;
 import main.tests.TransactionalSetup;

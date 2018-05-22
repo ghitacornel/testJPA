@@ -1,4 +1,4 @@
-package main.tests.ids.listener;
+package xxx.entities.ids.listener;
 
 import entities.ids.listener.EntityWithIdListener;
 import main.tests.TransactionalSetup;

@@ -1,4 +1,4 @@
-package main.tests.ids.table;
+package xxx.entities.ids.table;
 
 import entities.ids.table.EntityIdA;
 import entities.ids.table.EntityIdB;
@@ -27,19 +27,19 @@ public class TestIdTableGeneration extends TransactionalSetup {
     public void test() {
 
         // create new entities
-        EntityIdA entitateA = new EntityIdA();
-        Assert.assertNull(entitateA.getId());
-        Assert.assertNull(entitateA.getName());
-        entitateA.setName(entitateA.toString());
+        EntityIdA entityA = new EntityIdA();
+        Assert.assertNull(entityA.getId());
+        Assert.assertNull(entityA.getName());
+        entityA.setName(entityA.toString());
 
-        EntityIdB entitateB = new EntityIdB();
-        Assert.assertNull(entitateB.getId());
-        Assert.assertNull(entitateB.getName());
-        entitateB.setName(entitateB.toString());
+        EntityIdB entityB = new EntityIdB();
+        Assert.assertNull(entityB.getId());
+        Assert.assertNull(entityB.getName());
+        entityB.setName(entityB.toString());
 
         // persist
-        em.persist(entitateA);
-        em.persist(entitateB);
+        em.persist(entityA);
+        em.persist(entityB);
 
         // mandatory clear cache (entity managers act as caches also)
         flushAndClear();
@@ -47,13 +47,13 @@ public class TestIdTableGeneration extends TransactionalSetup {
         // verify
         List<EntityIdA> listA = em.createQuery("select t from EntityIdA t", EntityIdA.class).getResultList();
         Assert.assertEquals(1, listA.size());
-        Assert.assertNotNull(entitateA.getId());
-        ReflectionAssert.assertReflectionEquals(listA.get(0), entitateA);
+        Assert.assertNotNull(entityA.getId());
+        ReflectionAssert.assertReflectionEquals(listA.get(0), entityA);
 
         List<EntityIdB> listB = em.createQuery("select t from EntityIdB t", EntityIdB.class).getResultList();
         Assert.assertEquals(1, listB.size());
-        Assert.assertNotNull(entitateB.getId());
-        ReflectionAssert.assertReflectionEquals(listB.get(0), entitateB);
+        Assert.assertNotNull(entityB.getId());
+        ReflectionAssert.assertReflectionEquals(listB.get(0), entityB);
 
     }
 
