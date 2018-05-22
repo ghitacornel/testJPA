@@ -1,4 +1,4 @@
-package entities.simple.convertors;
+package entities.simple.converters;
 
 import javax.persistence.*;
 

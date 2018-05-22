@@ -1,6 +1,6 @@
 package xxx.entities.converters;
 
-import entities.simple.convertors.EntityWithAttributeConverters;
+import entities.simple.converters.EntityWithAttributeConverters;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
