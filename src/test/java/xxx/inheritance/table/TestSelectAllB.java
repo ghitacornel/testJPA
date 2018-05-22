@@ -1,6 +1,6 @@
-package main.tests.inheritance.single.table;
+package xxx.inheritance.table;
 
-import entities.inheritance.single.InheritanceSingleTableConcreteClassA;
+import entities.inheritance.single.InheritanceSingleTableConcreteClassB;
 import entities.inheritance.single.InheritanceSingleTableSuperClass;
 import main.tests.TransactionalSetup;
 import org.junit.Before;
@@ -10,7 +10,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 
 import java.util.List;
 
-public class TestSelectAllA extends TransactionalSetup {
+public class TestSelectAllB extends TransactionalSetup {
 
     private List<InheritanceSingleTableSuperClass> model = TestSelectAll.buildModel();
 
@@ -23,11 +23,11 @@ public class TestSelectAllA extends TransactionalSetup {
     @Test
     public void test() {
 
-        List<InheritanceSingleTableConcreteClassA> list = em.createQuery(
-                "select t from InheritanceSingleTableConcreteClassA t", InheritanceSingleTableConcreteClassA.class)
+        List<InheritanceSingleTableConcreteClassB> list = em.createQuery(
+                "select t from InheritanceSingleTableConcreteClassB t", InheritanceSingleTableConcreteClassB.class)
                 .getResultList();
 
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 3), list, ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(model.subList(3, model.size()), list, ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 

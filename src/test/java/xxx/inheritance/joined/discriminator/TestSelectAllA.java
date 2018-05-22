@@ -1,4 +1,4 @@
-package main.tests.inheritance.joined.discriminator;
+package xxx.inheritance.joined.discriminator;
 
 import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassA;
 import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorSuperClass;

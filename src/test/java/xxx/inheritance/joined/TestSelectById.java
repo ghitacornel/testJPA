@@ -1,4 +1,4 @@
-package main.tests.inheritance.joined;
+package xxx.inheritance.joined;
 
 import entities.inheritance.joined.InheritanceJoinedTablesSuperClass;
 import main.tests.TransactionalSetup;

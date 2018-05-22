@@ -1,4 +1,4 @@
-package main.tests.inheritance.single.table;
+package xxx.inheritance.table;
 
 import entities.inheritance.single.InheritanceSingleTableConcreteClassA;
 import entities.inheritance.single.InheritanceSingleTableConcreteClassB;

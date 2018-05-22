@@ -1,4 +1,4 @@
-package main.tests.inheritance.single.table.mixed;
+package xxx.inheritance.mixed;
 
 import entities.inheritance.mixed.ConcreteClassB;
 import entities.inheritance.mixed.MixedContainer;
