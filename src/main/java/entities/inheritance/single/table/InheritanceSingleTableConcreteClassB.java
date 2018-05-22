@@ -20,9 +20,4 @@ public class InheritanceSingleTableConcreteClassB extends InheritanceSingleTable
         this.specificB = specificB;
     }
 
-    @Override
-    public String toString() {
-        return super.toString() + "[id=" + getId() + ",name=" + getName()
-                + ",specificB=" + specificB + "]";
-    }
 }
