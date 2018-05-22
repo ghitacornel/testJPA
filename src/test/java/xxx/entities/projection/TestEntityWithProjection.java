@@ -3,6 +3,7 @@ package xxx.entities.projection;
 import entities.simple.projection.EntityWithProjection;
 import entities.simple.projection.Projection1OfEntityWithProjection;
 import entities.simple.projection.Projection2OfEntityWithProjection;
+import entities.simple.projection.ProjectionFullOfEntityWithProjection;
 import main.tests.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Test;
@@ -27,6 +28,10 @@ public class TestEntityWithProjection extends TransactionalSetup {
         Assert.assertEquals(entity.getId(), projection2.getId());
         Assert.assertEquals(entity.getValue(), projection2.getValue());
 
+        ProjectionFullOfEntityWithProjection projectionFull = em.createQuery("select new entities.simple.projection.ProjectionFullOfEntityWithProjection(e.id,e.name,e.value) from EntityWithProjection e where e.id = 1", ProjectionFullOfEntityWithProjection.class).getSingleResult();
+        Assert.assertEquals(entity.getId(), projectionFull.getId());
+        Assert.assertEquals(entity.getName(), projectionFull.getName());
+        Assert.assertEquals(entity.getValue(), projectionFull.getValue());
     }
 
 }
