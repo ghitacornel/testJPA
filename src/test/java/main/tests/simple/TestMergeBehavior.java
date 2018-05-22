@@ -52,7 +52,7 @@ public class TestMergeBehavior extends Setup {
 
         // update model
         Entity detachedEntity = buildModel();// original updated model is detached
-        detachedEntity.setName("newName1");
+        detachedEntity.setName("initial name");
 
         // merge model to the database
         Entity attachedEntity = em.merge(detachedEntity);
@@ -63,7 +63,10 @@ public class TestMergeBehavior extends Setup {
         Assert.assertNotSame(attachedEntity, detachedEntity);
 
         // make further changes on the not managed instance
-        detachedEntity.setName("newName2");
+        detachedEntity.setName("still detached name");
+
+        // make further changes on the managed instance
+        attachedEntity.setName("managed instance name");
 
         // commit at the end
         em.getTransaction().commit();
@@ -94,7 +97,6 @@ public class TestMergeBehavior extends Setup {
 
         // merge model to the database
         Entity mergedEntity = em.merge(attachedEntity);
-        em.flush();
 
         // a second object is not created since the original updated model is fetched first
         // hence already attached to the persistence context
