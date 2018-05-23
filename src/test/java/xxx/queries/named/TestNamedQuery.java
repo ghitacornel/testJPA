@@ -1,4 +1,4 @@
-package main.tests.queries.named;
+package xxx.queries.named;
 
 import entities.simple.Entity;
 import main.tests.TransactionalSetup;
@@ -31,9 +31,7 @@ public class TestNamedQuery extends TransactionalSetup {
     @Test
     public void testWithNamedParameters() {
 
-        List<Entity> list = em
-                .createNamedQuery("Entity.findByName", Entity.class)
-                .setParameter("name", "%1%").getResultList();
+        List<Entity> list = em.createNamedQuery("Entity.findByName", Entity.class).setParameter("name", "%1%").getResultList();
 
         List<Entity> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
@@ -44,20 +42,16 @@ public class TestNamedQuery extends TransactionalSetup {
     @Test
     public void testWithOrderParameters() {
 
-        Entity entity = em
-                .createNamedQuery("Entity.findById", Entity.class)
-                .setParameter(1, 1).getSingleResult();
-
+        Entity entity = em.createNamedQuery("Entity.findById", Entity.class).setParameter(1, 1).getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+
     }
 
     @Test
     public void testNamedQueryDefinedSeparately() {
 
-        Entity entity = em
-                .createNamedQuery("Entity.findByExactName", Entity.class)
-                .setParameter("name", "name 2").getSingleResult();
-
+        Entity entity = em.createNamedQuery("Entity.findByExactName", Entity.class).setParameter("name", "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
+
     }
 }
