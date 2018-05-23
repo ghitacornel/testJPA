@@ -1,7 +1,7 @@
 package relationships.many.to.many.map;
 
-import entities.relationships.many.to.many.map.MMap;
-import entities.relationships.many.to.many.map.NMap;
+import relationships.many.to.many.map.MMap;
+import relationships.many.to.many.map.NMap;
 import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package relationships.embedded;
 
-import entities.relationships.embedded.EmbeddableBean;
-import entities.relationships.embedded.EntityWithEmbeddable;
+import relationships.embedded.EmbeddableBean;
+import relationships.embedded.EntityWithEmbeddable;
 import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package queries.named.nativ;
 
-import entities.relationships.one.to.many.bidirectional.list.Child;
-import entities.relationships.one.to.many.bidirectional.list.Parent;
+import relationships.one.to.many.bidirectional.list.Child;
+import relationships.one.to.many.bidirectional.list.Parent;
 
 import javax.persistence.*;
 

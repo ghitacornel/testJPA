@@ -1,7 +1,7 @@
 package relationships.one.to.many.strict;
 
-import entities.relationships.one.to.many.strict.ChildStrict;
-import entities.relationships.one.to.many.strict.ParentStrict;
+import relationships.one.to.many.strict.ChildStrict;
+import relationships.one.to.many.strict.ParentStrict;
 import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,7 +1,7 @@
 package relationships.many.to.many.list.cascade;
 
-import entities.relationships.many.to.many.list.cascade.CascadeM;
-import entities.relationships.many.to.many.list.cascade.CascadeN;
+import relationships.many.to.many.list.cascade.CascadeM;
+import relationships.many.to.many.list.cascade.CascadeN;
 import setup.TransactionalSetup;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;

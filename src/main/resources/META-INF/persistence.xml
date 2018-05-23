@@ -25,24 +25,24 @@
         <class>entities.inheritance.single.InheritanceSingleTableSuperClass</class>
         <class>entities.inheritance.InheritanceMappedSuperClass</class>
 
-        <class>entities.relationships.embedded.EmbeddableBean</class>
-        <class>entities.relationships.embedded.EntityWithEmbeddable</class>
+        <class>relationships.embedded.EmbeddableBean</class>
+        <class>relationships.embedded.EntityWithEmbeddable</class>
 
-        <class>entities.relationships.many.to.many.list.M</class>
-        <class>entities.relationships.many.to.many.list.N</class>
-        <class>entities.relationships.many.to.many.list.cascade.CascadeM</class>
-        <class>entities.relationships.many.to.many.list.cascade.CascadeN</class>
-        <class>entities.relationships.many.to.many.map.MMap</class>
-        <class>entities.relationships.many.to.many.map.NMap</class>
+        <class>relationships.many.to.many.list.M</class>
+        <class>relationships.many.to.many.list.N</class>
+        <class>relationships.many.to.many.list.cascade.CascadeM</class>
+        <class>relationships.many.to.many.list.cascade.CascadeN</class>
+        <class>relationships.many.to.many.map.MMap</class>
+        <class>relationships.many.to.many.map.NMap</class>
 
-        <class>entities.relationships.one.to.many.bidirectional.list.Child</class>
-        <class>entities.relationships.one.to.many.bidirectional.list.Parent</class>
-        <class>entities.relationships.one.to.many.bidirectional.map.ChildMap</class>
-        <class>entities.relationships.one.to.many.bidirectional.map.ParentMap</class>
-        <class>entities.relationships.one.to.many.strict.ChildStrict</class>
-        <class>entities.relationships.one.to.many.strict.ParentStrict</class>
-        <class>entities.relationships.one.to.one.bidirectional.A</class>
-        <class>entities.relationships.one.to.one.bidirectional.B</class>
+        <class>relationships.one.to.many.bidirectional.list.Child</class>
+        <class>relationships.one.to.many.bidirectional.list.Parent</class>
+        <class>relationships.one.to.many.bidirectional.map.ChildMap</class>
+        <class>relationships.one.to.many.bidirectional.map.ParentMap</class>
+        <class>relationships.one.to.many.strict.ChildStrict</class>
+        <class>relationships.one.to.many.strict.ParentStrict</class>
+        <class>relationships.one.to.one.bidirectional.A</class>
+        <class>relationships.one.to.one.bidirectional.B</class>
 
         <class>entities.simple.Entity</class>
         <class>entities.simple.special.EntityWithEnums</class>

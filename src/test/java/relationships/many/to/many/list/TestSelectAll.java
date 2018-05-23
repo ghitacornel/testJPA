@@ -1,7 +1,7 @@
 package relationships.many.to.many.list;
 
-import entities.relationships.many.to.many.list.M;
-import entities.relationships.many.to.many.list.N;
+import relationships.many.to.many.list.M;
+import relationships.many.to.many.list.N;
 import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;

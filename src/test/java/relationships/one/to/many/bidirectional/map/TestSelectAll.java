@@ -1,7 +1,7 @@
 package relationships.one.to.many.bidirectional.map;
 
-import entities.relationships.one.to.many.bidirectional.map.ChildMap;
-import entities.relationships.one.to.many.bidirectional.map.ParentMap;
+import relationships.one.to.many.bidirectional.map.ChildMap;
+import relationships.one.to.many.bidirectional.map.ParentMap;
 import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
