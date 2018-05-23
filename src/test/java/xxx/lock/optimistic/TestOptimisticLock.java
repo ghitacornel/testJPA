@@ -1,4 +1,4 @@
-package main.tests.simple.lock.optimistic;
+package xxx.lock.optimistic;
 
 import entities.simple.version.VersionedEntity;
 import main.tests.Setup;

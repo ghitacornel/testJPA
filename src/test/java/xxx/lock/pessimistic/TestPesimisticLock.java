@@ -1,4 +1,4 @@
-package main.tests.simple.lock.pessimistic;
+package xxx.lock.pessimistic;
 
 import entities.simple.Entity;
 import main.tests.Setup;
@@ -7,7 +7,6 @@ import org.junit.*;
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
 import javax.persistence.LockTimeoutException;
-import javax.persistence.PessimisticLockException;
 
 public class TestPesimisticLock extends Setup {
 
