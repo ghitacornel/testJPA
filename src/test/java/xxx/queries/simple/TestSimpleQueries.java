@@ -176,4 +176,20 @@ public class TestSimpleQueries extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(expected, list2);
 
     }
+
+    /**
+     * TODO always check for null or empty collections passed as parameters since they cause generation of illegal SQL clauses such as empty IN<br>
+     * TODO make sure the database IN SQL clause does not have a limit of allowed IN values
+     */
+    @Test
+    public void testWithCollectionParameter() {
+
+        List<String> parameter = new ArrayList<>();
+        parameter.add("name 1");
+        parameter.add("name 2");
+
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", parameter).getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().subList(0, 2), actual);
+
+    }
 }
