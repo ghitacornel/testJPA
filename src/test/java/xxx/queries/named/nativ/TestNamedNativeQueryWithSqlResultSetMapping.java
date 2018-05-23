@@ -1,4 +1,4 @@
-package main.tests.queries.named.nativ;
+package xxx.queries.named.nativ;
 
 import entities.relationships.one.to.many.bidirectional.list.Child;
 import entities.relationships.one.to.many.bidirectional.list.Parent;
@@ -12,8 +12,7 @@ import org.unitils.reflectionassert.ReflectionComparatorMode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestNamedNativeQueryWithSqlResultSetMapping extends
-        TransactionalSetup {
+public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSetup {
 
     private Parent model = buildModel();
 
@@ -46,8 +45,7 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends
     public void test() {
 
         // fetch
-        List<Object[]> list = em.createNamedQuery(
-                "Parent.findWithChildrenNative").getResultList();
+        List<Object[]> list = em.createNamedQuery("Parent.findWithChildrenNative").getResultList();
 
         // verify, order is ignored
         List<Child> fetchedChildren = new ArrayList<>();
@@ -65,6 +63,7 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends
 
         // verify fetched children
         ReflectionAssert.assertReflectionEquals(model.getChildren(), fetchedChildren, ReflectionComparatorMode.LENIENT_ORDER);
+
     }
 
 }

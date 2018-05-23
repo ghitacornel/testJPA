@@ -6,8 +6,7 @@ import entities.relationships.one.to.many.bidirectional.list.Parent;
 import javax.persistence.*;
 
 /**
- * example with a {@link NamedNativeQuery} mapped to domain using a
- * {@link SqlResultSetMapping}
+ * example with a {@link NamedNativeQuery} mapped to domain using a * {@link SqlResultSetMapping}
  *
  * @author Cornel
  */

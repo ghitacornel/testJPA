@@ -1,4 +1,4 @@
-package main.tests.queries.named.nativ;
+package xxx.queries.named.nativ;
 
 import entities.simple.Entity;
 import main.tests.TransactionalSetup;
@@ -31,9 +31,7 @@ public class TestNativeQuery extends TransactionalSetup {
     @Test
     public void testWithNamedParameters() {
 
-        List<Entity> list = em
-                .createNamedQuery("Entity.findByNameNative", Entity.class)
-                .setParameter("name", "%1%").getResultList();
+        List<Entity> list = em.createNamedQuery("Entity.findByNameNative", Entity.class).setParameter("name", "%1%").getResultList();
 
         List<Entity> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
@@ -43,21 +41,17 @@ public class TestNativeQuery extends TransactionalSetup {
     @Test
     public void testWithOrderParameters() {
 
-        Entity entity = em
-                .createNamedQuery("Entity.findByIdNative", Entity.class)
-                .setParameter(1, 1).getSingleResult();
-
+        Entity entity = em.createNamedQuery("Entity.findByIdNative", Entity.class).setParameter(1, 1).getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+
     }
 
     @Test
     public void testNamedQueryDefinedSeparately() {
 
-        Entity entity = em
-                .createNamedQuery("Entity.findByExactNameNative", Entity.class)
-                .setParameter(1, "name 2").getSingleResult();
-
+        Entity entity = em.createNamedQuery("Entity.findByExactNameNative", Entity.class).setParameter(1, "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
+
     }
 
 }
