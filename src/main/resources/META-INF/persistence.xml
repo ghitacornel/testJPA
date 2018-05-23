@@ -53,19 +53,12 @@
         <class>entities.simple.converters.EntityWithAttributeConverters</class>
         <class>entities.simple.listener.EntityWithListener</class>
         <class>entities.simple.projection.EntityWithProjection</class>
-        <class>entities.simple.version.VersionedEntity</class>
+
+        <class>lock.VersionedEntity</class>
 
         <class>queries.named.nativ.NamedNativeQueriesDefinition</class>
         <class>queries.named.nativ.NamedNativeQueriesWithResultSetMappingDefinition</class>
         <class>queries.named.NamedQueriesDefinition</class>
-
-        <class>frameworks.auditable.model.Auditable</class>
-        <class>frameworks.auditable.tests.model.AuditableModel</class>
-
-        <class>frameworks.versionable.VersionableEntity</class>
-        <class>frameworks.versionable.EntityVersion</class>
-        <class>frameworks.versionable.tests.model.Model</class>
-        <class>frameworks.versionable.tests.model.ModelVersion</class>
 
         <class>entities.inheritance.mixed.ConcreteClassA</class>
         <class>entities.inheritance.mixed.ConcreteClassB</class>

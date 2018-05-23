@@ -1,6 +1,6 @@
 package xxx.lock.optimistic;
 
-import entities.simple.version.VersionedEntity;
+import lock.VersionedEntity;
 import main.tests.Setup;
 import org.junit.After;
 import org.junit.Assert;

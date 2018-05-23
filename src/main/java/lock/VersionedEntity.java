@@ -1,4 +1,4 @@
-package entities.simple.version;
+package lock;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
