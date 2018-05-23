@@ -124,7 +124,7 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testFindByNameWithCriteriaBuilderNoMetamodel() {
+    public void testFindByNameWithCriteriaBuilderNoMetaModel() {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
@@ -139,7 +139,7 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testFindByNameWithCriteriaBuilderMetamodel() {
+    public void testFindByNameWithCriteriaBuilderMetaModel() {
 
         CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
 
