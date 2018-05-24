@@ -31,7 +31,7 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testRemoveParentTriggersTheRemovalOfOrphanChild() {
 
         Assert.assertNotNull(em.find(A.class, 1));
         Assert.assertNotNull(em.find(B.class, 2));

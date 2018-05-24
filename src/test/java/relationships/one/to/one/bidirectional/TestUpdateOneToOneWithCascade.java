@@ -32,17 +32,21 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testUpdateRelationshipAndRemovalOfOrphan() {
+    public void testUpdateRelationshipToANewChildAndRemovalOfOrphan() {
 
         A existingA1 = em.find(A.class, model.getId());
         {
             existingA1.setName("new name a");
 
+            // create new child
             B b = new B();
             b.setId(4);
             b.setName("new name b");
+
+            // establish new relationships
             b.setA(existingA1);
             existingA1.setB(b);
+
         }
 
         em.merge(existingA1);
