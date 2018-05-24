@@ -49,4 +49,26 @@ public class TestOTOUCPCascade extends TransactionalSetup {
         Assert.assertNull(em.find(OTOUCPCascadeChild.class, 1));
 
     }
+
+    @Test(expected = javax.persistence.PersistenceException.class)
+    public void testRemoveParentAndFailRemoveOfOrphanChild() {
+
+        OTOUCPCascadeParent parent = new OTOUCPCascadeParent();
+        parent.setId(1);
+        parent.setName("parent");
+
+        OTOUCPCascadeChild child = new OTOUCPCascadeChild();
+        child.setId(1);
+        child.setName("child");
+        child.setParent(parent);
+
+        em.persist(child);
+        flushAndClear();
+
+        em.remove(em.find(OTOUCPCascadeParent.class, 1));
+        flushAndClear();
+        // the parent is removed and not the child, the child is not loaded
+        // => JPA won't trigger a select to remove the orphaned child => exception
+
+    }
 }
