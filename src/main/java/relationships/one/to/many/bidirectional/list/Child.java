@@ -12,7 +12,6 @@ public class Child {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "PARENT_ID")
     private Parent parent;
 
     public Integer getId() {
