@@ -93,7 +93,7 @@ public class TestRemove extends TransactionalSetup {
             verifyRemoveComplete();
         }
 
-        }
+    }
 
     private void verifyRemoveComplete() {
         CascadeM m = em.find(CascadeM.class, 1);
