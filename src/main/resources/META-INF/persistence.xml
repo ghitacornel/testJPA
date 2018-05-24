@@ -28,6 +28,11 @@
         <class>relationships.embedded.EmbeddableBean</class>
         <class>relationships.embedded.EntityWithEmbeddable</class>
 
+        <class>relationships.one.to.one.unidirectional.child.parent.nocascade.OTOUCPNoCascadeParent</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.nocascade.OTOUCPNoCascadeChild</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.cascade.OTOUCPCascadeParent</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.cascade.OTOUCPCascadeChild</class>
+
         <class>relationships.many.to.many.list.M</class>
         <class>relationships.many.to.many.list.N</class>
         <class>relationships.many.to.many.list.cascade.CascadeM</class>
