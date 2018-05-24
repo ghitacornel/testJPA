@@ -134,6 +134,16 @@ public class TestSimpleQueries extends TransactionalSetup {
 
     }
 
+    @Test(expected = javax.persistence.NonUniqueResultException.class)
+    public void testUniqueResultNonUniqueSelect() {
+        em.createQuery("select e from SQE e where e.name = 'name 1' or e.name = 'name 2'", SimpleQueryEntity.class).getSingleResult();
+    }
+
+    @Test(expected = javax.persistence.NoResultException.class)
+    public void testUniqueResultNoData() {
+        em.createQuery("select e from SQE e where e.name = 'name not present'", SimpleQueryEntity.class).getSingleResult();
+    }
+
     @Test
     public void testCountAll() {
 
