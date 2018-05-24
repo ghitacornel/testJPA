@@ -1,5 +1,6 @@
 package queries.simple;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -122,6 +123,22 @@ public class TestSimpleQueries extends TransactionalSetup {
 
         SimpleQueryEntity entity = em.find(SimpleQueryEntity.class, 5);
         ReflectionAssert.assertReflectionEquals(buildModel().get(4), entity);
+
+    }
+
+    @Test
+    public void testUniqueResult() {
+
+        SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name='name 1'", SimpleQueryEntity.class).getSingleResult();
+        ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+
+    }
+
+    @Test
+    public void testCountAll() {
+
+        Long count = em.createQuery("select count(e) from SQE e", Long.class).getSingleResult();
+        Assert.assertEquals(6, count.longValue());
 
     }
 
