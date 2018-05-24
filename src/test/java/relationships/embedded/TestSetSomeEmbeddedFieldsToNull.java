@@ -1,11 +1,9 @@
 package relationships.embedded;
 
-import relationships.embedded.EmbeddableBean;
-import relationships.embedded.EntityWithEmbeddable;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 import java.util.Date;
 
@@ -20,12 +18,12 @@ public class TestSetSomeEmbeddedFieldsToNull extends TransactionalSetup {
     }
 
     private EntityWithEmbeddable buildModel() {
-        EntityWithEmbeddable entitateCompusa = new EntityWithEmbeddable();
-        entitateCompusa.setId(1);
-        entitateCompusa.setEmbedded(new EmbeddableBean());
-        entitateCompusa.getEmbedded().setName("name " + entitateCompusa.getId());
-        entitateCompusa.getEmbedded().setCreationDate(new Date());
-        return entitateCompusa;
+        EntityWithEmbeddable entity = new EntityWithEmbeddable();
+        entity.setId(1);
+        entity.setEmbedded(new EmbeddableBean());
+        entity.getEmbedded().setName("name " + entity.getId());
+        entity.getEmbedded().setCreationDate(new Date());
+        return entity;
     }
 
     @Test
@@ -42,5 +40,6 @@ public class TestSetSomeEmbeddedFieldsToNull extends TransactionalSetup {
         Assert.assertNotNull(existing2.getEmbedded());
         Assert.assertNull(existing2.getEmbedded().getName());
         Assert.assertNotNull(existing2.getEmbedded().getCreationDate());
+        
     }
 }
