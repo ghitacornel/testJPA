@@ -8,7 +8,7 @@ import java.util.List;
 @Entity
 public class CascadeM {
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "CascadeMN",
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
@@ -18,6 +18,7 @@ public class CascadeM {
 
     @Id
     private Integer id;
+
     @Column(nullable = false)
     private String name;
 
