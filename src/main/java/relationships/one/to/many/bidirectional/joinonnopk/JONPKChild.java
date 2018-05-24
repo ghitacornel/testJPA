@@ -13,7 +13,7 @@ public class JONPKChild {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_name", referencedColumnName = "id")
-    // TODO change the reference column name to name and see it faling
+    // TODO change the reference column name to name and see it failing
     private JONPKParent parent;
 
     public Integer getId() {
