@@ -1,12 +1,10 @@
 package queries.simple;
 
-import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import queries.simple.SimpleQueryEntity;
-import queries.simple.SimpleQueryEntity_;
+import setup.TransactionalSetup;
 
 import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
