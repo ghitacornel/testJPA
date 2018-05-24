@@ -1,13 +1,11 @@
 package relationships.one.to.many.bidirectional.map;
 
-import relationships.one.to.many.bidirectional.map.ChildMap;
-import relationships.one.to.many.bidirectional.map.ParentMap;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,13 +18,13 @@ public class TestSelectAll extends TransactionalSetup {
 
         ParentMap parent = new ParentMap();
         parent.setId(1L);
-        parent.setName("parinte 1");
+        parent.setName("parent 1");
         parent.setChildren(new HashMap<>());
 
         for (long i = 1; i <= 3; i++) {
             ChildMap child = new ChildMap();
             child.setId(i);
-            child.setName("copil " + i);
+            child.setName("child " + i);
             child.setParent(parent);
             parent.getChildren().put(child.getId(), child);
         }
