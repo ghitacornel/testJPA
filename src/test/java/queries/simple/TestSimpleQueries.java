@@ -159,7 +159,7 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     /**
-     * TODO always check for null or empty collections passed as parameters since they cause generation of illegal SQL clauses such as empty IN<br>
+     * TODO always check for null or empty collections passed as parameters since they might cause generation of illegal SQL clauses such as empty IN<br>
      * TODO make sure the database IN SQL clause does not have a limit of allowed IN values
      */
     @Test
