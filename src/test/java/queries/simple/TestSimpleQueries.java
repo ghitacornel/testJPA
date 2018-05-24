@@ -143,20 +143,25 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testWithNullParameter() {
+    public void testWithNullClauseOK() {
 
-        // TODO an equality check is performed against null => FAILURE
-        List<SimpleQueryEntity> list1 = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
-        ReflectionAssert.assertReflectionEquals(new ArrayList<>(), list1);
-
-
-        // CORRECT way to check for nulls
-        List<SimpleQueryEntity> list2 = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
+        // CORRECT way to check for NULL
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(5));
-        ReflectionAssert.assertReflectionEquals(expected, list2);
+        ReflectionAssert.assertReflectionEquals(expected, list);
 
     }
+
+    @Test
+    public void testWithNullClauseFAIL() {
+
+        // INCORRECT way to check for NULL
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
+        Assert.assertTrue(list.isEmpty());
+
+    }
+
 
     /**
      * TODO always check for null or empty collections passed as parameters since they might cause generation of illegal SQL clauses such as empty IN<br>
