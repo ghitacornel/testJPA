@@ -1,11 +1,9 @@
 package relationships.one.to.one.bidirectional;
 
-import relationships.one.to.one.bidirectional.A;
-import relationships.one.to.one.bidirectional.B;
-import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 public class TestLoadOneToOneInOneNamedQuery extends
         TransactionalSetup {
@@ -37,6 +35,7 @@ public class TestLoadOneToOneInOneNamedQuery extends
     public void test() {
 
         A a = em.createNamedQuery("A.findWithB", A.class).setParameter(1, 1).getSingleResult();
+        flushAndClear();
 
         ReflectionAssert.assertReflectionEquals(model, a);
         ReflectionAssert.assertReflectionEquals(model.getB(), a.getB());

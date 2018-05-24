@@ -1,11 +1,9 @@
 package relationships.one.to.one.bidirectional;
 
-import relationships.one.to.one.bidirectional.A;
-import relationships.one.to.one.bidirectional.B;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 import javax.persistence.Persistence;
 

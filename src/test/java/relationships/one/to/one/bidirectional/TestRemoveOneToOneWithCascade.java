@@ -1,11 +1,9 @@
 package relationships.one.to.one.bidirectional;
 
-import relationships.one.to.one.bidirectional.A;
-import relationships.one.to.one.bidirectional.B;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
 
@@ -35,14 +33,14 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     @Test
     public void test() {
 
-        Assert.assertFalse(em.createQuery("select t from A t").getResultList().isEmpty());
-        Assert.assertFalse(em.createQuery("select t from B t").getResultList().isEmpty());
+        Assert.assertNotNull(em.find(A.class, 1));
+        Assert.assertNotNull(em.find(B.class, 2));
 
-        em.remove(em.find(A.class, model.getId()));
+        em.remove(em.find(A.class, 1));
         flushAndClear();
 
-        Assert.assertTrue(em.createQuery("select t from A t").getResultList().isEmpty());
-        Assert.assertTrue(em.createQuery("select t from B t").getResultList().isEmpty());
+        Assert.assertNull(em.find(A.class, 1));
+        Assert.assertNull(em.find(B.class, 2));
 
     }
 }

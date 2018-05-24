@@ -1,12 +1,10 @@
 package relationships.one.to.one.bidirectional;
 
-import relationships.one.to.one.bidirectional.A;
-import relationships.one.to.one.bidirectional.B;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
 
@@ -34,7 +32,7 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testUpdateRelationshipAndRemovalOfOrphan() {
 
         A existingA1 = em.find(A.class, model.getId());
         {
