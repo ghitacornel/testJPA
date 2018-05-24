@@ -1,11 +1,9 @@
 package relationships.one.to.many.bidirectional.list;
 
-import relationships.one.to.many.bidirectional.list.Child;
-import relationships.one.to.many.bidirectional.list.Parent;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
@@ -17,13 +15,13 @@ public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
 
         Parent parent = new Parent();
         parent.setId(1);
-        parent.setName("parinte 1");
+        parent.setName("parent 1");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             Child child = new Child();
             child.setId(i);
-            child.setName("copil " + i);
+            child.setName("child " + i);
             child.setParent(parent);
             parent.getChildren().add(child);
         }

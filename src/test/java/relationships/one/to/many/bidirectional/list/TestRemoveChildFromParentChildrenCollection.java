@@ -1,12 +1,11 @@
 package relationships.one.to.many.bidirectional.list;
 
-import relationships.one.to.many.bidirectional.list.Child;
-import relationships.one.to.many.bidirectional.list.Parent;
-import setup.TransactionalSetup;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
@@ -18,13 +17,13 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
 
         Parent parent = new Parent();
         parent.setId(1);
-        parent.setName("parinte 1");
+        parent.setName("parent 1");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             Child child = new Child();
             child.setId(i);
-            child.setName("copil " + i);
+            child.setName("child " + i);
             child.setParent(parent);
             parent.getChildren().add(child);
         }
@@ -49,6 +48,11 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
         Parent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
         ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+
+        // child is removed since it is now an orphan
+        Child child = em.find(Child.class, buildModel().getChildren().get(1).getId());
+        Assert.assertNull(child);
+
     }
 
     @Test
@@ -63,5 +67,6 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
         Parent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
         ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+
     }
 }
