@@ -21,8 +21,6 @@ public class ChildStrict {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
-    // this is actually the default also
     private ParentStrict parent;
 
     public Integer getId() {

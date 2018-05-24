@@ -1,37 +1,28 @@
 package relationships.one.to.many.strict;
 
-import relationships.one.to.many.strict.ChildStrict;
-import relationships.one.to.many.strict.ParentStrict;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class TestCRUD extends TransactionalSetup {
 
-    private List<ParentStrict> model = buildModel();
-
-    private List<ParentStrict> buildModel() {
-        List<ParentStrict> list = new ArrayList<>();
-
-        for (int i = 1; i < 3; i++) {
-            ParentStrict parent = new ParentStrict();
-            parent.setId(i);
-            parent.setName("strict parent " + i);
-            list.add(parent);
-        }
-
-        return list;
-    }
+    private ParentStrict parentStrict1 = new ParentStrict();
+    private ParentStrict parentStrict2 = new ParentStrict();
 
     @Before
     public void before() {
-        persist(model);
+        parentStrict1.setId(1);
+        parentStrict1.setName("parent strict");
+        persist(parentStrict1);
+
+        parentStrict2.setId(2);
+        parentStrict2.setName("parent strict");
+        persist(parentStrict2);
+
         flushAndClear();
     }
 
@@ -43,11 +34,10 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // insert
-        ParentStrict parentStrict = em.find(ParentStrict.class, model.get(0).getId());
         ChildStrict childStrict = new ChildStrict();
         childStrict.setId(1);
         childStrict.setName("child name");
-        childStrict.setParent(parentStrict);
+        childStrict.setParent(parentStrict1);
         em.persist(childStrict);
         flushAndClear();
 
@@ -60,15 +50,14 @@ public class TestCRUD extends TransactionalSetup {
         // update
         ChildStrict existing = em.find(ChildStrict.class, 1);
         existing.setName("new child name");
-        ParentStrict newParentStrict = em.find(ParentStrict.class, model.get(1).getId());
-        existing.setParent(newParentStrict);
+        existing.setParent(parentStrict2);
         em.merge(existing);
         flushAndClear();
 
         // test update
         existing = em.find(ChildStrict.class, 1);
         Assert.assertEquals("new child name", existing.getName());
-        ReflectionAssert.assertReflectionEquals(newParentStrict, existing.getParent());
+        ReflectionAssert.assertReflectionEquals(parentStrict2, existing.getParent());
         flushAndClear();
 
         // remove
@@ -82,8 +71,8 @@ public class TestCRUD extends TransactionalSetup {
 
         // this test verifies cascade is not present
         // cascade removal => test fails
-        ReflectionAssert.assertReflectionEquals(model, em.createQuery("select t from ParentStrict t").getResultList(), ReflectionComparatorMode.LENIENT_ORDER);
-        flushAndClear();
+        ReflectionAssert.assertReflectionEquals(parentStrict1, em.find(ParentStrict.class, 1));
+        ReflectionAssert.assertReflectionEquals(parentStrict2, em.find(ParentStrict.class, 2));
 
     }
 }
