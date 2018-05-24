@@ -1,20 +1,19 @@
-package relationships.one.to.many.bidirectional.list;
+package relationships.one.to.many.bidirectional.joinonnopk;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "Parent.findWithChildren", query = "select p from Parent p join fetch p.children where p.id = ?1")
-public class Parent {
+public class JONPKParent {
 
     @Id
     private Integer id;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
-    private List<Child> children;
+    private List<JONPKChild> children;
 
     public Integer getId() {
         return id;
@@ -32,11 +31,11 @@ public class Parent {
         this.name = name;
     }
 
-    public List<Child> getChildren() {
+    public List<JONPKChild> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Child> children) {
+    public void setChildren(List<JONPKChild> children) {
         this.children = children;
     }
 }

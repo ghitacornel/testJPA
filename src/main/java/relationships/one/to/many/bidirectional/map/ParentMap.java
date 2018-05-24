@@ -12,7 +12,7 @@ public class ParentMap {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
     @MapKey(name = "id")
     private Map<Long, ChildMap> children;
 

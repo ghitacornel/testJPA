@@ -39,6 +39,8 @@
         <class>relationships.many.to.many.list.cascade.CascadeN</class>
         <class>relationships.many.to.many.map.MMap</class>
         <class>relationships.many.to.many.map.NMap</class>
+        <class>relationships.one.to.many.bidirectional.joinonnopk.JONPKChild</class>
+        <class>relationships.one.to.many.bidirectional.joinonnopk.JONPKParent</class>
 
         <class>relationships.one.to.many.bidirectional.list.Child</class>
         <class>relationships.one.to.many.bidirectional.list.Parent</class>
