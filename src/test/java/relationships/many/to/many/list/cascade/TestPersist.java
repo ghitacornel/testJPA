@@ -1,11 +1,9 @@
 package relationships.many.to.many.list.cascade;
 
-import relationships.many.to.many.list.cascade.CascadeM;
-import relationships.many.to.many.list.cascade.CascadeN;
-import setup.TransactionalSetup;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +12,7 @@ public class TestPersist extends TransactionalSetup {
 
     private List<Object> model = buildModel();
 
-    static List<Object> buildModel() {
+    private static List<Object> buildModel() {
         List<Object> objects = new ArrayList<>();
 
         {
@@ -41,11 +39,9 @@ public class TestPersist extends TransactionalSetup {
     public void testPersistFromTheOwningSide() {
 
         // persist
-        {
-            em.persist(model.get(0));
-        }
+        em.persist(model.get(0));
+        flushAndClear();
 
-        // verify final
         verifyPersistedModel();
 
     }
@@ -54,14 +50,10 @@ public class TestPersist extends TransactionalSetup {
     public void testPersistFromTheNonOwningSide() {
 
         // persist
-        {
-            em.persist(model.get(1));
-        }
+        em.persist(model.get(1));
+        flushAndClear();
 
-        // verify final
-        {
-            verifyPersistedModel();
-        }
+        verifyPersistedModel();
 
     }
 

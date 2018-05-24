@@ -7,7 +7,7 @@ import java.util.List;
 @Entity
 public class M {
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(
             name = "MN",
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
@@ -17,6 +17,7 @@ public class M {
 
     @Id
     private Integer id;
+
     @Column(nullable = false)
     private String name;
 

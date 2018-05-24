@@ -15,6 +15,7 @@ public class N {
 
     @Id
     private Integer id;
+
     @Column(nullable = false)
     private String name;
 

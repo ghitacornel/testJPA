@@ -14,7 +14,7 @@ public class MMap {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany
     @JoinTable(name = "MN_MAP", joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")})
     @MapKey(name = "id")
     private Map<Integer, NMap> mapWithNs = new HashMap<>();

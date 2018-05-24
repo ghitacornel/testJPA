@@ -1,13 +1,11 @@
 package relationships.many.to.many.list.cascade;
 
-import relationships.many.to.many.list.cascade.CascadeM;
-import relationships.many.to.many.list.cascade.CascadeN;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +14,7 @@ public class TestRemove extends TransactionalSetup {
 
     private List<Object> model = buildModel();
 
-    static List<Object> buildModel() {
+    private static List<Object> buildModel() {
         List<Object> objects = new ArrayList<>();
 
         {
