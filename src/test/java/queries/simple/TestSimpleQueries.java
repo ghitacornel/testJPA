@@ -6,10 +6,6 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -119,36 +115,6 @@ public class TestSimpleQueries extends TransactionalSetup {
         SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
 
-    }
-
-    @Test
-    public void testFindByNameWithCriteriaBuilderNoMetaModel() {
-
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-        CriteriaQuery<SimpleQueryEntity> query = criteriaBuilder.createQuery(SimpleQueryEntity.class);
-        Root<SimpleQueryEntity> from = query.from(SimpleQueryEntity.class);
-        query.where(criteriaBuilder.equal(from.get("name"), "name 3"));
-        TypedQuery<SimpleQueryEntity> typedQuery = em.createQuery(query);
-
-        SimpleQueryEntity entity = typedQuery.getSingleResult();
-
-        ReflectionAssert.assertReflectionEquals(buildModel().get(2), entity);
-    }
-
-    @Test
-    public void testFindByNameWithCriteriaBuilderMetaModel() {
-
-        CriteriaBuilder criteriaBuilder = em.getCriteriaBuilder();
-
-        CriteriaQuery<SimpleQueryEntity> query = criteriaBuilder.createQuery(SimpleQueryEntity.class);
-        Root<SimpleQueryEntity> from = query.from(SimpleQueryEntity.class);
-        query.where(criteriaBuilder.equal(from.get(SimpleQueryEntity_.name), "name 4"));
-        TypedQuery<SimpleQueryEntity> typedQuery = em.createQuery(query);
-
-        SimpleQueryEntity entity = typedQuery.getSingleResult();
-
-        ReflectionAssert.assertReflectionEquals(buildModel().get(3), entity);
     }
 
     @Test
