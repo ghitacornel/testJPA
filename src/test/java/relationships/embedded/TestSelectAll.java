@@ -33,10 +33,24 @@ public class TestSelectAll extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testSelectAll() {
 
         List<EntityWithEmbeddable> existing = em.createQuery("select t from EntityWithEmbeddable t order by id", EntityWithEmbeddable.class).getResultList();
         ReflectionAssert.assertReflectionEquals(model, existing);
-        
+
+    }
+
+    @Test
+    public void testSelectAllEmbeddable() {
+
+        List<EmbeddableBean> existing = em.createQuery("select t.embedded from EntityWithEmbeddable t order by id", EmbeddableBean.class).getResultList();
+
+        List<EmbeddableBean> embeddableBeans = new ArrayList<>();
+        for (EntityWithEmbeddable entityWithEmbeddable : model) {
+            embeddableBeans.add(entityWithEmbeddable.getEmbedded());
+        }
+
+        ReflectionAssert.assertReflectionEquals(embeddableBeans, existing);
+
     }
 }

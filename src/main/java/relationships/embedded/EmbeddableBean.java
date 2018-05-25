@@ -16,7 +16,7 @@ public class EmbeddableBean {
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "data_creare")
+    @Column(name = "creation_date")
     private Date creationDate;
 
     public String getName() {
