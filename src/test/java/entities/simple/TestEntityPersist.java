@@ -61,7 +61,7 @@ public class TestEntityPersist extends TransactionalSetup {
         entity.setId(1);
         entity.setName("name");
 
-        // persist once + persistence context flushed and clear + persist twice = error
+        // persist once + persistence context clear + persist twice = error
         em.persist(entity);
         flushAndClear();
 
