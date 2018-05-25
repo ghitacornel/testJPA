@@ -3,12 +3,12 @@ package inheritance.mixed;
 import entities.inheritance.mixed.ConcreteClassA;
 import entities.inheritance.mixed.ConcreteClassB;
 import entities.inheritance.mixed.MixedContainer;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 public class TestCannotChangeHierarchyType extends TransactionalSetup {
 

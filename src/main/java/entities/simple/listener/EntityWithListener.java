@@ -1,7 +1,6 @@
 package entities.simple.listener;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @EntityListeners(EntityListener.class)

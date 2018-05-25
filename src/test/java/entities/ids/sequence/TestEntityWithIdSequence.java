@@ -1,11 +1,10 @@
 package entities.ids.sequence;
 
-import entities.ids.sequence.EntityWithIdSequence;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 import java.util.List;
 

@@ -3,11 +3,11 @@ package inheritance.joined.discriminator;
 import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassA;
 import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassB;
 import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorSuperClass;
-import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;

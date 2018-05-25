@@ -1,12 +1,12 @@
 package entities.special;
 
-import entities.simple.special.SimpleEnum;
 import entities.simple.special.EntityWithEnums;
-import setup.TransactionalSetup;
+import entities.simple.special.SimpleEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 import java.util.List;
 

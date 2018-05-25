@@ -1,11 +1,11 @@
 package lock.optimistic;
 
 import lock.VersionedEntity;
-import setup.Setup;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.Setup;
 
 import javax.persistence.EntityManager;
 import javax.persistence.OptimisticLockException;

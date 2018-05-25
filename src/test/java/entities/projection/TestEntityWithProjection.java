@@ -4,9 +4,9 @@ import entities.simple.projection.EntityWithProjection;
 import entities.simple.projection.Projection1OfEntityWithProjection;
 import entities.simple.projection.Projection2OfEntityWithProjection;
 import entities.simple.projection.ProjectionFullOfEntityWithProjection;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 public class TestEntityWithProjection extends TransactionalSetup {
 

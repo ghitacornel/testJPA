@@ -1,7 +1,5 @@
 package entities.simple;
 
-import entities.simple.Entity;
-import setup.TransactionalSetup;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
@@ -10,6 +8,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 import java.sql.Connection;
 import java.sql.ResultSet;

@@ -1,10 +1,10 @@
 package entities.special;
 
 import entities.simple.special.EntityWithPrimitives;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 public class TestEntityWithPrimitives extends TransactionalSetup {
 

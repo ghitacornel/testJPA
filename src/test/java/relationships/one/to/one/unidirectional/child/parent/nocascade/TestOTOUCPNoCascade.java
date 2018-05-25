@@ -3,7 +3,6 @@ package relationships.one.to.one.unidirectional.child.parent.nocascade;
 import org.junit.Assert;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-
 import setup.TransactionalSetup;
 
 public class TestOTOUCPNoCascade extends TransactionalSetup {

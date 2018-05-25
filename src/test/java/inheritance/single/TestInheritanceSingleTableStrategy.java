@@ -3,11 +3,11 @@ package inheritance.single;
 import entities.inheritance.single.InheritanceSingleTableConcreteClassA;
 import entities.inheritance.single.InheritanceSingleTableConcreteClassB;
 import entities.inheritance.single.InheritanceSingleTableSuperClass;
-import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;

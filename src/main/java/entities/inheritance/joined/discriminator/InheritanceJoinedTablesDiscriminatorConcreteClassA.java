@@ -1,6 +1,9 @@
 package entities.inheritance.joined.discriminator;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
 
 @Entity
 @Table(name = "IerarhieJoinedDiscriminatorA")

@@ -1,6 +1,9 @@
 package entities.simple.projection;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class EntityWithProjection {

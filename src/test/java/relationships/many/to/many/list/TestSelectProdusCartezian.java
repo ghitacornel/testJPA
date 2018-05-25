@@ -1,9 +1,9 @@
 package relationships.many.to.many.list;
 
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 import java.util.List;
 

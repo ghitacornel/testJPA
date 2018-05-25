@@ -1,11 +1,11 @@
 package entities.special;
 
 import entities.simple.special.EntityWithLOB;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 public class TestEntityWithLOB extends TransactionalSetup {
 

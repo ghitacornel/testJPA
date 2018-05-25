@@ -1,10 +1,10 @@
 package queries.named.nativ;
 
 import entities.simple.Entity;
-import setup.TransactionalSetup;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;

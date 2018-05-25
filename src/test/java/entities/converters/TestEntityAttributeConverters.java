@@ -1,11 +1,11 @@
 package entities.converters;
 
 import entities.simple.converters.EntityWithAttributeConverters;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 import java.util.List;
 

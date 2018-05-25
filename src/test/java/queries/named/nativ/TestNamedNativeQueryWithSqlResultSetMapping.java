@@ -1,13 +1,13 @@
 package queries.named.nativ;
 
-import relationships.one.to.many.bidirectional.list.Child;
-import relationships.one.to.many.bidirectional.list.Parent;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.one.to.many.bidirectional.list.Child;
+import relationships.one.to.many.bidirectional.list.Parent;
+import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;

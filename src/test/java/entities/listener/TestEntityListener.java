@@ -1,10 +1,10 @@
 package entities.listener;
 
 import entities.simple.listener.EntityWithListener;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 public class TestEntityListener extends TransactionalSetup {
 

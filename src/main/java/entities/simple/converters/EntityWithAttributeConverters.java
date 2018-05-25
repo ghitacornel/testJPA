@@ -1,6 +1,9 @@
 package entities.simple.converters;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Convert;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class EntityWithAttributeConverters {

@@ -1,13 +1,11 @@
 package relationships.one.to.one.bidirectional;
 
-import relationships.one.to.one.bidirectional.A;
-import relationships.one.to.one.bidirectional.B;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import setup.TransactionalSetup;
 
 public class TestInsertAWithCascadeToB extends TransactionalSetup {
 

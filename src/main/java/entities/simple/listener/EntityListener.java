@@ -2,7 +2,6 @@ package entities.simple.listener;
 
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.util.Date;
 
 public class EntityListener {
 

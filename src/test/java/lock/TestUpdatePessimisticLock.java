@@ -1,11 +1,11 @@
 package lock;
 
 import entities.simple.Entity;
-import setup.TransactionalSetup;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import setup.TransactionalSetup;
 
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;

@@ -1,12 +1,10 @@
 package entities.ids.table;
 
-import entities.ids.table.EntityAWithIdGeneratedFromTable;
-import entities.ids.table.EntityBWithIdGeneratedFromTable;
-import setup.TransactionalSetup;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.TransactionalSetup;
 
 import java.util.List;
 

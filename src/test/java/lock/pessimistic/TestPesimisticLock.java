@@ -1,8 +1,8 @@
 package lock.pessimistic;
 
 import entities.simple.Entity;
-import setup.Setup;
 import org.junit.*;
+import setup.Setup;
 
 import javax.persistence.EntityManager;
 import javax.persistence.LockModeType;
