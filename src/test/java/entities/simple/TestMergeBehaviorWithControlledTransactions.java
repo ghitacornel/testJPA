@@ -7,7 +7,7 @@ import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.Setup;
 
-public class TestMergeBehavior extends Setup {
+public class TestMergeBehaviorWithControlledTransactions extends Setup {
 
     @Before
     public void before() {
