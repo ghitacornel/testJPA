@@ -36,6 +36,7 @@ public class TestRemoveEmbedded extends TransactionalSetup {
         em.remove(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
         flushAndClear();
 
+        Assert.assertNotNull(em.find(EntityWithEmbeddable.class, model.getId()));
         Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
 
     }
@@ -47,6 +48,7 @@ public class TestRemoveEmbedded extends TransactionalSetup {
         existing1.setEmbedded(null);
         flushAndClear();
 
+        Assert.assertNotNull(em.find(EntityWithEmbeddable.class, model.getId()));
         Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
     }
 
