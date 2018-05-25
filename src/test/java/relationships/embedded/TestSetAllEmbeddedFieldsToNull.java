@@ -34,8 +34,6 @@ public class TestSetAllEmbeddedFieldsToNull extends TransactionalSetup {
         // set all embedded fields to null
         existing1.getEmbedded().setName(null);
         existing1.getEmbedded().setCreationDate(null);
-
-        em.merge(existing1);
         flushAndClear();
 
         Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());

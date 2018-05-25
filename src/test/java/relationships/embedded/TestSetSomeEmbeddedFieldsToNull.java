@@ -31,7 +31,6 @@ public class TestSetSomeEmbeddedFieldsToNull extends TransactionalSetup {
 
         EntityWithEmbeddable existing1 = em.find(EntityWithEmbeddable.class, model.getId());
         existing1.getEmbedded().setName(null);
-        em.merge(existing1);
         flushAndClear();
 
         EntityWithEmbeddable existing2 = em.find(EntityWithEmbeddable.class, model.getId());
