@@ -1,12 +1,11 @@
 package entities.simple;
 
-import entities.simple.Entity;
-import setup.Setup;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import setup.Setup;
 
 public class TestMergeBehavior extends Setup {
 
