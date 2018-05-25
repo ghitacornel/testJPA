@@ -45,7 +45,6 @@ public class TestRemoveEmbedded extends TransactionalSetup {
 
         EntityWithEmbeddable existing1 = em.find(EntityWithEmbeddable.class, model.getId());
         existing1.setEmbedded(null);
-        em.merge(existing1);
         flushAndClear();
 
         Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
