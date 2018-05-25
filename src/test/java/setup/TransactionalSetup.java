@@ -3,6 +3,9 @@ package setup;
 import org.junit.After;
 import org.junit.Before;
 
+/**
+ * Test Abstraction that controls a transaction which is started at the beginning of the test and rolled back afterwards
+ */
 public abstract class TransactionalSetup extends Setup {
 
     @Before

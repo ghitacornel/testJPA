@@ -11,6 +11,7 @@ import java.util.Collection;
 
 public abstract class Setup {
 
+    // persistence unit name must match the persistence unit name specified in the persistence.xml file
     private static final String PERSISTENCE_UNIT_NAME = "examplePersistenceUnit";
     protected static EntityManagerFactory entityManagerFactory;
 
