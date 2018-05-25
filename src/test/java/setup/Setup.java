@@ -15,6 +15,7 @@ public abstract class Setup {
     private static final String PERSISTENCE_UNIT_NAME = "examplePersistenceUnit";
     protected static EntityManagerFactory entityManagerFactory;
 
+    // for faster tests we don't use @BeforeClass / @AfterClass control of this factory
     static {
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     }
