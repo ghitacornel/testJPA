@@ -30,6 +30,38 @@ public class TestEntityUpdate extends TransactionalSetup {
     }
 
     @Test
+    public void testUpdateExistingEntityByAlteringAnAlreadyFetchedEntity() {
+
+        // fetch an entity
+        Entity originalEntity = em.find(Entity.class, 1);
+        Assert.assertNotNull(originalEntity);
+
+        // update
+        originalEntity.setName("new name");
+        originalEntity.setValue(12);
+        flushAndClear();
+        // TODO mandatory check executed queries
+        // TODO see that no specific operation is needed
+
+        // verify update
+        Entity updatedEntity = em.find(Entity.class, 1);
+        Assert.assertNotNull(updatedEntity);
+        ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
+
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id,name,nullableValue from SimpleEntity t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("new name", objects[1]);
+                Assert.assertEquals(12, objects[2]);
+            }
+        }
+
+    }
+
+    @Test
     public void testUpdateExistingEntityUsingMerge() {
 
         // create new version of existing entity
@@ -37,7 +69,10 @@ public class TestEntityUpdate extends TransactionalSetup {
         newVersionOfExistingEntity.setId(1);
         newVersionOfExistingEntity.setName("new name");
         newVersionOfExistingEntity.setValue(12);
-        em.merge(newVersionOfExistingEntity);
+
+        // update
+        Entity mergedEntity = em.merge(newVersionOfExistingEntity);
+        Assert.assertNotSame(mergedEntity, newVersionOfExistingEntity);// TODO observe a managed entity is returned by "merge"
         flushAndClear();// TODO mandatory check executed queries
 
         // verify update
@@ -59,23 +94,24 @@ public class TestEntityUpdate extends TransactionalSetup {
     }
 
     @Test
-    public void testUpdateExistingEntityByAlteringAnAlreadyFetchedEntity() {
+    public void testUpdateExistingEntityUsingMergeAndObserveEffectsOfMerge() {
 
-        // fetch an entity
-        Entity originalEntity = em.find(Entity.class, 1);
-        Assert.assertNotNull(originalEntity);
+        // create new version of existing entity
+        Entity newVersionOfExistingEntity = new Entity();
+        newVersionOfExistingEntity.setId(1);
+        newVersionOfExistingEntity.setName("new name");
+        newVersionOfExistingEntity.setValue(12);
 
         // update
-        originalEntity.setName("new name");
-        originalEntity.setValue(12);
-        flushAndClear();
-        // TODO mandatory check executed queries
-        // TODO see that merge is not needed
+        Entity mergedEntity = em.merge(newVersionOfExistingEntity);
+        newVersionOfExistingEntity.setName("new name not merged");
+        mergedEntity.setName("new name merged");
+        flushAndClear();// TODO mandatory check executed queries
 
         // verify update
-        Entity updatedEntity = em.find(Entity.class, 1);
-        Assert.assertNotNull(updatedEntity);
-        ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
+        Entity entity = em.find(Entity.class, 1);
+        Assert.assertNotNull(entity);
+        ReflectionAssert.assertReflectionEquals(mergedEntity, entity);
 
         // verify database state with a native query
         {
@@ -83,7 +119,7 @@ public class TestEntityUpdate extends TransactionalSetup {
             Assert.assertEquals(1, data.size());
             for (Object[] objects : data) {
                 Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("new name", objects[1]);
+                Assert.assertEquals("new name merged", objects[1]);
                 Assert.assertEquals(12, objects[2]);
             }
         }
