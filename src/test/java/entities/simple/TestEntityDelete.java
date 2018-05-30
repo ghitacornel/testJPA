@@ -10,10 +10,7 @@ public class TestEntityDelete extends TransactionalSetup {
     @Before
     public void ensureAnExistingEntityIsPresent() {
 
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        verifyCorrespondingTableIsEmpty(Entity.class);
 
         // create new entity
         Entity entity1 = new Entity();
@@ -39,10 +36,7 @@ public class TestEntityDelete extends TransactionalSetup {
         // verify remove
         Assert.assertNull(em.find(Entity.class, 1));
 
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        verifyCorrespondingTableIsEmpty(Entity.class);
 
     }
 

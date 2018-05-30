@@ -10,7 +10,7 @@ public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
 
     @Before
     public void verifyDatabaseState() {
-        Assert.assertTrue(em.createQuery("select t from Entity t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(Entity.class);
     }
 
     @Test

@@ -12,10 +12,7 @@ public class TestEntityCRUD extends TransactionalSetup {
 
     @Before
     public void verifyDatabaseState() {
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        verifyCorrespondingTableIsEmpty(Entity.class);
     }
 
     @Test
@@ -82,9 +79,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         Assert.assertNull(em.find(Entity.class, entity1.getId()));
 
         // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        verifyCorrespondingTableIsEmpty(Entity.class);
 
     }
 

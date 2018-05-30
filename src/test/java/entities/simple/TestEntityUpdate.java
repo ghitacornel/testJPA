@@ -13,10 +13,7 @@ public class TestEntityUpdate extends TransactionalSetup {
     @Before
     public void ensureAnExistingEntityIsPresent() {
 
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        verifyCorrespondingTableIsEmpty(Entity.class);
 
         // create new entity
         Entity entity = new Entity();

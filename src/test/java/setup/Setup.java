@@ -1,12 +1,11 @@
 package setup;
 
 import org.junit.After;
+import org.junit.Assert;
 import org.junit.Before;
 import org.unitils.inject.annotation.InjectIntoByType;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.Collection;
 
 public abstract class Setup {
@@ -50,6 +49,17 @@ public abstract class Setup {
                 em.persist(object);
             }
         }
+    }
+
+    protected void verifyCorrespondingTableIsEmpty(Class<?> entityClass) {
+        Entity entity = entityClass.getAnnotation(Entity.class);
+        Assert.assertNotNull(entity);
+        String tableName = entityClass.getName();
+        Table table = entityClass.getAnnotation(Table.class);
+        if (table != null) {
+            tableName = table.name();
+        }
+        Assert.assertTrue(em.createNativeQuery("select * from " + tableName).getResultList().isEmpty());
     }
 
 }

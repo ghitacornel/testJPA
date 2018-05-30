@@ -31,10 +31,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
         SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
         connection = sfi.getJdbcServices().getBootstrapJdbcConnectionAccess().obtainConnection();
 
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        verifyCorrespondingTableIsEmpty(Entity.class);
     }
 
     private void VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT() throws Exception {

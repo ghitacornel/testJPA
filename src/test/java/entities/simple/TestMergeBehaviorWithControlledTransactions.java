@@ -11,8 +11,8 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from Entity t").getResultList().isEmpty());
-        flushAndClear();
+
+        verifyCorrespondingTableIsEmpty(Entity.class);
 
         // make sure we have some data on a different transaction
         {
