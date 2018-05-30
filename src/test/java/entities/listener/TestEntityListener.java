@@ -14,7 +14,7 @@ public class TestEntityListener extends TransactionalSetup {
     }
 
     @Test
-    public void testCRU() {
+    public void testListenerIsInvoked() {
 
         // create new entity
         EntityWithListener entity1 = new EntityWithListener();
