@@ -14,10 +14,10 @@ public class EntityWithPrimitives {
     @Id
     private Integer id;
 
-    // TODO note that no marker is needed; JPA default value used is the same default value used by Java for this primitive
+    // note that no marker is needed; JPA default value used is the same default value used by Java for this primitive
     private boolean aBoolean;
 
-    // TODO note that no marker is needed; here a default vale is specified other than the default value used by Java for this primitive
+    // note that no marker is needed; here a default vale is specified other than the default value used by Java for this primitive
     private int anInt = 3;
 
     public Integer getId() {
