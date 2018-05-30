@@ -3,13 +3,13 @@ package entities.projection;
 /**
  * an entity projection is not a JPA entity
  */
-public class Projection2OfEntityWithProjection {
+public class Projection2 {
 
     private Integer id;
 
     private Integer value;
 
-    public Projection2OfEntityWithProjection(Integer id, Integer value) {
+    public Projection2(Integer id, Integer value) {
         this.id = id;
         this.value = value;
     }
