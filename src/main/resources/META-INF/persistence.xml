@@ -30,6 +30,8 @@
 
         <class>relationships.one.to.one.unidirectional.child.parent.nocascade.case3.Case3Parent</class>
         <class>relationships.one.to.one.unidirectional.child.parent.nocascade.case3.Case3Child</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.nocascade.case4.Case4Parent</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.nocascade.case4.Case4Child</class>
         <class>relationships.one.to.one.unidirectional.child.parent.cascade.case1.Case1Parent</class>
         <class>relationships.one.to.one.unidirectional.child.parent.cascade.case1.Case1Child</class>
         <class>relationships.one.to.one.unidirectional.child.parent.cascade.case2.Case2Parent</class>
