@@ -10,10 +10,16 @@ public class EntityWithTransient {
     @Id
     private Integer id;
 
-    transient private Boolean aBoolean;
+    /**
+     * one case of transient
+     */
+    transient private Boolean transientBoolean;
 
+    /**
+     * another case of transient
+     */
     @Transient
-    private Integer anInt;
+    private Integer transientInteger;
 
     public Integer getId() {
         return id;
@@ -23,19 +29,19 @@ public class EntityWithTransient {
         this.id = id;
     }
 
-    public Boolean getaBoolean() {
-        return aBoolean;
+    public Boolean getTransientBoolean() {
+        return transientBoolean;
     }
 
-    public void setaBoolean(Boolean aBoolean) {
-        this.aBoolean = aBoolean;
+    public void setTransientBoolean(Boolean transientBoolean) {
+        this.transientBoolean = transientBoolean;
     }
 
-    public Integer getAnInt() {
-        return anInt;
+    public Integer getTransientInteger() {
+        return transientInteger;
     }
 
-    public void setAnInt(Integer anInt) {
-        this.anInt = anInt;
+    public void setTransientInteger(Integer transientInteger) {
+        this.transientInteger = transientInteger;
     }
 }
