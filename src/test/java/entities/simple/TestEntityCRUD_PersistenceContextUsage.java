@@ -36,8 +36,10 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
 
     private void VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT() throws Exception {
 
+        // ensure we use the same transaction
         Assert.assertSame(currentTransaction, em.getTransaction());
 
+        // use plain old JDBC for test
         List<Object[]> data = new ArrayList<>();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery("select * from SimpleEntity");
@@ -75,7 +77,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
 
         // persist
         em.persist(entity1);
-//        flushAndClear();// TODO this time no flush and clear
+        // flushAndClear();//  this time no flush and clear
 
         // verify persist
         Entity entity2 = em.find(Entity.class, entity1.getId());
@@ -87,7 +89,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
         // update
         entity2.setName("new name");
         entity2.setValue(12);
-        //flushAndClear();// TODO this time no flush and clear
+        // flushAndClear();//  this time no flush and clear
 
         // verify update
         Entity entity3 = em.find(Entity.class, entity1.getId());
@@ -100,7 +102,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
         Entity entity4 = em.find(Entity.class, entity1.getId());
         Assert.assertNotNull(entity4);
         em.remove(entity4);
-        //flushAndClear();// TODO this time no flush and clear
+        // flushAndClear();//  this time no flush and clear
 
         // verify remove
         Assert.assertNull(em.find(Entity.class, entity1.getId()));
