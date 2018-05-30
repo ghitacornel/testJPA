@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 public class TestEntityDelete extends TransactionalSetup {
 
     @Before
-    public void before() {
+    public void ensureAnExistingEntityIsPresent() {
 
         // verify database state with a native query
         {
@@ -30,11 +30,11 @@ public class TestEntityDelete extends TransactionalSetup {
     public void test() {
 
         // remove
-        Entity entity4 = em.find(Entity.class, 1);
-        Assert.assertNotNull(entity4);
-        em.remove(entity4);
+        Entity entity = em.find(Entity.class, 1);
+        Assert.assertNotNull(entity);
+        em.remove(entity);
         flushAndClear();
-        // TODO mandatory check executed queries
+        // mandatory check executed queries
 
         // verify remove
         Assert.assertNull(em.find(Entity.class, 1));
