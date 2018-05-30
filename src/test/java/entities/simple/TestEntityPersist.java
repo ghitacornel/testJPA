@@ -54,7 +54,7 @@ public class TestEntityPersist extends TransactionalSetup {
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void test_PersistOnceThenFlushThenClearThenPersistTwice_AndObserve_Error() {
+    public void test_PersistOnceThenFlushThenFlushAndClearThePersistenceContextThenPersistTwice_AndObserve_Error() {
 
         // create new entity
         Entity entity = new Entity();
@@ -75,7 +75,7 @@ public class TestEntityPersist extends TransactionalSetup {
     }
 
     @Test
-    public void test_PersistMultipleTimesWithNoClear_AndObserve_OnlyOneInsertIsTriggered() {
+    public void test_PersistMultipleTimesWithNoPersistenceContextClear_AndObserve_OnlyOneInsertIsTriggered() {
 
         // create new entity
         Entity entity1 = new Entity();
