@@ -30,7 +30,7 @@ import java.util.UUID;
 @EntityListeners(EntityIdGeneratorListener.class)
 public class EntityWithIdListener {
 
-    // TODO must have ID visibility set at this level in order to be accessible from listener
+    // must have ID visibility set at this level in order to be accessible from listener
     @Id
     String id;
 
