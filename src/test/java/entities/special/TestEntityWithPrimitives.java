@@ -10,7 +10,7 @@ public class TestEntityWithPrimitives extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityWithPrimitives t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityWithPrimitives.class);
     }
 
     @Test

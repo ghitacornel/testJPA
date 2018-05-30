@@ -13,7 +13,7 @@ public class TestEntityWithDate extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityWithDate t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityWithDate.class);
     }
 
     @Test

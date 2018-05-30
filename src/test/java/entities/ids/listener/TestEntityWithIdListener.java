@@ -14,6 +14,7 @@ public class TestEntityWithIdListener extends TransactionalSetup {
 
     @Before
     public void before() {
+        verifyCorrespondingTableIsEmpty(EntityWithIdListener.class);
         Assert.assertTrue(em.createQuery(SELECT_ALL).getResultList().isEmpty());
     }
 
@@ -28,12 +29,12 @@ public class TestEntityWithIdListener extends TransactionalSetup {
         em.persist(model);
         flushAndClear();
 
-        // verify
+        // verify exactly 1 object was persisted
         List<EntityWithIdListener> list = em.createQuery(SELECT_ALL, EntityWithIdListener.class).getResultList();
         Assert.assertEquals(1, list.size());
         EntityWithIdListener existing = list.get(0);
 
-        Assert.assertNotNull(existing.getId());
+        Assert.assertNotNull(existing.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(model, existing);
     }
 

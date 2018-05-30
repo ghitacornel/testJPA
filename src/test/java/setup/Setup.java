@@ -54,7 +54,7 @@ public abstract class Setup {
     protected void verifyCorrespondingTableIsEmpty(Class<?> entityClass) {
         Entity entity = entityClass.getAnnotation(Entity.class);
         Assert.assertNotNull(entity);
-        String tableName = entityClass.getName();
+        String tableName = entityClass.getSimpleName();
         Table table = entityClass.getAnnotation(Table.class);
         if (table != null) {
             tableName = table.name();

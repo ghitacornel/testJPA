@@ -11,7 +11,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityWithLOB t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityWithLOB.class);
     }
 
     @Test

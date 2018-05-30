@@ -17,8 +17,8 @@ public class TestIdTableGeneration extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityAWithIdGeneratedFromTable t").getResultList().isEmpty());
-        Assert.assertTrue(em.createQuery("select t from EntityBWithIdGeneratedFromTable t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityAWithIdGeneratedFromTable.class);
+        verifyCorrespondingTableIsEmpty(EntityBWithIdGeneratedFromTable.class);
     }
 
     @Test
@@ -38,15 +38,16 @@ public class TestIdTableGeneration extends TransactionalSetup {
         // mandatory clear cache (entity managers act as caches also)
         flushAndClear();
 
-        // verify
+        // verify exactly 1 object was persisted
         List<EntityAWithIdGeneratedFromTable> listA = em.createQuery("select t from EntityAWithIdGeneratedFromTable t", EntityAWithIdGeneratedFromTable.class).getResultList();
         Assert.assertEquals(1, listA.size());
-        Assert.assertNotNull(entityA.getId());
+        Assert.assertNotNull(entityA.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(listA.get(0), entityA);
 
+        // verify exactly 1 object was persisted
         List<EntityBWithIdGeneratedFromTable> listB = em.createQuery("select t from EntityBWithIdGeneratedFromTable t", EntityBWithIdGeneratedFromTable.class).getResultList();
         Assert.assertEquals(1, listB.size());
-        Assert.assertNotNull(entityB.getId());
+        Assert.assertNotNull(entityB.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(listB.get(0), entityB);
 
     }

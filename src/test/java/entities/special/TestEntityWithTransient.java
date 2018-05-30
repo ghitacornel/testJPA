@@ -10,7 +10,7 @@ public class TestEntityWithTransient extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityWithTransient t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityWithTransient.class);
     }
 
     @Test

@@ -33,8 +33,8 @@ public class TestEntityWithProjection extends TransactionalSetup {
         Assert.assertEquals(entity.getName(), projectionFull.getName());
         Assert.assertEquals(entity.getValue(), projectionFull.getValue());
 
-        // TODO check that this search will execute a second "find by id query"
-        // TODO => loading fully an entity instance through a projection does not load and keep the entity instance in persistence context
+        // check that this search will execute a second "find by id query"
+        // loading fully an entity instance through a projection does not load and keep the entity instance in persistence context
         em.find(EntityWithProjection.class, 1);
 
     }

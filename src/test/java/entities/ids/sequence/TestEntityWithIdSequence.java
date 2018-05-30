@@ -10,11 +10,9 @@ import java.util.List;
 
 public class TestEntityWithIdSequence extends TransactionalSetup {
 
-    private static final String SELECT_ALL = "select t from EntityWithIdSequence t";
-
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery(SELECT_ALL).getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityWithIdSequence.class);
     }
 
     @Test
@@ -28,13 +26,12 @@ public class TestEntityWithIdSequence extends TransactionalSetup {
         em.persist(model);
         flushAndClear();
 
-        // verify
-        List<EntityWithIdSequence> list = em.createQuery(SELECT_ALL, EntityWithIdSequence.class).getResultList();
+        // verify exactly 1 object was persisted
+        List<EntityWithIdSequence> list = em.createQuery("select t from EntityWithIdSequence t", EntityWithIdSequence.class).getResultList();
         Assert.assertEquals(1, list.size());
         EntityWithIdSequence existing = list.get(0);
 
-        Assert.assertNotNull(existing.getId());
-
+        Assert.assertNotNull(existing.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(model, existing);
     }
 

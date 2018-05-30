@@ -10,7 +10,7 @@ public class TestEntityListener extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertNull(em.find(EntityWithListener.class, 1));
+        verifyCorrespondingTableIsEmpty(EntityWithListener.class);
     }
 
     @Test
