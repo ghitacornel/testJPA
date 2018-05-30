@@ -30,6 +30,44 @@ public class TestCase2 extends TransactionalSetup {
     }
 
     @Test
+    public void test_MergeOnlyTheChild_AndObserve_TheParentIsAlsoInsertedDueToCascade() {
+
+        {
+            Case2Parent parent = new Case2Parent();
+            parent.setId(1);
+            parent.setName("parent");
+
+            Case2Child child = new Case2Child();
+            child.setId(1);
+            child.setName("child");
+            child.setParent(parent);
+
+            // insert only the child
+            em.persist(child);
+            flushAndClear();
+
+        }
+
+        Case2Parent parent = new Case2Parent();
+        parent.setId(1);
+        parent.setName("parent new");
+
+        Case2Child child = new Case2Child();
+        child.setId(1);
+        child.setName("child new");
+        child.setParent(parent);
+
+        // insert only the child
+        em.merge(child);
+        flushAndClear();
+
+        // verify child and parent are both inserted
+        ReflectionAssert.assertReflectionEquals(parent, em.find(Case2Parent.class, 1));
+        ReflectionAssert.assertReflectionEquals(child, em.find(Case2Child.class, 1));
+
+    }
+
+    @Test
     public void test_RemoveOnlyTheChild_AndObserve_TheParentIsAlsoRemovedDueToCascade() {
 
         Case2Parent parent = new Case2Parent();
