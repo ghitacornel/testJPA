@@ -19,7 +19,7 @@ public class TestEntityPersist extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testPersist() {
 
         // create new entity
         Entity entity1 = new Entity();
@@ -54,36 +54,43 @@ public class TestEntityPersist extends TransactionalSetup {
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testPersistTwice() {
+    public void test_PersistOnceThenFlushThenClearThenPersistTwice_AndObserve_Error() {
 
         // create new entity
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName("name");
 
-        // persist once + persistence context clear + persist twice = error
+        // persist once
         em.persist(entity);
-        flushAndClear();
+        // then flush
+        em.flush();
+        // then clear
+        em.clear();
+        // then persist twice
+        em.persist(entity);
 
-        em.persist(entity);
         flushAndClear();
 
     }
 
     @Test
-    public void testPersistMultipleTimes() {
+    public void test_PersistMultipleTimesWithNoClear_AndObserve_OnlyOneInsertIsTriggered() {
 
         // create new entity
         Entity entity1 = new Entity();
         entity1.setId(1);
         entity1.setName("name");
 
-        // persist multiple times but do not clear persistence context
+        // persist once
         em.persist(entity1);
+        // persist again
         em.persist(entity1);
+        // can even flush
         em.flush();
-
+        // persist again
         em.persist(entity1);
+
         flushAndClear();
 
         // verify persist
