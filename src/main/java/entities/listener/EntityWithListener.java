@@ -1,4 +1,4 @@
-package entities.simple.listener;
+package entities.listener;
 
 import javax.persistence.*;
 

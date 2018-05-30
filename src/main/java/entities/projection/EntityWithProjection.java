@@ -1,4 +1,4 @@
-package entities.simple.projection;
+package entities.projection;
 
 import javax.persistence.Basic;
 import javax.persistence.Column;

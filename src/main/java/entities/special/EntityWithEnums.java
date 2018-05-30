@@ -1,4 +1,4 @@
-package entities.simple.special;
+package entities.special;
 
 import javax.persistence.Entity;
 import javax.persistence.EnumType;

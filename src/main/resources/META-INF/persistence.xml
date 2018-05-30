@@ -56,14 +56,14 @@
         <class>relationships.one.to.one.bidirectional.B</class>
 
         <class>entities.simple.Entity</class>
-        <class>entities.simple.special.EntityWithEnums</class>
-        <class>entities.simple.special.EntityWithPrimitives</class>
-        <class>entities.simple.special.EntityWithTransient</class>
-        <class>entities.simple.special.EntityWithLOB</class>
-        <class>entities.simple.special.EntityWithDate</class>
-        <class>entities.simple.converters.EntityWithAttributeConverters</class>
-        <class>entities.simple.listener.EntityWithListener</class>
-        <class>entities.simple.projection.EntityWithProjection</class>
+        <class>entities.special.EntityWithEnums</class>
+        <class>entities.special.EntityWithPrimitives</class>
+        <class>entities.special.EntityWithTransient</class>
+        <class>entities.special.EntityWithLOB</class>
+        <class>entities.special.EntityWithDate</class>
+        <class>entities.converters.EntityWithAttributeConverters</class>
+        <class>entities.listener.EntityWithListener</class>
+        <class>entities.projection.EntityWithProjection</class>
 
         <class>lock.VersionedEntity</class>
 

@@ -1,6 +1,6 @@
 package entities.listener;
 
-import entities.simple.listener.EntityWithListener;
+import entities.listener.EntityWithListener;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

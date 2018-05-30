@@ -1,4 +1,4 @@
-package entities.simple.converters;
+package entities.converters;
 
 import javax.persistence.Column;
 import javax.persistence.Convert;

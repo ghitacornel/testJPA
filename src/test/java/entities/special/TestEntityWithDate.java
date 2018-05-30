@@ -1,6 +1,6 @@
 package entities.special;
 
-import entities.simple.special.EntityWithDate;
+import entities.special.EntityWithDate;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,7 +1,7 @@
 package entities.special;
 
-import entities.simple.special.EntityWithEnums;
-import entities.simple.special.SimpleEnum;
+import entities.special.EntityWithEnums;
+import entities.special.SimpleEnum;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

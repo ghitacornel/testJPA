@@ -1,6 +1,6 @@
 package entities.special;
 
-import entities.simple.special.EntityWithTransient;
+import entities.special.EntityWithTransient;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package entities.simple.projection;
+package entities.projection;
 
 /**
  * an entity projection is not a JPA entity
