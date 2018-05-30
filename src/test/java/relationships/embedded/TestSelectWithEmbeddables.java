@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class TestSelectAll extends TransactionalSetup {
+public class TestSelectWithEmbeddables extends TransactionalSetup {
 
     private List<EntityWithEmbeddable> model = buildModel();
 
@@ -51,6 +51,19 @@ public class TestSelectAll extends TransactionalSetup {
         }
 
         ReflectionAssert.assertReflectionEquals(embeddableBeans, existing);
+
+    }
+
+    @Test
+    public void testFindByEmbeddable() {
+
+        EmbeddableBean embedded = new EmbeddableBean();
+        embedded.setName(model.get(0).getEmbedded().getName());
+        embedded.setCreationDate(model.get(0).getEmbedded().getCreationDate());
+
+        EntityWithEmbeddable existing = em.createQuery("select t from EntityWithEmbeddable t where t.embedded = :embedded", EntityWithEmbeddable.class).setParameter("embedded", embedded).getSingleResult();
+
+        ReflectionAssert.assertReflectionEquals(model.get(0), existing);
 
     }
 }
