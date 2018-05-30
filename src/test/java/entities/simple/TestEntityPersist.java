@@ -11,7 +11,7 @@ import java.util.List;
 public class TestEntityPersist extends TransactionalSetup {
 
     @Before
-    public void verifyTableIsEmpty() {
+    public void verifyDatabaseState() {
         // verify database state with a native query
         {
             Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());

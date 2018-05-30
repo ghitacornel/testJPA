@@ -11,7 +11,7 @@ import java.util.List;
 public class TestEntityCRUD extends TransactionalSetup {
 
     @Before
-    public void before() {
+    public void verifyDatabaseState() {
         // verify database state with a native query
         {
             Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
@@ -33,7 +33,7 @@ public class TestEntityCRUD extends TransactionalSetup {
 
         // persist
         em.persist(entity1);
-        flushAndClear();// TODO mandatory check executed queries
+        flushAndClear();// mandatory check executed queries
 
         // verify persist
         Entity entity2 = em.find(Entity.class, entity1.getId());
@@ -54,7 +54,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         // update
         entity2.setName("new name");
         entity2.setValue(12);
-        flushAndClear();// TODO mandatory check executed queries
+        flushAndClear();// mandatory check executed queries
 
         // verify update
         Entity entity3 = em.find(Entity.class, entity1.getId());
@@ -76,7 +76,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         Entity entity4 = em.find(Entity.class, entity1.getId());
         Assert.assertNotNull(entity4);
         em.remove(entity4);
-        flushAndClear();// // TODO mandatory check executed queries
+        flushAndClear();// //  mandatory check executed queries
 
         // verify remove
         Assert.assertNull(em.find(Entity.class, entity1.getId()));
