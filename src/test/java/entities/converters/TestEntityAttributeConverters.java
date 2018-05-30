@@ -1,6 +1,5 @@
 package entities.converters;
 
-import entities.converters.EntityWithAttributeConverters;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +12,7 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from EntityWithAttributeConverters t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(EntityWithAttributeConverters.class);
     }
 
     @Test
