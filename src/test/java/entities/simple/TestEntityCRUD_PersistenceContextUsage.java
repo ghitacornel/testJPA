@@ -41,16 +41,16 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
 
         // use plain old JDBC for test
         List<Object[]> data = new ArrayList<>();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery("select * from SimpleEntity");
-        while (resultSet.next()) {
-            Object o_0 = resultSet.getObject(0);
-            Object o_1 = resultSet.getObject(1);
-            Object o_2 = resultSet.getObject(2);
-            data.add(new Object[]{o_0, o_1, o_2});
+        try (Statement statement = connection.createStatement()) {
+            try (ResultSet resultSet = statement.executeQuery("select * from SimpleEntity")) {
+                while (resultSet.next()) {
+                    Object o_0 = resultSet.getObject(0);
+                    Object o_1 = resultSet.getObject(1);
+                    Object o_2 = resultSet.getObject(2);
+                    data.add(new Object[]{o_0, o_1, o_2});
+                }
+            }
         }
-        resultSet.close();
-        statement.close();
         if (!data.isEmpty()) {
             Assert.fail("something was written in the database");
         }
