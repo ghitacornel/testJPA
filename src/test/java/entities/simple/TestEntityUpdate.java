@@ -96,26 +96,26 @@ public class TestEntityUpdate extends TransactionalSetup {
     public void test_UpdateExistingEntityUsingMerge_AndObserve_EffectsOfSecondaryUpdatesOnMergedAndNotMergedEntities() {
 
         // create new version of existing entity
-        Entity newVersionOfExistingEntityNotMerged = new Entity();
-        newVersionOfExistingEntityNotMerged.setId(1);
-        newVersionOfExistingEntityNotMerged.setName("new name");
-        newVersionOfExistingEntityNotMerged.setValue(12);
+        Entity newVersionNotMerged = new Entity();
+        newVersionNotMerged.setId(1);
+        newVersionNotMerged.setName("new name");
+        newVersionNotMerged.setValue(12);
 
         // merge first
-        Entity newVersionOfExistingEntityMerged = em.merge(newVersionOfExistingEntityNotMerged);
+        Entity newVersionMerged = em.merge(newVersionNotMerged);
 
         // issue a second update of the not merged new version
-        newVersionOfExistingEntityNotMerged.setName("new name not merged");
+        newVersionNotMerged.setName("new name not merged");
 
         // issue a second update of the merged new version
-        newVersionOfExistingEntityMerged.setName("new name merged");
+        newVersionMerged.setName("new name merged");
 
         flushAndClear();// check executed queries
 
         // verify update
         Entity entity = em.find(Entity.class, 1);
         Assert.assertNotNull(entity);
-        ReflectionAssert.assertReflectionEquals(newVersionOfExistingEntityMerged, entity);
+        ReflectionAssert.assertReflectionEquals(newVersionMerged, entity);
 
         // verify database state with a native query
         {
