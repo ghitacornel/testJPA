@@ -1,11 +1,11 @@
-package relationships.one.to.one.unidirectional.child.parent.nocascade;
+package relationships.one.to.one.unidirectional.child.parent.nocascade.case3;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class OTOUCPNoCascadeParent {
+public class Case3Parent {
 
     @Id
     private Integer id;

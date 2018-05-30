@@ -30,7 +30,7 @@ public class TestCase1 extends TransactionalSetup {
     }
 
     @Test
-    public void test_MergeOnlyTheChild_AndObserve_TheParentIsAlsoInsertedDueToCascade() {
+    public void test_MergeOnlyTheChild_AndObserve_TheParentIsAlsoMergedDueToCascade() {
 
         {
             Case1Parent parent = new Case1Parent();
