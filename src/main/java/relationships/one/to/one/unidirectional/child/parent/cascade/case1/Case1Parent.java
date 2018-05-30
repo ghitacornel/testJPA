@@ -1,11 +1,11 @@
-package relationships.one.to.one.unidirectional.child.parent.cascade;
+package relationships.one.to.one.unidirectional.child.parent.cascade.case1;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class OTOUCPCascadeParent {
+public class Case1Parent {
 
     @Id
     private Integer id;
@@ -13,7 +13,7 @@ public class OTOUCPCascadeParent {
     @Column(nullable = false)
     private String name;
 
-        public Integer getId() {
+    public Integer getId() {
         return id;
     }
 

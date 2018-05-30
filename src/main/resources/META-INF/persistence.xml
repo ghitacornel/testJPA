@@ -30,8 +30,8 @@
 
         <class>relationships.one.to.one.unidirectional.child.parent.nocascade.OTOUCPNoCascadeParent</class>
         <class>relationships.one.to.one.unidirectional.child.parent.nocascade.OTOUCPNoCascadeChild</class>
-        <class>relationships.one.to.one.unidirectional.child.parent.cascade.OTOUCPCascadeParent</class>
-        <class>relationships.one.to.one.unidirectional.child.parent.cascade.OTOUCPCascadeChild</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.cascade.case1.Case1Parent</class>
+        <class>relationships.one.to.one.unidirectional.child.parent.cascade.case1.Case1Child</class>
 
         <class>relationships.many.to.many.list.M</class>
         <class>relationships.many.to.many.list.N</class>
