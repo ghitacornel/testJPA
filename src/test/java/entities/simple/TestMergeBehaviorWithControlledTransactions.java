@@ -41,7 +41,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
     }
 
     @Test
-    public void testMergeNotManagedEntity() {
+    public void test_MergeANotManagedEntity_AndObserve_ManagedVsNotManagedEntitiesBehavior() {
 
         // witness object
         Entity witness = buildModel();
@@ -82,7 +82,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
     }
 
     @Test
-    public void testMergeAlreadyManagedEntity() {
+    public void test_MergeAnAlreadyManagedEntity_AndObserve_NoNewManagedEntitiesAreReturnedByTheMergeOperation() {
 
         // witness object
         Entity witness = buildModel();
