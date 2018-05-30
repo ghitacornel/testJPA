@@ -10,12 +10,9 @@ import java.util.List;
 
 public class TestEntityWithIdListener extends TransactionalSetup {
 
-    private static final String SELECT_ALL = "select t from EntityWithIdListener t";
-
     @Before
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithIdListener.class);
-        Assert.assertTrue(em.createQuery(SELECT_ALL).getResultList().isEmpty());
     }
 
     @Test
@@ -30,7 +27,7 @@ public class TestEntityWithIdListener extends TransactionalSetup {
         flushAndClear();
 
         // verify exactly 1 object was persisted
-        List<EntityWithIdListener> list = em.createQuery(SELECT_ALL, EntityWithIdListener.class).getResultList();
+        List<EntityWithIdListener> list = em.createQuery("select t from EntityWithIdListener t", EntityWithIdListener.class).getResultList();
         Assert.assertEquals(1, list.size());
         EntityWithIdListener existing = list.get(0);
 
