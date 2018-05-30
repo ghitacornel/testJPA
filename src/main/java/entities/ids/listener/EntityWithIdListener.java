@@ -20,10 +20,6 @@ import java.util.UUID;
  * correctness, better is to use a combination of generated id and uniqueness on
  * multiple columns<br>
  * <br>
- * Note that a simple {@link GenerationType#SEQUENCE} is enough to specify a
- * sequence (Oracle DB)
- *
- * @author Cornel
  */
 
 @Entity
