@@ -140,14 +140,6 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testFindByIdNoQuery() {
-
-        SimpleQueryEntity entity = em.find(SimpleQueryEntity.class, 5);
-        ReflectionAssert.assertReflectionEquals(buildModel().get(4), entity);
-
-    }
-
-    @Test
     public void testUniqueResult() {
 
         SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name='name 1'", SimpleQueryEntity.class).getSingleResult();
