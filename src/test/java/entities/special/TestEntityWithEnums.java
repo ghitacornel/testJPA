@@ -66,4 +66,28 @@ public class TestEntityWithEnums extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
     }
+
+    @Test
+    public void testFindByEnum() {
+
+        EntityWithEnums entity1 = new EntityWithEnums();
+        {
+            entity1.setId(1);
+            entity1.setEnum1(SimpleEnum.ONE);
+            entity1.setEnum2(SimpleEnum.TWO);
+            em.persist(entity1);
+            flushAndClear();
+        }
+
+        {
+            EntityWithEnums entity2 = new EntityWithEnums();
+            entity2.setId(2);
+            entity2.setEnum1(SimpleEnum.THREE);
+            entity2.setEnum2(SimpleEnum.FOUR);
+            em.persist(entity2);
+            flushAndClear();
+        }
+
+        ReflectionAssert.assertReflectionEquals(entity1, em.createQuery("select t from EntityWithEnums t where t.enum1 = entities.special.SimpleEnum.ONE").getSingleResult());
+    }
 }
