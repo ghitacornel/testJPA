@@ -41,6 +41,7 @@ public class TestNativeQuery extends TransactionalSetup {
 
         List<Object[]> data = em.createNativeQuery("select name,value from SQE where id = :id").setParameter("id", 1).getResultList();
         Assert.assertEquals(1, data.size());
+        Assert.assertEquals(2, data.get(0).length);
         Assert.assertEquals("name 1", data.get(0)[0]);
         Assert.assertEquals(6, data.get(0)[1]);
 
