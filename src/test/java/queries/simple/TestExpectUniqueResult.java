@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestUniqueResult extends TransactionalSetup {
+public class TestExpectUniqueResult extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();

@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestLike extends TransactionalSetup {
+public class TestFindByUsingLike extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();
