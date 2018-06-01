@@ -178,37 +178,4 @@ public class TestSimpleQueries extends TransactionalSetup {
 
     }
 
-    /**
-     * this is BAD, it is basically an equals matcher
-     */
-    @Test
-    public void testWithLikeClauseBAD() {
-
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "jOHn").getResultList();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(6), list.get(0));
-
-    }
-
-    /**
-     * this is still BAD, it is a LIKE matcher but case sensitive
-     */
-    @Test
-    public void testWithLikeClauseStillBAD() {
-
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(7), list.get(0));
-
-    }
-
-    /**
-     * note the usage of "lower" on both sides
-     * note the usage of %% for position match
-     */
-    @Test
-    public void testWithLikeClauseOK() {
-
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(:name)", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
-        ReflectionAssert.assertReflectionEquals(buildModel().subList(6, 9), list);
-
-    }
 }
