@@ -5,7 +5,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-// TODO note we change the name of the entity used in queries
+// we changed the name of the entity used in queries
 @Entity(name = "SQE")
 public class SimpleQueryEntity {
 

@@ -5,3 +5,5 @@
 - hibernate envers
 
 data types
+projections over joins on different columns with aggregated stuff and order
+group by / count / and many others
