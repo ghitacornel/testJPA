@@ -96,7 +96,7 @@ public class TestCount extends TransactionalSetup {
     @Test
     public void testCountSome() {
 
-        Long count = em.createQuery("select count(e) from SQE e where e.value in (1,2,3)", Long.class).getSingleResult();
+        Long count = em.createQuery("select count(e) from SQE e where e.value = 1 or e.value = 2 or e.value = 3", Long.class).getSingleResult();
         Assert.assertEquals(4, count.longValue());
 
     }
