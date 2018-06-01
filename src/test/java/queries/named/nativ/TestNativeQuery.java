@@ -62,4 +62,33 @@ public class TestNativeQuery extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testNativeQueryReturnsManagedEntitiesWhenFullEntitiesAreFetched() {
+
+        // fetch all
+        List<EntityWithNamedNativeQuery> existingData = em.createNativeQuery("select * from EntityWithNamedNativeQuery", EntityWithNamedNativeQuery.class).getResultList();
+
+        // test fetch all works as expected
+        ReflectionAssert.assertReflectionEquals(buildModel(), existingData);
+
+        // alter fetched data
+        for (EntityWithNamedNativeQuery entity : existingData) {
+            entity.setName("new name " + entity.getId());
+        }
+
+        flushAndClear();
+
+        // fetch all again
+        List<EntityWithNamedNativeQuery> alteredData = em.createNativeQuery("select * from EntityWithNamedNativeQuery", EntityWithNamedNativeQuery.class).getResultList();
+
+        // test fetched again data is the managed + changed + automatically persisted data
+        List<EntityWithNamedNativeQuery> expected = buildModel();
+        for (EntityWithNamedNativeQuery entity : expected) {
+            entity.setName("new name " + entity.getId());
+        }
+        ReflectionAssert.assertReflectionEquals(expected, alteredData);
+
+
+    }
+
 }
