@@ -174,7 +174,9 @@ public class TestSimpleQueries extends TransactionalSetup {
 
 
     /**
-     * TODO always check for null or empty collections passed as parameters since they might cause generation of illegal SQL clauses such as empty IN<br>
+     * TODO always check for null or empty collections passed as parameters
+     * TODO passing null or empty collections as parameters can cause generation of corrupted SQLs having empty IN clauses
+     * TODO some JPA implementations produce corrupted SQLs, or some databases accept suck SQLs and produce no results
      * TODO make sure the database IN SQL clause does not have a limit of allowed IN values
      */
     @Test
