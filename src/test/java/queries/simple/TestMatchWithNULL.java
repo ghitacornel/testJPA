@@ -3,12 +3,13 @@ package queries.simple;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestCount extends TransactionalSetup {
+public class TestMatchWithNULL extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();
@@ -86,18 +87,24 @@ public class TestCount extends TransactionalSetup {
 
 
     @Test
-    public void testCountAll() {
+    public void testCheckWithNull_OK() {
 
-        Long count = em.createQuery("select count(e) from SQE e", Long.class).getSingleResult();
-        Assert.assertEquals(buildModel().size(), count.longValue());
+        // CORRECT way to check for NULL
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
+        List<SimpleQueryEntity> expected = new ArrayList<>();
+        expected.add(buildModel().get(5));
+        ReflectionAssert.assertReflectionEquals(expected, list);
 
     }
 
     @Test
-    public void testCountSome() {
+    public void testCheckWithNull_BAD() {
 
-        Long count = em.createQuery("select count(e) from SQE e where e.value = 1 or e.value = 2 or e.value = 3", Long.class).getSingleResult();
-        Assert.assertEquals(4, count.longValue());
+        // INCORRECT way to check for NULL
+        // sometimes a simple check for null on server side can avoid an SQL query on database side
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
+        Assert.assertTrue(list.isEmpty());
 
     }
+
 }

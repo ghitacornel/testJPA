@@ -1,6 +1,5 @@
 package queries.simple;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -9,7 +8,7 @@ import setup.TransactionalSetup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestMatchWithNull extends TransactionalSetup {
+public class TestFindByUsingIN extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();
@@ -85,25 +84,22 @@ public class TestMatchWithNull extends TransactionalSetup {
         flushAndClear();
     }
 
-
+    /**
+     * TODO always check for null or empty collections passed as parameters
+     * TODO passing null or empty collections as parameters can cause generation of corrupted SQLs having empty IN clauses
+     * TODO some JPA implementations produce corrupted SQLs, or some databases accept such SQLs and produce no results
+     * TODO make sure the database IN SQL clause does not have a limit of allowed IN values
+     * sometimes a check for null or empty collection parameters avoid an SQL execution
+     */
     @Test
-    public void testCheckWithNull_OK() {
+    public void testWithCollectionParameter() {
 
-        // CORRECT way to check for NULL
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
-        List<SimpleQueryEntity> expected = new ArrayList<>();
-        expected.add(buildModel().get(5));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        List<String> parameter = new ArrayList<>();
+        parameter.add("name 1");
+        parameter.add("name 2");
 
-    }
-
-    @Test
-    public void testCheckWithNull_BAD() {
-
-        // INCORRECT way to check for NULL
-        // sometimes a simple check for null on server side can avoid an SQL query on database side
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
-        Assert.assertTrue(list.isEmpty());
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", parameter).getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().subList(0, 2), actual);
 
     }
 

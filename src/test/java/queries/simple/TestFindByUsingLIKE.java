@@ -3,14 +3,12 @@ package queries.simple;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-public class TestSimpleQueries extends TransactionalSetup {
+public class TestFindByUsingLIKE extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();
@@ -86,56 +84,37 @@ public class TestSimpleQueries extends TransactionalSetup {
         flushAndClear();
     }
 
+    /**
+     * this is BAD, it is basically an equals matcher
+     */
     @Test
-    public void testSelectAll() {
+    public void testWithLikeClauseBAD() {
 
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e", SimpleQueryEntity.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(buildModel(), list, ReflectionComparatorMode.LENIENT_ORDER);
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "jOHn").getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().get(6), list.get(0));
 
     }
 
+    /**
+     * this is still BAD, it is a LIKE matcher but case sensitive
+     */
     @Test
-    public void testSelectAllWithOrder() {
+    public void testWithLikeClauseStillBAD() {
 
-        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by id desc", SimpleQueryEntity.class).getResultList();
-
-        // verify, order is important
-        List<SimpleQueryEntity> expected = buildModel();
-        Collections.reverse(expected);
-        ReflectionAssert.assertReflectionEquals(expected, actual);
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().get(7), list.get(0));
 
     }
 
+    /**
+     * note the usage of "lower" on both sides
+     * note the usage of %% for position match
+     */
     @Test
-    public void testSelectAllWithOrderAndBoundaries() {
+    public void testWithLikeClauseOK() {
 
-        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by id desc", SimpleQueryEntity.class).setFirstResult(1).setMaxResults(3).getResultList();
-
-        // verify, order is important
-        List<SimpleQueryEntity> expected = buildModel();
-        Collections.reverse(expected);
-        expected = expected.subList(1, 4);
-        ReflectionAssert.assertReflectionEquals(expected, actual);
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(:name)", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().subList(6, 9), list);
 
     }
-
-    @Test
-    public void testSelectAllWithNamedParameter() {
-
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name = :name", SimpleQueryEntity.class).setParameter("name", "name 1").getResultList();
-
-        List<SimpleQueryEntity> expected = new ArrayList<>();
-        expected.add(buildModel().get(0));
-        ReflectionAssert.assertReflectionEquals(expected, list);
-
-    }
-
-    @Test
-    public void testSelectAllWithOrderParameter() {
-
-        SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 2").getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
-
-    }
-
 }
