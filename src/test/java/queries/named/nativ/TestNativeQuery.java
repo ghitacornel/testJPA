@@ -1,6 +1,5 @@
 package queries.named.nativ;
 
-import entities.simple.Entity;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -17,10 +16,10 @@ public class TestNativeQuery extends TransactionalSetup {
         flushAndClear();
     }
 
-    private List<Entity> buildModel() {
-        List<Entity> list = new ArrayList<>();
+    private List<EntityWithNamedNativeQuery> buildModel() {
+        List<EntityWithNamedNativeQuery> list = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
-            Entity entity = new Entity();
+            EntityWithNamedNativeQuery entity = new EntityWithNamedNativeQuery();
             entity.setId(i);
             entity.setName("name " + i);
             list.add(entity);
@@ -31,9 +30,9 @@ public class TestNativeQuery extends TransactionalSetup {
     @Test
     public void testWithNamedParameters() {
 
-        List<Entity> list = em.createNamedQuery("Entity.findByNameNative", Entity.class).setParameter("name", "%1%").getResultList();
+        List<EntityWithNamedNativeQuery> list = em.createNamedQuery("EntityWithNamedNativeQuery.findByNameNative", EntityWithNamedNativeQuery.class).setParameter("name", "%1%").getResultList();
 
-        List<Entity> expected = new ArrayList<>();
+        List<EntityWithNamedNativeQuery> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
         ReflectionAssert.assertReflectionEquals(expected, list);
     }
@@ -41,7 +40,7 @@ public class TestNativeQuery extends TransactionalSetup {
     @Test
     public void testWithOrderParameters() {
 
-        Entity entity = em.createNamedQuery("Entity.findByIdNative", Entity.class).setParameter(1, 1).getSingleResult();
+        EntityWithNamedNativeQuery entity = em.createNamedQuery("EntityWithNamedNativeQuery.findByIdNative", EntityWithNamedNativeQuery.class).setParameter(1, 1).getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
 
     }
@@ -49,7 +48,7 @@ public class TestNativeQuery extends TransactionalSetup {
     @Test
     public void testNamedQueryDefinedSeparately() {
 
-        Entity entity = em.createNamedQuery("Entity.findByExactNameNative", Entity.class).setParameter(1, "name 2").getSingleResult();
+        EntityWithNamedNativeQuery entity = em.createNamedQuery("EntityWithNamedNativeQuery.findByExactNameNative", EntityWithNamedNativeQuery.class).setParameter(1, "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
 
     }

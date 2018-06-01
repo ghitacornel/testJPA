@@ -1,7 +1,5 @@
 package queries.named.nativ;
 
-import entities.simple.Entity;
-
 import javax.persistence.MappedSuperclass;
 import javax.persistence.NamedNativeQueries;
 import javax.persistence.NamedNativeQuery;
@@ -19,8 +17,8 @@ import javax.persistence.NamedNativeQuery;
  */
 @MappedSuperclass
 @NamedNativeQueries({
-        @NamedNativeQuery(name = "Entity.findByNameNative", query = "select * from SimpleEntity where lower(name) like lower(:name)", resultClass = Entity.class),
-        @NamedNativeQuery(name = "Entity.findByIdNative", query = "select * from SimpleEntity where id = ?1", resultClass = Entity.class)})
-@NamedNativeQuery(name = "Entity.findByExactNameNative", query = "select * from SimpleEntity where name = ?1", resultClass = Entity.class)
+        @NamedNativeQuery(name = "EntityWithNamedNativeQuery.findByNameNative", query = "select * from EntityWithNamedNativeQuery where lower(name) like lower(:name)", resultClass = EntityWithNamedNativeQuery.class),
+        @NamedNativeQuery(name = "EntityWithNamedNativeQuery.findByIdNative", query = "select * from EntityWithNamedNativeQuery where id = ?1", resultClass = EntityWithNamedNativeQuery.class)})
+@NamedNativeQuery(name = "EntityWithNamedNativeQuery.findByExactNameNative", query = "select * from EntityWithNamedNativeQuery where name = ?1", resultClass = EntityWithNamedNativeQuery.class)
 public class NamedNativeQueriesDefinition {
 }
