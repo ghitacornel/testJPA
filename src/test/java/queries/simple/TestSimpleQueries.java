@@ -1,6 +1,5 @@
 package queries.simple;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -138,27 +137,6 @@ public class TestSimpleQueries extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
 
     }
-
-    @Test
-    public void testWithNullClauseOK() {
-
-        // CORRECT way to check for NULL
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
-        List<SimpleQueryEntity> expected = new ArrayList<>();
-        expected.add(buildModel().get(5));
-        ReflectionAssert.assertReflectionEquals(expected, list);
-
-    }
-
-    @Test
-    public void testWithNullClauseFAIL() {
-
-        // INCORRECT way to check for NULL
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
-        Assert.assertTrue(list.isEmpty());
-
-    }
-
 
     /**
      * TODO always check for null or empty collections passed as parameters
