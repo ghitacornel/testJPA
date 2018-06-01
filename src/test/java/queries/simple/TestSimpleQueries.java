@@ -57,6 +57,20 @@ public class TestSimpleQueries extends TransactionalSetup {
             entity.setValue(null);
             list.add(entity);
         }
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(7);
+            entity.setName("a john 1");
+            entity.setValue(1);
+            list.add(entity);
+        }
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(8);
+            entity.setName("a second JOHN 2");
+            entity.setValue(2);
+            list.add(entity);
+        }
         return list;
     }
 
@@ -148,7 +162,7 @@ public class TestSimpleQueries extends TransactionalSetup {
     public void testCountAll() {
 
         Long count = em.createQuery("select count(e) from SQE e", Long.class).getSingleResult();
-        Assert.assertEquals(6, count.longValue());
+        Assert.assertEquals(buildModel().size(), count.longValue());
 
     }
 
@@ -188,6 +202,36 @@ public class TestSimpleQueries extends TransactionalSetup {
 
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", parameter).getResultList();
         ReflectionAssert.assertReflectionEquals(buildModel().subList(0, 2), actual);
+
+    }
+
+    /**
+     * this is BAD, it is basically an equals matcher
+     */
+    @Test
+    public void testWithLikeClauseBAD() {
+
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "john").getResultList();
+        ReflectionAssert.assertReflectionEquals(new ArrayList<>(), list);
+
+    }
+
+    /**
+     * this is still BAD, it is a LIKE matcher but case sensitive
+     */
+    @Test
+    public void testWithLikeClauseStillBAD() {
+
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().get(6), list.get(0));
+
+    }
+
+    @Test
+    public void testWithLikeClauseOK() {
+
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(:name)", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
+        ReflectionAssert.assertReflectionEquals(buildModel().subList(6, 8), list);
 
     }
 }
