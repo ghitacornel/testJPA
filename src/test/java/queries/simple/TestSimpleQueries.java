@@ -140,24 +140,6 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testUniqueResult() {
-
-        SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name='name 1'", SimpleQueryEntity.class).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
-
-    }
-
-    @Test(expected = javax.persistence.NonUniqueResultException.class)
-    public void testUniqueResultNonUniqueSelect() {
-        em.createQuery("select e from SQE e where e.name = 'name 1' or e.name = 'name 2'", SimpleQueryEntity.class).getSingleResult();
-    }
-
-    @Test(expected = javax.persistence.NoResultException.class)
-    public void testUniqueResultNoData() {
-        em.createQuery("select e from SQE e where e.name = 'name not present'", SimpleQueryEntity.class).getSingleResult();
-    }
-
-    @Test
     public void testWithNullClauseOK() {
 
         // CORRECT way to check for NULL
