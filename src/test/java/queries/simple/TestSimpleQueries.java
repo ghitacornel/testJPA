@@ -166,14 +166,6 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testCountAll() {
-
-        Long count = em.createQuery("select count(e) from SQE e", Long.class).getSingleResult();
-        Assert.assertEquals(buildModel().size(), count.longValue());
-
-    }
-
-    @Test
     public void testWithNullClauseOK() {
 
         // CORRECT way to check for NULL
