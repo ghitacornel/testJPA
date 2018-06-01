@@ -64,6 +64,8 @@
         <class>entities.converters.EntityWithAttributeConverters</class>
         <class>entities.listener.EntityWithListener</class>
         <class>entities.projection.EntityWithProjection</class>
+        <class>entities.aggregated.Person</class>
+        <class>entities.aggregated.Country</class>
 
         <class>lock.VersionedEntity</class>
 
