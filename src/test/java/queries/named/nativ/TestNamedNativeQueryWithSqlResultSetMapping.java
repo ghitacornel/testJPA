@@ -20,13 +20,13 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
 
         Parent parent = new Parent();
         parent.setId(1);
-        parent.setName("parinte 1");
+        parent.setName("parent 1");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             Child child = new Child();
             child.setId(i);
-            child.setName("copil " + i);
+            child.setName("child " + i);
             child.setParent(parent);
             parent.getChildren().add(child);
         }
