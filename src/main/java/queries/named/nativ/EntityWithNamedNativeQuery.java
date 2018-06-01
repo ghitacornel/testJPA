@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 
-@NamedQuery(name = "EntityWithNamedNativeQuery.countAll", query = "select count(*) from EntityWithNamedQuery t")
+@NamedQuery(name = "EntityWithNamedNativeQuery.countAll", query = "select count(*) from EntityWithNamedNativeQuery t")
 @Entity
 public class EntityWithNamedNativeQuery {
 

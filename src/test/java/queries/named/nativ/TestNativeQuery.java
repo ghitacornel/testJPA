@@ -1,5 +1,6 @@
 package queries.named.nativ;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -50,6 +51,14 @@ public class TestNativeQuery extends TransactionalSetup {
 
         EntityWithNamedNativeQuery entity = em.createNamedQuery("EntityWithNamedNativeQuery.findByExactNameNative", EntityWithNamedNativeQuery.class).setParameter(1, "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
+
+    }
+
+    @Test
+    public void testNamedQueryDefinedOnEntity() {
+
+        Long count = em.createNamedQuery("EntityWithNamedNativeQuery.countAll", Long.class).getSingleResult();
+        Assert.assertEquals(5L, count.longValue());
 
     }
 
