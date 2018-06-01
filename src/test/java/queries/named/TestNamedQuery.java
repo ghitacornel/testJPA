@@ -1,6 +1,6 @@
 package queries.named;
 
-import entities.simple.Entity;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -17,10 +17,10 @@ public class TestNamedQuery extends TransactionalSetup {
         flushAndClear();
     }
 
-    private List<Entity> buildModel() {
-        List<Entity> list = new ArrayList<>();
+    private List<EntityWithNamedQuery> buildModel() {
+        List<EntityWithNamedQuery> list = new ArrayList<>();
         for (int i = 1; i < 6; i++) {
-            Entity entity = new Entity();
+            EntityWithNamedQuery entity = new EntityWithNamedQuery();
             entity.setId(i);
             entity.setName("name " + i);
             list.add(entity);
@@ -31,9 +31,9 @@ public class TestNamedQuery extends TransactionalSetup {
     @Test
     public void testWithNamedParameters() {
 
-        List<Entity> list = em.createNamedQuery("Entity.findByName", Entity.class).setParameter("name", "%1%").getResultList();
+        List<EntityWithNamedQuery> list = em.createNamedQuery("EntityWithNamedQuery.findByName", EntityWithNamedQuery.class).setParameter("name", "%1%").getResultList();
 
-        List<Entity> expected = new ArrayList<>();
+        List<EntityWithNamedQuery> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
         ReflectionAssert.assertReflectionEquals(expected, list);
 
@@ -42,7 +42,7 @@ public class TestNamedQuery extends TransactionalSetup {
     @Test
     public void testWithOrderParameters() {
 
-        Entity entity = em.createNamedQuery("Entity.findById", Entity.class).setParameter(1, 1).getSingleResult();
+        EntityWithNamedQuery entity = em.createNamedQuery("EntityWithNamedQuery.findById", EntityWithNamedQuery.class).setParameter(1, 1).getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
 
     }
@@ -50,8 +50,16 @@ public class TestNamedQuery extends TransactionalSetup {
     @Test
     public void testNamedQueryDefinedSeparately() {
 
-        Entity entity = em.createNamedQuery("Entity.findByExactName", Entity.class).setParameter("name", "name 2").getSingleResult();
+        EntityWithNamedQuery entity = em.createNamedQuery("EntityWithNamedQuery.findByExactName", EntityWithNamedQuery.class).setParameter("name", "name 2").getSingleResult();
         ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
+
+    }
+
+    @Test
+    public void testNamedQueryDefinedOnEntity() {
+
+        Long count = em.createNamedQuery("EntityWithNamedQuery.countAll", Long.class).getSingleResult();
+        Assert.assertEquals(5L, count.longValue());
 
     }
 }

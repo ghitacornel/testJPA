@@ -18,8 +18,8 @@ import javax.persistence.NamedQuery;
  */
 @MappedSuperclass
 @NamedQueries({
-        @NamedQuery(name = "Entity.findByName", query = "select t from Entity t where lower(t.name) like :name"),
-        @NamedQuery(name = "Entity.findById", query = "select t from Entity t where t.id = ?1")})
-@NamedQuery(name = "Entity.findByExactName", query = "select t from Entity t where t.name = :name")
+        @NamedQuery(name = "EntityWithNamedQuery.findByName", query = "select t from EntityWithNamedQuery t where lower(t.name) like :name"),
+        @NamedQuery(name = "EntityWithNamedQuery.findById", query = "select t from EntityWithNamedQuery t where t.id = ?1")})
+@NamedQuery(name = "EntityWithNamedQuery.findByExactName", query = "select t from EntityWithNamedQuery t where t.name = :name")
 public class NamedQueriesDefinition {
 }

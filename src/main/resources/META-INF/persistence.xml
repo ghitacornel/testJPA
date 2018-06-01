@@ -69,6 +69,7 @@
 
         <class>lock.VersionedEntity</class>
 
+        <class>queries.named.EntityWithNamedQuery</class>
         <class>queries.named.nativ.NamedNativeQueriesDefinition</class>
         <class>queries.named.nativ.NamedNativeQueriesWithResultSetMappingDefinition</class>
         <class>queries.named.NamedQueriesDefinition</class>
