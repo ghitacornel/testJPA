@@ -41,6 +41,7 @@ public class TestPersist extends TransactionalSetup {
         em.persist(m1);
         flushAndClear();
 
+        // verify
         ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, 2), ReflectionComparatorMode.LENIENT_ORDER);
@@ -54,6 +55,7 @@ public class TestPersist extends TransactionalSetup {
         em.persist(n1);
         flushAndClear();
 
+        // verify
         ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, 2), ReflectionComparatorMode.LENIENT_ORDER);
