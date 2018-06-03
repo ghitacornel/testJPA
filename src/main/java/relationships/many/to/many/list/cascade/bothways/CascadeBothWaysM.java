@@ -10,7 +10,7 @@ public class CascadeBothWaysM {
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "CascadeMN",
+            name = "CascadeBothWaysMN",
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )

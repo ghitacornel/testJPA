@@ -9,7 +9,7 @@ public class NoCascadeM {
 
     @ManyToMany
     @JoinTable(
-            name = "MN",
+            name = "NoCascadeMN",
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )

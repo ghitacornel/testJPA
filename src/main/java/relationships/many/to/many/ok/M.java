@@ -9,7 +9,7 @@ public class M {
 
     @ManyToMany
     @JoinTable(
-            name = "MN",
+            name = "MN_OK",
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )
