@@ -1,7 +1,6 @@
 package relationships.many.to.many.list.nocascade;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
@@ -57,19 +56,20 @@ public class TestRemoveLink extends TransactionalSetup {
 
     }
 
-    @Ignore
     @Test
     public void testSafeRemoveLink() {
 
         // safes way to remove link is to remove it from both sides
-        em.find(M.class, m.getId()).getListWithNs().remove(n);
-        em.find(N.class, n.getId()).getListWithMs().remove(m);
+        M actualM = em.find(M.class, m.getId());
+        N actualN = em.find(N.class, n.getId());
+        actualM.getListWithNs().remove(actualN);
+        actualN.getListWithMs().remove(actualM);
         flushAndClear();
 
         // validate link removed
         {// adjust model to reflect expected changes
-            m.getListWithNs().clear();
-            n.getListWithMs().clear();
+            m.getListWithNs().remove(n);
+            n.getListWithMs().remove(m);
         }
         ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
         ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
