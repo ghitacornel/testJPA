@@ -51,7 +51,7 @@ public class TestRemove extends TransactionalSetup {
     public void testRemoveFromTheNonOwningSide() {
 
         // remove
-        N existingN = em.find(N.class, this.n.getId());
+        N existingN = em.find(N.class, n.getId());
         for (M existingM : existingN.getListWithMs()) {
             existingM.getListWithNs().remove(existingN);
         }
@@ -60,9 +60,9 @@ public class TestRemove extends TransactionalSetup {
 
         // verify final
         {// adjust model to reflect expected changes
-            m.getListWithNs().remove(this.n);
+            m.getListWithNs().remove(n);
         }
-        Assert.assertNull(em.find(N.class, this.n.getId()));
+        Assert.assertNull(em.find(N.class, n.getId()));
         ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
