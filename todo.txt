@@ -8,3 +8,5 @@ data types
 projections over joins on different columns with aggregated stuff and order
 better tests with date and time comparisons
 test with fetch
+
+test with many to many remove link only
