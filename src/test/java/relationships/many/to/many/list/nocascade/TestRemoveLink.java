@@ -31,7 +31,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveLinkFromTheOwningSide() {
+    public void testRemoveLinkFromTheOwningSideNotWorking() {
 
         // remove link
         em.find(M.class, m.getId()).getListWithNs().remove(n);
@@ -44,7 +44,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveLinkFromTheNonOwning() {
+    public void testRemoveLinkFromTheNonOwningSideNotWorking() {
 
         // remove link
         em.find(N.class, n.getId()).getListWithMs().remove(m);
