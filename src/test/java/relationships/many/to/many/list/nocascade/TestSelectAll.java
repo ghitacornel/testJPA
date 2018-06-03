@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.many.to.many.list.nocascade.M;
-import relationships.many.to.many.list.nocascade.N;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -85,18 +83,14 @@ public class TestSelectAll extends TransactionalSetup {
     }
 
     @Test
-    public void testM() {
-
+    public void testSelectAllM() {
         List<M> list = em.createQuery("select t from M t", M.class).getResultList();
-
         ReflectionAssert.assertReflectionEquals(model.subList(4, 8), list, ReflectionComparatorMode.LENIENT_ORDER);
     }
 
     @Test
-    public void testN() {
-
+    public void testSelectAllN() {
         List<N> list = em.createQuery("select t from N t", N.class).getResultList();
-
         ReflectionAssert.assertReflectionEquals(model.subList(0, 4), list, ReflectionComparatorMode.LENIENT_ORDER);
     }
 }
