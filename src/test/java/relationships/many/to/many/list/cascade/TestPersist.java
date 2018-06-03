@@ -1,48 +1,49 @@
 package relationships.many.to.many.list.cascade;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestPersist extends TransactionalSetup {
 
-    private List<Object> model = buildModel();
+    CascadeM m1;
+    CascadeN n1;
+    CascadeN n2;
 
-    private static List<Object> buildModel() {
-        List<Object> objects = new ArrayList<>();
+    @Before
+    public void buildModel() {
 
-        {
+        m1 = new CascadeM();
+        m1.setId(1);
+        m1.setName("m 1 name");
 
-            CascadeM m1 = new CascadeM();
-            m1.setId(1);
-            m1.setName("m 1 name");
-            objects.add(m1);
+        n1 = new CascadeN();
+        n1.setId(1);
+        n1.setName("n 1 name");
 
-            CascadeN n1 = new CascadeN();
-            n1.setId(1);
-            n1.setName("n 1 name");
-            objects.add(n1);
+        n2 = new CascadeN();
+        n2.setId(2);
+        n2.setName("n 2 name");
 
-            n1.getListWithMs().add(m1);
-            m1.getListWithNs().add(n1);
+        n1.getListWithMs().add(m1);
+        n2.getListWithMs().add(m1);
+        m1.getListWithNs().add(n1);
+        m1.getListWithNs().add(n2);
 
-        }
-
-        return objects;
     }
 
     @Test
     public void testPersistFromTheOwningSide() {
 
         // persist
-        em.persist(model.get(0));
+        em.persist(m1);
         flushAndClear();
 
-        verifyPersistedModel();
+        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, 2), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
@@ -50,19 +51,13 @@ public class TestPersist extends TransactionalSetup {
     public void testPersistFromTheNonOwningSide() {
 
         // persist
-        em.persist(model.get(1));
+        em.persist(n1);
         flushAndClear();
 
-        verifyPersistedModel();
+        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, 2), ReflectionComparatorMode.LENIENT_ORDER);
 
-    }
-
-    private void verifyPersistedModel() {
-        List<CascadeM> listM = em.createQuery("select t from CascadeM t", CascadeM.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 1), listM, ReflectionComparatorMode.LENIENT_ORDER);
-        List<CascadeN> listN = em.createQuery("select t from CascadeN t", CascadeN.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(1, 2), listN, ReflectionComparatorMode.LENIENT_ORDER);
-        flushAndClear();
     }
 
 }
