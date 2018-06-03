@@ -74,7 +74,6 @@ public class TestRemove extends TransactionalSetup {
         em.remove(em.find(N.class, n.getId()));
         flushAndClear();
 
-
     }
 
 }
