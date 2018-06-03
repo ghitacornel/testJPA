@@ -37,11 +37,7 @@ public class TestRemoveLink extends TransactionalSetup {
         em.find(M.class, m.getId()).getListWithNs().remove(n);
         flushAndClear();
 
-        // validate link removed
-        {// adjust model to reflect expected changes
-            m.getListWithNs().clear();
-            n.getListWithMs().clear();
-        }
+        // validate link not removed
         ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
         ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
 
@@ -55,10 +51,6 @@ public class TestRemoveLink extends TransactionalSetup {
         flushAndClear();
 
         // validate link not removed
-        {// adjust model to reflect expected changes
-            m.getListWithNs().clear();
-            n.getListWithMs().clear();
-        }
         ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
         ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
 
