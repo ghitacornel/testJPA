@@ -34,14 +34,16 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOfLinkFromTheOwningSide() {
+    public void testRemoveOfLinkFromTheOwningOrNotOwningSide() {
 
         // remove
-        em.find(CascadeBothWaysM.class, m.getId()).getListWithNs().clear();
+        CascadeBothWaysM existingM = em.find(CascadeBothWaysM.class, m.getId());
+        CascadeBothWaysN existingN = em.find(CascadeBothWaysN.class, n.getId());
+        existingM.getListWithNs().remove(existingN);
+        existingN.getListWithMs().remove(existingM);
         flushAndClear();
 
-
-        // verify removal of link only
+        // verify removal of link
         {// adjust model to reflect the expected result
             m.getListWithNs().clear();
             n.getListWithMs().clear();
@@ -52,18 +54,26 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOfLinkFromTheNonOwningSide() {
+    public void testRemoveOfLinkFromTheOwningSideNotWorking() {
 
         // remove
-        em.find(CascadeBothWaysM.class, n.getId()).getListWithNs().clear();
+        em.find(CascadeBothWaysM.class, m.getId()).getListWithNs().remove(n);
         flushAndClear();
 
+        // verify removal of link not working
+        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
-        // verify removal of link only
-        {// adjust model to reflect the expected result
-            m.getListWithNs().clear();
-            n.getListWithMs().clear();
-        }
+    }
+
+    @Test
+    public void testRemoveOfLinkFromTheNonOwningSideNotWorking() {
+
+        // remove
+        em.find(CascadeBothWaysM.class, n.getId()).getListWithNs().remove(m);
+        flushAndClear();
+
+        // verify removal of link not working
         ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
