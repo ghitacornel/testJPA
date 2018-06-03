@@ -39,8 +39,8 @@
 
         <class>relationships.many.to.many.list.nocascade.M</class>
         <class>relationships.many.to.many.list.nocascade.N</class>
-        <class>relationships.many.to.many.list.cascade.bothways.CascadeM</class>
-        <class>relationships.many.to.many.list.cascade.bothways.CascadeN</class>
+        <class>relationships.many.to.many.list.cascade.bothways.CascadeBothWaysM</class>
+        <class>relationships.many.to.many.list.cascade.bothways.CascadeBothWaysN</class>
         <class>relationships.many.to.many.list.cascade.oneside.CascadeOneSideM</class>
         <class>relationships.many.to.many.list.cascade.oneside.CascadeOneSideN</class>
         <class>relationships.many.to.many.map.MMap</class>
