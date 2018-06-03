@@ -1,9 +1,8 @@
 package relationships.many.to.many.list.cascade.bothways;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestRemove extends TransactionalSetup {
@@ -33,29 +32,30 @@ public class TestRemove extends TransactionalSetup {
         flushAndClear();
     }
 
+
     @Test
-    public void testRemoveOfLinkFromTheOwningSideNotWorking() {
+    public void testRemoveFromTheOwningSideCascades() {
 
         // remove
-        em.find(CascadeBothWaysM.class, m.getId()).getListWithNs().remove(n);
+        em.remove(em.find(CascadeBothWaysM.class, m.getId()));
         flushAndClear();
 
-        // verify removal of link only
-        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        // verify final
+        Assert.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
+        Assert.assertNull(em.find(CascadeBothWaysN.class, n.getId()));
 
     }
 
     @Test
-    public void testRemoveOfLinkFromTheNonOwningSideNotWorking() {
+    public void testRemoveFromTheNonOwningSideCascades() {
 
         // remove
-        em.find(CascadeBothWaysM.class, n.getId()).getListWithNs().remove(m);
+        em.remove(em.find(CascadeBothWaysN.class, n.getId()));
         flushAndClear();
 
-        // verify removal of link only
-        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        // verify final
+        Assert.assertNull(em.find(CascadeBothWaysN.class, n.getId()));
+        Assert.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
 
     }
 
