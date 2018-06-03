@@ -1,4 +1,4 @@
-package relationships.many.to.many.list.cascade;
+package relationships.many.to.many.list.cascade.bothways;
 
 import javax.persistence.*;
 import java.util.ArrayList;
