@@ -7,99 +7,95 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestRemove extends TransactionalSetup {
 
-    private List<Object> model = buildModel();
+    CascadeM m1;
+    CascadeN n1;
 
-    private static List<Object> buildModel() {
-        List<Object> objects = new ArrayList<>();
+    @Before
+    public void buildModel() {
 
-        {
+        m1 = new CascadeM();
+        m1.setId(1);
+        m1.setName("m 1 name");
 
-            CascadeN n1 = new CascadeN();
-            n1.setId(1);
-            n1.setName("n 1 name");
-            objects.add(n1);
+        n1 = new CascadeN();
+        n1.setId(1);
+        n1.setName("n 1 name");
 
-            CascadeM m1 = new CascadeM();
-            m1.setId(1);
-            m1.setName("m 1 name");
-            objects.add(m1);
+        n1.getListWithMs().add(m1);
+        m1.getListWithNs().add(n1);
 
-            n1.getListWithMs().add(m1);
-            m1.getListWithNs().add(n1);
-
-        }
-
-        return objects;
     }
 
     @Before
     public void before() {
-        persist(model);
+        persist(m1);
         flushAndClear();
     }
 
     @Test
     public void testRemoveFromTheOwningSide() {
 
-        // verify initial
-        {
-            List<CascadeN> listN = em.createQuery("select t from CascadeN t", CascadeN.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(0, 1), listN, ReflectionComparatorMode.LENIENT_ORDER);
-            List<CascadeM> listM = em.createQuery("select t from CascadeM t", CascadeM.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(1, 2), listM, ReflectionComparatorMode.LENIENT_ORDER);
-            flushAndClear();
-        }
-
         // remove
-        {
-            CascadeM m = em.find(CascadeM.class, 1);
-            em.remove(m);
-            flushAndClear();
-        }
+        em.remove(em.find(CascadeM.class, m1.getId()));
+        flushAndClear();
 
-        // verify final
-        {
-            verifyRemoveComplete();
-        }
+
+        // verify removal
+        Assert.assertNull(em.find(CascadeM.class, m1.getId()));
+        Assert.assertNull(em.find(CascadeN.class, n1.getId()));
 
     }
 
     @Test
     public void testRemoveFromTheNonOwningSide() {
 
-        // verify initial
-        {
-            List<CascadeN> listN = em.createQuery("select t from CascadeN t", CascadeN.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(0, 1), listN, ReflectionComparatorMode.LENIENT_ORDER);
-            List<CascadeM> listM = em.createQuery("select t from CascadeM t", CascadeM.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(1, 2), listM, ReflectionComparatorMode.LENIENT_ORDER);
-            flushAndClear();
-        }
-
         // remove
-        {
-            CascadeN n = em.find(CascadeN.class, 1);
-            em.remove(n);
-            flushAndClear();
-        }
+        em.remove(em.find(CascadeN.class, n1.getId()));
+        flushAndClear();
 
-        // verify final
-        {
-            verifyRemoveComplete();
-        }
+
+        // verify removal
+        Assert.assertNull(em.find(CascadeM.class, m1.getId()));
+        Assert.assertNull(em.find(CascadeN.class, n1.getId()));
 
     }
 
-    private void verifyRemoveComplete() {
-        CascadeM m = em.find(CascadeM.class, 1);
-        Assert.assertNull(m);
-        CascadeN n = em.find(CascadeN.class, 1);
-        Assert.assertNull(n);
+    @Test
+    public void testRemoveOfLinkFromTheOwningSide() {
+
+        // remove
+        em.find(CascadeM.class, m1.getId()).getListWithNs().clear();
+        flushAndClear();
+
+
+        // verify removal of link only
+        {// adjust model to reflect the expected result
+            m1.getListWithNs().clear();
+            n1.getListWithMs().clear();
+        }
+        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+
+    }
+
+    @Test
+    public void testRemoveOfLinkFromTheNonOwningSide() {
+
+        // remove
+        em.find(CascadeM.class, n1.getId()).getListWithNs().clear();
+        flushAndClear();
+
+
+        // verify removal of link only
+        {// adjust model to reflect the expected result
+            m1.getListWithNs().clear();
+            n1.getListWithMs().clear();
+        }
+        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+
     }
 
 }

@@ -42,9 +42,9 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, 2), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
@@ -56,9 +56,9 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, 1), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, 2), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
