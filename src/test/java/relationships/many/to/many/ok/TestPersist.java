@@ -30,10 +30,10 @@ public class TestPersist extends TransactionalSetup {
         n2.setId(2);
         n2.setName("n 2 name");
 
-//        n1.getListWithMs().add(m);
-//        n2.getListWithMs().add(m);
-//        m.getListWithNs().add(n1);
-//        m.getListWithNs().add(n2);
+        n1.getListWithMs().add(m);
+        n2.getListWithMs().add(m);
+        m.getListWithNs().add(n1);
+        m.getListWithNs().add(n2);
 
     }
 
