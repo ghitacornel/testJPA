@@ -34,7 +34,7 @@ public class TestRemoveLink extends TransactionalSetup {
     public void testRemoveLinkFromTheOwningSide() {
 
         // remove link
-        em.find(M.class, m.getId()).getListWithNs().clear();
+        em.find(M.class, m.getId()).getListWithNs().remove(n);
         flushAndClear();
 
         // validate link removed
@@ -48,13 +48,17 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveLinkFromTheNonOwningSideNotWorking() {
+    public void testRemoveLinkFromTheNonOwning() {
 
         // remove link
-        em.find(N.class, n.getId()).getListWithMs().clear();
+        em.find(N.class, n.getId()).getListWithMs().remove(m);
         flushAndClear();
 
         // validate link not removed
+        {// adjust model to reflect expected changes
+            m.getListWithNs().clear();
+            n.getListWithMs().clear();
+        }
         ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
         ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
 
@@ -64,8 +68,8 @@ public class TestRemoveLink extends TransactionalSetup {
     public void testSafeRemoveLink() {
 
         // safes way to remove link is to remove it from both sides
-        em.find(M.class, m.getId()).getListWithNs().clear();
-        em.find(N.class, n.getId()).getListWithMs().clear();
+        em.find(M.class, m.getId()).getListWithNs().remove(n);
+        em.find(N.class, n.getId()).getListWithMs().remove(m);
         flushAndClear();
 
         // validate link removed
