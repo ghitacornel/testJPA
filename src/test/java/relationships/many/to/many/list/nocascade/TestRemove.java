@@ -7,90 +7,60 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class TestRemove extends TransactionalSetup {
 
-    private List<Object> model = buildModel();
-
-    static List<Object> buildModel() {
-        List<Object> objects = new ArrayList<>();
-
-        {
-
-            N n1 = new N();
-            n1.setId(1);
-            n1.setName("n 1 name");
-            objects.add(n1);
-
-            M m1 = new M();
-            m1.setId(1);
-            m1.setName("m 1 name");
-            objects.add(m1);
-
-            n1.getListWithMs().add(m1);
-            m1.getListWithNs().add(n1);
-
-        }
-
-        return objects;
-    }
+    M m;
+    N n;
 
     @Before
     public void before() {
-        persist(model);
+
+        n = new N();
+        n.setId(1);
+        n.setName("n 1 name");
+
+        m = new M();
+        m.setId(1);
+        m.setName("m 1 name");
+
+        n.getListWithMs().add(m);
+        m.getListWithNs().add(n);
+
+        persist(m);
+        persist(n);
         flushAndClear();
     }
 
     @Test
     public void testRemoveFromTheOwningSide() {
 
-        // verify initial
-        {
-            List<N> listN = em.createQuery("select t from N t", N.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(0, 1), listN, ReflectionComparatorMode.LENIENT_ORDER);
-            List<M> listM = em.createQuery("select t from M t", M.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(1, 2), listM, ReflectionComparatorMode.LENIENT_ORDER);
-            flushAndClear();
-        }
-
         // remove
-        {
-            M m = em.find(M.class, 1);
-            em.remove(m);
-            flushAndClear();
-        }
+        em.remove(em.find(M.class, m.getId()));
+        flushAndClear();
 
         // verify final
-        {
-            M m = em.find(M.class, 1);
-            Assert.assertNull(m);
-            N n = em.find(N.class, 1);
-            Assert.assertNotNull(n);
-            Assert.assertTrue(n.getListWithMs().isEmpty());
+        {// adjust model to reflect expected changes
+            n.getListWithMs().clear();
         }
+        Assert.assertNull(em.find(M.class, m.getId()));
+        ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testRemoveFromTheNonOwningSide() {
+    public void testRemoveFromTheNonOwningSideNotWorking() {
 
-        // verify initial
-        {
-            List<N> listN = em.createQuery("select t from N t", N.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(0, 1), listN, ReflectionComparatorMode.LENIENT_ORDER);
-            List<M> listM = em.createQuery("select t from M t", M.class).getResultList();
-            ReflectionAssert.assertReflectionEquals(model.subList(1, 2), listM, ReflectionComparatorMode.LENIENT_ORDER);
-            flushAndClear();
-        }
+        // remove
+        em.remove(em.find(N.class, n.getId()));
 
-        // remove and verify expected exception is raised
-        {
-            N n = em.find(N.class, 1);
-            em.remove(n);
-            flushAndClear();
+        flushAndClear();
+
+        // verify final
+        {// adjust model to reflect expected changes
+            m.getListWithNs().clear();
         }
+        Assert.assertNull(em.find(N.class, n.getId()));
+        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
