@@ -37,8 +37,8 @@
         <class>relationships.one.to.one.unidirectional.child.parent.cascade.case2.Case2Parent</class>
         <class>relationships.one.to.one.unidirectional.child.parent.cascade.case2.Case2Child</class>
 
-        <class>relationships.many.to.many.list.M</class>
-        <class>relationships.many.to.many.list.N</class>
+        <class>relationships.many.to.many.list.nocascade.M</class>
+        <class>relationships.many.to.many.list.nocascade.N</class>
         <class>relationships.many.to.many.list.cascade.CascadeM</class>
         <class>relationships.many.to.many.list.cascade.CascadeN</class>
         <class>relationships.many.to.many.map.MMap</class>

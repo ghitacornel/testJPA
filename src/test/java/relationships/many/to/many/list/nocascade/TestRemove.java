@@ -1,10 +1,12 @@
-package relationships.many.to.many.list;
+package relationships.many.to.many.list.nocascade;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.many.to.many.list.nocascade.M;
+import relationships.many.to.many.list.nocascade.N;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;

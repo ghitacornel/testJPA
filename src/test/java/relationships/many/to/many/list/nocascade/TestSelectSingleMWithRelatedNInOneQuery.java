@@ -1,4 +1,4 @@
-package relationships.many.to.many.list;
+package relationships.many.to.many.list.nocascade;
 
 import org.junit.Assert;
 import org.junit.Before;

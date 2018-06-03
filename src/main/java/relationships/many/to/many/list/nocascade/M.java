@@ -1,17 +1,19 @@
-package relationships.many.to.many.list;
+package relationships.many.to.many.list.nocascade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class N {
+public class M {
 
-    @ManyToMany(mappedBy = "listWithNs")
-    private List<M> listWithMs = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "MN",
+            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
+    )
+    private List<N> listWithNs = new ArrayList<>();
 
     @Id
     private Integer id;
@@ -35,13 +37,13 @@ public class N {
         this.name = name;
     }
 
+    public List<N> getListWithNs() {
+        return listWithNs;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
-    }
-
-    public List<M> getListWithMs() {
-        return listWithMs;
     }
 
 }
