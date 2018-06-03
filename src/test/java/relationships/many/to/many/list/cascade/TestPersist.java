@@ -37,7 +37,7 @@ public class TestPersist extends TransactionalSetup {
     @Test
     public void testPersistFromTheOwningSide() {
 
-        // persist
+        // persist and expect cascade
         em.persist(m1);
         flushAndClear();
 
@@ -51,7 +51,7 @@ public class TestPersist extends TransactionalSetup {
     @Test
     public void testPersistFromTheNonOwningSide() {
 
-        // persist
+        // persist and expect cascade
         em.persist(n1);
         flushAndClear();
 
