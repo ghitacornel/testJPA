@@ -18,42 +18,42 @@ public class TestSelectAll extends TransactionalSetup {
 
         {
 
-            N n1 = new N();
+            NoCascadeN n1 = new NoCascadeN();
             n1.setId(1);
             n1.setName("n 1 name");
             objects.add(n1);
 
-            N n2 = new N();
+            NoCascadeN n2 = new NoCascadeN();
             n2.setId(2);
             n2.setName("n 2 name");
             objects.add(n2);
 
-            N n3 = new N();
+            NoCascadeN n3 = new NoCascadeN();
             n3.setId(3);
             n3.setName("n 3 name");
             objects.add(n3);
 
-            N n4 = new N();
+            NoCascadeN n4 = new NoCascadeN();
             n4.setId(4);
             n4.setName("n 4 name");
             objects.add(n4);
 
-            M m1 = new M();
+            NoCascadeM m1 = new NoCascadeM();
             m1.setId(1);
             m1.setName("m 1 name");
             objects.add(m1);
 
-            M m2 = new M();
+            NoCascadeM m2 = new NoCascadeM();
             m2.setId(2);
             m2.setName("m 2 name");
             objects.add(m2);
 
-            M m3 = new M();
+            NoCascadeM m3 = new NoCascadeM();
             m3.setId(3);
             m3.setName("m 3 name");
             objects.add(m3);
 
-            M m4 = new M();
+            NoCascadeM m4 = new NoCascadeM();
             m4.setId(4);
             m4.setName("m 4 name");
             objects.add(m4);
@@ -84,13 +84,13 @@ public class TestSelectAll extends TransactionalSetup {
 
     @Test
     public void testSelectAllM() {
-        List<M> list = em.createQuery("select t from M t", M.class).getResultList();
+        List<NoCascadeM> list = em.createQuery("select t from NoCascadeM t", NoCascadeM.class).getResultList();
         ReflectionAssert.assertReflectionEquals(model.subList(4, 8), list, ReflectionComparatorMode.LENIENT_ORDER);
     }
 
     @Test
     public void testSelectAllN() {
-        List<N> list = em.createQuery("select t from N t", N.class).getResultList();
+        List<NoCascadeN> list = em.createQuery("select t from NoCascadeN t", NoCascadeN.class).getResultList();
         ReflectionAssert.assertReflectionEquals(model.subList(0, 4), list, ReflectionComparatorMode.LENIENT_ORDER);
     }
 }

@@ -9,11 +9,11 @@ public class TestPersist extends TransactionalSetup {
     @Test
     public void testPersist() {
 
-        N n = new N();
+        NoCascadeN n = new NoCascadeN();
         n.setId(1);
         n.setName("n 1 name");
 
-        M m = new M();
+        NoCascadeM m = new NoCascadeM();
         m.setId(1);
         m.setName("m 1 name");
 
@@ -26,8 +26,8 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify persist
-        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
-        ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
+        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
+        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
 
     }
 

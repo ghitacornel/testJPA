@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class M {
+public class NoCascadeM {
 
     @ManyToMany
     @JoinTable(
@@ -13,7 +13,7 @@ public class M {
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )
-    private List<N> listWithNs = new ArrayList<>();
+    private List<NoCascadeN> listWithNs = new ArrayList<>();
 
     @Id
     private Integer id;
@@ -37,7 +37,7 @@ public class M {
         this.name = name;
     }
 
-    public List<N> getListWithNs() {
+    public List<NoCascadeN> getListWithNs() {
         return listWithNs;
     }
 

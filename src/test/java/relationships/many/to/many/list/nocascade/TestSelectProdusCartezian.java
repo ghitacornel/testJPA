@@ -21,7 +21,7 @@ public class TestSelectProdusCartezian extends TransactionalSetup {
     public void testProdusCartezian() {
 
         @SuppressWarnings("unchecked")
-        List<Object[]> list = em.createQuery("select m , n from M m , N n ").getResultList();
+        List<Object[]> list = em.createQuery("select m , n from NoCascadeM m , NoCascadeN n ").getResultList();
 
         for (Object[] tuple : list) {
             Assert.assertEquals(2, tuple.length);
@@ -31,7 +31,7 @@ public class TestSelectProdusCartezian extends TransactionalSetup {
             }
             System.out.println();
         }
-        Assert.assertEquals(list.size(), em.createQuery("select m from M m").getResultList().size() * em.createQuery("select n from N n").getResultList().size());
+        Assert.assertEquals(list.size(), em.createQuery("select m from NoCascadeM m").getResultList().size() * em.createQuery("select n from NoCascadeN n").getResultList().size());
     }
 
     // NOTE full inner join in terms of JPA doesn't return correct model values.

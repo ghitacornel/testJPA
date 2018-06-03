@@ -30,12 +30,12 @@ public class TestSelectSingleMWithRelatedNInOneQuery extends TransactionalSetup 
     @Test
     public void test() {
 
-        M m = em.createQuery("select t from M t join fetch t.listWithNs where t.id=1", M.class).getSingleResult();
+        NoCascadeM m = em.createQuery("select t from NoCascadeM t join fetch t.listWithNs where t.id=1", NoCascadeM.class).getSingleResult();
 
         Assert.assertNotNull(m);
         ReflectionAssert.assertReflectionEquals(model.get(4), m);
-        List<N> expected = new ArrayList<>();
-        expected.add((N) model.get(0));
+        List<NoCascadeN> expected = new ArrayList<>();
+        expected.add((NoCascadeN) model.get(0));
         ReflectionAssert.assertReflectionEquals(expected, m.getListWithNs(), ReflectionComparatorMode.LENIENT_ORDER);
     }
 }

@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class N {
+public class NoCascadeN {
 
     @ManyToMany(mappedBy = "listWithNs")
-    private List<M> listWithMs = new ArrayList<>();
+    private List<NoCascadeM> listWithMs = new ArrayList<>();
 
     @Id
     private Integer id;
@@ -40,7 +40,7 @@ public class N {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
-    public List<M> getListWithMs() {
+    public List<NoCascadeM> getListWithMs() {
         return listWithMs;
     }
 

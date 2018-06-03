@@ -7,17 +7,17 @@ import setup.TransactionalSetup;
 
 public class TestRemoveLink extends TransactionalSetup {
 
-    M m;
-    N n;
+    NoCascadeM m;
+    NoCascadeN n;
 
     @Before
     public void before() {
 
-        m = new M();
+        m = new NoCascadeM();
         m.setId(1);
         m.setName("m 1 name");
 
-        n = new N();
+        n = new NoCascadeN();
         n.setId(1);
         n.setName("n 1 name");
 
@@ -34,12 +34,12 @@ public class TestRemoveLink extends TransactionalSetup {
     public void testRemoveLinkFromTheOwningSideNotWorking() {
 
         // remove link
-        em.find(M.class, m.getId()).getListWithNs().remove(n);
+        em.find(NoCascadeM.class, m.getId()).getListWithNs().remove(n);
         flushAndClear();
 
         // validate link not removed
-        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
-        ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
+        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
+        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
 
     }
 
@@ -47,12 +47,12 @@ public class TestRemoveLink extends TransactionalSetup {
     public void testRemoveLinkFromTheNonOwningSideNotWorking() {
 
         // remove link
-        em.find(N.class, n.getId()).getListWithMs().remove(m);
+        em.find(NoCascadeN.class, n.getId()).getListWithMs().remove(m);
         flushAndClear();
 
         // validate link not removed
-        ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
-        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
+        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
+        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
 
     }
 
@@ -60,8 +60,8 @@ public class TestRemoveLink extends TransactionalSetup {
     public void testSafeRemoveLink() {
 
         // safes way to remove link is to remove it from both sides
-        M actualM = em.find(M.class, m.getId());
-        N actualN = em.find(N.class, n.getId());
+        NoCascadeM actualM = em.find(NoCascadeM.class, m.getId());
+        NoCascadeN actualN = em.find(NoCascadeN.class, n.getId());
         actualM.getListWithNs().remove(actualN);
         actualN.getListWithMs().remove(actualM);
         flushAndClear();
@@ -71,8 +71,8 @@ public class TestRemoveLink extends TransactionalSetup {
             m.getListWithNs().remove(n);
             n.getListWithMs().remove(m);
         }
-        ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()));
-        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()));
+        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
+        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
 
     }
 

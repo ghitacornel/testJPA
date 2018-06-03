@@ -9,17 +9,17 @@ import setup.TransactionalSetup;
 
 public class TestRemove extends TransactionalSetup {
 
-    M m;
-    N n;
+    NoCascadeM m;
+    NoCascadeN n;
 
     @Before
     public void before() {
 
-        n = new N();
+        n = new NoCascadeN();
         n.setId(1);
         n.setName("n 1 name");
 
-        m = new M();
+        m = new NoCascadeM();
         m.setId(1);
         m.setName("m 1 name");
 
@@ -35,15 +35,15 @@ public class TestRemove extends TransactionalSetup {
     public void testRemoveFromTheOwningSide() {
 
         // remove
-        em.remove(em.find(M.class, m.getId()));
+        em.remove(em.find(NoCascadeM.class, m.getId()));
         flushAndClear();
 
         // verify final
         {// adjust model to reflect expected changes
             n.getListWithMs().remove(m);
         }
-        Assert.assertNull(em.find(M.class, m.getId()));
-        ReflectionAssert.assertReflectionEquals(n, em.find(N.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        Assert.assertNull(em.find(NoCascadeM.class, m.getId()));
+        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
@@ -51,8 +51,8 @@ public class TestRemove extends TransactionalSetup {
     public void testRemoveFromTheNonOwningSide() {
 
         // remove
-        N existingN = em.find(N.class, n.getId());
-        for (M existingM : existingN.getListWithMs()) {
+        NoCascadeN existingN = em.find(NoCascadeN.class, n.getId());
+        for (NoCascadeM existingM : existingN.getListWithMs()) {
             existingM.getListWithNs().remove(existingN);
         }
         em.remove(existingN);
@@ -62,8 +62,8 @@ public class TestRemove extends TransactionalSetup {
         {// adjust model to reflect expected changes
             m.getListWithNs().remove(n);
         }
-        Assert.assertNull(em.find(N.class, n.getId()));
-        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        Assert.assertNull(em.find(NoCascadeN.class, n.getId()));
+        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
@@ -71,7 +71,7 @@ public class TestRemove extends TransactionalSetup {
     public void testRemoveFromTheNonOwningSideNotWorking() {
 
         // remove
-        em.remove(em.find(N.class, n.getId()));
+        em.remove(em.find(NoCascadeN.class, n.getId()));
         flushAndClear();
 
     }
