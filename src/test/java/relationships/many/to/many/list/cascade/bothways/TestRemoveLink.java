@@ -45,8 +45,8 @@ public class TestRemoveLink extends TransactionalSetup {
 
         // verify removal of link
         {// adjust model to reflect the expected result
-            m.getListWithNs().clear();
-            n.getListWithMs().clear();
+            m.getListWithNs().remove(n);
+            n.getListWithMs().remove(m);
         }
         ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
