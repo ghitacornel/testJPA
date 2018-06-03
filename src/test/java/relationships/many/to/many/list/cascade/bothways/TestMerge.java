@@ -8,33 +8,33 @@ import setup.TransactionalSetup;
 
 public class TestMerge extends TransactionalSetup {
 
-    CascadeBothWaysM m1;
-    CascadeBothWaysN n1;
+    CascadeBothWaysM m;
+    CascadeBothWaysN n;
     CascadeBothWaysN nUnaffected;
 
     @Before
     public void buildModel() {
 
-        m1 = new CascadeBothWaysM();
-        m1.setId(1);
-        m1.setName("m 1 name");
+        m = new CascadeBothWaysM();
+        m.setId(1);
+        m.setName("m 1 name");
 
-        n1 = new CascadeBothWaysN();
-        n1.setId(1);
-        n1.setName("n 1 name");
+        n = new CascadeBothWaysN();
+        n.setId(1);
+        n.setName("n 1 name");
 
-        n1.getListWithMs().add(m1);
-        m1.getListWithNs().add(n1);
+        n.getListWithMs().add(m);
+        m.getListWithNs().add(n);
 
         {// this is tested altogether via list reflections
             nUnaffected = new CascadeBothWaysN();
             nUnaffected.setId(111);
             nUnaffected.setName("n 1 name");
-            m1.getListWithNs().add(nUnaffected);
-            nUnaffected.getListWithMs().add(m1);
+            m.getListWithNs().add(nUnaffected);
+            nUnaffected.getListWithMs().add(m);
         }
 
-        em.persist(m1);
+        em.persist(m);
         flushAndClear();
 
     }
@@ -68,18 +68,18 @@ public class TestMerge extends TransactionalSetup {
         // verify
         {// first alter the initial model to match expectations
 
-            m1.setName("m 1 new name");
-            m1.getListWithNs().add(n2New);
-            m1.getListWithNs().remove(nUnaffected);
+            m.setName("m 1 new name");
+            m.getListWithNs().add(n2New);
+            m.getListWithNs().remove(nUnaffected);
 
-            n1.setName("n 1 new name");
+            n.setName("n 1 new name");
 
             nUnaffected.getListWithMs().clear();
 
         }
 
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeBothWaysM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeBothWaysN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n2New, em.find(CascadeBothWaysN.class, n2New.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
         // the unaffected is not removed, only the links between entities are removed
