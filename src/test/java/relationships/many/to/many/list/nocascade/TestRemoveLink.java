@@ -1,6 +1,7 @@
 package relationships.many.to.many.list.nocascade;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
@@ -56,6 +57,7 @@ public class TestRemoveLink extends TransactionalSetup {
 
     }
 
+    @Ignore
     @Test
     public void testSafeRemoveLink() {
 

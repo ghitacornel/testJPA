@@ -1,6 +1,5 @@
 package relationships.many.to.many.list.cascade.bothways;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -9,92 +8,54 @@ import setup.TransactionalSetup;
 
 public class TestRemove extends TransactionalSetup {
 
-    CascadeBothWaysM m1;
-    CascadeBothWaysN n1;
+    CascadeBothWaysM m;
+    CascadeBothWaysN n;
 
     @Before
     public void buildModel() {
 
-        m1 = new CascadeBothWaysM();
-        m1.setId(1);
-        m1.setName("m 1 name");
+        m = new CascadeBothWaysM();
+        m.setId(1);
+        m.setName("m 1 name");
 
-        n1 = new CascadeBothWaysN();
-        n1.setId(1);
-        n1.setName("n 1 name");
+        n = new CascadeBothWaysN();
+        n.setId(1);
+        n.setName("n 1 name");
 
-        n1.getListWithMs().add(m1);
-        m1.getListWithNs().add(n1);
+        n.getListWithMs().add(m);
+        m.getListWithNs().add(n);
 
     }
 
     @Before
     public void before() {
-        persist(m1);
+        persist(m);
         flushAndClear();
     }
 
     @Test
-    public void testRemoveFromTheOwningSide() {
+    public void testRemoveOfLinkFromTheOwningSideNotWorking() {
 
         // remove
-        em.remove(em.find(CascadeBothWaysM.class, m1.getId()));
+        em.find(CascadeBothWaysM.class, m.getId()).getListWithNs().remove(n);
         flushAndClear();
-
-
-        // verify removal
-        Assert.assertNull(em.find(CascadeBothWaysM.class, m1.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
-
-    }
-
-    @Test
-    public void testRemoveFromTheNonOwningSide() {
-
-        // remove
-        em.remove(em.find(CascadeBothWaysN.class, n1.getId()));
-        flushAndClear();
-
-
-        // verify removal
-        Assert.assertNull(em.find(CascadeBothWaysM.class, m1.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
-
-    }
-
-    @Test
-    public void testRemoveOfLinkFromTheOwningSide() {
-
-        // remove
-        em.find(CascadeBothWaysM.class, m1.getId()).getListWithNs().clear();
-        flushAndClear();
-
 
         // verify removal of link only
-        {// adjust model to reflect the expected result
-            m1.getListWithNs().clear();
-            n1.getListWithMs().clear();
-        }
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeBothWaysM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeBothWaysN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
     @Test
-    public void testRemoveOfLinkFromTheNonOwningSide() {
+    public void testRemoveOfLinkFromTheNonOwningSideNotWorking() {
 
         // remove
-        em.find(CascadeBothWaysM.class, n1.getId()).getListWithNs().clear();
+        em.find(CascadeBothWaysM.class, n.getId()).getListWithNs().remove(m);
         flushAndClear();
 
-
         // verify removal of link only
-        {// adjust model to reflect the expected result
-            m1.getListWithNs().clear();
-            n1.getListWithMs().clear();
-        }
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeBothWaysM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeBothWaysN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
