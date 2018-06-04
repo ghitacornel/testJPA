@@ -11,13 +11,13 @@ import java.util.ArrayList;
 public class TestLoadParentAndChildrenInOneNamedQuery extends
         TransactionalSetup {
 
-    private Parent model = buildModel();
+    private Parent parent = buildModel();
 
     private Parent buildModel() {
 
         Parent parent = new Parent();
         parent.setId(1);
-        parent.setName("parent 1");
+        parent.setName("parent name");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
@@ -33,17 +33,13 @@ public class TestLoadParentAndChildrenInOneNamedQuery extends
 
     @Before
     public void before() {
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
     }
 
     @Test
     public void test() {
-
-        Parent parent = em.createNamedQuery("Parent.findWithChildren", Parent.class).setParameter(1, 1).getSingleResult();
-
-        ReflectionAssert.assertReflectionEquals(model, parent, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), parent.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
-
+        Parent existing = em.createNamedQuery("Parent.findWithChildren", Parent.class).setParameter(1, parent.getId()).getSingleResult();
+        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
     }
 }
