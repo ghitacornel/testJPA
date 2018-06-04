@@ -5,9 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * This class represents the ONE part of a MANY TO ONE relationship<br>
- * a strict parent is an independent entity<br>
- * a strict parent doesn't know about its children
+ * Cascading with this kind of relationship is bad
  */
 @Entity
 public class MTOOCascadeParent {
