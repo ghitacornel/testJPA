@@ -12,7 +12,7 @@ import java.util.List;
 
 public class TestSelectAll extends TransactionalSetup {
 
-    private ParentMap model = buildModel();
+    private ParentMap parent = buildModel();
 
     private ParentMap buildModel() {
 
@@ -34,7 +34,7 @@ public class TestSelectAll extends TransactionalSetup {
 
     @Before
     public void before() {
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
     }
 
@@ -44,8 +44,8 @@ public class TestSelectAll extends TransactionalSetup {
         List<ParentMap> parents = em.createQuery("select t from ParentMap t", ParentMap.class).getResultList();
 
         Assert.assertEquals(1, parents.size());
-        ReflectionAssert.assertReflectionEquals(model, parents.get(0), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), parents.get(0).getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(parent, parents.get(0), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(parent.getChildren(), parents.get(0).getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 }
