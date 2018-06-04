@@ -1,6 +1,5 @@
 package relationships.onetoone.bidirectional;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -28,8 +27,8 @@ public class TestInsertAWithCascadeToB extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertTrue(em.createQuery("select t from A t").getResultList().isEmpty());
-        Assert.assertTrue(em.createQuery("select t from B t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(A.class);
+        verifyCorrespondingTableIsEmpty(B.class);
     }
 
     @Test
