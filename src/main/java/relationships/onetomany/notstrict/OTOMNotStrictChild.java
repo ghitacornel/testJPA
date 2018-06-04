@@ -1,18 +1,19 @@
-package relationships.manytoone.notstrict;
+package relationships.onetomany.notstrict;
 
 import javax.persistence.*;
 
 /**
- * This class represents the MANY part of a MANY TO ONE relationship
+ * This class represents the MANY part of a ONE TO MANY relationship
  * The children know about their parents<br>
- * The parents do not know about their children<br>
+ * The parents know but do not control their children<br>
  * The child is the owner of the relationship<br>
- * No cascade options must be used in this case since parents are fully independent entities<br>
+ * Cascade options must NOT BE used in this case on child part since child can be independent of their parents<br>
+ * Cascade options must NOT BE used in this case on parent part since parents do not fully control their children<br>
  * It is allowed for a child not to have a parent<br>
  * This relationship is similar to ONE TO ONE
  */
 @Entity
-public class MTOONotStrictChild {
+public class OTOMNotStrictChild {
 
     @Id
     private Integer id;
@@ -21,7 +22,7 @@ public class MTOONotStrictChild {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private MTOONotStrictParent parent;
+    private OTOMNotStrictParent parent;
 
     public Integer getId() {
         return id;
@@ -39,11 +40,11 @@ public class MTOONotStrictChild {
         this.name = name;
     }
 
-    public MTOONotStrictParent getParent() {
+    public OTOMNotStrictParent getParent() {
         return parent;
     }
 
-    public void setParent(MTOONotStrictParent parent) {
+    public void setParent(OTOMNotStrictParent parent) {
         this.parent = parent;
     }
 

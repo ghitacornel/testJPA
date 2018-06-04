@@ -50,6 +50,8 @@
         <class>relationships.many.to.many.ok.M</class>
         <class>relationships.many.to.many.ok.N</class>
 
+        <class>relationships.onetomany.notstrict.OTOMNotStrictChild</class>
+        <class>relationships.onetomany.notstrict.OTOMNotStrictParent</class>
         <class>relationships.onetomany.strict.OTOMStrictChild</class>
         <class>relationships.onetomany.strict.OTOMStrictParent</class>
         <class>relationships.onetomany.map.ChildMap</class>
