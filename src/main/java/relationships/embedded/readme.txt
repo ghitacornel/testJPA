@@ -6,4 +6,4 @@ A is the owner of the association, meaning the deletion of A implies the deletio
 instead of using 2 linked tables (one for each entity) embedded entity concept allows us to use 1 single table for storing both entities
 
 B is not seen as an entity, but just a part of an entity
-mapping of B can be overwritten in those classes who reuse the concept
+mapping of B can be overwritten in class hierarchies who reuse the concept
