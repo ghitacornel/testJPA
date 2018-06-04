@@ -1,6 +1,5 @@
 package relationships.onetomany.list;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -11,7 +10,7 @@ import java.util.ArrayList;
 
 public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
-    private Parent model = buildModel();
+    private Parent parent = buildModel();
 
     private Parent buildModel() {
 
@@ -33,21 +32,19 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertNull(em.find(Parent.class, model.getId()));
-        for (Child child : model.getChildren()) {
-            Assert.assertNull(em.find(Child.class, child.getId()));
-        }
+        verifyCorrespondingTableIsEmpty(Parent.class);
+        verifyCorrespondingTableIsEmpty(Child.class);
     }
 
     @Test
     public void test() {
 
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
 
-        Parent existing = em.find(Parent.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(model, existing, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), existing.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+        Parent existing = em.find(Parent.class, parent.getId());
+        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(parent.getChildren(), existing.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 }
