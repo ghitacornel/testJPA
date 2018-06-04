@@ -36,9 +36,19 @@ public class TestMatchWithNULL extends TransactionalSetup {
         flushAndClear();
     }
 
+    @Test
+    public void testCheckWithIsNotNull_OK() {
+
+        // CORRECT way to check for NULL
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NOT NULL", SimpleQueryEntity.class).getResultList();
+        List<SimpleQueryEntity> expected = new ArrayList<>();
+        expected.add(buildModel().get(0));
+        ReflectionAssert.assertReflectionEquals(expected, list);
+
+    }
 
     @Test
-    public void testCheckWithNull_OK() {
+    public void testCheckWithIsNull_OK() {
 
         // CORRECT way to check for NULL
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
