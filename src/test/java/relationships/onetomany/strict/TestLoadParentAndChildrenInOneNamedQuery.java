@@ -11,17 +11,17 @@ import java.util.ArrayList;
 public class TestLoadParentAndChildrenInOneNamedQuery extends
         TransactionalSetup {
 
-    private Parent parent = buildModel();
+    private OTOMStrictParent parent = buildModel();
 
-    private Parent buildModel() {
+    private OTOMStrictParent buildModel() {
 
-        Parent parent = new Parent();
+        OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent name");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
-            Child child = new Child();
+            OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
             child.setName("child " + i);
             child.setParent(parent);
@@ -39,7 +39,7 @@ public class TestLoadParentAndChildrenInOneNamedQuery extends
 
     @Test
     public void test() {
-        Parent existing = em.createNamedQuery("Parent.findWithChildren", Parent.class).setParameter(1, parent.getId()).getSingleResult();
+        OTOMStrictParent existing = em.createNamedQuery("OTOMStrictParent.findWithChildren", OTOMStrictParent.class).setParameter(1, parent.getId()).getSingleResult();
         ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
     }
 }

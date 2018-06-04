@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.onetomany.strict.Child;
-import relationships.onetomany.strict.Parent;
+import relationships.onetomany.strict.OTOMStrictChild;
+import relationships.onetomany.strict.OTOMStrictParent;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -14,17 +14,17 @@ import java.util.List;
 
 public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSetup {
 
-    private Parent model = buildModel();
+    private OTOMStrictParent model = buildModel();
 
-    private Parent buildModel() {
+    private OTOMStrictParent buildModel() {
 
-        Parent parent = new Parent();
+        OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent " + parent.getId());
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
-            Child child = new Child();
+            OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
             child.setName("child " + +child.getId());
             child.setParent(parent);
@@ -45,15 +45,15 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
     public void test() {
 
         // fetch
-        List<Object[]> list = em.createNamedQuery("Parent.findWithChildrenNative").getResultList();
+        List<Object[]> list = em.createNamedQuery("OTOMStrictParent.findWithChildrenNative").getResultList();
 
         // verify, order is ignored
-        List<Child> fetchedChildren = new ArrayList<>();
+        List<OTOMStrictChild> fetchedChildren = new ArrayList<>();
         for (Object[] objects : list) {
 
             // parent is 'retrieved' many times
-            Parent parent = (Parent) objects[0];
-            Child child = (Child) objects[1];
+            OTOMStrictParent parent = (OTOMStrictParent) objects[0];
+            OTOMStrictChild child = (OTOMStrictChild) objects[1];
             fetchedChildren.add(child);
 
             Assert.assertEquals(model.getId(), parent.getId());
@@ -71,36 +71,36 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
     public void testFullyFetchedEntitiesAreManaged() {
 
         // fetch
-        List<Object[]> existing = em.createNamedQuery("Parent.findWithChildrenNative").getResultList();
+        List<Object[]> existing = em.createNamedQuery("OTOMStrictParent.findWithChildrenNative").getResultList();
 
         // alter
         for (Object[] objects : existing) {
-            Parent parent = (Parent) objects[0];
+            OTOMStrictParent parent = (OTOMStrictParent) objects[0];
             parent.setName("new parent name " + parent.getId());
-            Child child = (Child) objects[1];
+            OTOMStrictChild child = (OTOMStrictChild) objects[1];
             child.setName("new child name " + child.getId());
         }
 
         flushAndClear();
 
         // fetch again
-        List<Object[]> updated = em.createNamedQuery("Parent.findWithChildrenNative").getResultList();
+        List<Object[]> updated = em.createNamedQuery("OTOMStrictParent.findWithChildrenNative").getResultList();
 
         // adjust model for verification
         {
             model.setName("new parent name " + model.getId());
-            for (Child child : model.getChildren()) {
+            for (OTOMStrictChild child : model.getChildren()) {
                 child.setName("new child name " + child.getId());
             }
 
         }
         // verify, order is ignored
-        List<Child> fetchedChildren = new ArrayList<>();
+        List<OTOMStrictChild> fetchedChildren = new ArrayList<>();
         for (Object[] objects : updated) {
 
             // parent is 'retrieved' many times
-            Parent parent = (Parent) objects[0];
-            Child child = (Child) objects[1];
+            OTOMStrictParent parent = (OTOMStrictParent) objects[0];
+            OTOMStrictChild child = (OTOMStrictChild) objects[1];
             fetchedChildren.add(child);
 
             Assert.assertEquals(model.getId(), parent.getId());

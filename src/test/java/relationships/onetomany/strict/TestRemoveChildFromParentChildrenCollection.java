@@ -11,17 +11,17 @@ import java.util.ArrayList;
 
 public class TestRemoveChildFromParentChildrenCollection extends TransactionalSetup {
 
-    private Parent model = buildModel();
+    private OTOMStrictParent model = buildModel();
 
-    private Parent buildModel() {
+    private OTOMStrictParent buildModel() {
 
-        Parent parent = new Parent();
+        OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent 1");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
-            Child child = new Child();
+            OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
             child.setName("child " + i);
             child.setParent(parent);
@@ -40,17 +40,17 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
     @Test
     public void testRemoveDirectlyFromCollection() {
 
-        Parent existing1 = em.find(Parent.class, model.getId());
+        OTOMStrictParent existing1 = em.find(OTOMStrictParent.class, model.getId());
         existing1.getChildren().remove(1);
         flushAndClear();
 
-        Parent existing2 = em.find(Parent.class, model.getId());
-        Parent expectedParent = buildModel();
+        OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, model.getId());
+        OTOMStrictParent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
         ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 
         // child is removed since it is now an orphan
-        Child child = em.find(Child.class, buildModel().getChildren().get(1).getId());
+        OTOMStrictChild child = em.find(OTOMStrictChild.class, buildModel().getChildren().get(1).getId());
         Assert.assertNull(child);
 
     }
@@ -58,13 +58,13 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
     @Test
     public void testRemoveFromEMAndThenFromCollection() {
 
-        Parent existing1 = em.find(Parent.class, model.getId());
+        OTOMStrictParent existing1 = em.find(OTOMStrictParent.class, model.getId());
         em.remove(existing1.getChildren().get(1));
         existing1.getChildren().remove(1);//without this it won't work
         flushAndClear();
 
-        Parent existing2 = em.find(Parent.class, model.getId());
-        Parent expectedParent = buildModel();
+        OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, model.getId());
+        OTOMStrictParent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
         ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 

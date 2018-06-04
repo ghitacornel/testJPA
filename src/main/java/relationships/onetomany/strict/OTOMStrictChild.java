@@ -3,7 +3,7 @@ package relationships.onetomany.strict;
 import javax.persistence.*;
 
 @Entity
-public class Child {
+public class OTOMStrictChild {
 
     @Id
     private Integer id;
@@ -12,7 +12,7 @@ public class Child {
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    private Parent parent;
+    private OTOMStrictParent parent;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class Child {
         this.name = name;
     }
 
-    public Parent getParent() {
+    public OTOMStrictParent getParent() {
         return parent;
     }
 
-    public void setParent(Parent parent) {
+    public void setParent(OTOMStrictParent parent) {
         this.parent = parent;
     }
 

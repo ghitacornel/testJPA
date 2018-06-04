@@ -9,17 +9,17 @@ import java.util.ArrayList;
 
 public class TestLazyLoading extends TransactionalSetup {
 
-    private Parent parent = buildModel();
+    private OTOMStrictParent parent = buildModel();
 
-    private Parent buildModel() {
+    private OTOMStrictParent buildModel() {
 
-        Parent parent = new Parent();
+        OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent 1");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
-            Child child = new Child();
+            OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
             child.setName("child " + i);
             child.setParent(parent);
@@ -38,7 +38,7 @@ public class TestLazyLoading extends TransactionalSetup {
     @Test(expected = Exception.class)
     public void testLazyLoadingFailOnNotLoadedRelationshipsOfADetachedEntity() {
 
-        Parent existing = em.find(Parent.class, parent.getId());
+        OTOMStrictParent existing = em.find(OTOMStrictParent.class, parent.getId());
         flushAndClear();
 
         // proxy activated over a detached entity => proxy problem => lazy fails
@@ -52,7 +52,7 @@ public class TestLazyLoading extends TransactionalSetup {
     @Test
     public void testLazyLoading() {
 
-        Parent existing = em.find(Parent.class, parent.getId());
+        OTOMStrictParent existing = em.find(OTOMStrictParent.class, parent.getId());
         existing.getChildren().size();// force the proxy to fetch the data from the database
         flushAndClear();
 

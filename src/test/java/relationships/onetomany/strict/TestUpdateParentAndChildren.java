@@ -10,17 +10,17 @@ import java.util.ArrayList;
 
 public class TestUpdateParentAndChildren extends TransactionalSetup {
 
-    private Parent model = buildModel();
+    private OTOMStrictParent parent = buildModel();
 
-    private Parent buildModel() {
+    private OTOMStrictParent buildModel() {
 
-        Parent parent = new Parent();
+        OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
-        parent.setName("parent 1");
+        parent.setName("parent name");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
-            Child child = new Child();
+            OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
             child.setName("child " + i);
             child.setParent(parent);
@@ -32,19 +32,19 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
 
     @Before
     public void before() {
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
     }
 
     @Test
     public void test() {
 
-        Parent existing1 = em.find(Parent.class, model.getId());
+        OTOMStrictParent existing1 = em.find(OTOMStrictParent.class, parent.getId());
 
         {
             existing1.setName("new name");
 
-            Child child = new Child();
+            OTOMStrictChild child = new OTOMStrictChild();
             child.setId(4);
             child.setName("child 4");
             child.setParent(existing1);
@@ -56,7 +56,7 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
         em.merge(existing1);
         flushAndClear();
 
-        Parent existing2 = em.find(Parent.class, model.getId());
+        OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, parent.getId());
         ReflectionAssert.assertReflectionEquals(existing1, existing2, ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(existing1.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 

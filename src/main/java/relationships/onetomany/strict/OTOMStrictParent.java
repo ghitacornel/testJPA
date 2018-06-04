@@ -4,8 +4,8 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity
-@NamedQuery(name = "Parent.findWithChildren", query = "select p from Parent p join fetch p.children where p.id = ?1")
-public class Parent {
+@NamedQuery(name = "OTOMStrictParent.findWithChildren", query = "select p from OTOMStrictParent p join fetch p.children where p.id = ?1")
+public class OTOMStrictParent {
 
     @Id
     private Integer id;
@@ -14,7 +14,7 @@ public class Parent {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
-    private List<Child> children;
+    private List<OTOMStrictChild> children;
 
     public Integer getId() {
         return id;
@@ -32,11 +32,11 @@ public class Parent {
         this.name = name;
     }
 
-    public List<Child> getChildren() {
+    public List<OTOMStrictChild> getChildren() {
         return children;
     }
 
-    public void setChildren(List<Child> children) {
+    public void setChildren(List<OTOMStrictChild> children) {
         this.children = children;
     }
 }
