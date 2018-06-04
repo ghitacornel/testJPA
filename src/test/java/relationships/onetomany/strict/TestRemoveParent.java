@@ -6,7 +6,7 @@ import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
-public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
+public class TestRemoveParent extends TransactionalSetup {
 
     private OTOMStrictParent parent = buildModel();
 
@@ -37,7 +37,7 @@ public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testRemoveParentremovesAllOrphanedChildren() {
 
         // remove parent
         em.remove(em.find(OTOMStrictParent.class, parent.getId()));

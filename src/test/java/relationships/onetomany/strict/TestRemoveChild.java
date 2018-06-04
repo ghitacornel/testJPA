@@ -9,7 +9,7 @@ import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
-public class TestRemoveChildFromParentChildrenCollection extends TransactionalSetup {
+public class TestRemoveChild extends TransactionalSetup {
 
     private OTOMStrictParent model = buildModel();
 
@@ -38,16 +38,15 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
     }
 
     @Test
-    public void testRemoveDirectlyFromCollection() {
+    public void testRemoveChildByRemovingDirectlyFromItsParentChildrenList() {
 
-        OTOMStrictParent existing1 = em.find(OTOMStrictParent.class, model.getId());
-        existing1.getChildren().remove(1);
+        em.find(OTOMStrictParent.class, model.getId()).getChildren().remove(1);
         flushAndClear();
 
-        OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, model.getId());
+        OTOMStrictParent existingParent = em.find(OTOMStrictParent.class, model.getId());
         OTOMStrictParent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
-        ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(expectedParent, existingParent, ReflectionComparatorMode.LENIENT_ORDER);
 
         // child is removed since it is now an orphan
         OTOMStrictChild child = em.find(OTOMStrictChild.class, buildModel().getChildren().get(1).getId());
@@ -55,18 +54,11 @@ public class TestRemoveChildFromParentChildrenCollection extends TransactionalSe
 
     }
 
-    @Test
-    public void testRemoveFromEMAndThenFromCollection() {
+    @Test(expected = javax.persistence.PersistenceException.class)
+    public void testRemoveChildByMakingItOrphanDoesNotWorkDueToConstraint() {
 
-        OTOMStrictParent existing1 = em.find(OTOMStrictParent.class, model.getId());
-        em.remove(existing1.getChildren().get(1));
-        existing1.getChildren().remove(1);//without this it won't work
+        em.find(OTOMStrictParent.class, model.getId()).getChildren().get(1).setParent(null);
         flushAndClear();
-
-        OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, model.getId());
-        OTOMStrictParent expectedParent = buildModel();
-        expectedParent.getChildren().remove(1);
-        ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 }
