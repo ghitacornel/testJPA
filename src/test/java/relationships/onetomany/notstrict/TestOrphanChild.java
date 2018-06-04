@@ -40,16 +40,14 @@ public class TestOrphanChild extends TransactionalSetup {
     @Test
     public void testMakeOrphanChildBySettingParentToNull() {
 
-        OTOMNotStrictParent existingParent = em.find(OTOMNotStrictParent.class, parent.getId());
-        OTOMNotStrictChild toRemoveChild = existingParent.getChildren().get(1);
+        OTOMNotStrictChild toRemoveChild = em.find(OTOMNotStrictParent.class, parent.getId()).getChildren().get(1);
         toRemoveChild.setParent(null);// mark child as orphan
         flushAndClear();
 
         // test parent and other children are unaffected
-        OTOMNotStrictParent existing2 = em.find(OTOMNotStrictParent.class, parent.getId());
         OTOMNotStrictParent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
-        ReflectionAssert.assertReflectionEquals(expectedParent.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMNotStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
         // test child is now orphan
         OTOMNotStrictChild child = em.find(OTOMNotStrictChild.class, toRemoveChild.getId());
