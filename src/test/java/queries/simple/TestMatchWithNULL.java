@@ -37,9 +37,8 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckWithIsNotNull_OK() {
+    public void testCheckWithIsNotNull() {
 
-        // CORRECT way to check for NULL
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NOT NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
@@ -48,9 +47,8 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckWithIsNull_OK() {
+    public void testCheckWithIsNull() {
 
-        // CORRECT way to check for NULL
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(1));
@@ -59,7 +57,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckWithNull_BAD() {
+    public void testCheckForNull() {
 
         // INCORRECT way to check for NULL
         // sometimes a simple check for null on server side can avoid an SQL query on database side
