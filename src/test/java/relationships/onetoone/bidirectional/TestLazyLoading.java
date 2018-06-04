@@ -33,7 +33,7 @@ public class TestLazyLoading extends TransactionalSetup {
     }
 
     @Test
-    public void testLazyDoesNotWork() {
+    public void testLazyLoadingDoesNotWork() {
 
         A a = em.find(A.class, model.getId());
         flushAndClear();
@@ -45,7 +45,7 @@ public class TestLazyLoading extends TransactionalSetup {
     }
 
     @Test
-    public void testLazyWorks() {
+    public void testLazyLoadingWorks() {
 
         B b = em.find(B.class, 2);
         flushAndClear();
