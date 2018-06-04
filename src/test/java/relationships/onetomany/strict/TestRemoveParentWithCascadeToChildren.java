@@ -1,23 +1,21 @@
-package relationships.onetomany.list;
+package relationships.onetomany.strict;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
-public class TestLoadParentAndChildrenInOneNamedQuery extends
-        TransactionalSetup {
+public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
 
-    private Parent parent = buildModel();
+    private Parent model = buildModel();
 
     private Parent buildModel() {
 
         Parent parent = new Parent();
         parent.setId(1);
-        parent.setName("parent name");
+        parent.setName("parent 1");
         parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
@@ -33,13 +31,20 @@ public class TestLoadParentAndChildrenInOneNamedQuery extends
 
     @Before
     public void before() {
-        em.persist(parent);
+        em.persist(model);
         flushAndClear();
     }
 
     @Test
     public void test() {
-        Parent existing = em.createNamedQuery("Parent.findWithChildren", Parent.class).setParameter(1, parent.getId()).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
+
+        em.remove(em.find(Parent.class, model.getId()));
+        flushAndClear();
+
+        Assert.assertNull(em.find(Parent.class, model.getId()));
+        for (Child child : model.getChildren()) {
+            Assert.assertNull(em.find(Child.class, child.getId()));
+        }
+
     }
 }

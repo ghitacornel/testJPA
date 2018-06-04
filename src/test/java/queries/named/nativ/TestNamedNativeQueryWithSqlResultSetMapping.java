@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.onetomany.list.Child;
-import relationships.onetomany.list.Parent;
+import relationships.onetomany.strict.Child;
+import relationships.onetomany.strict.Parent;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;

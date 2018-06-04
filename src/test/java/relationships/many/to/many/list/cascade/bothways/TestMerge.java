@@ -26,7 +26,7 @@ public class TestMerge extends TransactionalSetup {
         n.getListWithMs().add(m);
         m.getListWithNs().add(n);
 
-        {// this is tested altogether via list reflections
+        {// this is tested altogether via strict reflections
             nUnaffected = new CascadeBothWaysN();
             nUnaffected.setId(111);
             nUnaffected.setName("n 1 name");

@@ -1,4 +1,4 @@
-package relationships.onetomany.list;
+package relationships.onetomany.strict;
 
 import org.junit.Assert;
 import org.junit.Before;

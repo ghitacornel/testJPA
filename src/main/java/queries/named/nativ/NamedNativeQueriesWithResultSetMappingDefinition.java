@@ -1,7 +1,7 @@
 package queries.named.nativ;
 
-import relationships.onetomany.list.Child;
-import relationships.onetomany.list.Parent;
+import relationships.onetomany.strict.Child;
+import relationships.onetomany.strict.Parent;
 
 import javax.persistence.*;
 
