@@ -44,7 +44,7 @@ public class TestCOUNT extends TransactionalSetup {
 
     @Test
     public void testCountAll() {
-        Long count = em.createQuery("select count(e) from SQE e", Long.class).getSingleResult();
+        Long count = em.createQuery("select count(*) from SQE", Long.class).getSingleResult();
         Assert.assertEquals(buildModel().size(), count.longValue());
     }
 
