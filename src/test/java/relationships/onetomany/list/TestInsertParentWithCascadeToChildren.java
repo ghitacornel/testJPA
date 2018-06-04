@@ -44,7 +44,6 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
         Parent existing = em.find(Parent.class, parent.getId());
         ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(parent.getChildren(), existing.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 }
