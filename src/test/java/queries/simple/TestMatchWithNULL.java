@@ -66,4 +66,14 @@ public class TestMatchWithNULL extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testCheckForNotNull() {
+
+        // INCORRECT way to check for NULL
+        // sometimes a simple check for null on server side can avoid an SQL query on database side
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value <> :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
+        Assert.assertTrue(list.isEmpty());
+
+    }
+
 }
