@@ -9,3 +9,4 @@ projections over joins on different columns with aggregated stuff and order
 better tests with date and time comparisons
 test with fetch
 
+test 1 to many with cascade not strict
