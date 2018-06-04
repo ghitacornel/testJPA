@@ -55,8 +55,10 @@
         <class>relationships.one.to.many.bidirectional.list.Parent</class>
         <class>relationships.one.to.many.bidirectional.map.ChildMap</class>
         <class>relationships.one.to.many.bidirectional.map.ParentMap</class>
-        <class>relationships.one.to.many.strict.ChildStrict</class>
-        <class>relationships.one.to.many.strict.ParentStrict</class>
+        <class>relationships.manytoone.notstrict.MTOONotStrictChild</class>
+        <class>relationships.manytoone.notstrict.MTOONotStrictParent</class>
+        <class>relationships.manytoone.strict.MTOOStrictChild</class>
+        <class>relationships.manytoone.strict.MTOOStrictParent</class>
         <class>relationships.one.to.one.bidirectional.A</class>
         <class>relationships.one.to.one.bidirectional.B</class>
 

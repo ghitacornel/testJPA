@@ -1,4 +1,4 @@
-package relationships.one.to.many.strict;
+package relationships.manytoone.strict;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,17 +10,17 @@ import java.util.List;
 
 public class TestCRUD extends TransactionalSetup {
 
-    private ParentStrict parentStrict1 = new ParentStrict();
-    private ParentStrict parentStrict2 = new ParentStrict();
+    private MTOOStrictParent parentStrict1 = new MTOOStrictParent();
+    private MTOOStrictParent parentStrict2 = new MTOOStrictParent();
 
     @Before
     public void before() {
         parentStrict1.setId(1);
-        parentStrict1.setName("parent strict");
+        parentStrict1.setName("parent strict 1");
         persist(parentStrict1);
 
         parentStrict2.setId(2);
-        parentStrict2.setName("parent strict");
+        parentStrict2.setName("parent strict 2");
         persist(parentStrict2);
 
         flushAndClear();
@@ -30,11 +30,11 @@ public class TestCRUD extends TransactionalSetup {
     public void testCRUD() {
 
         // assert empty
-        Assert.assertTrue(em.createQuery("select t from ChildStrict t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from MTOOStrictChild t").getResultList().isEmpty());
         flushAndClear();
 
         // insert
-        ChildStrict childStrict = new ChildStrict();
+        MTOOStrictChild childStrict = new MTOOStrictChild();
         childStrict.setId(1);
         childStrict.setName("child name");
         childStrict.setParent(parentStrict1);
@@ -42,37 +42,37 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // test insert
-        List<ChildStrict> list = em.createQuery("select t from ChildStrict t", ChildStrict.class).getResultList();
+        List<MTOOStrictChild> list = em.createQuery("select t from MTOOStrictChild t", MTOOStrictChild.class).getResultList();
         Assert.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(childStrict, list.get(0));
         flushAndClear();
 
         // update
-        ChildStrict existing = em.find(ChildStrict.class, 1);
-        existing.setName("new child name");
-        existing.setParent(parentStrict2);
+        MTOOStrictChild existing = em.find(MTOOStrictChild.class, 1);
+        existing.setName("new child name");// update name
+        existing.setParent(parentStrict2);// update parent
         em.merge(existing);
         flushAndClear();
 
         // test update
-        existing = em.find(ChildStrict.class, 1);
+        existing = em.find(MTOOStrictChild.class, 1);
         Assert.assertEquals("new child name", existing.getName());
         ReflectionAssert.assertReflectionEquals(parentStrict2, existing.getParent());
         flushAndClear();
 
         // remove
-        existing = em.find(ChildStrict.class, 1);
+        existing = em.find(MTOOStrictChild.class, 1);
         Assert.assertNotNull(existing);
         em.remove(existing);
         flushAndClear();
 
         // test remove
-        Assert.assertTrue(em.createQuery("select t from ChildStrict t").getResultList().isEmpty());
+        Assert.assertTrue(em.createQuery("select t from MTOOStrictChild t").getResultList().isEmpty());
 
         // this test verifies cascade is not present
         // cascade removal => test fails
-        ReflectionAssert.assertReflectionEquals(parentStrict1, em.find(ParentStrict.class, 1));
-        ReflectionAssert.assertReflectionEquals(parentStrict2, em.find(ParentStrict.class, 2));
+        ReflectionAssert.assertReflectionEquals(parentStrict1, em.find(MTOOStrictParent.class, 1));
+        ReflectionAssert.assertReflectionEquals(parentStrict2, em.find(MTOOStrictParent.class, 2));
 
     }
 }

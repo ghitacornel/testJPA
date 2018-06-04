@@ -1,18 +1,16 @@
-package relationships.one.to.many.strict;
+package relationships.manytoone.notstrict;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * this is a strict parent<br>
- * a strict parent is an independent {@link Entity}<br>
- * a strict parent doesn't know about his children
- *
- * @author Cornel
+ * This class represents the ONE part of a MANY TO ONE relationship<br>
+ * a strict parent is an independent entity<br>
+ * a strict parent doesn't know about its children
  */
 @Entity
-public class ParentStrict {
+public class MTOONotStrictParent {
 
     @Id
     private Integer id;
