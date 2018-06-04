@@ -11,7 +11,7 @@ public class Child {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     private Parent parent;
 
     public Integer getId() {
