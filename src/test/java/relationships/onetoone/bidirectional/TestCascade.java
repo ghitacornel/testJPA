@@ -6,7 +6,7 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-public class TestInsertAWithCascadeToB extends TransactionalSetup {
+public class TestCascade extends TransactionalSetup {
 
     private A model = buildModel();
 
@@ -32,14 +32,32 @@ public class TestInsertAWithCascadeToB extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testPersist() {
+
+        // persist
+        em.persist(model);
+        flushAndClear();
+
+        // verify cascade persist
+        A existing = em.find(A.class, model.getId());
+        ReflectionAssert.assertReflectionEquals(model, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(model.getB(), existing.getB());
+
+    }
+
+    @Test
+    public void testRemove() {
 
         em.persist(model);
         flushAndClear();
 
-        A existing = em.find(A.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(model, existing, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getB(), existing.getB());
+        // remove
+        em.remove(em.find(A.class, model.getId()));
+        flushAndClear();
+
+        // verify cascade remove
+        verifyCorrespondingTableIsEmpty(A.class);
+        verifyCorrespondingTableIsEmpty(B.class);
 
     }
 }
