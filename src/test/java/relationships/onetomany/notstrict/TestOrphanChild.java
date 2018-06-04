@@ -58,9 +58,7 @@ public class TestOrphanChild extends TransactionalSetup {
     @Test
     public void testMakeOrphanChildByRemovingFromItsParentChildrenListDoesNotWork() {
 
-        OTOMNotStrictParent existingParent = em.find(OTOMNotStrictParent.class, parent.getId());
-        OTOMNotStrictChild toRemoveChild = existingParent.getChildren().get(1);
-        existingParent.getChildren().remove(toRemoveChild);// remove child from its parent children list
+        em.find(OTOMNotStrictParent.class, parent.getId()).getChildren().remove(1);// remove child from its parent children list
         flushAndClear();
 
         // test nothing happened
