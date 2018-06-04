@@ -37,7 +37,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckWithIsNotNull() {
+    public void testIsNotNull() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NOT NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
@@ -47,7 +47,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckWithIsNull() {
+    public void testIsNull() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
@@ -57,7 +57,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckForNull() {
+    public void testWrongCheckForNull() {
 
         // INCORRECT way to check for NULL
         // sometimes a simple check for null on server side can avoid an SQL query on database side
@@ -67,9 +67,9 @@ public class TestMatchWithNULL extends TransactionalSetup {
     }
 
     @Test
-    public void testCheckForNotNull() {
+    public void testWrongCheckForNotNull() {
 
-        // INCORRECT way to check for NULL
+        // INCORRECT way to check for NOT NULL
         // sometimes a simple check for null on server side can avoid an SQL query on database side
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value <> :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
         Assert.assertTrue(list.isEmpty());
