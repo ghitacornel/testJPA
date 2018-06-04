@@ -50,7 +50,7 @@ public class TestRemoveParentWithNoCascadeToChildren extends TransactionalSetup 
     }
 
     @Test
-    public void testRemoveParentKeepsTheNowOrphanedChildren() {
+    public void testRemoveParentRequiresMarkingItsChildrenAsOrphans() {
 
         OTOMNotStrictParent existing = em.find(OTOMNotStrictParent.class, parent.getId());
 
@@ -63,8 +63,10 @@ public class TestRemoveParentWithNoCascadeToChildren extends TransactionalSetup 
         em.remove(em.find(OTOMNotStrictParent.class, parent.getId()));
         flushAndClear();
 
-        // verify parent is removed but children are orphaned
+        // verify parent is removed
         Assert.assertNull(em.find(OTOMNotStrictParent.class, this.parent.getId()));
+
+        // verify parent children are orphaned
         {// adjust model to match expectations
             for (OTOMNotStrictChild child : parent.getChildren()) {
                 child.setParent(null);
