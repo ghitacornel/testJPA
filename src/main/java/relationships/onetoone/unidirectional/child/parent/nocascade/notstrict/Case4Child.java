@@ -1,9 +1,9 @@
-package relationships.onetoone.unidirectional.child.parent.cascade.case2;
+package relationships.onetoone.unidirectional.child.parent.nocascade.notstrict;
 
 import javax.persistence.*;
 
 @Entity
-public class Case2Child {
+public class Case4Child {
 
     @Id
     private Integer id;
@@ -11,8 +11,8 @@ public class Case2Child {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
-    private Case2Parent parent;
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    private Case4Parent parent;
 
     public Integer getId() {
         return id;
@@ -30,11 +30,11 @@ public class Case2Child {
         this.name = name;
     }
 
-    public Case2Parent getParent() {
+    public Case4Parent getParent() {
         return parent;
     }
 
-    public void setParent(Case2Parent parent) {
+    public void setParent(Case4Parent parent) {
         this.parent = parent;
     }
 }

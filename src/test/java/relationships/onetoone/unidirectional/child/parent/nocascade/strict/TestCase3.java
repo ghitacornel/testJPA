@@ -1,4 +1,4 @@
-package relationships.onetoone.unidirectional.child.parent.nocascade.case3;
+package relationships.onetoone.unidirectional.child.parent.nocascade.strict;
 
 import org.junit.Assert;
 import org.junit.Test;

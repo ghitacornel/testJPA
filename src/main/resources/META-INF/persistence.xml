@@ -28,14 +28,14 @@
         <class>relationships.embedded.EmbeddableBean</class>
         <class>relationships.embedded.EntityWithEmbeddable</class>
 
-        <class>relationships.onetoone.unidirectional.child.parent.nocascade.case3.Case3Parent</class>
-        <class>relationships.onetoone.unidirectional.child.parent.nocascade.case3.Case3Child</class>
-        <class>relationships.onetoone.unidirectional.child.parent.nocascade.case4.Case4Parent</class>
-        <class>relationships.onetoone.unidirectional.child.parent.nocascade.case4.Case4Child</class>
-        <class>relationships.onetoone.unidirectional.child.parent.cascade.case1.Case1Parent</class>
-        <class>relationships.onetoone.unidirectional.child.parent.cascade.case1.Case1Child</class>
-        <class>relationships.onetoone.unidirectional.child.parent.cascade.case2.Case2Parent</class>
-        <class>relationships.onetoone.unidirectional.child.parent.cascade.case2.Case2Child</class>
+        <class>relationships.onetoone.unidirectional.child.parent.nocascade.strict.Case3Parent</class>
+        <class>relationships.onetoone.unidirectional.child.parent.nocascade.strict.Case3Child</class>
+        <class>relationships.onetoone.unidirectional.child.parent.nocascade.notstrict.Case4Parent</class>
+        <class>relationships.onetoone.unidirectional.child.parent.nocascade.notstrict.Case4Child</class>
+        <class>relationships.onetoone.unidirectional.child.parent.cascade.strict.Case1Parent</class>
+        <class>relationships.onetoone.unidirectional.child.parent.cascade.strict.Case1Child</class>
+        <class>relationships.onetoone.unidirectional.child.parent.cascade.notstrict.Case2Parent</class>
+        <class>relationships.onetoone.unidirectional.child.parent.cascade.notstrict.Case2Child</class>
         <class>relationships.onetoone.bidirectional.A</class>
         <class>relationships.onetoone.bidirectional.B</class>
 
