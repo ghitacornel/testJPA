@@ -9,7 +9,7 @@ import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
-public class TestRemoveParentWithNoCascadeToChildren extends TransactionalSetup {
+public class TestRemoveParent extends TransactionalSetup {
 
     private OTOMNotStrictParent parent = buildModel();
 
