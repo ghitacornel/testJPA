@@ -62,7 +62,7 @@ public class TestCascade extends TransactionalSetup {
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testCascadeRemoveChildLeadsToRemovalOfParentRefrencedByAnotherChildAlso() {
+    public void testCascadeRemoveChildLeadsToRemovalOfParentReferencedByAnotherChildAlso() {
 
         MTOOCascadeParent parent = new MTOOCascadeParent();
         parent.setId(1);
