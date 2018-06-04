@@ -1,4 +1,4 @@
-package relationships.one.to.many.bidirectional.joinonnopk;
+package relationships.onetomany.joinonnopk;
 
 import javax.persistence.*;
 

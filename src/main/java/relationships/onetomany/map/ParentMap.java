@@ -1,4 +1,4 @@
-package relationships.one.to.many.bidirectional.map;
+package relationships.onetomany.map;
 
 import javax.persistence.*;
 import java.util.Map;

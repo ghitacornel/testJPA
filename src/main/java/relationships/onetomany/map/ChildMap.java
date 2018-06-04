@@ -1,24 +1,24 @@
-package relationships.one.to.many.bidirectional.list;
+package relationships.onetomany.map;
 
 import javax.persistence.*;
 
 @Entity
-public class Child {
+public class ChildMap {
 
     @Id
-    private Integer id;
+    private Long id;
 
     @Column(nullable = false)
     private String name;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    private Parent parent;
+    private ParentMap parent;
 
-    public Integer getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -30,11 +30,11 @@ public class Child {
         this.name = name;
     }
 
-    public Parent getParent() {
+    public ParentMap getParent() {
         return parent;
     }
 
-    public void setParent(Parent parent) {
+    public void setParent(ParentMap parent) {
         this.parent = parent;
     }
 

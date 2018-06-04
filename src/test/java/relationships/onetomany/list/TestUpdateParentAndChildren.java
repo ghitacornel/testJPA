@@ -1,4 +1,4 @@
-package relationships.one.to.many.bidirectional.list;
+package relationships.onetomany.list;
 
 import org.junit.Before;
 import org.junit.Test;

@@ -1,4 +1,4 @@
-package relationships.one.to.many.bidirectional.map;
+package relationships.onetomany.map;
 
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package relationships.one.to.many.bidirectional.joinonnopk;
+package relationships.onetomany.joinonnopk;
 
 import org.junit.Assert;
 import org.junit.Before;

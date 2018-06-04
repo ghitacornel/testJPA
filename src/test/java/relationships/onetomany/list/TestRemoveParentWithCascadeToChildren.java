@@ -1,15 +1,13 @@
-package relationships.one.to.many.bidirectional.list;
+package relationships.onetomany.list;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
-public class TestLoadParentAndChildrenInOneNamedQuery extends
-        TransactionalSetup {
+public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
 
     private Parent model = buildModel();
 
@@ -40,10 +38,13 @@ public class TestLoadParentAndChildrenInOneNamedQuery extends
     @Test
     public void test() {
 
-        Parent parent = em.createNamedQuery("Parent.findWithChildren", Parent.class).setParameter(1, 1).getSingleResult();
+        em.remove(em.find(Parent.class, model.getId()));
+        flushAndClear();
 
-        ReflectionAssert.assertReflectionEquals(model, parent, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), parent.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+        Assert.assertNull(em.find(Parent.class, model.getId()));
+        for (Child child : model.getChildren()) {
+            Assert.assertNull(em.find(Child.class, child.getId()));
+        }
 
     }
 }

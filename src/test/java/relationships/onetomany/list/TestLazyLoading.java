@@ -1,13 +1,12 @@
-package relationships.one.to.many.bidirectional.list;
+package relationships.onetomany.list;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
 
-public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
+public class TestLazyLoading extends TransactionalSetup {
 
     private Parent model = buildModel();
 
@@ -35,16 +34,22 @@ public class TestRemoveParentWithCascadeToChildren extends TransactionalSetup {
         flushAndClear();
     }
 
-    @Test
-    public void test() {
+    @Test(expected = Exception.class)
+    public void testLazy() {
 
-        em.remove(em.find(Parent.class, model.getId()));
+        Parent parent = em.find(Parent.class, model.getId());
+
+        // specified explicitly here (optional if flush and clear is used)
+
+        em.detach(parent);
         flushAndClear();
 
-        Assert.assertNull(em.find(Parent.class, model.getId()));
-        for (Child child : model.getChildren()) {
-            Assert.assertNull(em.find(Child.class, child.getId()));
-        }
+        // detached entity => proxy problem => lazy fails
+        parent.getChildren().size();
+
+        // no problem will occur with eager loading
+        // XXX note that defaults for eager/lazy are not always those you expect
 
     }
+
 }

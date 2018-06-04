@@ -5,8 +5,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.one.to.many.bidirectional.list.Child;
-import relationships.one.to.many.bidirectional.list.Parent;
+import relationships.onetomany.list.Child;
+import relationships.onetomany.list.Parent;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
