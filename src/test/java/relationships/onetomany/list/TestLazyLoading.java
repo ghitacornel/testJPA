@@ -1,5 +1,6 @@
 package relationships.onetomany.list;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import setup.TransactionalSetup;
@@ -8,7 +9,7 @@ import java.util.ArrayList;
 
 public class TestLazyLoading extends TransactionalSetup {
 
-    private Parent model = buildModel();
+    private Parent parent = buildModel();
 
     private Parent buildModel() {
 
@@ -30,26 +31,32 @@ public class TestLazyLoading extends TransactionalSetup {
 
     @Before
     public void before() {
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
     }
 
     @Test(expected = Exception.class)
-    public void testLazy() {
+    public void testLazyLoadingFailOnNotLoadedRelationshipsOfADetachedEntity() {
 
-        Parent parent = em.find(Parent.class, model.getId());
-
-        // specified explicitly here (optional if flush and clear is used)
-
-        em.detach(parent);
+        Parent existing = em.find(Parent.class, parent.getId());
         flushAndClear();
 
-        // detached entity => proxy problem => lazy fails
-        parent.getChildren().size();
+        // proxy activated over a detached entity => proxy problem => lazy fails
+        existing.getChildren().size();
 
         // no problem will occur with eager loading
         // XXX note that defaults for eager/lazy are not always those you expect
 
     }
 
+    @Test
+    public void testLazyLoading() {
+
+        Parent existing = em.find(Parent.class, parent.getId());
+        existing.getChildren().size();// force the proxy to fetch the data from the database
+        flushAndClear();
+
+        Assert.assertEquals(3, existing.getChildren().size());
+
+    }
 }
