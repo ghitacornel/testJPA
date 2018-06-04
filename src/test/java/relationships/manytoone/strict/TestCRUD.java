@@ -73,25 +73,4 @@ public class TestCRUD extends TransactionalSetup {
 
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
-    public void testSetParentToNull() {
-
-        // assert empty
-        Assert.assertTrue(em.createQuery("select t from MTOOStrictChild t").getResultList().isEmpty());
-        flushAndClear();
-
-        // insert
-        MTOOStrictChild child = new MTOOStrictChild();
-        child.setId(1);
-        child.setName("child name");
-        child.setParent(parent1);
-        em.persist(child);
-        flushAndClear();
-
-        // update and set parent to null
-        MTOOStrictChild existing = em.find(MTOOStrictChild.class, 1);
-        existing.setParent(null);
-        flushAndClear();
-
-    }
 }
