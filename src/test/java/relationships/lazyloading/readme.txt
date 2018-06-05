@@ -1,0 +1,1 @@
+relationships encapsulated by collections can always be loaded lazily
