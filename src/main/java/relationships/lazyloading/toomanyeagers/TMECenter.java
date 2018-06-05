@@ -22,6 +22,9 @@ public class TMECenter {
     @OneToMany(fetch = FetchType.EAGER)
     private List<TMELink3> links3 = new ArrayList<>();
 
+    // keep this as LAZY
+    // marking it as EAGER will fail the tests
+    // check the reported errors when using EAGER marker
     @OneToMany(fetch = FetchType.LAZY)
     private List<TMELink4> links4 = new ArrayList<>();
 
