@@ -33,6 +33,13 @@ public class TestCOUNT extends TransactionalSetup {
             entity.setValue(3);
             list.add(entity);
         }
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(4);
+            entity.setName("name 4");
+            entity.setValue(1);
+            list.add(entity);
+        }
         return list;
     }
 
@@ -52,5 +59,11 @@ public class TestCOUNT extends TransactionalSetup {
     public void testCountSome() {
         Long count = em.createQuery("select count(e) from SQE e where e.value = 2 or e.value = 3", Long.class).getSingleResult();
         Assert.assertEquals(2, count.longValue());
+    }
+
+    @Test
+    public void testCountDistinct() {
+        Long count = em.createQuery("select count(distinct e.value) from SQE e", Long.class).getSingleResult();
+        Assert.assertEquals(3, count.longValue());
     }
 }
