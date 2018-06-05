@@ -11,9 +11,8 @@ public class JONPKChild {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne
-    @JoinColumn(name = "parent_name", referencedColumnName = "id")
-    // TODO change the reference column name to name and see it failing
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "parent_name", referencedColumnName = "name")
     private JONPKParent parent;
 
     public Integer getId() {
