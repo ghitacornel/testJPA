@@ -7,7 +7,6 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.HashMap;
 import java.util.List;
 
 public class TestSelectAll extends TransactionalSetup {
@@ -19,7 +18,6 @@ public class TestSelectAll extends TransactionalSetup {
         ParentMap parent = new ParentMap();
         parent.setId(1L);
         parent.setName("parent 1");
-        parent.setChildren(new HashMap<>());
 
         for (long i = 1; i <= 3; i++) {
             ChildMap child = new ChildMap();

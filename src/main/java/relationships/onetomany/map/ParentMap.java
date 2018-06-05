@@ -1,6 +1,7 @@
 package relationships.onetomany.map;
 
 import javax.persistence.*;
+import java.util.HashMap;
 import java.util.Map;
 
 @Entity
@@ -14,7 +15,7 @@ public class ParentMap {
 
     @OneToMany(mappedBy = "parent")
     @MapKey(name = "id")
-    private Map<Long, ChildMap> children;
+    final private Map<Long, ChildMap> children = new HashMap<>();
 
     public Long getId() {
         return id;
@@ -34,10 +35,6 @@ public class ParentMap {
 
     public Map<Long, ChildMap> getChildren() {
         return children;
-    }
-
-    public void setChildren(Map<Long, ChildMap> children) {
-        this.children = children;
     }
 
 }
