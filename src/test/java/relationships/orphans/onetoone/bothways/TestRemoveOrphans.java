@@ -35,6 +35,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         em.find(OTOOrphanBothWaysB.class, b.getId()).setA(null);
         flushAndClear();
 
+        // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
         Assert.assertNull(em.find(OTOOrphanBothWaysA.class, a.getId()));
         Assert.assertNull(em.find(OTOOrphanBothWaysB.class, b.getId()));
 
@@ -46,6 +47,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         em.find(OTOOrphanBothWaysA.class, a.getId()).setB(null);
         flushAndClear();
 
+        // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
         Assert.assertNull(em.find(OTOOrphanBothWaysA.class, a.getId()));
         Assert.assertNull(em.find(OTOOrphanBothWaysB.class, b.getId()));
 

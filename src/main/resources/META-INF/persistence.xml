@@ -81,8 +81,10 @@
 
         <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysA</class>
         <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysB</class>
-        <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideB</class>
         <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideA</class>
+        <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideB</class>
+        <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideA</class>
+        <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideB</class>
 
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
