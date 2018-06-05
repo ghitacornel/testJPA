@@ -66,6 +66,9 @@
         <class>relationships.manytoone.cascade.MTOOCascadeChild</class>
         <class>relationships.manytoone.cascade.MTOOCascadeParent</class>
 
+        <class>relationships.lazyloading.manytomany.MTOMLazyM</class>
+        <class>relationships.lazyloading.manytomany.MTOMLazyN</class>
+
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
         <class>entities.special.EntityWithPrimitives</class>
