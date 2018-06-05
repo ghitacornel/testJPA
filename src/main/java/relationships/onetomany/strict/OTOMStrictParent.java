@@ -20,7 +20,7 @@ public class OTOMStrictParent {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
-    private List<OTOMStrictChild> children = new ArrayList<>();
+    final private List<OTOMStrictChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
