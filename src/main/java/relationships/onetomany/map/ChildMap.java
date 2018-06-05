@@ -11,7 +11,7 @@ public class ChildMap {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private ParentMap parent;
 
     public Long getId() {
