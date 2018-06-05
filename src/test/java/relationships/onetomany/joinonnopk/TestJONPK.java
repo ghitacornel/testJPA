@@ -1,6 +1,5 @@
 package relationships.onetomany.joinonnopk;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -30,10 +29,8 @@ public class TestJONPK extends TransactionalSetup {
 
     @Before
     public void before() {
-        Assert.assertNull(em.find(JONPKParent.class, model.getId()));
-        for (JONPKChild child : model.getChildren()) {
-            Assert.assertNull(em.find(JONPKChild.class, child.getId()));
-        }
+        verifyCorrespondingTableIsEmpty(JONPKParent.class);
+        verifyCorrespondingTableIsEmpty(JONPKChild.class);
     }
 
     @Test
