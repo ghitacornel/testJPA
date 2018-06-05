@@ -34,7 +34,7 @@ public class TestSelectAll extends TransactionalSetup {
 
     @Before
     public void before() {
-        em.persist(parent);
+        persist(parent, parent.getChildren().values());
         flushAndClear();
     }
 
