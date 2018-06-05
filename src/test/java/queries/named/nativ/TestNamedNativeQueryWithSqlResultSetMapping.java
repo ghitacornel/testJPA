@@ -21,7 +21,6 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
         OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent " + parent.getId());
-        parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             OTOMStrictChild child = new OTOMStrictChild();

@@ -1,6 +1,7 @@
 package relationships.onetomany.strict;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class OTOMStrictParent {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
-    private List<OTOMStrictChild> children;
+    private List<OTOMStrictChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -41,7 +42,4 @@ public class OTOMStrictParent {
         return children;
     }
 
-    public void setChildren(List<OTOMStrictChild> children) {
-        this.children = children;
-    }
 }

@@ -7,8 +7,6 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-
 public class TestRemoveChild extends TransactionalSetup {
 
     private OTOMStrictParent model = buildModel();
@@ -18,7 +16,6 @@ public class TestRemoveChild extends TransactionalSetup {
         OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent 1");
-        parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             OTOMStrictChild child = new OTOMStrictChild();

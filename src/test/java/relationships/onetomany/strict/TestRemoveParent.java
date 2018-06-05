@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-
 public class TestRemoveParent extends TransactionalSetup {
 
     private OTOMStrictParent parent = buildModel();
@@ -15,7 +13,6 @@ public class TestRemoveParent extends TransactionalSetup {
         OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent name");
-        parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             OTOMStrictChild child = new OTOMStrictChild();

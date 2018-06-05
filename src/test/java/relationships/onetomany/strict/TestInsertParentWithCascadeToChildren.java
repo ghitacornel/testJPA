@@ -6,8 +6,6 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-
 public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
     private OTOMStrictParent parent = buildModel();
@@ -17,7 +15,6 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
         OTOMStrictParent parent = new OTOMStrictParent();
         parent.setId(1);
         parent.setName("parent name");
-        parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             OTOMStrictChild child = new OTOMStrictChild();
