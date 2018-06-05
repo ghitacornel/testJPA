@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TestCOUNT extends TransactionalSetup {
+public class TestDistinct extends TransactionalSetup {
 
     private static List<SimpleQueryEntity> buildModel() {
         List<SimpleQueryEntity> list = new ArrayList<>();
@@ -29,8 +29,15 @@ public class TestCOUNT extends TransactionalSetup {
         {
             SimpleQueryEntity entity = new SimpleQueryEntity();
             entity.setId(3);
-            entity.setName("name 3");
+            entity.setName("name 2");
             entity.setValue(3);
+            list.add(entity);
+        }
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(4);
+            entity.setName("name 3");
+            entity.setValue(1);
             list.add(entity);
         }
         return list;
@@ -43,15 +50,18 @@ public class TestCOUNT extends TransactionalSetup {
     }
 
     @Test
-    public void testCountAll() {
-        Long count = em.createQuery("select count(*) from SQE", Long.class).getSingleResult();
-        Assert.assertEquals(buildModel().size(), count.longValue());
+    public void testSelectDistinct() {
+        List<String> actual = em.createQuery("select distinct e.name from SQE e order by 1", String.class).getResultList();
+        List<String> expected = new ArrayList<>();
+        expected.add("name 1");
+        expected.add("name 2");
+        expected.add("name 3");
+        Assert.assertEquals(expected, actual);
     }
 
     @Test
-    public void testCountSome() {
-        Long count = em.createQuery("select count(e) from SQE e where e.value = 2 or e.value = 3", Long.class).getSingleResult();
-        Assert.assertEquals(2, count.longValue());
+    public void testSelectCountDistinct() {
+        Long count = em.createQuery("select count(distinct e.name) from SQE e", Long.class).getSingleResult();
+        Assert.assertEquals(3, count.longValue());
     }
-
 }
