@@ -1,10 +1,7 @@
-package relationships.many.to.many.ok;
+package relationships.many.to.many.bothowners;
 
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -50,9 +47,8 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
     }
 
-    @Ignore
-    @Test
-    public void testPersistAll() {
+    @Test(expected = PersistenceException.class)
+    public void testPersistAllAndFail() {
 
         // persist all
         em.persist(m);
@@ -61,9 +57,20 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(M.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(M.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+//        {
+//            List<Object[]> list = em.createNativeQuery("select * from MN_OK").getResultList();
+//            for (Object[] objects : list) {
+//                for (Object object : objects) {
+//                    System.out.print(object + " ");
+//                }
+//                System.out.println("\n");
+//            }
+//
+//        }
+//
+//        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+//        ReflectionAssert.assertReflectionEquals(n1, em.find(N.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+//        ReflectionAssert.assertReflectionEquals(n2, em.find(N.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 

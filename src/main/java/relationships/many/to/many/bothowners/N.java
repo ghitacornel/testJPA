@@ -1,4 +1,4 @@
-package relationships.many.to.many.ok;
+package relationships.many.to.many.bothowners;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -11,7 +11,8 @@ public class N {
     @JoinTable(
             name = "MN_OK",
             joinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")}
+            inverseJoinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
+            uniqueConstraints = {@UniqueConstraint(name = "UK_MN_OK", columnNames = {"id_m", "id_n"})}
     )
     private List<M> listWithMs = new ArrayList<>();
 

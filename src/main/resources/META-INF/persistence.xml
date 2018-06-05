@@ -47,8 +47,8 @@
         <class>relationships.many.to.many.list.cascade.oneside.CascadeOneSideN</class>
         <class>relationships.many.to.many.map.MMap</class>
         <class>relationships.many.to.many.map.NMap</class>
-        <class>relationships.many.to.many.ok.M</class>
-        <class>relationships.many.to.many.ok.N</class>
+        <class>relationships.many.to.many.bothowners.M</class>
+        <class>relationships.many.to.many.bothowners.N</class>
 
         <class>relationships.onetomany.notstrict.OTOMNotStrictChild</class>
         <class>relationships.onetomany.notstrict.OTOMNotStrictParent</class>
