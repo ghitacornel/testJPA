@@ -13,7 +13,7 @@ public class JONPKParent {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
     final private List<JONPKChild> children = new ArrayList<>();
 
     public Integer getId() {
