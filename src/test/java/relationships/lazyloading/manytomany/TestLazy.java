@@ -35,10 +35,11 @@ public class TestLazy extends TransactionalSetup {
     public void testLazyLoaded() {
 
         MTOMLazyM existingM = em.find(MTOMLazyM.class, m.getId());
+        flushAndClear();
+        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
+
         MTOMLazyN existingN = em.find(MTOMLazyN.class, n.getId());
         flushAndClear();
-
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
         Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingN.getListWithMs()));
 
     }
@@ -48,6 +49,8 @@ public class TestLazy extends TransactionalSetup {
 
         MTOMLazyM existingM = em.find(MTOMLazyM.class, m.getId());
         existingM.getListWithNs().size();
+        flushAndClear();
+
         MTOMLazyN existingN = em.find(MTOMLazyN.class, n.getId());
         existingN.getListWithMs().size();
         flushAndClear();
