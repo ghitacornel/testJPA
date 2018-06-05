@@ -1,6 +1,7 @@
 package relationships.onetomany.joinonnopk;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -13,7 +14,7 @@ public class JONPKParent {
     private String name;
 
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
-    private List<JONPKChild> children;
+    final private List<JONPKChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -35,7 +36,4 @@ public class JONPKParent {
         return children;
     }
 
-    public void setChildren(List<JONPKChild> children) {
-        this.children = children;
-    }
 }

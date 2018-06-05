@@ -7,8 +7,6 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-
 public class TestJONPK extends TransactionalSetup {
 
     private JONPKParent model = buildModel();
@@ -18,7 +16,6 @@ public class TestJONPK extends TransactionalSetup {
         JONPKParent parent = new JONPKParent();
         parent.setId(1);
         parent.setName("parent 1");
-        parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             JONPKChild child = new JONPKChild();
