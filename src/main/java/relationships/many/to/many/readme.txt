@@ -1,1 +1,1 @@
-in Many To Many relationship both entities are independent
+in MANY TO MANY relationship both entities are independent
