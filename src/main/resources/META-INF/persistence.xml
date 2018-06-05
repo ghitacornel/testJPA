@@ -73,6 +73,12 @@
         <class>relationships.lazyloading.onetoone.OTOOA</class>
         <class>relationships.lazyloading.onetoone.OTOOB</class>
 
+        <class>relationships.lazyloading.toomanyeagers.TMECenter</class>
+        <class>relationships.lazyloading.toomanyeagers.TMELink1</class>
+        <class>relationships.lazyloading.toomanyeagers.TMELink2</class>
+        <class>relationships.lazyloading.toomanyeagers.TMELink3</class>
+        <class>relationships.lazyloading.toomanyeagers.TMELink4</class>
+
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
         <class>entities.special.EntityWithPrimitives</class>
