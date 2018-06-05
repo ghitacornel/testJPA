@@ -1,6 +1,7 @@
 package relationships.onetomany.notstrict;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,7 +20,7 @@ public class OTOMNotStrictParent {
     private String name;
 
     @OneToMany(mappedBy = "parent")
-    private List<OTOMNotStrictChild> children;
+    final private List<OTOMNotStrictChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -41,7 +42,4 @@ public class OTOMNotStrictParent {
         return children;
     }
 
-    public void setChildren(List<OTOMNotStrictChild> children) {
-        this.children = children;
-    }
 }

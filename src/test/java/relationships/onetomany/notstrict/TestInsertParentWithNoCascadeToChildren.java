@@ -6,8 +6,6 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import java.util.ArrayList;
-
 public class TestInsertParentWithNoCascadeToChildren extends TransactionalSetup {
 
     private OTOMNotStrictParent parent = buildModel();
@@ -17,7 +15,6 @@ public class TestInsertParentWithNoCascadeToChildren extends TransactionalSetup 
         OTOMNotStrictParent parent = new OTOMNotStrictParent();
         parent.setId(1);
         parent.setName("parent name");
-        parent.setChildren(new ArrayList<>());
 
         for (int i = 1; i <= 3; i++) {
             OTOMNotStrictChild child = new OTOMNotStrictChild();
