@@ -70,6 +70,8 @@
         <class>relationships.lazyloading.manytomany.MTOMLazyN</class>
         <class>relationships.lazyloading.onetomany.OTOMLazyChild</class>
         <class>relationships.lazyloading.onetomany.OTOMLazyParent</class>
+        <class>relationships.lazyloading.onetoone.OTOOA</class>
+        <class>relationships.lazyloading.onetoone.OTOOB</class>
 
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
