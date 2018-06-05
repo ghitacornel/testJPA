@@ -79,6 +79,9 @@
         <class>relationships.lazyloading.toomanyeagers.TMELink3</class>
         <class>relationships.lazyloading.toomanyeagers.TMELink4</class>
 
+        <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysA</class>
+        <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysB</class>
+
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
         <class>entities.special.EntityWithPrimitives</class>
