@@ -36,7 +36,7 @@ public class TestRemoveChild extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChild() {
+    public void testRemoveChildFromParentListTriggersRemovalOfChild() {
 
         OTOMNotStrictChild toRemoveChild = em.find(OTOMNotStrictParent.class, parent.getId()).getChildren().get(1);
         em.remove(toRemoveChild);
@@ -50,6 +50,24 @@ public class TestRemoveChild extends TransactionalSetup {
 
         // test child is now removed
         Assert.assertNull(em.find(OTOMNotStrictChild.class, toRemoveChild.getId()));
+
+    }
+
+    @Test
+    public void testRemoveChild() {
+
+        em.remove(em.find(OTOMNotStrictChild.class, 1));
+        flushAndClear();
+
+        // test parent and other children are unaffected
+        OTOMNotStrictParent expectedParent = buildModel();
+        {// adjust model to reflect expected changes
+            expectedParent.getChildren().remove(0);
+        }
+        ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMNotStrictParent.class, expectedParent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+
+        // test child is now removed
+        Assert.assertNull(em.find(OTOMNotStrictChild.class, 1));
 
     }
 
