@@ -34,7 +34,7 @@ public class TestJONPK extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testSelectAll() {
 
         em.persist(model);
         flushAndClear();
