@@ -75,10 +75,10 @@ public class TestRemoveChild extends TransactionalSetup {
     public void testRemoveChildWhenParentAndSiblingsAreLoadedDoesNotAffectListOfSiblings() {
 
         OTOMNotStrictParent existingParent = em.find(OTOMNotStrictParent.class, 1);
-        Assert.assertEquals(3, existingParent.getChildren().size());
+        Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children
 
         em.remove(em.find(OTOMNotStrictChild.class, 1));
-        Assert.assertEquals(3, existingParent.getChildren().size());
+        Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children is the same
         flushAndClear();
 
         // test parent and other children are unaffected
