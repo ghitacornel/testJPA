@@ -1,11 +1,11 @@
-package relationships.onetoone.unidirectional.child.parent.cascade.notstrict;
+package relationships.onetoone.unidirectional.nocascade.strict;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Case2Parent {
+public class Case3Parent {
 
     @Id
     private Integer id;

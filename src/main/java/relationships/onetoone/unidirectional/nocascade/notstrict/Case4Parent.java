@@ -1,4 +1,4 @@
-package relationships.onetoone.unidirectional.child.parent.nocascade.notstrict;
+package relationships.onetoone.unidirectional.nocascade.notstrict;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,4 +1,4 @@
-package relationships.onetoone.unidirectional.child.parent.cascade.strict;
+package relationships.onetoone.unidirectional.cascade.strict;
 
 import javax.persistence.*;
 
