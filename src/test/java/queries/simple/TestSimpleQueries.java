@@ -95,19 +95,7 @@ public class TestSimpleQueries extends TransactionalSetup {
     }
 
     @Test
-    public void testSelectAllWithOrder() {
-
-        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by id desc", SimpleQueryEntity.class).getResultList();
-
-        // verify, order is important
-        List<SimpleQueryEntity> expected = buildModel();
-        Collections.reverse(expected);
-        ReflectionAssert.assertReflectionEquals(expected, actual);
-
-    }
-
-    @Test
-    public void testSelectAllWithOrderAndBoundaries() {
+    public void testSelectAllWithBoundaries() {
 
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by id desc", SimpleQueryEntity.class).setFirstResult(1).setMaxResults(3).getResultList();
 
