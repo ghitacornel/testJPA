@@ -1,4 +1,4 @@
-package relationships.manytomany.list.nocascade;
+package relationships.manytomany.nocascade;
 
 import org.junit.Assert;
 import org.junit.Before;

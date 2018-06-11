@@ -39,12 +39,12 @@
         <class>relationships.onetoone.bidirectional.A</class>
         <class>relationships.onetoone.bidirectional.B</class>
 
-        <class>relationships.manytomany.list.nocascade.NoCascadeM</class>
-        <class>relationships.manytomany.list.nocascade.NoCascadeN</class>
-        <class>relationships.manytomany.list.cascade.bothways.CascadeBothWaysM</class>
-        <class>relationships.manytomany.list.cascade.bothways.CascadeBothWaysN</class>
-        <class>relationships.manytomany.list.cascade.oneside.CascadeOneSideM</class>
-        <class>relationships.manytomany.list.cascade.oneside.CascadeOneSideN</class>
+        <class>relationships.manytomany.nocascade.NoCascadeM</class>
+        <class>relationships.manytomany.nocascade.NoCascadeN</class>
+        <class>relationships.manytomany.cascade.bothways.CascadeBothWaysM</class>
+        <class>relationships.manytomany.cascade.bothways.CascadeBothWaysN</class>
+        <class>relationships.manytomany.cascade.oneside.CascadeOneSideM</class>
+        <class>relationships.manytomany.cascade.oneside.CascadeOneSideN</class>
         <class>relationships.manytomany.map.MMap</class>
         <class>relationships.manytomany.map.NMap</class>
         <class>relationships.manytomany.bothowners.M</class>

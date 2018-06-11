@@ -1,11 +1,11 @@
-package relationships.manytomany.list.cascade.bothways;
+package relationships.manytomany.cascade.oneside;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class CascadeBothWaysN {
+public class CascadeOneSideM {
 
     @Id
     private Integer id;
@@ -13,8 +13,13 @@ public class CascadeBothWaysN {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "listWithNs", cascade = CascadeType.ALL)
-    private List<CascadeBothWaysM> listWithMs = new ArrayList<>();
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "CascadeOneSideMN",
+            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
+    )
+    private List<CascadeOneSideN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -32,13 +37,13 @@ public class CascadeBothWaysN {
         this.name = name;
     }
 
+    public List<CascadeOneSideN> getListWithNs() {
+        return listWithNs;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
-    }
-
-    public List<CascadeBothWaysM> getListWithMs() {
-        return listWithMs;
     }
 
 }

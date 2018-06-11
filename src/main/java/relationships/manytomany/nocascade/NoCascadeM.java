@@ -1,11 +1,11 @@
-package relationships.manytomany.list.cascade.oneside;
+package relationships.manytomany.nocascade;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class CascadeOneSideN {
+public class NoCascadeM {
 
     @Id
     private Integer id;
@@ -13,8 +13,13 @@ public class CascadeOneSideN {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "listWithNs")
-    private List<CascadeOneSideM> listWithMs = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "NoCascadeMN",
+            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
+    )
+    private List<NoCascadeN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -32,13 +37,13 @@ public class CascadeOneSideN {
         this.name = name;
     }
 
+    public List<NoCascadeN> getListWithNs() {
+        return listWithNs;
+    }
+
     @Override
     public String toString() {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
-    }
-
-    public List<CascadeOneSideM> getListWithMs() {
-        return listWithMs;
     }
 
 }

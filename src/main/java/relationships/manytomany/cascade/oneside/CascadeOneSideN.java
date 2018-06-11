@@ -1,14 +1,11 @@
-package relationships.manytomany.list.nocascade;
+package relationships.manytomany.cascade.oneside;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class NoCascadeN {
+public class CascadeOneSideN {
 
     @Id
     private Integer id;
@@ -17,7 +14,7 @@ public class NoCascadeN {
     private String name;
 
     @ManyToMany(mappedBy = "listWithNs")
-    private List<NoCascadeM> listWithMs = new ArrayList<>();
+    private List<CascadeOneSideM> listWithMs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -40,7 +37,7 @@ public class NoCascadeN {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
-    public List<NoCascadeM> getListWithMs() {
+    public List<CascadeOneSideM> getListWithMs() {
         return listWithMs;
     }
 

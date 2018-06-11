@@ -1,4 +1,4 @@
-package relationships.manytomany.list.cascade.bothways;
+package relationships.manytomany.cascade.bothways;
 
 
 import javax.persistence.*;

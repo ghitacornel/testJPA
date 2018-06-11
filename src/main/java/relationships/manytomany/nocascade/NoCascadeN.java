@@ -1,11 +1,14 @@
-package relationships.manytomany.list.nocascade;
+package relationships.manytomany.nocascade;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class NoCascadeM {
+public class NoCascadeN {
 
     @Id
     private Integer id;
@@ -13,13 +16,8 @@ public class NoCascadeM {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany
-    @JoinTable(
-            name = "NoCascadeMN",
-            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
-    )
-    private List<NoCascadeN> listWithNs = new ArrayList<>();
+    @ManyToMany(mappedBy = "listWithNs")
+    private List<NoCascadeM> listWithMs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -37,13 +35,13 @@ public class NoCascadeM {
         this.name = name;
     }
 
-    public List<NoCascadeN> getListWithNs() {
-        return listWithNs;
-    }
-
     @Override
     public String toString() {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
+    }
+
+    public List<NoCascadeM> getListWithMs() {
+        return listWithMs;
     }
 
 }
