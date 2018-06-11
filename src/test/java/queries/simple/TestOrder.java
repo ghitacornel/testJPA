@@ -12,7 +12,7 @@ import java.util.List;
 public class TestOrder extends TransactionalSetup {
 
     @Test
-    public void testSelectAllWithOrderByName() {
+    public void testSelectAllWithOrderByPropertyName() {
 
         List<SimpleQueryEntity> model = new ArrayList<>();
         {
@@ -47,7 +47,7 @@ public class TestOrder extends TransactionalSetup {
     }
 
     @Test
-    public void testSelectAllWithOrderByNumber() {
+    public void testSelectAllWithOrderByPropertyPosition() {
 
         List<SimpleQueryEntity> model = new ArrayList<>();
         {
@@ -149,6 +149,41 @@ public class TestOrder extends TransactionalSetup {
         flushAndClear();
 
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value nulls last", SimpleQueryEntity.class).getResultList();
+
+        Collections.reverse(model);
+        ReflectionAssert.assertReflectionEquals(model, actual);
+
+    }
+
+    @Test
+    public void testSelectAllWithMultipleOrders() {
+
+        List<SimpleQueryEntity> model = new ArrayList<>();
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(1);
+            entity.setName("name 1");
+            entity.setValue(6);
+            model.add(entity);
+        }
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(2);
+            entity.setName("name 2");
+            entity.setValue(5);
+            model.add(entity);
+        }
+        {
+            SimpleQueryEntity entity = new SimpleQueryEntity();
+            entity.setId(3);
+            entity.setName("name 2");
+            entity.setValue(4);
+            model.add(entity);
+        }
+        persist(model);
+        flushAndClear();
+
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by e.name desc, value asc", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
         ReflectionAssert.assertReflectionEquals(model, actual);
