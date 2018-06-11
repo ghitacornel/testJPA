@@ -47,7 +47,7 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testPersistAllAndFail() {
 
         // persist all
