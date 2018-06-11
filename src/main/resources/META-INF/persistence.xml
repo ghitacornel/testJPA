@@ -90,6 +90,8 @@
 
         <class>relationships.orderby.manytomany.MTOMOrderM</class>
         <class>relationships.orderby.manytomany.MTOMOrderN</class>
+        <class>relationships.orderby.onetomany.OTOMOrderParent</class>
+        <class>relationships.orderby.onetomany.OTOMOrderChild</class>
 
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
