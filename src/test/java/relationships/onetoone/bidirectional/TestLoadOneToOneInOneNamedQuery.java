@@ -5,8 +5,7 @@ import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
-public class TestLoadOneToOneInOneNamedQuery extends
-        TransactionalSetup {
+public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
 
     private A model = buildModel();
 
