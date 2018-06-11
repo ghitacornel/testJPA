@@ -22,7 +22,7 @@ public class TestSetParentToNull extends TransactionalSetup {
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testSetParentToNull() {
+    public void testSetParentToNullNotWorking() {
 
         // insert
         MTOOStrictChild child = new MTOOStrictChild();
