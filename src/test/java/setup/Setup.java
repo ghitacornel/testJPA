@@ -62,4 +62,8 @@ public abstract class Setup {
         Assert.assertTrue(em.createNativeQuery("select * from " + tableName).getResultList().isEmpty());
     }
 
+    protected void verifyTableIsEmpty(String tableName) {
+        Assert.assertTrue(em.createNativeQuery("select * from " + tableName).getResultList().isEmpty());
+    }
+
 }

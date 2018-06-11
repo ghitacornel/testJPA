@@ -1,6 +1,7 @@
 package relationships.embedded;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
@@ -10,6 +11,12 @@ import javax.persistence.Persistence;
 import java.util.Date;
 
 public class TestCRUD extends TransactionalSetup {
+
+    @Before
+    public void setUp() {
+        verifyTableIsEmpty("EWE_Names");
+        verifyTableIsEmpty("EntityWithEmbeddable_relatedEmbedded");
+    }
 
     @Test
     public void testCRUD() {

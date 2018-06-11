@@ -1,9 +1,6 @@
 package relationships.embedded;
 
-import javax.persistence.ElementCollection;
-import javax.persistence.Embedded;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -17,6 +14,7 @@ public class EntityWithEmbeddable {
     private EmbeddableBean embedded;
 
     @ElementCollection
+    @JoinTable(name = "EWE_Names")// can override default table and foreign keys
     private List<String> names = new ArrayList<>();
 
     @ElementCollection
