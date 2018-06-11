@@ -42,11 +42,13 @@ public class TestRemoveChild extends TransactionalSetup {
 
         OTOMStrictParent existingParent = em.find(OTOMStrictParent.class, model.getId());
         OTOMStrictParent expectedParent = buildModel();
-        expectedParent.getChildren().remove(1);
+        {// adjust model to reflect expected changes
+            expectedParent.getChildren().remove(1);
+        }
         ReflectionAssert.assertReflectionEquals(expectedParent, existingParent, ReflectionComparatorMode.LENIENT_ORDER);
 
         // child is removed since it is now an orphan
-        OTOMStrictChild child = em.find(OTOMStrictChild.class, buildModel().getChildren().get(1).getId());
+        OTOMStrictChild child = em.find(OTOMStrictChild.class, 1);
         Assert.assertNull(child);
 
     }
