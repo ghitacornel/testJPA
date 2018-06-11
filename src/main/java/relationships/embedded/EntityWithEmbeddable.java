@@ -1,8 +1,11 @@
 package relationships.embedded;
 
+import javax.persistence.ElementCollection;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class EntityWithEmbeddable {
@@ -12,6 +15,12 @@ public class EntityWithEmbeddable {
 
     @Embedded
     private EmbeddableBean embedded;
+
+    @ElementCollection
+    private List<String> names = new ArrayList<>();
+
+    @ElementCollection
+    private List<EmbeddableBean> relatedEmbedded = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -29,4 +38,11 @@ public class EntityWithEmbeddable {
         this.embedded = embeddable;
     }
 
+    public List<String> getNames() {
+        return names;
+    }
+
+    public List<EmbeddableBean> getRelatedEmbedded() {
+        return relatedEmbedded;
+    }
 }
