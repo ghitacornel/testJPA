@@ -7,6 +7,12 @@ import java.util.List;
 @Entity
 public class NoCascadeM {
 
+    @Id
+    private Integer id;
+
+    @Column(nullable = false)
+    private String name;
+
     @ManyToMany
     @JoinTable(
             name = "NoCascadeMN",
@@ -14,12 +20,6 @@ public class NoCascadeM {
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )
     private List<NoCascadeN> listWithNs = new ArrayList<>();
-
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
 
     public Integer getId() {
         return id;

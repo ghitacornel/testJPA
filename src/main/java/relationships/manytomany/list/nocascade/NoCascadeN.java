@@ -10,14 +10,14 @@ import java.util.List;
 @Entity
 public class NoCascadeN {
 
-    @ManyToMany(mappedBy = "listWithNs")
-    private List<NoCascadeM> listWithMs = new ArrayList<>();
-
     @Id
     private Integer id;
 
     @Column(nullable = false)
     private String name;
+
+    @ManyToMany(mappedBy = "listWithNs")
+    private List<NoCascadeM> listWithMs = new ArrayList<>();
 
     public Integer getId() {
         return id;
