@@ -2,6 +2,8 @@ package relationships.manytomany.bothowners;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.unitils.reflectionassert.ReflectionAssert;
+import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -35,25 +37,43 @@ public class TestPersist extends TransactionalSetup {
     }
 
     @Test(expected = PersistenceException.class)
-    public void testPersistOnlyOneSide() {
+    public void testPersistOnlyOneSideAndFail() {
         em.persist(m);
         flushAndClear();
     }
 
     @Test(expected = PersistenceException.class)
-    public void testPersistPartially() {
+    public void testPersistPartiallyAndFail() {
         em.persist(m);
         em.persist(n1);
         flushAndClear();
     }
 
-    @Test
+    @Test(expected = PersistenceException.class)
     public void testPersistAllAndFail() {
+
+        em.persist(m);
+        em.persist(n1);
+        em.persist(n2);
+        flushAndClear();
+
+    }
+
+    @Test
+    public void testPersistFirstEntitiesThenOnly1SideOfTheRelationshipAndOK() {
+
+        m.getListWithNs().clear();
+        n1.getListWithMs().clear();
+        n2.getListWithMs().clear();
 
         // persist all
         em.persist(m);
         em.persist(n1);
         em.persist(n2);
+        em.flush();
+
+        m.getListWithNs().add(n1);
+        m.getListWithNs().add(n2);
         flushAndClear();
 
         // verify
@@ -67,10 +87,15 @@ public class TestPersist extends TransactionalSetup {
 //            }
 //
 //        }
-//
-//        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-//        ReflectionAssert.assertReflectionEquals(n1, em.find(N.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-//        ReflectionAssert.assertReflectionEquals(n2, em.find(N.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+
+        {// adjust the model to reflect expected changes
+            n1.getListWithMs().add(m);
+            n2.getListWithMs().add(m);
+            em.flush();
+        }
+        ReflectionAssert.assertReflectionEquals(m, em.find(M.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n1, em.find(N.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(n2, em.find(N.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
