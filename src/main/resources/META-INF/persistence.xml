@@ -88,6 +88,9 @@
         <class>relationships.orphans.onetomany.OTOMOrphanA</class>
         <class>relationships.orphans.onetomany.OTOMOrphanB</class>
 
+        <class>relationships.orderby.manytomany.MTOMOrderM</class>
+        <class>relationships.orderby.manytomany.MTOMOrderN</class>
+
         <class>entities.simple.Entity</class>
         <class>entities.special.EntityWithEnums</class>
         <class>entities.special.EntityWithPrimitives</class>
