@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * Cascading with this kind of relationship is bad
+ * Cascading with this kind of relationship is bad since the parents are supposed to be independent
  */
 @Entity
 public class MTOOCascadeParent {

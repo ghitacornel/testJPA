@@ -3,7 +3,7 @@ package relationships.manytoone.cascade;
 import javax.persistence.*;
 
 /**
- * Cascading with this kind of relationship is bad
+ * Cascading with this kind of relationship is bad since the parents are supposed to be independent
  */
 @Entity
 public class MTOOCascadeChild {
