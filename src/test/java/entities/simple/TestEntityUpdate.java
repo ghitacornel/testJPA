@@ -91,8 +91,8 @@ public class TestEntityUpdate extends TransactionalSetup {
     }
 
     /**
-     * MERGE uses a persistence context managed or not managed entity and returns a persistence context managed entity (DB updated or DB inserted)<br>
-     * PERSIST uses a persistence context managed or not managed entity and ensure the entity becomes persistence context managed and DB inserted<br>
+     * MERGE uses a persistence context managed or not managed entity and returns a persistence context managed entity (and DB updated or DB inserted)<br>
+     * PERSIST uses a persistence context managed or not managed entity and ensure the entity becomes persistence context managed (and DB inserted)<br>
      */
     @Test
     public void testUpdateExistingEntityUsingMergeAndObserveEffectsOfUpdatesOnMergedAndNotMergedEntities() {
@@ -107,7 +107,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         Entity newVersionMerged = em.merge(newVersionNotMerged);
         Assert.assertNotSame(newVersionMerged,newVersionNotMerged);
 
-        // merge twice and observe same object is returned even if flush was used, but not clear
+        // merge twice and observe same object is returned even if flush was used, but not CLEAR
         {
             em.flush();
             Entity newVersionMerged2 = em.merge(newVersionMerged);
