@@ -119,7 +119,9 @@
         <class>inheritance.change.MixedContainer</class>
 
         <class>queries.simple.SimpleQueryEntity</class>
+
         <class>queries.bulk.BulkQueryEntity</class>
+        <class>queries.bulk.BulkTarget</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
