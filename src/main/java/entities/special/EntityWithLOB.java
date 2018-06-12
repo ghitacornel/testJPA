@@ -9,7 +9,8 @@ public class EntityWithLOB {
     private Integer id;
 
     /**
-     * TODO note the LAZY marker is just a hint, it does not enforce lazy loading
+     * Note the LAZY marker is just a hint, it does not enforce lazy loading<br>
+     * For LAZY LOADING consider lacing such content in LAZY LOADABLE RELATIONSHIPS
      */
     @Basic(fetch = FetchType.LAZY)
     @Lob

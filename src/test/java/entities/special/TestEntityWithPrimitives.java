@@ -16,18 +16,18 @@ public class TestEntityWithPrimitives extends TransactionalSetup {
     public void test() {
 
         // create new entity
-        EntityWithPrimitives entity1 = new EntityWithPrimitives();
-        entity1.setId(1);
+        EntityWithPrimitives initialEntity = new EntityWithPrimitives();
+        initialEntity.setId(1);
 
         // persist
-        em.persist(entity1);
+        em.persist(initialEntity);
         flushAndClear();
 
         // verify defaults are persisted as expected
-        EntityWithPrimitives entity2 = em.find(EntityWithPrimitives.class, 1);
-        Assert.assertNotNull(entity2);
-        Assert.assertFalse(entity2.isaBoolean());
-        Assert.assertEquals(3, entity2.getAnInt());
+        EntityWithPrimitives persistedEntity = em.find(EntityWithPrimitives.class, initialEntity.getId());
+        Assert.assertNotNull(persistedEntity);
+        Assert.assertFalse(persistedEntity.isaBoolean());
+        Assert.assertEquals(3, persistedEntity.getAnInt());
 
     }
 }
