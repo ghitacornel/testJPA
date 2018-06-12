@@ -10,14 +10,11 @@ public class EntityWithListener {
     private Integer id;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String name;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String prePersist;
 
-    @Basic
     private String preUpdate;
 
     public Integer getId() {
