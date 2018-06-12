@@ -122,7 +122,7 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         flushAndClear();// check executed queries
 
-        // verify update
+        // verify which update was executed
         Entity entity = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity);
         ReflectionAssert.assertReflectionEquals(newVersionMerged, entity);
