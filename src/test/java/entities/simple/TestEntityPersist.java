@@ -16,7 +16,7 @@ public class TestEntityPersist extends TransactionalSetup {
     }
 
     @Test
-    public void testPersist() {
+    public void testPersistNewEntityUsingPERSIST() {
 
         // create new entity
         Entity entity = new Entity();
@@ -28,6 +28,37 @@ public class TestEntityPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify persist
+        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("name", objects[1]);
+                Assert.assertNull(objects[2]);
+            }
+        }
+
+    }
+
+    @Test
+    public void testPersistNewEntityUsingMERGE() {
+
+        // create new entity
+        Entity entity = new Entity();
+        entity.setId(1);
+        entity.setName("name");
+
+        // merge
+        Entity mergedEntity = em.merge(entity);
+        flushAndClear();
+
+        // verify merge return value
+        Assert.assertNotSame(entity, mergedEntity);
+
+        // verify merge
         ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
