@@ -1,6 +1,6 @@
-package entities.inheritance.mixed;
+package inheritance.change;
 
-import entities.inheritance.InheritanceMappedSuperClass;
+import inheritance.InheritanceMappedSuperClass;
 
 import javax.persistence.*;
 import java.util.ArrayList;

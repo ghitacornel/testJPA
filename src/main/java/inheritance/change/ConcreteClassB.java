@@ -1,4 +1,4 @@
-package entities.inheritance.mixed;
+package inheritance.change;
 
 import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;

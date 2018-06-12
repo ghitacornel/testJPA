@@ -1,8 +1,5 @@
 package inheritance.single;
 
-import entities.inheritance.single.InheritanceSingleTableConcreteClassA;
-import entities.inheritance.single.InheritanceSingleTableConcreteClassB;
-import entities.inheritance.single.InheritanceSingleTableSuperClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;

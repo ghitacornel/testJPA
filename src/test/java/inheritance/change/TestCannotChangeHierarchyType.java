@@ -1,8 +1,5 @@
-package inheritance.mixed;
+package inheritance.change;
 
-import entities.inheritance.mixed.ConcreteClassA;
-import entities.inheritance.mixed.ConcreteClassB;
-import entities.inheritance.mixed.MixedContainer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

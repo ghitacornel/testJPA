@@ -1,6 +1,6 @@
-package entities.inheritance.joined;
+package inheritance.joined;
 
-import entities.inheritance.InheritanceMappedSuperClass;
+import inheritance.InheritanceMappedSuperClass;
 
 import javax.persistence.*;
 

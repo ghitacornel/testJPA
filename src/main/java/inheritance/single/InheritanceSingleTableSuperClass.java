@@ -1,6 +1,6 @@
-package entities.inheritance.single;
+package inheritance.single;
 
-import entities.inheritance.InheritanceMappedSuperClass;
+import inheritance.InheritanceMappedSuperClass;
 
 import javax.persistence.*;
 

@@ -1,8 +1,5 @@
 package inheritance.joined.discriminator;
 
-import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassA;
-import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassB;
-import entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorSuperClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;

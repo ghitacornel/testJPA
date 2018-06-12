@@ -1,8 +1,5 @@
 package inheritance.joined;
 
-import entities.inheritance.joined.InheritanceJoinedTablesConcreteClassA;
-import entities.inheritance.joined.InheritanceJoinedTablesConcreteClassB;
-import entities.inheritance.joined.InheritanceJoinedTablesSuperClass;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;

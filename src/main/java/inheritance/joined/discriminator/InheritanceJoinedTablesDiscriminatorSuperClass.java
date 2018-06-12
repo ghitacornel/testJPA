@@ -1,6 +1,6 @@
-package entities.inheritance.joined.discriminator;
+package inheritance.joined.discriminator;
 
-import entities.inheritance.InheritanceMappedSuperClass;
+import inheritance.InheritanceMappedSuperClass;
 
 import javax.persistence.*;
 

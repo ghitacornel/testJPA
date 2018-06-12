@@ -1,4 +1,4 @@
-package entities.inheritance;
+package inheritance;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;

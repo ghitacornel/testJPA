@@ -14,16 +14,16 @@
         <class>entities.ids.table.EntityAWithIdGeneratedFromTable</class>
         <class>entities.ids.table.EntityBWithIdGeneratedFromTable</class>
 
-        <class>entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassA</class>
-        <class>entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassB</class>
-        <class>entities.inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorSuperClass</class>
-        <class>entities.inheritance.joined.InheritanceJoinedTablesConcreteClassA</class>
-        <class>entities.inheritance.joined.InheritanceJoinedTablesConcreteClassB</class>
-        <class>entities.inheritance.joined.InheritanceJoinedTablesSuperClass</class>
-        <class>entities.inheritance.single.InheritanceSingleTableConcreteClassA</class>
-        <class>entities.inheritance.single.InheritanceSingleTableConcreteClassB</class>
-        <class>entities.inheritance.single.InheritanceSingleTableSuperClass</class>
-        <class>entities.inheritance.InheritanceMappedSuperClass</class>
+        <class>inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassA</class>
+        <class>inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorConcreteClassB</class>
+        <class>inheritance.joined.discriminator.InheritanceJoinedTablesDiscriminatorSuperClass</class>
+        <class>inheritance.joined.InheritanceJoinedTablesConcreteClassA</class>
+        <class>inheritance.joined.InheritanceJoinedTablesConcreteClassB</class>
+        <class>inheritance.joined.InheritanceJoinedTablesSuperClass</class>
+        <class>inheritance.single.InheritanceSingleTableConcreteClassA</class>
+        <class>inheritance.single.InheritanceSingleTableConcreteClassB</class>
+        <class>inheritance.single.InheritanceSingleTableSuperClass</class>
+        <class>inheritance.InheritanceMappedSuperClass</class>
 
         <class>relationships.embedded.EmbeddableBean</class>
         <class>relationships.embedded.EntityWithEmbeddable</class>
@@ -113,10 +113,10 @@
         <class>queries.named.nativ.NamedNativeQueriesWithResultSetMappingDefinition</class>
         <class>queries.named.NamedQueriesDefinition</class>
 
-        <class>entities.inheritance.mixed.ConcreteClassA</class>
-        <class>entities.inheritance.mixed.ConcreteClassB</class>
-        <class>entities.inheritance.mixed.ConcreteSuperClass</class>
-        <class>entities.inheritance.mixed.MixedContainer</class>
+        <class>inheritance.change.ConcreteClassA</class>
+        <class>inheritance.change.ConcreteClassB</class>
+        <class>inheritance.change.ConcreteSuperClass</class>
+        <class>inheritance.change.MixedContainer</class>
 
         <class>queries.simple.SimpleQueryEntity</class>
         <class>queries.bulk.BulkQueryEntity</class>

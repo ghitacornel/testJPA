@@ -1,4 +1,4 @@
-package entities.inheritance.joined.discriminator;
+package inheritance.joined.discriminator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
