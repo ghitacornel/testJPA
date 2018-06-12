@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * Good practice :<br>
  * Ensure proper database CHECK constraints are in place when using enums<br>
- * Enums are excellent replacements for dictionary tables for which values we hard code business logic
+ * Enums are excellent replacements for dictionary tables for which values hard coded business logic exists
  */
 @Entity
 public class EntityWithEnums {
@@ -17,16 +17,16 @@ public class EntityWithEnums {
     private Integer id;
 
     /**
-     * recommended<br>
-     * safe when adding, removing or changing order of enum elements<br>
-     * increase memory usage + slower performance due to text column usage
+     * PRO : safe when adding, removing or changing order of enum elements<br>
+     * PRO : easier understand to humans by reading directly from the database<br>
+     * CONS : increases memory usage + slower performance due to text types usage
      */
     @Enumerated(EnumType.STRING)
     private SimpleEnum enum1;
 
     /**
-     * raise problems when adding, removing or changing order of enum values<br>
-     * better performance + better memory usage due to integer column usage
+     * PRO : better performance + better memory usage due to integer types usage<br>
+     * CONS : raises problems when changing order of enum values
      */
     @Enumerated(EnumType.ORDINAL)
     private SimpleEnum enum2;
