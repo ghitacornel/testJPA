@@ -22,7 +22,6 @@ public class TestEntityWithProjection extends TransactionalSetup {
     @Test
     public void testProjection() {
 
-
         Projection1 projection1 = em.createQuery("select new entities.projection.Projection1(e.id,e.name) from EntityWithProjection e where e.id = 1", Projection1.class).getSingleResult();
         Assert.assertEquals(entity.getId(), projection1.getId());
         Assert.assertEquals(entity.getName(), projection1.getName());

@@ -1,7 +1,6 @@
 package entities.projection;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,11 +11,9 @@ public class EntityWithProjection {
     private Integer id;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String name;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private Integer value;
 
     public Integer getId() {
