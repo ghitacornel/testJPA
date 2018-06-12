@@ -47,7 +47,7 @@ public class TestEntityPersist extends TransactionalSetup {
      * persist + flush + clear + persist again an already persisted but not managed entity => exception
      */
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testPersistException1() {
+    public void testPersistMultipleTimesWithOrWithoutFlushButWithAtLeastOneClearLeadsToException() {
 
         // create new entity
         Entity entity = new Entity();
@@ -71,7 +71,7 @@ public class TestEntityPersist extends TransactionalSetup {
      * persist multiple times same entity with or without flush but with no "clear" => only 1 SQL INSERT is executed
      */
     @Test
-    public void testPersistOk1() {
+    public void testPersistMultipleTimesWithOrWithoutFlushButWithNoClearLeadsToSingleInsert() {
 
         // create new entity
         Entity entity = new Entity();
