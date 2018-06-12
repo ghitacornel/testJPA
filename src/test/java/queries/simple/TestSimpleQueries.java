@@ -107,23 +107,4 @@ public class TestSimpleQueries extends TransactionalSetup {
 
     }
 
-    @Test
-    public void testSelectAllWithNamedParameter() {
-
-        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name = :name", SimpleQueryEntity.class).setParameter("name", "name 1").getResultList();
-
-        List<SimpleQueryEntity> expected = new ArrayList<>();
-        expected.add(buildModel().get(0));
-        ReflectionAssert.assertReflectionEquals(expected, list);
-
-    }
-
-    @Test
-    public void testSelectAllWithOrderParameter() {
-
-        SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 2").getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
-
-    }
-
 }
