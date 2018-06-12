@@ -7,7 +7,7 @@ import setup.TransactionalSetup;
 
 import java.util.List;
 
-public class TestCurrentDateTime extends TransactionalSetup {
+public class TestGetCurrentDateTime extends TransactionalSetup {
 
     @Before
     public void before() {
