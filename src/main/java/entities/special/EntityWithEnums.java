@@ -26,7 +26,8 @@ public class EntityWithEnums {
 
     /**
      * PRO : better performance + better memory usage due to integer types usage<br>
-     * CONS : raises problems when changing order of enum values
+     * CONS : raises problems when changing order of enum values<br>
+     * CONS : hard to understand to humans by reading directly from the database<br>
      */
     @Enumerated(EnumType.ORDINAL)
     private SimpleEnum enum2;
