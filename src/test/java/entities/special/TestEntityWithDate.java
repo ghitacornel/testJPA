@@ -22,29 +22,29 @@ public class TestEntityWithDate extends TransactionalSetup {
         Date referenceDate = new Date();
 
         // create new entity
-        EntityWithDate entity1 = new EntityWithDate();
-        entity1.setId(1);
-        entity1.setFullDate(referenceDate);
-        entity1.setOnlyDate(referenceDate);
-        entity1.setOnlyTime(referenceDate);
+        EntityWithDate initialEntity = new EntityWithDate();
+        initialEntity.setId(1);
+        initialEntity.setFullDate(referenceDate);
+        initialEntity.setOnlyDate(referenceDate);
+        initialEntity.setOnlyTime(referenceDate);
 
         // persist
-        em.persist(entity1);
+        em.persist(initialEntity);
         flushAndClear();
 
         // verify persist
-        EntityWithDate entity2 = em.find(EntityWithDate.class, 1);
-        Assert.assertNotNull(entity2);
-        Assert.assertEquals(1, (int) entity2.getId());
+        EntityWithDate persistedEntity = em.find(EntityWithDate.class, 1);
+        Assert.assertNotNull(persistedEntity);
+        Assert.assertEquals(1, (int) persistedEntity.getId());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:SSS");
-        Assert.assertEquals(simpleDateFormat.format(referenceDate), simpleDateFormat.format(entity2.getFullDate()));
+        Assert.assertEquals(simpleDateFormat.format(referenceDate), simpleDateFormat.format(persistedEntity.getFullDate()));
 
         SimpleDateFormat simpleDateOnlyFormat = new SimpleDateFormat("dd-MMM-yyyy");
-        Assert.assertEquals(simpleDateOnlyFormat.format(referenceDate), simpleDateOnlyFormat.format(entity2.getOnlyDate()));
+        Assert.assertEquals(simpleDateOnlyFormat.format(referenceDate), simpleDateOnlyFormat.format(persistedEntity.getOnlyDate()));
 
         SimpleDateFormat simpleTimeOnlyFormat = new SimpleDateFormat("HH:mm:ss");
-        Assert.assertEquals(simpleTimeOnlyFormat.format(referenceDate), simpleTimeOnlyFormat.format(entity2.getOnlyTime()));
+        Assert.assertEquals(simpleTimeOnlyFormat.format(referenceDate), simpleTimeOnlyFormat.format(persistedEntity.getOnlyTime()));
 
     }
 }
