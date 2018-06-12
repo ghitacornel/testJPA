@@ -8,24 +8,23 @@ import javax.persistence.Table;
 /**
  * a simple {@link javax.persistence.Entity}<br>
  * jpa default mappings usage is encouraged<br>
- * jpa enum mapping usage is encourage over standard database dictionaries
- * whenever possible<br>
+ * jpa enum mapping usage is encourage over standard database dictionaries whenever possible<br>
  *
  * @author Cornel
  */
 @javax.persistence.Entity
-@Table(name = "SimpleEntity")// note we override default table name
+@Table(name = "SimpleEntity")// override default table name
 public class Entity {
 
     @Id
     private Integer id;
 
-    @Basic(optional = false)
-    @Column(nullable = false)
+    @Basic(optional = false)// these 2 annotations are equivalent, only one could be used
+    @Column(nullable = false)// these 2 annotations are equivalent
     private String name;
 
-    @Basic
-    @Column(name = "nullableValue")// TODO we override default column name
+    @Basic// can use this annotation or @Column only, yet @Column is richer in configurations
+    @Column(name = "nullableValue")// override default column name
     private Integer value;
 
     public Integer getId() {
