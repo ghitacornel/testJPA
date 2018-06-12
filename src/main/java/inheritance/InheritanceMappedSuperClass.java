@@ -11,11 +11,9 @@ import java.util.UUID;
  * <p>
  * A good practice :
  * - have 1 such class as a parent for all your entities<br>
- * - ensure this class holds the id mapping and generation policy for all your entities<br>
- * - ensure this class provides default "equals" and "hashCode" methods based only on entity ID<br>
+ * - ensure this class holds the id mapping and / or generation policy for all your entities<br>
+ * - ensure this class provides default "equals" + "hashCode" methods based only on entity ID<br>
  * - ensure this class provides default "toString" method based only on entity ID<br>
- *
- * @author Cornel
  */
 @MappedSuperclass
 public class InheritanceMappedSuperClass {

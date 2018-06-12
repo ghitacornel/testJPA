@@ -10,8 +10,6 @@ import javax.persistence.*;
  * if @DiscriminatorColumn is not specified then defaults are specified by the specification<br>
  * the discriminator column values are managed only by the JPA hence no need to map this column to a property<br>
  * the parent class of the hierarchy can be a concrete class
- *
- * @author Cornel
  */
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)

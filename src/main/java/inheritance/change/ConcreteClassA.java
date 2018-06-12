@@ -7,8 +7,6 @@ import javax.persistence.Entity;
 /**
  * if @DiscriminatorValue is not specified a default value as specified by specs
  * is used
- *
- * @author Cornel
  */
 @Entity
 @DiscriminatorValue("A")

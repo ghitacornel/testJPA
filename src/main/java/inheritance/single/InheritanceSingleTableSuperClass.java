@@ -11,8 +11,6 @@ import javax.persistence.*;
  * the discriminator column values are managed only by the JPA<br>
  * the discriminator column must not be mapped to a property<br>
  * the parent class of the hierarchy can be a concrete or abstract class<br>
- *
- * @author Cornel
  */
 @Entity
 @Table(name = "Ierarhie")

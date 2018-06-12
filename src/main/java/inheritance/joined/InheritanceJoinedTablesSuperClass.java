@@ -8,8 +8,6 @@ import javax.persistence.*;
  * not all inheritance types are supported<br>
  * a discriminator column is not required in this case, but additional SQL joins will be performed<br>
  * the parent class of the hierarchy can be a concrete or abstract class <br>
- *
- * @author Cornel
  */
 @Entity
 @Table(name = "IerarhieJoined")
