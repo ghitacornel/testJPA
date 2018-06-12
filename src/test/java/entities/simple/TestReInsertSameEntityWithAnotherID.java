@@ -42,7 +42,9 @@ public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
         // verify 1
         Entity persisted1 = em.find(Entity.class, 1);
         Assert.assertNotNull(persisted1);
-        entity.setId(1);// set the old id prior to checking
+        {// adjust the model to reflect expected changes
+            entity.setId(1);// set the old id prior to checking
+        }
         ReflectionAssert.assertReflectionEquals(entity, persisted1);
 
     }
