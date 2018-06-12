@@ -136,4 +136,74 @@ public class TestEntityPersist extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testPersistNewEntityUsingPERSISTLeadsToCreationOfManagedEntity() {
+
+        // create new entity
+        Entity entity = new Entity();
+        entity.setId(1);
+        entity.setName("name");
+
+        // persist
+        em.persist(entity);
+        em.flush();
+
+        // update now the managed newly persisted entity
+        entity.setName("new name");
+        flushAndClear();
+
+        // verify new changes to the managed entity are propagated to the database
+        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("new name", objects[1]);
+                Assert.assertNull(objects[2]);
+            }
+        }
+
+    }
+
+    @Test
+    public void testUsingCLEARMakesManagedEntitiesNotManagedAnymore() {
+
+        // create new entity
+        Entity entity = new Entity();
+        entity.setId(1);
+        entity.setName("name");
+
+        // persist
+        em.persist(entity);
+        em.flush();
+
+        // CLEAR persistence context => all entities become not managed
+        em.clear();
+
+        // update now the not managed entity
+        entity.setName("new name");
+        flushAndClear();
+
+        // verify new changes to the not managed entity are not propagated to the database
+        {// adjust model to reflect expected changes
+            entity.setName("name");
+        }
+        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("name", objects[1]);
+                Assert.assertNull(objects[2]);
+            }
+        }
+
+    }
+
 }
