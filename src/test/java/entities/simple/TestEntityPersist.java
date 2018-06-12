@@ -19,23 +19,16 @@ public class TestEntityPersist extends TransactionalSetup {
     public void testPersist() {
 
         // create new entity
-        Entity entity1 = new Entity();
-        entity1.setId(1);
-        entity1.setName("name");
-
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        Entity entity = new Entity();
+        entity.setId(1);
+        entity.setName("name");
 
         // persist
-        em.persist(entity1);
+        em.persist(entity);
         flushAndClear();
 
         // verify persist
-        Entity entity2 = em.find(Entity.class, entity1.getId());
-        Assert.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {
@@ -50,8 +43,11 @@ public class TestEntityPersist extends TransactionalSetup {
 
     }
 
+    /**
+     * persist + flush + clear + persist again an already persisted but not managed entity => exception
+     */
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void test_PersistOnceThenFlushThenFlushAndClearThePersistenceContextThenPersistTwice_AndObserve_Error() {
+    public void testPersistException1() {
 
         // create new entity
         Entity entity = new Entity();
@@ -71,29 +67,30 @@ public class TestEntityPersist extends TransactionalSetup {
 
     }
 
+    /**
+     * persist multiple times same entity with or without flush but with no "clear" => only 1 SQL INSERT is executed
+     */
     @Test
-    public void test_PersistMultipleTimesWithNoPersistenceContextClear_AndObserve_OnlyOneInsertIsTriggered() {
+    public void testPersistOk1() {
 
         // create new entity
-        Entity entity1 = new Entity();
-        entity1.setId(1);
-        entity1.setName("name");
+        Entity entity = new Entity();
+        entity.setId(1);
+        entity.setName("name");
 
         // persist once
-        em.persist(entity1);
+        em.persist(entity);
         // persist again
-        em.persist(entity1);
+        em.persist(entity);
         // can even flush
         em.flush();
         // persist again
-        em.persist(entity1);
+        em.persist(entity);
 
         flushAndClear();
 
         // verify persist
-        Entity entity2 = em.find(Entity.class, entity1.getId());
-        Assert.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {
