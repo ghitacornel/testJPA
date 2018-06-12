@@ -1,10 +1,12 @@
-package relationships.onetomany.map;
+package relationships.collections.maps.onetomany;
 
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.collections.maps.onetomany.ChildMap;
+import relationships.collections.maps.onetomany.ParentMap;
 import setup.TransactionalSetup;
 
 import java.util.List;

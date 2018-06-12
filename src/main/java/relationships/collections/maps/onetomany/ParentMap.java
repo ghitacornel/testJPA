@@ -1,4 +1,4 @@
-package relationships.onetomany.map;
+package relationships.collections.maps.onetomany;
 
 import javax.persistence.*;
 import java.util.HashMap;

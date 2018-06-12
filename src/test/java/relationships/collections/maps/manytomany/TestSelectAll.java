@@ -1,9 +1,11 @@
-package relationships.manytomany.map;
+package relationships.collections.maps.manytomany;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.collections.maps.manytomany.MMap;
+import relationships.collections.maps.manytomany.NMap;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;

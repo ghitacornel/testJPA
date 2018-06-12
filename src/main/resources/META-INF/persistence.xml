@@ -45,8 +45,8 @@
         <class>relationships.manytomany.cascade.bothways.CascadeBothWaysN</class>
         <class>relationships.manytomany.cascade.oneside.CascadeOneSideM</class>
         <class>relationships.manytomany.cascade.oneside.CascadeOneSideN</class>
-        <class>relationships.manytomany.map.MMap</class>
-        <class>relationships.manytomany.map.NMap</class>
+        <class>relationships.collections.maps.manytomany.MMap</class>
+        <class>relationships.collections.maps.manytomany.NMap</class>
         <class>relationships.manytomany.bothowners.M</class>
         <class>relationships.manytomany.bothowners.N</class>
 
@@ -54,8 +54,8 @@
         <class>relationships.onetomany.notstrict.OTOMNotStrictParent</class>
         <class>relationships.onetomany.strict.OTOMStrictChild</class>
         <class>relationships.onetomany.strict.OTOMStrictParent</class>
-        <class>relationships.onetomany.map.ChildMap</class>
-        <class>relationships.onetomany.map.ParentMap</class>
+        <class>relationships.collections.maps.onetomany.ChildMap</class>
+        <class>relationships.collections.maps.onetomany.ParentMap</class>
         <class>relationships.onetomany.joinonnopk.JONPKChild</class>
         <class>relationships.onetomany.joinonnopk.JONPKParent</class>
 
