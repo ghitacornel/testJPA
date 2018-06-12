@@ -16,26 +16,21 @@ public class TestEntityCRUD extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testCreateReadUpdateReadRemoveRead() {
 
         // create new entity
-        Entity entity1 = new Entity();
-        entity1.setId(1);
-        entity1.setName("name");
-
-        // verify database state with a native query
-        {
-            Assert.assertTrue(em.createNativeQuery("select * from SimpleEntity").getResultList().isEmpty());
-        }
+        Entity initialEntity = new Entity();
+        initialEntity.setId(1);
+        initialEntity.setName("name");
 
         // persist
-        em.persist(entity1);
+        em.persist(initialEntity);
         flushAndClear();// mandatory check executed queries
 
         // verify persist
-        Entity entity2 = em.find(Entity.class, entity1.getId());
+        Entity entity2 = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
 
         // verify database state with a native query
         {
@@ -54,7 +49,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         flushAndClear();// mandatory check executed queries
 
         // verify update
-        Entity entity3 = em.find(Entity.class, entity1.getId());
+        Entity entity3 = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
@@ -70,13 +65,13 @@ public class TestEntityCRUD extends TransactionalSetup {
         }
 
         // remove
-        Entity entity4 = em.find(Entity.class, entity1.getId());
-        Assert.assertNotNull(entity4);
-        em.remove(entity4);
+        Entity toBeRemovedEntity = em.find(Entity.class, initialEntity.getId());
+        Assert.assertNotNull(toBeRemovedEntity);
+        em.remove(toBeRemovedEntity);
         flushAndClear();// //  mandatory check executed queries
 
         // verify remove
-        Assert.assertNull(em.find(Entity.class, entity1.getId()));
+        Assert.assertNull(em.find(Entity.class, initialEntity.getId()));
 
         // verify database state with a native query
         verifyCorrespondingTableIsEmpty(Entity.class);
