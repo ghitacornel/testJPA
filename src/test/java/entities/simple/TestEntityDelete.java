@@ -29,9 +29,9 @@ public class TestEntityDelete extends TransactionalSetup {
     public void test() {
 
         // remove
-        Entity entity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(entity);
-        em.remove(entity);
+        Entity toBeRemovedEntity = em.find(Entity.class, initialEntity.getId());
+        Assert.assertNotNull(toBeRemovedEntity);
+        em.remove(toBeRemovedEntity);
         flushAndClear();// mandatory check executed queries
 
         // verify remove
