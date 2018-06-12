@@ -107,8 +107,9 @@ public class TestEntityUpdate extends TransactionalSetup {
         Entity newVersionMerged = em.merge(newVersionNotMerged);
         Assert.assertNotSame(newVersionMerged,newVersionNotMerged);
 
-        // merge twice and observe same object is returned
+        // merge twice and observe same object is returned even if flush was used, but not clear
         {
+            em.flush();
             Entity newVersionMerged2 = em.merge(newVersionMerged);
             Assert.assertSame(newVersionMerged, newVersionMerged2);
         }
