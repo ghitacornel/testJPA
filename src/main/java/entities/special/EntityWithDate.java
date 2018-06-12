@@ -5,7 +5,8 @@ import java.util.Date;
 
 /**
  * Good practice :<br>
- * Ensure proper date precision and type is used since it affects database performance, range checks and automated tests precision
+ * Ensure proper date precision and type is used in the JAVA model but also in the DATABASE model
+ * since it affects performance, date range checks and precision
  */
 @Entity
 public class EntityWithDate {
