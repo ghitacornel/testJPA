@@ -10,27 +10,28 @@ import java.util.List;
 
 public class TestEntityUpdate extends TransactionalSetup {
 
+    Entity initialEntity;
+
     @Before
     public void ensureAnExistingEntityIsPresent() {
 
         verifyCorrespondingTableIsEmpty(Entity.class);
 
         // create new entity
-        Entity entity = new Entity();
-        entity.setId(1);
-        entity.setName("name");
+        initialEntity = new Entity();
+        initialEntity.setId(1);
+        initialEntity.setName("name");
 
-        // persist
-        em.persist(entity);
+        persist(initialEntity);
         flushAndClear();
 
     }
 
     @Test
-    public void test_UpdateExistingEntityByAlteringAnAlreadyFetchedEntity() {
+    public void testUpdateExistingEntityByAlteringAFetchedEntity() {
 
         // fetch the entity
-        Entity originalEntity = em.find(Entity.class, 1);
+        Entity originalEntity = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(originalEntity);
 
         // update
@@ -40,7 +41,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         // check executed queries and observe that no other specific entity manager operation operation is needed
 
         // verify update
-        Entity updatedEntity = em.find(Entity.class, 1);
+        Entity updatedEntity = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(updatedEntity);
         ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
 
@@ -58,11 +59,11 @@ public class TestEntityUpdate extends TransactionalSetup {
     }
 
     @Test
-    public void test_UpdateExistingEntityUsingMerge() {
+    public void testUpdateExistingEntityUsingMerge() {
 
         // create new version of existing entity
         Entity newVersionOfExistingEntity = new Entity();
-        newVersionOfExistingEntity.setId(1);
+        newVersionOfExistingEntity.setId(initialEntity.getId());
         newVersionOfExistingEntity.setName("new name");
         newVersionOfExistingEntity.setValue(12);
 
@@ -72,7 +73,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         flushAndClear();// check executed queries
 
         // verify update
-        Entity entity = em.find(Entity.class, 1);
+        Entity entity = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity);
         ReflectionAssert.assertReflectionEquals(newVersionOfExistingEntity, entity);
 
