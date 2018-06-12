@@ -9,7 +9,6 @@ import java.util.List;
 
 public class Test_GROUP_BY_and_HAVING extends TransactionalSetup {
 
-
     @Before
     public void ensureSomeDataIsPresent() {
         verifyCorrespondingTableIsEmpty(Person.class);
@@ -53,6 +52,7 @@ public class Test_GROUP_BY_and_HAVING extends TransactionalSetup {
         Assert.assertArrayEquals(row1, data.get(1));
         Assert.assertArrayEquals(row2, data.get(2));
         Assert.assertArrayEquals(row3, data.get(3));
+
     }
 
     @Test

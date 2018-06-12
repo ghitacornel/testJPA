@@ -1,17 +1,16 @@
 package entities.aggregated;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
+import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@javax.persistence.Entity
+@Entity
 public class Country {
 
     @Id
     private Integer id;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String name;
 
     public Country(Integer id, String name) {
