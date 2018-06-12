@@ -7,18 +7,20 @@ import setup.TransactionalSetup;
 
 public class TestEntityDelete extends TransactionalSetup {
 
+    Entity initialEntity;
+
     @Before
     public void ensureAnExistingEntityIsPresent() {
 
         verifyCorrespondingTableIsEmpty(Entity.class);
 
         // create new entity
-        Entity entity1 = new Entity();
-        entity1.setId(1);
-        entity1.setName("name");
+        initialEntity = new Entity();
+        initialEntity.setId(1);
+        initialEntity.setName("name");
 
         // persist
-        em.persist(entity1);
+        em.persist(initialEntity);
         flushAndClear();
 
     }
@@ -27,14 +29,13 @@ public class TestEntityDelete extends TransactionalSetup {
     public void test() {
 
         // remove
-        Entity entity = em.find(Entity.class, 1);
+        Entity entity = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity);
         em.remove(entity);
-        flushAndClear();
-        // mandatory check executed queries
+        flushAndClear();// mandatory check executed queries
 
         // verify remove
-        Assert.assertNull(em.find(Entity.class, 1));
+        Assert.assertNull(em.find(Entity.class, initialEntity.getId()));
 
         verifyCorrespondingTableIsEmpty(Entity.class);
 
