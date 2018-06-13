@@ -8,32 +8,32 @@ import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
 
-    OTOMOrphanA parent;
-    OTOMOrphanB child1;
-    OTOMOrphanB child2;
+    OTOMOrphanParent parent;
+    OTOMOrphanChild child1;
+    OTOMOrphanChild child2;
 
     @Before
     public void setUp() {
 
-        verifyCorrespondingTableIsEmpty(OTOMOrphanA.class);
-        verifyCorrespondingTableIsEmpty(OTOMOrphanB.class);
+        verifyCorrespondingTableIsEmpty(OTOMOrphanParent.class);
+        verifyCorrespondingTableIsEmpty(OTOMOrphanChild.class);
 
-        parent = new OTOMOrphanA();
+        parent = new OTOMOrphanParent();
         parent.setId(1);
         parent.setName("a");
 
-        child1 = new OTOMOrphanB();
+        child1 = new OTOMOrphanChild();
         child1.setId(1);
         child1.setName("child1");
-        child1.setA(parent);
+        child1.setParent(parent);
 
-        child2 = new OTOMOrphanB();
+        child2 = new OTOMOrphanChild();
         child2.setId(2);
         child2.setName("child2");
-        child2.setA(parent);
+        child2.setParent(parent);
 
-        parent.getBs().add(child1);
-        parent.getBs().add(child2);
+        parent.getChildren().add(child1);
+        parent.getChildren().add(child2);
         persist(parent, child1, child2);
 
         flushAndClear();
@@ -44,42 +44,42 @@ public class TestRemoveOrphans extends TransactionalSetup {
     public void testRemoveOrphansWhenParentIsRemoved() {
 
         // remove parent
-        OTOMOrphanA parent = em.find(OTOMOrphanA.class, this.parent.getId());
+        OTOMOrphanParent parent = em.find(OTOMOrphanParent.class, this.parent.getId());
         em.remove(parent);
         flushAndClear();
 
         // test parent was removed
-        verifyCorrespondingTableIsEmpty(OTOMOrphanA.class);
+        verifyCorrespondingTableIsEmpty(OTOMOrphanParent.class);
 
         // test orphans are removed
-        verifyCorrespondingTableIsEmpty(OTOMOrphanB.class);
+        verifyCorrespondingTableIsEmpty(OTOMOrphanChild.class);
 
     }
 
     @Test
     public void testRemoveOrphanBySettingParentToNullDoesNotWork() {
 
-        em.find(OTOMOrphanB.class, child2.getId()).setA(null);
+        em.find(OTOMOrphanChild.class, child2.getId()).setParent(null);
         flushAndClear();
 
         // test orphan is not removed
         {// adjust model to match expectations
-            child2.setA(null);
+            child2.setParent(null);
         }
-        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanB.class, child2.getId()));
+        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanChild.class, child2.getId()));
 
     }
 
     @Test
     public void testRemoveOrphanByRemovingFromParentListOnlyDoesNotWork() {
 
-        em.find(OTOMOrphanA.class, parent.getId()).getBs().remove(1);
+        em.find(OTOMOrphanParent.class, parent.getId()).getChildren().remove(1);
         flushAndClear();
 
         // test orphan is not removed
-        ReflectionAssert.assertReflectionEquals(child1, em.find(OTOMOrphanB.class, child1.getId()));
-        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanB.class, child2.getId()));
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrphanA.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(child1, em.find(OTOMOrphanChild.class, child1.getId()));
+        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanChild.class, child2.getId()));
+        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrphanParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
@@ -87,19 +87,19 @@ public class TestRemoveOrphans extends TransactionalSetup {
     @Test
     public void testRemoveOrphanByRemovingFromParentListAndSetParentToNullDoesNotWork() {
 
-        OTOMOrphanB toRemoveChild = em.find(OTOMOrphanA.class, parent.getId()).getBs().remove(1);
-        toRemoveChild.setA(null);
+        OTOMOrphanChild toRemoveChild = em.find(OTOMOrphanParent.class, parent.getId()).getChildren().remove(1);
+        toRemoveChild.setParent(null);
         flushAndClear();
 
         // test orphan is not removed
         {// adjust model to match expectations
-            child2.setA(null);
+            child2.setParent(null);
         }
-        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanB.class, child2.getId()));
+        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanChild.class, child2.getId()));
         {// adjust model to match expectations
-            parent.getBs().remove(1);
+            parent.getChildren().remove(1);
         }
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrphanA.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrphanParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 

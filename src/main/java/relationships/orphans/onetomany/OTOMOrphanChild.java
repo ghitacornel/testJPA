@@ -3,7 +3,7 @@ package relationships.orphans.onetomany;
 import javax.persistence.*;
 
 @Entity
-public class OTOMOrphanB {
+public class OTOMOrphanChild {
 
     @Id
     private Integer id;
@@ -12,7 +12,7 @@ public class OTOMOrphanB {
     private String name;
 
     @ManyToOne
-    private OTOMOrphanA a;
+    private OTOMOrphanParent parent;
 
     public Integer getId() {
         return id;
@@ -30,12 +30,12 @@ public class OTOMOrphanB {
         this.name = name;
     }
 
-    public OTOMOrphanA getA() {
-        return a;
+    public OTOMOrphanParent getParent() {
+        return parent;
     }
 
-    public void setA(OTOMOrphanA a) {
-        this.a = a;
+    public void setParent(OTOMOrphanParent parent) {
+        this.parent = parent;
     }
 
 }

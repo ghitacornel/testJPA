@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class OTOMOrphanA {
+public class OTOMOrphanParent {
 
     @Id
     private Integer id;
@@ -13,8 +13,8 @@ public class OTOMOrphanA {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(orphanRemoval = true, mappedBy = "a")
-    private List<OTOMOrphanB> bs = new ArrayList<>();
+    @OneToMany(orphanRemoval = true, mappedBy = "parent")
+    private List<OTOMOrphanChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -32,11 +32,11 @@ public class OTOMOrphanA {
         this.name = name;
     }
 
-    public List<OTOMOrphanB> getBs() {
-        return bs;
+    public List<OTOMOrphanChild> getChildren() {
+        return children;
     }
 
-    public void setBs(List<OTOMOrphanB> bs) {
-        this.bs = bs;
+    public void setChildren(List<OTOMOrphanChild> children) {
+        this.children = children;
     }
 }

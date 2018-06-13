@@ -85,8 +85,8 @@
         <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideB</class>
         <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideA</class>
         <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideB</class>
-        <class>relationships.orphans.onetomany.OTOMOrphanA</class>
-        <class>relationships.orphans.onetomany.OTOMOrphanB</class>
+        <class>relationships.orphans.onetomany.OTOMOrphanParent</class>
+        <class>relationships.orphans.onetomany.OTOMOrphanChild</class>
 
         <class>relationships.orderby.manytomany.MTOMOrderM</class>
         <class>relationships.orderby.manytomany.MTOMOrderN</class>
