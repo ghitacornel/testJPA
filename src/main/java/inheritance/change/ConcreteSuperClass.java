@@ -39,4 +39,12 @@ public abstract class ConcreteSuperClass extends InheritanceMappedSuperClass {
         return discriminator;
     }
 
+    /**
+     * this setter is used to test if hierarchy change is possible
+     *
+     * @param discriminator
+     */
+    public void setDiscriminator(String discriminator) {
+        this.discriminator = discriminator;
+    }
 }
