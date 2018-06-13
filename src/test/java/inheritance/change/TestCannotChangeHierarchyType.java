@@ -42,16 +42,17 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testTryToChangeHierarchy() {
 
         MixedContainer containerInitial = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
 
-        // discriminators are set automatically so in order to check the data models we need to ensure initial model has them set properly
-        for (ConcreteClassB concreteClassB : model.getConcreteClassBs()) {
-            concreteClassB.setDiscriminator("B");
-        }
-        for (ConcreteClassA concreteClassA : model.getConcreteClassAs()) {
-            concreteClassA.setDiscriminator("A");
+        {// discriminators are set automatically so in order to check the data models we need to ensure initial model has them set properly
+            for (ConcreteClassB concreteClassB : model.getConcreteClassBs()) {
+                concreteClassB.setDiscriminator("B");
+            }
+            for (ConcreteClassA concreteClassA : model.getConcreteClassAs()) {
+                concreteClassA.setDiscriminator("A");
+            }
         }
         ReflectionAssert.assertReflectionEquals(model, containerInitial, ReflectionComparatorMode.LENIENT_ORDER);
 
