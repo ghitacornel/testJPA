@@ -1,11 +1,14 @@
-package relationships.collections.maps.manytomany;
+package relationships.collections.sets.manytomany;
 
-import javax.persistence.*;
-import java.util.HashMap;
-import java.util.Map;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-public class NMap {
+public class NSet {
 
     @Id
     private Integer id;
@@ -14,8 +17,7 @@ public class NMap {
     private String name;
 
     @ManyToMany(mappedBy = "mapWithNs")
-    @MapKey(name = "id")
-    private Map<Integer, MMap> mapWithNs = new HashMap<>();
+    private Set<MSet> mapWithMs = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -38,12 +40,11 @@ public class NMap {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
-    public Map<Integer, MMap> getMapWithNs() {
-        return mapWithNs;
+    public Set<MSet> getMapWithMs() {
+        return mapWithMs;
     }
 
-    public void setMapWithNs(Map<Integer, MMap> mapWithNs) {
-        this.mapWithNs = mapWithNs;
+    public void setMapWithMs(Set<MSet> mapWithMs) {
+        this.mapWithMs = mapWithMs;
     }
-
 }
