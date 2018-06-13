@@ -62,6 +62,7 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
         flushAndClear();
 
         // verify changed type operation has no success
+        // even if a setter was provided, this discriminator is marked as not insertable, not updatable hence immutable
         MixedContainer containerFinal = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
         Assert.assertEquals(3, containerFinal.getConcreteSuperClass().size());
 
