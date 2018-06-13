@@ -20,6 +20,10 @@ public abstract class ConcreteSuperClass extends InheritanceMappedSuperClass {
     @Column(nullable = false)
     private String name;
 
+    /**
+     * mapping a discriminator column requires marking it as not insertable , not updatable since it is JPA only managed<br>
+     * good practice : do not provide setters for such properties
+     */
     @Column(name = "discriminator", insertable = false, updatable = false)
     private String discriminator;
 
@@ -35,7 +39,4 @@ public abstract class ConcreteSuperClass extends InheritanceMappedSuperClass {
         return discriminator;
     }
 
-    public void setDiscriminator(String discriminator) {
-        this.discriminator = discriminator;
-    }
 }
