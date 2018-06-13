@@ -8,8 +8,8 @@ import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
 
-    OTOOrphanOwningSideNotOwner a;
-    OTOOrphanOwningSideOwner b;
+    OTOOrphanOwningSideNotOwner notOwner;
+    OTOOrphanOwningSideOwner owner;
 
     @Before
     public void setUp() {
@@ -17,47 +17,47 @@ public class TestRemoveOrphans extends TransactionalSetup {
         verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideNotOwner.class);
         verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideOwner.class);
 
-        a = new OTOOrphanOwningSideNotOwner();
-        a.setId(1);
-        a.setName("a");
+        notOwner = new OTOOrphanOwningSideNotOwner();
+        notOwner.setId(1);
+        notOwner.setName("notOwner");
 
-        b = new OTOOrphanOwningSideOwner();
-        b.setId(1);
-        b.setName("b");
+        owner = new OTOOrphanOwningSideOwner();
+        owner.setId(1);
+        owner.setName("owner");
 
-        a.setB(b);
-        b.setA(a);
+        notOwner.setB(owner);
+        owner.setA(notOwner);
 
-        persist(a, b);
+        persist(notOwner, owner);
         flushAndClear();
 
     }
 
     @Test
-    public void testRemoveOrphanB() {
+    public void testRemoveOrphanOwner() {
 
-        // mark B as orphan
-        em.find(OTOOrphanOwningSideOwner.class, b.getId()).setA(null);
+        // mark owner as orphan
+        em.find(OTOOrphanOwningSideOwner.class, owner.getId()).setA(null);
         flushAndClear();
 
-        Assert.assertNull(em.find(OTOOrphanOwningSideNotOwner.class, a.getId()));
+        Assert.assertNull(em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
         {// adjust model to match expectations
-            b.setA(null);
+            owner.setA(null);
         }
-        ReflectionAssert.assertReflectionEquals(b, em.find(OTOOrphanOwningSideOwner.class, b.getId()));
+        ReflectionAssert.assertReflectionEquals(owner, em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
 
     }
 
     @Test
-    public void testRemoveOrphanA() {
+    public void testRemoveOrphanNotOwner() {
 
-        // mark A as orphan
-        em.find(OTOOrphanOwningSideNotOwner.class, a.getId()).setB(null);
+        // mark not owner as orphan
+        em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()).setB(null);
         flushAndClear();
 
         // observe nothing happened since A is not the owning side
-        ReflectionAssert.assertReflectionEquals(a, em.find(OTOOrphanOwningSideNotOwner.class, a.getId()));
-        ReflectionAssert.assertReflectionEquals(b, em.find(OTOOrphanOwningSideOwner.class, b.getId()));
+        ReflectionAssert.assertReflectionEquals(notOwner, em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
+        ReflectionAssert.assertReflectionEquals(owner, em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
 
     }
 }

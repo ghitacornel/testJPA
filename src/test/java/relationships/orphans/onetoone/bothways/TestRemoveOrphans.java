@@ -6,8 +6,8 @@ import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
 
-    OTOOrphanBothWaysNotOwner a;
-    OTOOrphanBothWaysOwner b;
+    OTOOrphanBothWaysNotOwner notOwner;
+    OTOOrphanBothWaysOwner owner;
 
     @Before
     public void setUp() {
@@ -15,27 +15,27 @@ public class TestRemoveOrphans extends TransactionalSetup {
         verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysNotOwner.class);
         verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysOwner.class);
 
-        a = new OTOOrphanBothWaysNotOwner();
-        a.setId(1);
-        a.setName("a");
+        notOwner = new OTOOrphanBothWaysNotOwner();
+        notOwner.setId(1);
+        notOwner.setName("notOwner");
 
-        b = new OTOOrphanBothWaysOwner();
-        b.setId(1);
-        b.setName("b");
+        owner = new OTOOrphanBothWaysOwner();
+        owner.setId(1);
+        owner.setName("owner");
 
-        a.setB(b);
-        b.setA(a);
+        notOwner.setB(owner);
+        owner.setA(notOwner);
 
-        persist(a, b);
+        persist(notOwner, owner);
         flushAndClear();
 
     }
 
     @Test
-    public void testRemoveOrphanB() {
+    public void testRemoveOrphanOwner() {
 
-        // mark B as orphan
-        em.find(OTOOrphanBothWaysOwner.class, b.getId()).setA(null);
+        // mark owner as orphan
+        em.find(OTOOrphanBothWaysOwner.class, owner.getId()).setA(null);
         flushAndClear();
 
         // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
@@ -45,10 +45,10 @@ public class TestRemoveOrphans extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOrphanA() {
+    public void testRemoveOrphanNotOwner() {
 
-        // mark A as orphan
-        em.find(OTOOrphanBothWaysNotOwner.class, a.getId()).setB(null);
+        // mark not owner as orphan
+        em.find(OTOOrphanBothWaysNotOwner.class, notOwner.getId()).setB(null);
         flushAndClear();
 
         // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
