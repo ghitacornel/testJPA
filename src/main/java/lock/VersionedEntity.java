@@ -16,8 +16,8 @@ public class VersionedEntity {
     private String name;
 
     /**
-     * applicable only on some certain data types<br>
-     * good practice => no getters/setters defined
+     * @Version is applicable only on some certain data types<br>
+     * good practice : do not define getters/setters for @Version marked properties
      */
     @Version
     private int version;
