@@ -11,7 +11,6 @@ import java.util.Date;
 @Embeddable
 public class EmbeddableBean {
 
-    @Basic
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)

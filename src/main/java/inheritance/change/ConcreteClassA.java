@@ -1,6 +1,5 @@
 package inheritance.change;
 
-import javax.persistence.Basic;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
@@ -11,7 +10,6 @@ import javax.persistence.Entity;
 @DiscriminatorValue("A")
 public class ConcreteClassA extends ConcreteSuperClass {
 
-    @Basic
     // cannot be not null since it'a a one table per hierarchy strategy
     private String specificA;
 

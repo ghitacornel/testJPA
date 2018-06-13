@@ -1,7 +1,6 @@
 package queries.bulk;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,7 +11,6 @@ public class BulkTarget {
     private Integer id;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String name;
 
     public Integer getId() {

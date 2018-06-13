@@ -1,7 +1,6 @@
 package queries.bulk;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -12,10 +11,8 @@ public class BulkQueryEntity {
     private Integer id;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String name;
 
-    @Basic
     private Integer value;
 
     public Integer getId() {

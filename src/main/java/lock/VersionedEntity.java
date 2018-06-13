@@ -1,6 +1,5 @@
 package lock;
 
-import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Version;
@@ -16,7 +15,6 @@ public class VersionedEntity {
     @Id
     private Integer id;
 
-    @Basic
     private String name;
 
     /**
