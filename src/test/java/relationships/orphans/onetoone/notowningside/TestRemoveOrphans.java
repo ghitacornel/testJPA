@@ -34,8 +34,9 @@ public class TestRemoveOrphans extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOrphanA() {
+    public void testRemoveOrphanB() {
 
+        // mark B as orphan
         em.find(OTOOrphanNotOwningSideB.class, b.getId()).setA(null);
         flushAndClear();
 
@@ -53,8 +54,9 @@ public class TestRemoveOrphans extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOrphanB() {
+    public void testRemoveOrphanA() {
 
+        // mark A as orphan
         em.find(OTOOrphanNotOwningSideA.class, a.getId()).setB(null);
         flushAndClear();
 
