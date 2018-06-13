@@ -86,15 +86,15 @@ public class TestSelectAll extends TransactionalSetup {
     public void testM() {
 
         List<MMap> list = em.createQuery("select t from MMap t", MMap.class).getResultList();
-
         ReflectionAssert.assertReflectionEquals(model.subList(4, 8), list, ReflectionComparatorMode.LENIENT_ORDER);
+
     }
 
     @Test
     public void testN() {
 
         List<NMap> list = em.createQuery("select t from NMap t", NMap.class).getResultList();
-
         ReflectionAssert.assertReflectionEquals(model.subList(0, 4), list, ReflectionComparatorMode.LENIENT_ORDER);
+
     }
 }

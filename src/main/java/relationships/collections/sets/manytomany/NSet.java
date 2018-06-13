@@ -17,7 +17,7 @@ public class NSet {
     private String name;
 
     @ManyToMany(mappedBy = "setWithNs")
-    private Set<MSet> setWithMs = new HashSet<>();
+    final private Set<MSet> setWithMs = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -44,7 +44,4 @@ public class NSet {
         return setWithMs;
     }
 
-    public void setSetWithMs(Set<MSet> setWithMs) {
-        this.setWithMs = setWithMs;
-    }
 }

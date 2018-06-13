@@ -16,7 +16,7 @@ public class MMap {
     @ManyToMany
     @JoinTable(name = "MN_MAP", joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")})
     @MapKey(name = "id")
-    private Map<Integer, NMap> mapWithNs = new HashMap<>();
+    final private Map<Integer, NMap> mapWithNs = new HashMap<>();
 
     public Integer getId() {
         return id;
@@ -36,10 +36,6 @@ public class MMap {
 
     public Map<Integer, NMap> getMapWithNs() {
         return mapWithNs;
-    }
-
-    public void setMapWithNs(Map<Integer, NMap> mapWithNs) {
-        this.mapWithNs = mapWithNs;
     }
 
 }

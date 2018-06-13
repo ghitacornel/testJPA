@@ -17,7 +17,7 @@ public class MSet {
     private String name;
 
     @ManyToMany
-    private Set<NSet> setWithNs = new HashSet<>();
+    final private Set<NSet> setWithNs = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -39,7 +39,4 @@ public class MSet {
         return setWithNs;
     }
 
-    public void setSetWithNs(Set<NSet> setWithNs) {
-        this.setWithNs = setWithNs;
-    }
 }
