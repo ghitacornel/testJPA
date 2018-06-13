@@ -6,8 +6,6 @@ import javax.persistence.Version;
 
 /**
  * a simple versioned {@link Entity} is used for optimistic lock
- *
- * @author Cornel
  */
 @Entity
 public class VersionedEntity {
