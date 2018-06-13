@@ -37,6 +37,7 @@ public class TestLazy extends TransactionalSetup {
         // observe in this case the referenced entity is always loaded regardless of the LAZY flag
         OTOOA existingA = em.find(OTOOA.class, a.getId());
         flushAndClear();
+
         Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingA.getB()));
 
     }
@@ -46,6 +47,7 @@ public class TestLazy extends TransactionalSetup {
 
         OTOOB existingB = em.find(OTOOB.class, b.getId());
         flushAndClear();
+
         Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
 
     }
@@ -56,16 +58,18 @@ public class TestLazy extends TransactionalSetup {
         OTOOB existingB = em.find(OTOOB.class, b.getId());
         existingB.getA().getName();// force proxy
         flushAndClear();
+
         Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
 
     }
 
     @Test
-    public void testForceEagerOnAlreadyLoadedFieldDoesNotTriggerTheForceLoadingOfTheWholeEntity() {
+    public void testForceEagerOnAlreadyLoadedFieldDoesNotTriggerTheForcedLoadingOfTheWholeEntity() {
 
         OTOOB existingB = em.find(OTOOB.class, a.getId());
         existingB.getA().getId();// try to force proxy on already loaded field
         flushAndClear();
+
         Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
 
     }

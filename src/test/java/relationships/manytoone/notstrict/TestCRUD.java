@@ -16,8 +16,6 @@ public class TestCRUD extends TransactionalSetup {
     @Before
     public void before() {
 
-        verifyCorrespondingTableIsEmpty(MTOONotStrictChild.class);
-
         parent1.setId(1);
         parent1.setName("parent strict 1");
         persist(parent1);
@@ -31,6 +29,8 @@ public class TestCRUD extends TransactionalSetup {
 
     @Test
     public void testCRUD() {
+
+        verifyCorrespondingTableIsEmpty(MTOONotStrictChild.class);
 
         // insert
         MTOONotStrictChild child = new MTOONotStrictChild();
@@ -66,7 +66,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // test remove
-        Assert.assertTrue(em.createQuery("select t from MTOONotStrictChild t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(MTOONotStrictChild.class);
 
     }
 

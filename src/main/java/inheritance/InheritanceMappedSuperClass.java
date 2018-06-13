@@ -6,14 +6,17 @@ import javax.persistence.MappedSuperclass;
 import java.util.UUID;
 
 /**
- * this mapped superclass has no value other than specifying some mapped inherited properties<br>
- * A {@link MappedSuperclass} cannot be queried, it is not an {@link Entity}<br>
+ * A mapped superclass declares mapped inherited properties<br>
+ * A {@link MappedSuperclass} cannot be queried for<br>
+ * A mapped superclass is not an {@link Entity}<br>
  * <p>
  * A good practice :
  * - have 1 such class as a parent for all your entities<br>
- * - ensure this class holds the id mapping and / or generation policy for all your entities<br>
- * - ensure this class provides default "equals" + "hashCode" methods based only on entity ID<br>
- * - ensure this class provides default "toString" method based only on entity ID<br>
+ * - this class can be typed with the type of the ID
+ * - this class can provide the generic ID getter method
+ * - this class can encapsulate the ID mapping and / or generation policy for all your entities<br>
+ * - this class can provide default "equals" + "hashCode" methods based solely on entity ID<br>
+ * - this class can provide default "toString" method based solely on entity ID and actual class<br>
  */
 @MappedSuperclass
 public class InheritanceMappedSuperClass {

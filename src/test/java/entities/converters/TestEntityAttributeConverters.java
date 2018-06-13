@@ -16,7 +16,7 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
     }
 
     @Test
-    public void testCRU() {
+    public void testCreateReadUpdateRead() {
 
         // create new entity
         EntityWithAttributeConverters entity1 = new EntityWithAttributeConverters();

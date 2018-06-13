@@ -23,7 +23,7 @@ public class Entity {
     @Column(nullable = false)// these 2 annotations are equivalent
     private String name;
 
-    @Basic// can use this annotation or @Column only, yet @Column is richer in configurations
+    @Basic// can use this annotation or @Column, yet @Column is richer in configurations
     @Column(name = "nullableValue")// override default column name
     private Integer value;
 

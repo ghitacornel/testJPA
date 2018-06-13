@@ -9,33 +9,29 @@ import java.util.Date;
 
 public class TestSetAllEmbeddedFieldsToNull extends TransactionalSetup {
 
-    private EntityWithEmbeddable model = buildModel();
+    private EntityWithEmbeddable entity;
 
     @Before
     public void before() {
-        persist(model);
-        flushAndClear();
-    }
-
-    private EntityWithEmbeddable buildModel() {
-        EntityWithEmbeddable entity = new EntityWithEmbeddable();
+        entity = new EntityWithEmbeddable();
         entity.setId(1);
         entity.setEmbedded(new EmbeddableBean());
         entity.getEmbedded().setName("name " + entity.getId());
         entity.getEmbedded().setCreationDate(new Date());
-        return entity;
+        persist(entity);
+        flushAndClear();
     }
 
     @Test
     public void testSetAllEmbeddedFieldsToNullLeadsToNullEmbedded() {
 
-        EntityWithEmbeddable existing1 = em.find(EntityWithEmbeddable.class, model.getId());
+        EntityWithEmbeddable existing = em.find(EntityWithEmbeddable.class, entity.getId());
 
         // set all embedded fields to null
-        existing1.getEmbedded().setName(null);
-        existing1.getEmbedded().setCreationDate(null);
+        existing.getEmbedded().setName(null);
+        existing.getEmbedded().setCreationDate(null);
         flushAndClear();
 
-        Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
+        Assert.assertNull(em.find(EntityWithEmbeddable.class, entity.getId()).getEmbedded());
     }
 }

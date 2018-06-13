@@ -6,6 +6,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is an entity container of other entities belonging to the same class hierarchy
+ */
 @Entity
 public class MixedContainer extends InheritanceMappedSuperClass {
 

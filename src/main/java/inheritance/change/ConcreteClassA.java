@@ -5,8 +5,7 @@ import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 
 /**
- * if @DiscriminatorValue is not specified a default value as specified by specs
- * is used
+ * if @DiscriminatorValue is not specified a default value as specified by specs is used
  */
 @Entity
 @DiscriminatorValue("A")

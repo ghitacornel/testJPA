@@ -60,6 +60,7 @@ public abstract class Setup {
             tableName = table.name();
         }
         Assert.assertTrue(em.createNativeQuery("select * from " + tableName).getResultList().isEmpty());
+        flushAndClear();
     }
 
     protected void verifyTableIsEmpty(String tableName) {

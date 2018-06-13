@@ -19,20 +19,20 @@ public class TestEntityWithIdListener extends TransactionalSetup {
     public void test() {
 
         // create new entity
-        EntityWithIdListener model = new EntityWithIdListener();
-        Assert.assertNull(model.getId());
+        EntityWithIdListener initialEntity = new EntityWithIdListener();
+        Assert.assertNull(initialEntity.getId());
 
         // persist
-        em.persist(model);
+        em.persist(initialEntity);
         flushAndClear();
 
         // verify exactly 1 object was persisted
         List<EntityWithIdListener> list = em.createQuery("select t from EntityWithIdListener t", EntityWithIdListener.class).getResultList();
         Assert.assertEquals(1, list.size());
-        EntityWithIdListener existing = list.get(0);
+        EntityWithIdListener persistedEntity = list.get(0);
 
-        Assert.assertNotNull(existing.getId());// verify id was generated and populated
-        ReflectionAssert.assertReflectionEquals(model, existing);
+        Assert.assertNotNull(persistedEntity.getId());// verify id was generated and populated
+        ReflectionAssert.assertReflectionEquals(initialEntity, persistedEntity);
     }
 
 }

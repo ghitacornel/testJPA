@@ -60,11 +60,12 @@ public class TestLazy extends TransactionalSetup {
     }
 
     @Test
-    public void testForceEagerOnAlreadyLoadedFieldDoesNotTriggerTheForceLoadingOfTheWholeEntity() {
+    public void testForceEagerOnAlreadyLoadedFieldDoesNotTriggerTheForcedLoadingOfTheWholeEntity() {
 
         OTOMLazyChild existingChild = em.find(OTOMLazyChild.class, child.getId());
         existingChild.getParent().getId();// try to force proxy on already loaded field
         flushAndClear();
+
         Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
 
     }

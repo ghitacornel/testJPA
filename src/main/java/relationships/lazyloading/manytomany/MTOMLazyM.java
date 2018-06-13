@@ -7,14 +7,14 @@ import java.util.List;
 @Entity
 public class MTOMLazyM {
 
-    @ManyToMany
-    private List<MTOMLazyN> listWithNs = new ArrayList<>();
-
     @Id
     private Integer id;
 
     @Column(nullable = false)
     private String name;
+
+    @ManyToMany
+    private List<MTOMLazyN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;

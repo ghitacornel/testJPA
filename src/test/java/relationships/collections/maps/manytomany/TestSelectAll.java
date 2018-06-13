@@ -4,8 +4,6 @@ import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.collections.maps.manytomany.MMap;
-import relationships.collections.maps.manytomany.NMap;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -82,14 +80,6 @@ public class TestSelectAll extends TransactionalSetup {
     public void before() {
         persist(model);
         flushAndClear();
-    }
-
-    @Test
-    public void testFullJoin() {
-
-        // XXX MySQL lacks full join support
-        // in order to use JPA for full join we need native queries
-
     }
 
     @Test

@@ -32,8 +32,7 @@ public class TestCRUD extends TransactionalSetup {
     public void testCRUD() {
 
         // assert empty
-        Assert.assertTrue(em.createQuery("select t from MTOOStrictChild t").getResultList().isEmpty());
-        flushAndClear();
+        verifyCorrespondingTableIsEmpty(MTOOStrictChild.class);
 
         // insert
         MTOOStrictChild child = new MTOOStrictChild();
@@ -50,26 +49,26 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // update
-        MTOOStrictChild existing = em.find(MTOOStrictChild.class, 1);
+        MTOOStrictChild existing = em.find(MTOOStrictChild.class, child.getId());
         existing.setName("new child name");// update name
         existing.setParent(parent2);// update parent
         em.merge(existing);
         flushAndClear();
 
         // test update
-        existing = em.find(MTOOStrictChild.class, 1);
+        existing = em.find(MTOOStrictChild.class, child.getId());
         Assert.assertEquals("new child name", existing.getName());
         ReflectionAssert.assertReflectionEquals(parent2, existing.getParent());
         flushAndClear();
 
         // remove
-        existing = em.find(MTOOStrictChild.class, 1);
+        existing = em.find(MTOOStrictChild.class, child.getId());
         Assert.assertNotNull(existing);
         em.remove(existing);
         flushAndClear();
 
         // test remove
-        Assert.assertTrue(em.createQuery("select t from MTOOStrictChild t").getResultList().isEmpty());
+        verifyCorrespondingTableIsEmpty(MTOOStrictChild.class);
 
     }
 

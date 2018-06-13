@@ -1,22 +1,18 @@
 package queries.simple;
 
 import javax.persistence.Basic;
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-// we changed the name of the entity used in queries
-@Entity(name = "SQE")
+@Entity(name = "SQE")// changed the name of the entity for shorter JPQL queries
 public class SimpleQueryEntity {
 
     @Id
     private Integer id;
 
     @Basic(optional = false)
-    @Column(nullable = false)
     private String name;
 
-    @Basic
     private Integer value;
 
     public Integer getId() {

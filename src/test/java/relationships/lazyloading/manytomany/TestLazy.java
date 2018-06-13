@@ -48,13 +48,15 @@ public class TestLazy extends TransactionalSetup {
     public void testForceEager() {
 
         MTOMLazyM existingM = em.find(MTOMLazyM.class, m.getId());
-        existingM.getListWithNs().size();
+        existingM.getListWithNs().size();// force loading
         flushAndClear();
 
         MTOMLazyN existingN = em.find(MTOMLazyN.class, n.getId());
-        existingN.getListWithMs().size();
+        existingN.getListWithMs().size();// force loading
         flushAndClear();
 
+        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
+        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingN.getListWithMs()));
         Assert.assertEquals(1, existingM.getListWithNs().size());
         Assert.assertEquals(1, existingN.getListWithMs().size());
 

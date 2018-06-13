@@ -41,6 +41,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     @Test
     public void testRemoveOrphansWhenParentIsRemoved() {
 
+        // remove parent
         OTOMOrphanA existingA = em.find(OTOMOrphanA.class, a.getId());
         em.remove(existingA);
         flushAndClear();

@@ -5,9 +5,8 @@ import java.util.Date;
 
 /**
  * an {@link Embeddable} is not considered to be an {@link Entity}<br>
- * {@link Embeddable} do not have an {@link Id}
- *
- * @author Cornel
+ * {@link Embeddable} do not have an {@link Id}<br>
+ * can use {@link Embeddable} for composite primary keys or foreign keys
  */
 @Embeddable
 public class EmbeddableBean {
