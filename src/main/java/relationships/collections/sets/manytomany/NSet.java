@@ -16,8 +16,8 @@ public class NSet {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "mapWithNs")
-    private Set<MSet> mapWithMs = new HashSet<>();
+    @ManyToMany(mappedBy = "setWithNs")
+    private Set<MSet> setWithMs = new HashSet<>();
 
     public Integer getId() {
         return id;
@@ -40,11 +40,11 @@ public class NSet {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
-    public Set<MSet> getMapWithMs() {
-        return mapWithMs;
+    public Set<MSet> getSetWithMs() {
+        return setWithMs;
     }
 
-    public void setMapWithMs(Set<MSet> mapWithMs) {
-        this.mapWithMs = mapWithMs;
+    public void setSetWithMs(Set<MSet> setWithMs) {
+        this.setWithMs = setWithMs;
     }
 }

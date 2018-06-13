@@ -58,18 +58,18 @@ public class TestSelectAll extends TransactionalSetup {
             m4.setName("m 4 name");
             objects.add(m4);
 
-            n1.getMapWithMs().add( m1);
-            m1.getMapWithNs().add( n1);
+            n1.getSetWithMs().add( m1);
+            m1.getSetWithNs().add( n1);
 
-            n2.getMapWithMs().add( m2);
-            n2.getMapWithMs().add( m3);
-            n3.getMapWithMs().add( m2);
-            n3.getMapWithMs().add( m3);
+            n2.getSetWithMs().add( m2);
+            n2.getSetWithMs().add( m3);
+            n3.getSetWithMs().add( m2);
+            n3.getSetWithMs().add( m3);
 
-            m2.getMapWithNs().add( n2);
-            m2.getMapWithNs().add( n3);
-            m3.getMapWithNs().add( n2);
-            m3.getMapWithNs().add( n3);
+            m2.getSetWithNs().add( n2);
+            m2.getSetWithNs().add( n3);
+            m3.getSetWithNs().add( n2);
+            m3.getSetWithNs().add( n3);
 
         }
 
