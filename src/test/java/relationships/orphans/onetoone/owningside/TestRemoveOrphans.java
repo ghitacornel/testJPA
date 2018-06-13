@@ -8,20 +8,20 @@ import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
 
-    OTOOrphanOwningSideA a;
-    OTOOrphanOwningSideB b;
+    OTOOrphanOwningSideNotOwner a;
+    OTOOrphanOwningSideOwner b;
 
     @Before
     public void setUp() {
 
-        verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideA.class);
-        verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideB.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideNotOwner.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideOwner.class);
 
-        a = new OTOOrphanOwningSideA();
+        a = new OTOOrphanOwningSideNotOwner();
         a.setId(1);
         a.setName("a");
 
-        b = new OTOOrphanOwningSideB();
+        b = new OTOOrphanOwningSideOwner();
         b.setId(1);
         b.setName("b");
 
@@ -37,14 +37,14 @@ public class TestRemoveOrphans extends TransactionalSetup {
     public void testRemoveOrphanB() {
 
         // mark B as orphan
-        em.find(OTOOrphanOwningSideB.class, b.getId()).setA(null);
+        em.find(OTOOrphanOwningSideOwner.class, b.getId()).setA(null);
         flushAndClear();
 
-        Assert.assertNull(em.find(OTOOrphanOwningSideA.class, a.getId()));
+        Assert.assertNull(em.find(OTOOrphanOwningSideNotOwner.class, a.getId()));
         {// adjust model to match expectations
             b.setA(null);
         }
-        ReflectionAssert.assertReflectionEquals(b, em.find(OTOOrphanOwningSideB.class, b.getId()));
+        ReflectionAssert.assertReflectionEquals(b, em.find(OTOOrphanOwningSideOwner.class, b.getId()));
 
     }
 
@@ -52,12 +52,12 @@ public class TestRemoveOrphans extends TransactionalSetup {
     public void testRemoveOrphanA() {
 
         // mark A as orphan
-        em.find(OTOOrphanOwningSideA.class, a.getId()).setB(null);
+        em.find(OTOOrphanOwningSideNotOwner.class, a.getId()).setB(null);
         flushAndClear();
 
         // observe nothing happened since A is not the owning side
-        ReflectionAssert.assertReflectionEquals(a, em.find(OTOOrphanOwningSideA.class, a.getId()));
-        ReflectionAssert.assertReflectionEquals(b, em.find(OTOOrphanOwningSideB.class, b.getId()));
+        ReflectionAssert.assertReflectionEquals(a, em.find(OTOOrphanOwningSideNotOwner.class, a.getId()));
+        ReflectionAssert.assertReflectionEquals(b, em.find(OTOOrphanOwningSideOwner.class, b.getId()));
 
     }
 }

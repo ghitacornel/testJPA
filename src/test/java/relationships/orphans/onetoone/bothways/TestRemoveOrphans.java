@@ -6,20 +6,20 @@ import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
 
-    OTOOrphanBothWaysA a;
-    OTOOrphanBothWaysB b;
+    OTOOrphanBothWaysNotOwner a;
+    OTOOrphanBothWaysOwner b;
 
     @Before
     public void setUp() {
 
-        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysA.class);
-        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysB.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysNotOwner.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysOwner.class);
 
-        a = new OTOOrphanBothWaysA();
+        a = new OTOOrphanBothWaysNotOwner();
         a.setId(1);
         a.setName("a");
 
-        b = new OTOOrphanBothWaysB();
+        b = new OTOOrphanBothWaysOwner();
         b.setId(1);
         b.setName("b");
 
@@ -35,12 +35,12 @@ public class TestRemoveOrphans extends TransactionalSetup {
     public void testRemoveOrphanB() {
 
         // mark B as orphan
-        em.find(OTOOrphanBothWaysB.class, b.getId()).setA(null);
+        em.find(OTOOrphanBothWaysOwner.class, b.getId()).setA(null);
         flushAndClear();
 
         // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
-        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysA.class);
-        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysB.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysNotOwner.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysOwner.class);
 
     }
 
@@ -48,12 +48,12 @@ public class TestRemoveOrphans extends TransactionalSetup {
     public void testRemoveOrphanA() {
 
         // mark A as orphan
-        em.find(OTOOrphanBothWaysA.class, a.getId()).setB(null);
+        em.find(OTOOrphanBothWaysNotOwner.class, a.getId()).setB(null);
         flushAndClear();
 
         // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
-        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysA.class);
-        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysB.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysNotOwner.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysOwner.class);
 
     }
 }

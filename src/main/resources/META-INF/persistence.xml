@@ -79,12 +79,12 @@
         <class>relationships.lazyloading.toomanyeagers.TMELink3</class>
         <class>relationships.lazyloading.toomanyeagers.TMELink4</class>
 
-        <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysA</class>
-        <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysB</class>
-        <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideA</class>
-        <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideB</class>
-        <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideA</class>
-        <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideB</class>
+        <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysNotOwner</class>
+        <class>relationships.orphans.onetoone.bothways.OTOOrphanBothWaysOwner</class>
+        <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideNotOwner</class>
+        <class>relationships.orphans.onetoone.owningside.OTOOrphanOwningSideOwner</class>
+        <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideNotOwner</class>
+        <class>relationships.orphans.onetoone.notowningside.OTOOrphanNotOwningSideOwner</class>
         <class>relationships.orphans.onetomany.OTOMOrphanParent</class>
         <class>relationships.orphans.onetomany.OTOMOrphanChild</class>
 

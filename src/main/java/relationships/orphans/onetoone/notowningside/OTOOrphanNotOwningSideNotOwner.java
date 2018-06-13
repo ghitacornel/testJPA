@@ -1,4 +1,4 @@
-package relationships.orphans.onetoone.bothways;
+package relationships.orphans.onetoone.notowningside;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -6,7 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
 @Entity
-public class OTOOrphanBothWaysB {
+public class OTOOrphanNotOwningSideNotOwner {
 
     @Id
     private Integer id;
@@ -14,8 +14,8 @@ public class OTOOrphanBothWaysB {
     @Column(nullable = false)
     private String name;
 
-    @OneToOne(orphanRemoval = true)
-    private OTOOrphanBothWaysA a;
+    @OneToOne(mappedBy = "a", orphanRemoval = true)
+    private OTOOrphanNotOwningSideOwner b;
 
     public Integer getId() {
         return id;
@@ -33,12 +33,12 @@ public class OTOOrphanBothWaysB {
         this.name = name;
     }
 
-    public OTOOrphanBothWaysA getA() {
-        return a;
+    public OTOOrphanNotOwningSideOwner getB() {
+        return b;
     }
 
-    public void setA(OTOOrphanBothWaysA a) {
-        this.a = a;
+    public void setB(OTOOrphanNotOwningSideOwner b) {
+        this.b = b;
     }
 
 }
