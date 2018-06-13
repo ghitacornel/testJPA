@@ -1,6 +1,5 @@
 package relationships.orphans.onetoone.bothways;
 
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import setup.TransactionalSetup;
@@ -12,6 +11,9 @@ public class TestRemoveOrphans extends TransactionalSetup {
 
     @Before
     public void setUp() {
+
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysA.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysB.class);
 
         a = new OTOOrphanBothWaysA();
         a.setId(1);
@@ -36,8 +38,8 @@ public class TestRemoveOrphans extends TransactionalSetup {
         flushAndClear();
 
         // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
-        Assert.assertNull(em.find(OTOOrphanBothWaysA.class, a.getId()));
-        Assert.assertNull(em.find(OTOOrphanBothWaysB.class, b.getId()));
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysA.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysB.class);
 
     }
 
@@ -48,8 +50,8 @@ public class TestRemoveOrphans extends TransactionalSetup {
         flushAndClear();
 
         // regardless which is removed since orphanRemoval flag is used on both side both entities are removed
-        Assert.assertNull(em.find(OTOOrphanBothWaysA.class, a.getId()));
-        Assert.assertNull(em.find(OTOOrphanBothWaysB.class, b.getId()));
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysA.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysB.class);
 
     }
 }

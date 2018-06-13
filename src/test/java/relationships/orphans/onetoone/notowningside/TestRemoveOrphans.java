@@ -14,6 +14,9 @@ public class TestRemoveOrphans extends TransactionalSetup {
     @Before
     public void setUp() {
 
+        verifyCorrespondingTableIsEmpty(OTOOrphanNotOwningSideA.class);
+        verifyCorrespondingTableIsEmpty(OTOOrphanNotOwningSideB.class);
+
         a = new OTOOrphanNotOwningSideA();
         a.setId(1);
         a.setName("a");
