@@ -15,7 +15,7 @@ public class NMap {
 
     @ManyToMany(mappedBy = "mapWithNs")
     @MapKey(name = "id")
-    private Map<Integer, MMap> mapWithNs = new HashMap<>();
+    private Map<Integer, MMap> mapWithMs = new HashMap<>();
 
     public Integer getId() {
         return id;
@@ -38,12 +38,11 @@ public class NMap {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
-    public Map<Integer, MMap> getMapWithNs() {
-        return mapWithNs;
+    public Map<Integer, MMap> getMapWithMs() {
+        return mapWithMs;
     }
 
-    public void setMapWithNs(Map<Integer, MMap> mapWithNs) {
-        this.mapWithNs = mapWithNs;
+    public void setMapWithMs(Map<Integer, MMap> mapWithMs) {
+        this.mapWithMs = mapWithMs;
     }
-
 }
