@@ -57,7 +57,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOrphanBySettingParentToNullDoesNotWork() {
+    public void testRemoveOrphanBySettingParentToNullRemovesOnlyTheRelationshipAndNotTheOrphanedChild() {
 
         em.find(OTOMOrphanChild.class, child2.getId()).setParent(null);
         flushAndClear();
@@ -71,7 +71,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOrphanByRemovingFromParentListOnlyDoesNotWork() {
+    public void testRemoveOrphanByRemovingFromParentListOnlyRemovesOnlyTheRelationshipAndNotTheOrphanedChild() {
 
         em.find(OTOMOrphanParent.class, parent.getId()).getChildren().remove(1);
         flushAndClear();
@@ -85,7 +85,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
 
     // TODO verify with other JPA implementations / versions
     @Test
-    public void testRemoveOrphanByRemovingFromParentListAndSetParentToNullDoesNotWork() {
+    public void testRemoveOrphanByRemovingFromParentListAndSetParentToNullRemovesOnlyTheRelationshipAndNotTheOrphanedChild() {
 
         OTOMOrphanChild toRemoveChild = em.find(OTOMOrphanParent.class, parent.getId()).getChildren().remove(1);
         toRemoveChild.setParent(null);
