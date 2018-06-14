@@ -66,7 +66,7 @@ public class TestMerge extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        {// first alter the initial model to match expectations
+        {// alter the initial model to match expectations
 
             m.setName("m 1 new name");
             m.getListWithNs().add(n2New);
