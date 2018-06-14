@@ -55,7 +55,6 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
 
         OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, parent.getId());
         ReflectionAssert.assertReflectionEquals(existing1, existing2, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(existing1.getChildren(), existing2.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 }

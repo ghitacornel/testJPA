@@ -29,8 +29,10 @@ public class TestUpdateParentWithCascadeToChildren extends TransactionalSetup {
 
     @Before
     public void before() {
+
         verifyCorrespondingTableIsEmpty(OTOMStrictParent.class);
         verifyCorrespondingTableIsEmpty(OTOMStrictChild.class);
+
         em.persist(parent);
         flushAndClear();
     }
@@ -56,6 +58,7 @@ public class TestUpdateParentWithCascadeToChildren extends TransactionalSetup {
         flushAndClear();
 
         // verify results
+        //observe existing children are removed
         ReflectionAssert.assertReflectionEquals(newVersionOfParent, em.find(OTOMStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
