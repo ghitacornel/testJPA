@@ -15,7 +15,8 @@ public class NoCascadeM {
 
     /**
      * observe override the join table definition<br>
-     * observe unique constraint added on foreign keys combination
+     * observe unique constraint added on foreign keys combination<br>
+     * observe not null constraints added
      */
     @ManyToMany
     @JoinTable(
