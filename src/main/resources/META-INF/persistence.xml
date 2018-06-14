@@ -45,8 +45,6 @@
         <class>relationships.manytomany.cascade.bothways.CascadeBothWaysN</class>
         <class>relationships.manytomany.cascade.oneside.CascadeOneSideM</class>
         <class>relationships.manytomany.cascade.oneside.CascadeOneSideN</class>
-        <class>relationships.collections.maps.manytomany.MMap</class>
-        <class>relationships.collections.maps.manytomany.NMap</class>
         <class>relationships.manytomany.bothowners.BothOwnerM</class>
         <class>relationships.manytomany.bothowners.BothOwnerN</class>
 
@@ -70,7 +68,6 @@
         <class>relationships.lazyloading.onetomany.OTOMLazyParent</class>
         <class>relationships.lazyloading.onetoone.OTOOA</class>
         <class>relationships.lazyloading.onetoone.OTOOB</class>
-
         <class>relationships.lazyloading.toomanyeagers.TMECenter</class>
         <class>relationships.lazyloading.toomanyeagers.TMELink1</class>
         <class>relationships.lazyloading.toomanyeagers.TMELink2</class>
@@ -91,6 +88,8 @@
         <class>relationships.orderby.onetomany.OTOMOrderParent</class>
         <class>relationships.orderby.onetomany.OTOMOrderChild</class>
 
+        <class>relationships.collections.maps.manytomany.MMap</class>
+        <class>relationships.collections.maps.manytomany.NMap</class>
         <class>relationships.collections.maps.onetomany.ChildMap</class>
         <class>relationships.collections.maps.onetomany.ParentMap</class>
         <class>relationships.collections.sets.manytomany.MSet</class>
