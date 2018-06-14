@@ -20,8 +20,8 @@ public class NoCascadeM {
     @ManyToMany
     @JoinTable(
             name = "NoCascadeMN",
-            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")},
+            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id", nullable = false)},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"id_m", "id_n"})}
     )
     private List<NoCascadeN> listWithNs = new ArrayList<>();
