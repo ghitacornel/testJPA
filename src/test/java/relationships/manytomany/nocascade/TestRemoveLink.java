@@ -57,7 +57,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testSafeRemoveLink() {
+    public void testRemoveLinkFromBothSidesWorks() {
 
         // safes way to remove link is to remove it from both sides
         NoCascadeM actualM = em.find(NoCascadeM.class, m.getId());
