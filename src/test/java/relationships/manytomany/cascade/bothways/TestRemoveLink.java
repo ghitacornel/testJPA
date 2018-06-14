@@ -34,7 +34,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOfLinkFromTheOwningOrNotOwningSide() {
+    public void testRemoveOfLinkFromTheBothSides() {
 
         // remove
         CascadeBothWaysM existingM = em.find(CascadeBothWaysM.class, m.getId());
@@ -54,7 +54,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOfLinkFromTheOwningSideNotWorking() {
+    public void testRemoveOfLinkFromTheOwningSideOnlyIsNotWorking() {
 
         // remove
         em.find(CascadeBothWaysM.class, m.getId()).getListWithNs().remove(n);
@@ -67,7 +67,7 @@ public class TestRemoveLink extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveOfLinkFromTheNonOwningSideNotWorking() {
+    public void testRemoveOfLinkFromTheNonOwningSideOnlyIsNotWorking() {
 
         // remove
         em.find(CascadeBothWaysM.class, n.getId()).getListWithNs().remove(m);
