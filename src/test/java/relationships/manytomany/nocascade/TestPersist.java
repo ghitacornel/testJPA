@@ -9,6 +9,9 @@ public class TestPersist extends TransactionalSetup {
     @Test
     public void testPersist() {
 
+        verifyCorrespondingTableIsEmpty(NoCascadeM.class);
+        verifyCorrespondingTableIsEmpty(NoCascadeN.class);
+
         NoCascadeN n = new NoCascadeN();
         n.setId(1);
         n.setName("n 1 name");
