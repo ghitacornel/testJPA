@@ -42,7 +42,7 @@ public class TestPersist extends TransactionalSetup {
         em.persist(m1);
         flushAndClear();
 
-        // verify
+        // verify all is persisted
         ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeOneSideM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeOneSideN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
         ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeOneSideN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
@@ -56,7 +56,7 @@ public class TestPersist extends TransactionalSetup {
         em.persist(n1);
         flushAndClear();
 
-        // verify
+        // verify some parts of the model are persisted
         {// adjust model to reflect expected
             n1.getListWithMs().clear();
         }
