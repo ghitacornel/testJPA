@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class M {
+public class BothOwnerM {
 
     @ManyToMany
     @JoinTable(
@@ -14,7 +14,7 @@ public class M {
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")},
             uniqueConstraints = {@UniqueConstraint(name = "UK_MN_OK", columnNames = {"id_m", "id_n"})}
     )
-    private List<N> listWithNs = new ArrayList<>();
+    private List<BothOwnerN> listWithNs = new ArrayList<>();
 
     @Id
     private Integer id;
@@ -38,7 +38,7 @@ public class M {
         this.name = name;
     }
 
-    public List<N> getListWithNs() {
+    public List<BothOwnerN> getListWithNs() {
         return listWithNs;
     }
 
