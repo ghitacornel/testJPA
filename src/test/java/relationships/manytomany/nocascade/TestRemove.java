@@ -38,6 +38,9 @@ public class TestRemove extends TransactionalSetup {
         em.remove(em.find(NoCascadeM.class, m.getId()));
         flushAndClear();
 
+        // observe no update of relationship is required on the not owning side
+        // best practice is to update the not owning side also
+
         // verify final
         {// adjust model to reflect expected changes
             n.getListWithMs().remove(m);
