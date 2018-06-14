@@ -13,6 +13,10 @@ public class NoCascadeM {
     @Column(nullable = false)
     private String name;
 
+    /**
+     * observe override the join table definition<br>
+     * observe unique constraint added on foreign keys combination
+     */
     @ManyToMany
     @JoinTable(
             name = "NoCascadeMN",
