@@ -53,14 +53,13 @@ public class TestOrphanChild extends TransactionalSetup {
     }
 
     @Test
-    public void testMakeOrphanChildByRemovingFromItsParentChildrenListDoesNotWork() {
+    public void testMakeOrphanChildByRemovingFromItsParentChildrenListDoesNotMakeTheChildOrphan() {
 
         em.find(OTOMNotStrictParent.class, parent.getId()).getChildren().remove(1);// remove child from its parent children list
         flushAndClear();
 
         // test nothing happened
         ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMNotStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-
 
     }
 

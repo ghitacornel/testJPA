@@ -36,24 +36,6 @@ public class TestRemoveChild extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildFromParentListTriggersRemovalOfChild() {
-
-        OTOMNotStrictChild toRemoveChild = em.find(OTOMNotStrictParent.class, parent.getId()).getChildren().get(1);
-        em.remove(toRemoveChild);
-        flushAndClear();
-
-        // test parent and other children are unaffected
-        OTOMNotStrictParent existingParent = em.find(OTOMNotStrictParent.class, parent.getId());
-        OTOMNotStrictParent expectedParent = buildModel();
-        expectedParent.getChildren().remove(1);
-        ReflectionAssert.assertReflectionEquals(expectedParent, existingParent, ReflectionComparatorMode.LENIENT_ORDER);
-
-        // test child is now removed
-        Assert.assertNull(em.find(OTOMNotStrictChild.class, toRemoveChild.getId()));
-
-    }
-
-    @Test
     public void testRemoveChild() {
 
         em.remove(em.find(OTOMNotStrictChild.class, 1));
@@ -72,9 +54,9 @@ public class TestRemoveChild extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildWhenParentAndSiblingsAreLoadedDoesNotAffectListOfSiblings() {
+    public void testRemoveChildWhenParentAndSiblingsAreLoadedWorksAndDoesNotAffectListOfSiblings() {
 
-        OTOMNotStrictParent existingParent = em.find(OTOMNotStrictParent.class, 1);
+        OTOMNotStrictParent existingParent = em.find(OTOMNotStrictParent.class, parent.getId());
         Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children
 
         em.remove(em.find(OTOMNotStrictChild.class, 1));
