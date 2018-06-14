@@ -51,7 +51,7 @@ public class TestRemove extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveTheNonOwningSideWorksOnlyWhenOwningSideIsUpdatedAlso() {
+    public void testRemoveTheNonOwningSideWorksOnlyWhenOwningSideLinksAreRemovedAlso() {
 
         // remove
         NoCascadeN existingN = em.find(NoCascadeN.class, n.getId());
