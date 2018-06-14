@@ -17,7 +17,8 @@ public class NoCascadeM {
     @JoinTable(
             name = "NoCascadeMN",
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
-            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
+            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")},
+            uniqueConstraints = {@UniqueConstraint(columnNames = {"id_m", "id_n"})}
     )
     private List<NoCascadeN> listWithNs = new ArrayList<>();
 
