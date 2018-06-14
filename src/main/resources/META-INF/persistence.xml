@@ -89,6 +89,8 @@
         <class>relationships.orderby.onetomany.OTOMOrderChild</class>
         <class>relationships.orderby.maps.OTOMOrderMapParent</class>
         <class>relationships.orderby.maps.OTOMOrderMapChild</class>
+        <class>relationships.orderby.sets.OTOMOrderSetParent</class>
+        <class>relationships.orderby.sets.OTOMOrderSetChild</class>
 
         <class>relationships.collections.maps.manytomany.MMap</class>
         <class>relationships.collections.maps.manytomany.NMap</class>
