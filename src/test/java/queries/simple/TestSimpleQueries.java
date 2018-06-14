@@ -119,4 +119,15 @@ public class TestSimpleQueries extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testSelectAllWithSimpleComparison() {
+
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e where id >= 1 and id <= 4 order by id", SimpleQueryEntity.class).getResultList();
+
+        // verify, order is important
+        List<SimpleQueryEntity> expected = buildModel();
+        expected = expected.subList(0, 4);
+        ReflectionAssert.assertReflectionEquals(expected, actual);
+
+    }
 }
