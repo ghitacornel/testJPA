@@ -8,7 +8,8 @@ import setup.TransactionalSetup;
 public class TestRemove extends TransactionalSetup {
 
     CascadeBothWaysM m;
-    CascadeBothWaysN n;
+    CascadeBothWaysN n1;
+    CascadeBothWaysN n2;
 
     @Before
     public void buildModel() {
@@ -17,12 +18,18 @@ public class TestRemove extends TransactionalSetup {
         m.setId(1);
         m.setName("m 1 name");
 
-        n = new CascadeBothWaysN();
-        n.setId(1);
-        n.setName("n 1 name");
+        n1 = new CascadeBothWaysN();
+        n1.setId(1);
+        n1.setName("n 1 name");
 
-        n.getListWithMs().add(m);
-        m.getListWithNs().add(n);
+        n2 = new CascadeBothWaysN();
+        n2.setId(2);
+        n2.setName("n 2 name");
+
+        n1.getListWithMs().add(m);
+        n2.getListWithMs().add(m);
+        m.getListWithNs().add(n1);
+        m.getListWithNs().add(n2);
 
     }
 
@@ -40,9 +47,10 @@ public class TestRemove extends TransactionalSetup {
         em.remove(em.find(CascadeBothWaysM.class, m.getId()));
         flushAndClear();
 
-        // verify final
+        // verify cascade removal was propagated
         Assert.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n.getId()));
+        Assert.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
+        Assert.assertNull(em.find(CascadeBothWaysN.class, n2.getId()));
 
     }
 
@@ -50,11 +58,12 @@ public class TestRemove extends TransactionalSetup {
     public void testRemoveFromTheNonOwningSideCascades() {
 
         // remove
-        em.remove(em.find(CascadeBothWaysN.class, n.getId()));
+        em.remove(em.find(CascadeBothWaysN.class, n1.getId()));
         flushAndClear();
 
-        // verify final
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n.getId()));
+        // verify cascade removal was propagated
+        Assert.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
+        Assert.assertNull(em.find(CascadeBothWaysN.class, n2.getId()));
         Assert.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
 
     }
