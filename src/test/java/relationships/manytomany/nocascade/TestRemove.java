@@ -32,7 +32,7 @@ public class TestRemove extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveFromTheOwningSide() {
+    public void testRemoveTheOwningSide() {
 
         // remove
         em.remove(em.find(NoCascadeM.class, m.getId()));
@@ -48,7 +48,7 @@ public class TestRemove extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveFromTheNonOwningSide() {
+    public void testRemoveTheNonOwningSideWorksOnlyWhenOwningSideIsUpdatedAlso() {
 
         // remove
         NoCascadeN existingN = em.find(NoCascadeN.class, n.getId());
@@ -68,7 +68,7 @@ public class TestRemove extends TransactionalSetup {
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testRemoveFromTheNonOwningSideNotWorking() {
+    public void testRemoveTheNonOwningSideOnlyNotWorking() {
 
         // remove
         em.remove(em.find(NoCascadeN.class, n.getId()));
