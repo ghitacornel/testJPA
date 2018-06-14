@@ -55,7 +55,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()).setB(null);
         flushAndClear();
 
-        // observe nothing happened since A is not the owning side
+        // observe nothing happens since A is not the owning side
         ReflectionAssert.assertReflectionEquals(notOwner, em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
         ReflectionAssert.assertReflectionEquals(owner, em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
 
