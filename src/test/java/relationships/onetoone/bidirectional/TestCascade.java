@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestCascade extends TransactionalSetup {
 
-    private A model = buildModel();
+    private A parent = buildModel();
 
     private A buildModel() {
 
@@ -32,27 +32,27 @@ public class TestCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testPersist() {
+    public void testChildIsPersistedWhenParentIsPersisted() {
 
         // persist
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
 
         // verify cascade persist
-        A existing = em.find(A.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(model, existing, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getB(), existing.getB());
+        A existing = em.find(A.class, parent.getId());
+        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(parent.getB(), existing.getB());
 
     }
 
     @Test
-    public void testRemove() {
+    public void testChildIsRemovedWhenParentIsRemoved() {
 
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
 
         // remove
-        em.remove(em.find(A.class, model.getId()));
+        em.remove(em.find(A.class, parent.getId()));
         flushAndClear();
 
         // verify cascade remove

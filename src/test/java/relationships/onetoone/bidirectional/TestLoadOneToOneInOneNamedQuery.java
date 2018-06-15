@@ -31,13 +31,13 @@ public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testLoadParentAndChildInOneSingleQuery() {
 
-        A a = em.createQuery("select t from A t join fetch t.b where t.id = :id", A.class).setParameter("id", 1).getSingleResult();
+        A existing = em.createQuery("select t from A t join fetch t.b where t.id = :id", A.class).setParameter("id", 1).getSingleResult();
         flushAndClear();
 
-        ReflectionAssert.assertReflectionEquals(model, a);
-        ReflectionAssert.assertReflectionEquals(model.getB(), a.getB());
+        ReflectionAssert.assertReflectionEquals(model, existing);
+        ReflectionAssert.assertReflectionEquals(model.getB(), existing.getB());
 
     }
 }

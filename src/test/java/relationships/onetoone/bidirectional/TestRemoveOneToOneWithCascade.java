@@ -7,7 +7,7 @@ import setup.TransactionalSetup;
 
 public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
 
-    private A model = buildModel();
+    private A parent = buildModel();
 
     private A buildModel() {
 
@@ -26,12 +26,12 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
 
     @Before
     public void before() {
-        em.persist(model);
+        em.persist(parent);
         flushAndClear();
     }
 
     @Test
-    public void testRemoveParentTriggersTheRemovalOfOrphanChild() {
+    public void testRemovalOfParentTriggersTheRemovalOfOrphanChild() {
 
         Assert.assertNotNull(em.find(A.class, 1));
         Assert.assertNotNull(em.find(B.class, 2));
@@ -45,7 +45,7 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildBySettingParentToNull() {
+    public void testChildIsRemovedWhenItsParentIsSetToNull() {
 
         Assert.assertNotNull(em.find(A.class, 1));
         Assert.assertNotNull(em.find(B.class, 2));
@@ -59,7 +59,7 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildDirectlyWorksWhenParentNotLoaded() {
+    public void testDirectRemovalOfChildWorksWhenParentIsNotLoaded() {
 
         Assert.assertNotNull(em.find(B.class, 2));
 
@@ -73,12 +73,12 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildDirectlyFailsWhenParentWasLoaded() {
+    public void testDirectRemovalOfChildDoesNotWorkWhenParentWasLoaded() {
 
         Assert.assertNotNull(em.find(A.class, 1));// loads the parent
         Assert.assertNotNull(em.find(B.class, 2));
 
-        // it fails due to the previously loaded parent and cascaded all marker on relationship
+        // it fails due to the previously loaded parent and relationship not removed
         em.remove(em.find(B.class, 2));
         flushAndClear();
 
@@ -88,12 +88,12 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildDirectlyWorksWhenParentWasLoadedAndRelationshipUpdated() {
+    public void testDirectRemovalOfChildDoesWorksWhenParentWasLoadedAndRelationshipUpdated() {
 
         Assert.assertNotNull(em.find(A.class, 1));// loads the parent
         Assert.assertNotNull(em.find(B.class, 2));
 
-        em.find(A.class, 1).setB(null);
+        em.find(A.class, 1).setB(null);// update relationship
         em.remove(em.find(B.class, 2));
         flushAndClear();
 
