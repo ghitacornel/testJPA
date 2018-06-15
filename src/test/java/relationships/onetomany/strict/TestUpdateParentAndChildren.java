@@ -79,4 +79,28 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(parent, existing2, ReflectionComparatorMode.LENIENT_ORDER);
 
     }
+
+    @Test
+    public void testUpdateNotLoadedParentAndChildren() {
+
+        // create new version of parent and children
+        OTOMStrictParent newVersionOfParent = new OTOMStrictParent();
+        newVersionOfParent.setId(1);
+        newVersionOfParent.setName("parent new name");
+
+        OTOMStrictChild child = new OTOMStrictChild();
+        child.setId(3);
+        child.setName("child " + 3);
+        child.setParent(newVersionOfParent);
+        newVersionOfParent.getChildren().add(child);
+
+        // update
+        em.merge(newVersionOfParent);
+        flushAndClear();
+
+        // verify results
+        //observe existing children but not loaded are removed
+        ReflectionAssert.assertReflectionEquals(newVersionOfParent, em.find(OTOMStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+
+    }
 }
