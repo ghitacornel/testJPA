@@ -3,7 +3,7 @@ package entities.converters;
 import javax.persistence.AttributeConverter;
 
 /**
- * convert a boolean to Y / N
+ * convert a boolean to-from Y-N
  */
 public class BooleanAttributeConverter implements AttributeConverter<Boolean, String> {
 

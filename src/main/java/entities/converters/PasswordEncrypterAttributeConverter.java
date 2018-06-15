@@ -19,12 +19,11 @@ public class PasswordEncrypterAttributeConverter implements AttributeConverter<S
     /**
      * The private KEY used for encryption
      */
-    private static final byte[] KEY = "MySuperSecretKey".getBytes();
+    Key key = new SecretKeySpec("MySuperSecretKey".getBytes(), "AES");
 
     @Override
     public String convertToDatabaseColumn(String value) {
         // do some encryption
-        Key key = new SecretKeySpec(KEY, "AES");
         try {
             Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.ENCRYPT_MODE, key);
@@ -37,7 +36,6 @@ public class PasswordEncrypterAttributeConverter implements AttributeConverter<S
     @Override
     public String convertToEntityAttribute(String value) {
         // do some decryption
-        Key key = new SecretKeySpec(KEY, "AES");
         try {
             Cipher c = Cipher.getInstance(ALGORITHM);
             c.init(Cipher.DECRYPT_MODE, key);
