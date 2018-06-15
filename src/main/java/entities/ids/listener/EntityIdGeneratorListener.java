@@ -4,7 +4,7 @@ import javax.persistence.PrePersist;
 import java.util.UUID;
 
 /**
- * this listener will set an id by hand
+ * this listener will set an id before persist
  */
 public class EntityIdGeneratorListener {
 
