@@ -41,6 +41,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         flushAndClear();
 
         Assert.assertNull(em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
+
         {// adjust model to match expectations
             owner.setA(null);
         }

@@ -46,6 +46,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
             owner.setA(null);
         }
         ReflectionAssert.assertReflectionEquals(owner, em.find(OTOOrphanNotOwningSideOwner.class, owner.getId()));
+
         {// adjust model to match expectations
             notOwner.setB(null);
         }
