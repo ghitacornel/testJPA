@@ -10,8 +10,6 @@ import javax.persistence.Table;
  * JPA offers well defined default mappings<br>
  * GOOD PRACTICE : ensure used database objects are controlled through JPA annotations and JPA defaults are not used<br>
  * this way code refactoring can be used over entities and entities mappings without affecting database used objects
- *
- * @author Cornel
  */
 @javax.persistence.Entity
 @Table(name = "SimpleEntity")// override default table name
