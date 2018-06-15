@@ -7,8 +7,9 @@ import javax.persistence.Table;
 
 /**
  * a simple {@link javax.persistence.Entity}<br>
- * jpa default mappings usage is encouraged<br>
- * jpa enum mapping usage is encourage over standard database dictionaries whenever possible<br>
+ * JPA offers well defined default mappings<br>
+ * GOOD PRACTICE : ensure used database objects are controlled through JPA annotations and JPA defaults are not used<br>
+ * this way code refactoring can be used over entities and entities mappings without affecting database used objects
  *
  * @author Cornel
  */
