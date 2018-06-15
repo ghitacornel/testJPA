@@ -10,7 +10,7 @@ public class EntityWithLOB {
 
     /**
      * Note the LAZY marker is just a hint, it does not enforce lazy loading<br>
-     * For LAZY LOADING consider lacing such content in LAZY LOADABLE RELATIONSHIPS
+     * For LAZY LOADING behavior consider placing such fields in separate entities and use LAZY LOADABLE RELATIONSHIPS
      */
     @Basic(fetch = FetchType.LAZY)
     @Lob
