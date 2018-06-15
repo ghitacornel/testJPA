@@ -1,1 +1,1 @@
-in MANY TO MANY relationship both entities are independent
+in MANY TO MANY relationship both entities are independent hence NO CASCADE should be used
