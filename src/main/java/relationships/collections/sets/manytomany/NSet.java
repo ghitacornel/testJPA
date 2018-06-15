@@ -35,11 +35,6 @@ public class NSet {
         this.name = name;
     }
 
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
-    }
-
     public Set<MSet> getSetWithMs() {
         return setWithMs;
     }

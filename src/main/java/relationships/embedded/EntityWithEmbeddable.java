@@ -21,7 +21,7 @@ public class EntityWithEmbeddable {
      */
     @ElementCollection
     @JoinTable(name = "EWE_Names")// can override default table and foreign keys
-    private List<String> names = new ArrayList<>();
+    final private List<String> names = new ArrayList<>();
 
     /**
      * collection of embeddable usage
