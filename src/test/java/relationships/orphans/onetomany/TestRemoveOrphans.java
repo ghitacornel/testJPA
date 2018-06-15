@@ -56,6 +56,9 @@ public class TestRemoveOrphans extends TransactionalSetup {
 
     }
 
+    /**
+     * In this case Orphan is not removed since it is a NOT STRICT mapping
+     */
     @Test
     public void testSettingParentToNullRemovesOnlyTheRelationshipAndNotTheOrphanedChild() {
 
@@ -70,8 +73,11 @@ public class TestRemoveOrphans extends TransactionalSetup {
 
     }
 
+    /**
+     * In this case Orphan is not removed since it is a NOT STRICT mapping
+     */
     @Test
-    public void testRemoveOrphanByRemovingFromParentListOnlyRemovesOnlyTheRelationshipAndNotTheOrphanedChild() {
+    public void testRemoveOrphanFromParentListRemovesOnlyTheRelationshipAndNotTheOrphanedChild() {
 
         em.find(OTOMOrphanParent.class, parent.getId()).getChildren().remove(1);
         flushAndClear();
