@@ -4,7 +4,7 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-@Entity(name = "SQE")// changed the name of the entity for shorter JPQL queries
+@Entity(name = "SQE")// specify and use a shorter entity name for writing shorter JPQL queries
 public class SimpleQueryEntity {
 
     @Id

@@ -7,8 +7,6 @@ import javax.persistence.*;
 
 /**
  * example with a {@link NamedNativeQuery} mapped to domain using a * {@link SqlResultSetMapping}
- *
- * @author Cornel
  */
 @MappedSuperclass
 @SqlResultSetMapping(name = "customParentChildMapping", entities = {
@@ -30,7 +28,6 @@ public class NamedNativeQueriesWithResultSetMappingDefinition {
     // XXX very weird Hibernate mapping case but testable anyway
     // looks like Hibernate requires mapping of ids for dependable entities
 
-    // this kind of mapping is useful for retrieving in 1 native query all
-    // needed results
+    // this kind of mapping is useful for retrieving in 1 native query all needed results
 
 }
