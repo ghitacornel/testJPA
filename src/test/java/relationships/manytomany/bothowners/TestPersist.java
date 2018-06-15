@@ -59,6 +59,9 @@ public class TestPersist extends TransactionalSetup {
 
     }
 
+    /**
+     * This kind of mapping doesn't work as expected
+     */
     @Test
     public void testPersistFirstEntitiesThenOnly1SideOfTheRelationshipAndOK() {
 
