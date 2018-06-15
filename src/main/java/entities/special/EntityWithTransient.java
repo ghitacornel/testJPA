@@ -4,6 +4,9 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Transient;
 
+/**
+ * transient fields are not processed by JPA
+ */
 @Entity
 public class EntityWithTransient {
 
