@@ -33,7 +33,7 @@ public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
     @Test
     public void test() {
 
-        A a = em.createNamedQuery("A.findWithB", A.class).setParameter(1, 1).getSingleResult();
+        A a = em.createQuery("select t from A t join fetch t.b where t.id = :id", A.class).setParameter("id", 1).getSingleResult();
         flushAndClear();
 
         ReflectionAssert.assertReflectionEquals(model, a);

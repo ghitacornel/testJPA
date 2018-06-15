@@ -3,7 +3,6 @@ package relationships.onetoone.bidirectional;
 import javax.persistence.*;
 
 @Entity
-@NamedQuery(name = "A.findWithB", query = "select t from A t join fetch t.b where t.id = ?1")
 public class A {
 
     @Id
