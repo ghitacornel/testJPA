@@ -10,15 +10,24 @@ public class EntityWithEmbeddable {
     @Id
     private Integer id;
 
+    /**
+     * simple embeddable usage
+     */
     @Embedded
     private EmbeddableBean embedded;
 
+    /**
+     * primitive embeddable usage
+     */
     @ElementCollection
     @JoinTable(name = "EWE_Names")// can override default table and foreign keys
     private List<String> names = new ArrayList<>();
 
+    /**
+     * collection of embeddable usage
+     */
     @ElementCollection
-    private List<EmbeddableBean> relatedEmbedded = new ArrayList<>();
+    final private List<EmbeddableBean> relatedEmbedded = new ArrayList<>();
 
     public Integer getId() {
         return id;

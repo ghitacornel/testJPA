@@ -85,6 +85,9 @@ public class TestOrder extends TransactionalSetup {
 
     }
 
+    /**
+     * NULLS FIRST is not officially defined but it might work depending on the used database
+     */
     @Test
     public void testSelectAllWithOrderNullsFirst() {
 
@@ -120,6 +123,9 @@ public class TestOrder extends TransactionalSetup {
 
     }
 
+    /**
+     * NULLS LAST is not officially defined but it might work depending on the used database
+     */
     @Test
     public void testSelectAllWithOrderNullsLast() {
 

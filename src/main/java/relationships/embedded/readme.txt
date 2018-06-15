@@ -1,4 +1,4 @@
-this embedded notion is perfect for simulating 1(A) ---> 0..1(B) kind of relationships:
+embedded concept is perfect for simulating 1(A) ---> 0..1(B) kind of relationships:
 
 A is the parent and B is a child of A.
 A can have 0 or at most 1 child of type B.
