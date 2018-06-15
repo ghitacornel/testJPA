@@ -20,7 +20,8 @@ public class EntityWithEmbeddable {
      * primitive embeddable usage
      */
     @ElementCollection
-    @JoinTable(name = "EWE_Names")// can override default table and foreign keys
+    @JoinTable(name = "EWE_Names", joinColumns = {@JoinColumn(name = "parent_id", referencedColumnName = "id")})
+    // can override default table and foreign keys
     final private List<String> names = new ArrayList<>();
 
     /**
