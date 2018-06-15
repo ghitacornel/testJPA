@@ -37,9 +37,4 @@ public class OTOMOrderParent {
         return children;
     }
 
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
-    }
-
 }

@@ -15,7 +15,7 @@ public class MTOMOrderM {
 
     @ManyToMany(cascade = CascadeType.PERSIST)
     @OrderBy("name")
-    private List<MTOMOrderN> listWithNs = new ArrayList<>();
+    final private List<MTOMOrderN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -35,11 +35,6 @@ public class MTOMOrderM {
 
     public List<MTOMOrderN> getListWithNs() {
         return listWithNs;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
 }
