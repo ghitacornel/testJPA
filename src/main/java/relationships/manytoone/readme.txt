@@ -7,3 +7,5 @@ MANY part entity is the only one that knows about the relationship
 ONE part entity is always independent
 ONE part entity does not own the relationship
 ONE part entity does not know about the relationship
+
+ONE part entity is always independent + MANY part entity owns the relationship => CASCADING of any type must be forbidden
