@@ -18,7 +18,7 @@ public class EntityWithEnums {
 
     /**
      * PRO : safe when adding, removing or changing order of enum elements<br>
-     * PRO : easier understand to humans by reading directly from the database<br>
+     * PRO : easier understand by reading directly from the database<br>
      * CONS : increases memory usage + slower performance due to text types usage
      */
     @Enumerated(EnumType.STRING)
@@ -27,7 +27,7 @@ public class EntityWithEnums {
     /**
      * PRO : better performance + better memory usage due to integer types usage<br>
      * CONS : raises problems when changing order of enum values<br>
-     * CONS : hard to understand to humans by reading directly from the database<br>
+     * CONS : harder to understand by reading directly from the database<br>
      */
     @Enumerated(EnumType.ORDINAL)
     private SimpleEnum enum2;
