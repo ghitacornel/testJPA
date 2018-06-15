@@ -14,7 +14,7 @@ public class OTOMOrphanParent {
     private String name;
 
     @OneToMany(orphanRemoval = true, mappedBy = "parent")
-    private List<OTOMOrphanChild> children = new ArrayList<>();
+    final private List<OTOMOrphanChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -34,9 +34,5 @@ public class OTOMOrphanParent {
 
     public List<OTOMOrphanChild> getChildren() {
         return children;
-    }
-
-    public void setChildren(List<OTOMOrphanChild> children) {
-        this.children = children;
     }
 }
