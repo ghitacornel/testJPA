@@ -39,13 +39,13 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
         em.remove(em.find(A.class, 1));
         flushAndClear();
 
-        Assert.assertNull(em.find(A.class, 1));
-        Assert.assertNull(em.find(B.class, 2));
+        verifyCorrespondingTableIsEmpty(A.class);
+        verifyCorrespondingTableIsEmpty(B.class);
 
     }
 
     @Test
-    public void testRemoveChildOK1() {
+    public void testRemoveChildBySettingParentToNull() {
 
         Assert.assertNotNull(em.find(A.class, 1));
         Assert.assertNotNull(em.find(B.class, 2));
@@ -59,7 +59,7 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildOK2() {
+    public void testRemoveChildDirectlyWorksWhenParentNotLoaded() {
 
         Assert.assertNotNull(em.find(B.class, 2));
 
@@ -73,9 +73,9 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveChildFAIL1() {
+    public void testRemoveChildDirectlyFailsWhenParentWasLoaded() {
 
-        Assert.assertNotNull(em.find(A.class, 1));
+        Assert.assertNotNull(em.find(A.class, 1));// loads the parent
         Assert.assertNotNull(em.find(B.class, 2));
 
         // it fails due to the previously loaded parent and cascaded all marker on relationship
@@ -84,6 +84,21 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
 
         Assert.assertNotNull(em.find(A.class, 1));
         Assert.assertNotNull(em.find(B.class, 2));
+
+    }
+
+    @Test
+    public void testRemoveChildDirectlyWorksWhenParentWasLoadedAndRelationshipUpdated() {
+
+        Assert.assertNotNull(em.find(A.class, 1));// loads the parent
+        Assert.assertNotNull(em.find(B.class, 2));
+
+        em.find(A.class, 1).setB(null);
+        em.remove(em.find(B.class, 2));
+        flushAndClear();
+
+        Assert.assertNotNull(em.find(A.class, 1));
+        Assert.assertNull(em.find(B.class, 2));
 
     }
 
