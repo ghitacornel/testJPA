@@ -10,6 +10,9 @@ import javax.persistence.Table;
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
 public class InheritanceJoinedTablesConcreteClassB extends InheritanceJoinedTablesSuperClass {
 
+    /**
+     * not null columns can be specified in this strategy case
+     */
     @Column(nullable = false)
     private String specificB;
 

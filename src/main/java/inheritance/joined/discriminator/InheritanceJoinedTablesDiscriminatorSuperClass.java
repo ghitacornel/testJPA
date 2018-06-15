@@ -12,7 +12,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "IerarhieJoinedDiscriminator")
 @Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name = "discriminator", length = 100)
+@DiscriminatorColumn(name = "discriminator", length = 100)// observe specified discriminator to use
 public class InheritanceJoinedTablesDiscriminatorSuperClass extends InheritanceMappedSuperClass {
 
     @Column(nullable = false)

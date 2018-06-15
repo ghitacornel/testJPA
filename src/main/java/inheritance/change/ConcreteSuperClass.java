@@ -22,7 +22,8 @@ public abstract class ConcreteSuperClass extends InheritanceMappedSuperClass {
 
     /**
      * mapping a discriminator column requires marking it as not insertable , not updatable since it is JPA only managed<br>
-     * good practice : do not provide setters for such properties
+     * GOOD PRACTICE : do not map such JPA only managed database columns<br>
+     * GOOD PRACTICE : do not provide getters / setters for such mapped database columns in case of mapping<br>
      */
     @Column(name = "discriminator", insertable = false, updatable = false)
     private String discriminator;
