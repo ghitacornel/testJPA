@@ -7,7 +7,7 @@ import javax.persistence.Id;
  * WARNING : do not use primitives for NULL database columns <br>
  * <p>
  * Good practice :<br>
- * Use primitives whenever a not null with default value column must be mapped<br>
+ * Use primitives whenever a column marked as not null with a default value must be mapped<br>
  * Using primitives leads to a cleaner and easier to use JAVA model due to removal of NULL checks
  */
 @Entity
