@@ -36,6 +36,8 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
 
         A existingA1 = em.find(A.class, model.getId());
         {
+
+            // set new name to parent
             existingA1.setName("new name a");
 
             // create new child
@@ -49,12 +51,41 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
 
         }
 
-        em.merge(existingA1);
         flushAndClear();
 
         A existingA2 = em.find(A.class, model.getId());
         ReflectionAssert.assertReflectionEquals(existingA1, existingA2);
         ReflectionAssert.assertReflectionEquals(existingA1.getB(), existingA2.getB());
+
+        // test old B is removed
+        Assert.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
+
+    }
+
+    @Test
+    public void testMergeRelationshipToANewChildAndRemovalOfOrphan() {
+
+        A newVersion = new A();
+        newVersion.setId(1);
+        {
+            newVersion.setName("new name a");
+
+            // create new child
+            B b = new B();
+            b.setId(4);
+            b.setName("new name b");
+
+            // establish new relationships
+            b.setA(newVersion);
+            newVersion.setB(b);
+
+        }
+        em.merge(newVersion);
+        flushAndClear();
+
+        A existingA2 = em.find(A.class, model.getId());
+        ReflectionAssert.assertReflectionEquals(newVersion, existingA2);
+        ReflectionAssert.assertReflectionEquals(newVersion.getB(), existingA2.getB());
 
         // test old B is removed
         Assert.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
