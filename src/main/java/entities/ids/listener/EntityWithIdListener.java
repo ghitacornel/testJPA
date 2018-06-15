@@ -26,6 +26,7 @@ import java.util.UUID;
 public class EntityWithIdListener {
 
     // must have ID visibility set at this level in order to be accessible from listener
+    // no need to use a setter in this case
     @Id
     String id;
 

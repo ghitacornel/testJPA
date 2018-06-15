@@ -5,9 +5,9 @@ package entities.projection;
  */
 public class Projection1 {
 
-    private Integer id;
+    final private Integer id;
 
-    private String name;
+    final private String name;
 
     public Projection1(Integer id, String name) {
         this.id = id;
@@ -18,16 +18,8 @@ public class Projection1 {
         return id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
 }

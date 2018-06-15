@@ -4,6 +4,9 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * entity for which multiple projections were designed and used
+ */
 @Entity
 public class EntityWithProjection {
 
@@ -15,6 +18,16 @@ public class EntityWithProjection {
 
     @Basic(optional = false)
     private Integer value;
+
+    EntityWithProjection() {
+        // JPA requires at least 1 no argument constructor with visibility at least default
+    }
+
+    public EntityWithProjection(Integer id, String name, Integer value) {
+        this.id = id;
+        this.name = name;
+        this.value = value;
+    }
 
     public Integer getId() {
         return id;

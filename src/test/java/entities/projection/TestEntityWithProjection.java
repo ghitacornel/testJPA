@@ -11,10 +11,7 @@ public class TestEntityWithProjection extends TransactionalSetup {
 
     @Before
     public void ensureSomeDataIsPresent() {
-        entity = new EntityWithProjection();
-        entity.setId(1);
-        entity.setName("name");
-        entity.setValue(2);
+        entity = new EntityWithProjection(1, "name", 2);
         em.persist(entity);
         flushAndClear();
     }
@@ -27,8 +24,8 @@ public class TestEntityWithProjection extends TransactionalSetup {
         Assert.assertEquals(entity.getName(), projection1.getName());
 
         Projection2 projection2 = em.createQuery("select new entities.projection.Projection2(e.id,e.value) from EntityWithProjection e where e.id = 1", Projection2.class).getSingleResult();
-        Assert.assertEquals(entity.getId(), projection2.getId());
-        Assert.assertEquals(entity.getValue(), projection2.getValue());
+        Assert.assertEquals(entity.getId(), projection2.id);
+        Assert.assertEquals(entity.getValue(), projection2.value);
 
         ProjectionFull projectionFull = em.createQuery("select new entities.projection.ProjectionFull(e.id,e.name,e.value) from EntityWithProjection e where e.id = 1", ProjectionFull.class).getSingleResult();
         Assert.assertEquals(entity.getId(), projectionFull.getId());
