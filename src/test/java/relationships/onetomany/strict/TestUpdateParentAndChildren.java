@@ -16,7 +16,7 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
         parent.setId(1);
         parent.setName("parent name");
 
-        for (int i = 1; i <= 3; i++) {
+        for (int i = 1; i <= 2; i++) {
             OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
             child.setName("child " + i);
@@ -34,27 +34,49 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testUpdateLoadedParentAndChildren() {
 
         OTOMStrictParent existing1 = em.find(OTOMStrictParent.class, parent.getId());
 
-        {
-            existing1.setName("new name");
+        existing1.setName("new name");
 
-            OTOMStrictChild child = new OTOMStrictChild();
-            child.setId(4);
-            child.setName("child 4");
-            child.setParent(existing1);
-            existing1.getChildren().add(child);
-
-            existing1.getChildren().get(0).setName("new name 1");
+        {// remove child with id 1
+            OTOMStrictChild toRemove = null;
+            for (OTOMStrictChild child : existing1.getChildren()) {
+                if (child.getId() == 1) {
+                    toRemove = child;
+                }
+            }
+            existing1.getChildren().remove(toRemove);
         }
 
-        em.merge(existing1);
+        {// update the single one left
+            existing1.getChildren().get(0).setName("new name 2");
+        }
+
+        {// add new child
+            OTOMStrictChild child = new OTOMStrictChild();
+            child.setId(3);
+            child.setName("child 3");
+            child.setParent(existing1);
+            existing1.getChildren().add(child);
+        }
+
         flushAndClear();
 
+        {// adjust model to reflect changes
+            parent.setName("new name");
+            parent.getChildren().remove(0);
+            parent.getChildren().get(0).setName("new name 2");
+            OTOMStrictChild child = new OTOMStrictChild();
+            child.setId(3);
+            child.setName("child 3");
+            child.setParent(parent);
+            parent.getChildren().add(child);
+        }
+
         OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, parent.getId());
-        ReflectionAssert.assertReflectionEquals(existing1, existing2, ReflectionComparatorMode.LENIENT_ORDER);
+        ReflectionAssert.assertReflectionEquals(parent, existing2, ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 }

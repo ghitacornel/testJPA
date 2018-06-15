@@ -38,7 +38,7 @@ public class TestUpdateParentWithCascadeToChildren extends TransactionalSetup {
     }
 
     @Test
-    public void test() {
+    public void testUpdateNotLoadedParentAndChildren() {
 
         // create new version of parent and children
         OTOMStrictParent newVersionOfParent = new OTOMStrictParent();
