@@ -8,7 +8,7 @@ import javax.persistence.Id;
 /**
  * Good practice :<br>
  * Ensure proper database CHECK constraints are in place when using enums<br>
- * Enums are excellent replacements for dictionary tables for which values hard coded business logic exists
+ * Enums are excellent replacements for dictionary tables for which business logic exists involving hard coded values
  */
 @Entity
 public class EntityWithEnums {
