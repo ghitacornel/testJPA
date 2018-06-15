@@ -25,7 +25,7 @@ public class NoCascadeM {
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id", nullable = false)},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"id_m", "id_n"})}
     )
-    private List<NoCascadeN> listWithNs = new ArrayList<>();
+    final private List<NoCascadeN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -45,11 +45,6 @@ public class NoCascadeM {
 
     public List<NoCascadeN> getListWithNs() {
         return listWithNs;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
 }

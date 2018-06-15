@@ -19,7 +19,7 @@ public class CascadeOneSideM {
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )
-    private List<CascadeOneSideN> listWithNs = new ArrayList<>();
+    final private List<CascadeOneSideN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -39,11 +39,6 @@ public class CascadeOneSideM {
 
     public List<CascadeOneSideN> getListWithNs() {
         return listWithNs;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
 }

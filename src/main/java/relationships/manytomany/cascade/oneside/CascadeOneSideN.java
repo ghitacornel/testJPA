@@ -14,7 +14,7 @@ public class CascadeOneSideN {
     private String name;
 
     @ManyToMany(mappedBy = "listWithNs")
-    private List<CascadeOneSideM> listWithMs = new ArrayList<>();
+    final private List<CascadeOneSideM> listWithMs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -30,11 +30,6 @@ public class CascadeOneSideN {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
     public List<CascadeOneSideM> getListWithMs() {

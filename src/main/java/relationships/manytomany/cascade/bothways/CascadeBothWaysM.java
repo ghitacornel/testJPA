@@ -20,7 +20,7 @@ public class CascadeBothWaysM {
             joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )
-    private List<CascadeBothWaysN> listWithNs = new ArrayList<>();
+    final private List<CascadeBothWaysN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -40,11 +40,6 @@ public class CascadeBothWaysM {
 
     public List<CascadeBothWaysN> getListWithNs() {
         return listWithNs;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
 }

@@ -14,7 +14,7 @@ public class OTOMLazyParent {
     private String name;
 
     @OneToMany(mappedBy = "parent")
-    private List<OTOMLazyChild> children = new ArrayList<>();
+    final private List<OTOMLazyChild> children = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -36,7 +36,4 @@ public class OTOMLazyParent {
         return children;
     }
 
-    public void setChildren(List<OTOMLazyChild> children) {
-        this.children = children;
-    }
 }

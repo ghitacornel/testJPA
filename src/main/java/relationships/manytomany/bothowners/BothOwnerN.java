@@ -14,7 +14,7 @@ public class BothOwnerN {
             inverseJoinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")},
             uniqueConstraints = {@UniqueConstraint(name = "UK_MN_OK", columnNames = {"id_m", "id_n"})}
     )
-    private List<BothOwnerM> listWithMs = new ArrayList<>();
+    final private List<BothOwnerM> listWithMs = new ArrayList<>();
 
     @Id
     private Integer id;
@@ -36,11 +36,6 @@ public class BothOwnerN {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
     public List<BothOwnerM> getListWithMs() {

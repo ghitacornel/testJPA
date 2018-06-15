@@ -17,7 +17,7 @@ public class NoCascadeN {
     private String name;
 
     @ManyToMany(mappedBy = "listWithNs")
-    private List<NoCascadeM> listWithMs = new ArrayList<>();
+    final private List<NoCascadeM> listWithMs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -33,11 +33,6 @@ public class NoCascadeN {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
     public List<NoCascadeM> getListWithMs() {

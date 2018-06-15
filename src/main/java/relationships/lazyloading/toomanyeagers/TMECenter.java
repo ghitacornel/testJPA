@@ -20,13 +20,13 @@ public class TMECenter {
     private TMELink2 link2;
 
     @OneToMany(fetch = FetchType.EAGER)
-    private List<TMELink3> links3 = new ArrayList<>();
+    final private List<TMELink3> links3 = new ArrayList<>();
 
     // keep this as LAZY
     // marking it as EAGER will fail the tests
     // check the reported errors when using EAGER marker
     @OneToMany(fetch = FetchType.LAZY)
-    private List<TMELink4> links4 = new ArrayList<>();
+    final private List<TMELink4> links4 = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -69,15 +69,8 @@ public class TMECenter {
         return links3;
     }
 
-    public void setLinks3(List<TMELink3> links3) {
-        this.links3 = links3;
-    }
-
     public List<TMELink4> getLinks4() {
         return links4;
     }
 
-    public void setLinks4(List<TMELink4> links4) {
-        this.links4 = links4;
-    }
 }

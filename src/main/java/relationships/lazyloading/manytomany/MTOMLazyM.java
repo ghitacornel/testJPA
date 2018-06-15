@@ -14,7 +14,7 @@ public class MTOMLazyM {
     private String name;
 
     @ManyToMany
-    private List<MTOMLazyN> listWithNs = new ArrayList<>();
+    final private List<MTOMLazyN> listWithNs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -34,11 +34,6 @@ public class MTOMLazyM {
 
     public List<MTOMLazyN> getListWithNs() {
         return listWithNs;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
 }

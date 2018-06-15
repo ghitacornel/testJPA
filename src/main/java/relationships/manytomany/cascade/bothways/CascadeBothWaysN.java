@@ -14,7 +14,7 @@ public class CascadeBothWaysN {
     private String name;
 
     @ManyToMany(mappedBy = "listWithNs", cascade = CascadeType.ALL)
-    private List<CascadeBothWaysM> listWithMs = new ArrayList<>();
+    final private List<CascadeBothWaysM> listWithMs = new ArrayList<>();
 
     public Integer getId() {
         return id;
@@ -30,11 +30,6 @@ public class CascadeBothWaysN {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return "[" + this.getClass() + "|" + id + "|" + name + "]";
     }
 
     public List<CascadeBothWaysM> getListWithMs() {
