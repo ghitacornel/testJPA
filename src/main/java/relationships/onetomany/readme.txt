@@ -1,4 +1,5 @@
 ONE to MANY relationship comes in two forms : STRICT or NOT STRICT
+ONE to MANY can be simulated using EMBEDDED
 
 [GENERIC]
 ONE part entity is an independent entity

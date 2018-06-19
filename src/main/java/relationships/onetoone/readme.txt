@@ -1,6 +1,6 @@
 ONE to ONE relationship comes in two forms : STRICT or NOT STRICT
 ONE to ONE relationship is a form of ONE to MANY relationship where there is a UNIQUE constraint on the MANY side
-
+ONE to ONE can be simulated using EMBEDDED
 CASCADE of other type than REMOVE can be defined
 
 [ONE to ONE STRICT]

@@ -12,6 +12,7 @@ public class EntityWithEmbeddable {
 
     /**
      * simple embeddable usage
+     * simulates ONE TO ONE one side mapping STRICT
      */
     @Embedded
     private EmbeddableBean embedded;
@@ -26,6 +27,7 @@ public class EntityWithEmbeddable {
 
     /**
      * collection of embeddable usage
+     * simulates ONE TO MANY one side mapping STRICT
      */
     @ElementCollection
     final private List<EmbeddableBean> relatedEmbedded = new ArrayList<>();
