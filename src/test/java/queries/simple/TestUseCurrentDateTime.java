@@ -108,6 +108,9 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
 
     }
 
+    /**
+     * observe comparison over full date and time column which filter items based on time also
+     */
     @Test
     public void testGetOnlyFutureFromTomorrow() {
 

@@ -5,7 +5,6 @@
 - hibernate envers
 
 data types
-better tests with date and time comparisons
 
 test 1 to many with cascade not strict
 
