@@ -24,3 +24,6 @@ ONE part entity is always independent +
 only MANY part entity knows of the relationship +
 only MANY part entity owns the relationship
 => CASCADING of any type are forbidden
+
+when REMOVING the ONE part entity
+manually marking the MANY part entities as orphaned by setting their corresponding ONE part reference to null is required
