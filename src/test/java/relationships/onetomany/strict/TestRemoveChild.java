@@ -86,7 +86,7 @@ public class TestRemoveChild extends TransactionalSetup {
         Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children
 
         OTOMStrictChild toRemoveChild = em.find(OTOMStrictChild.class, 1);
-        em.remove(toRemoveChild);
+        em.remove(toRemoveChild);// remove only the child
         Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children is the same
         flushAndClear();
 
@@ -106,8 +106,8 @@ public class TestRemoveChild extends TransactionalSetup {
         Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children
 
         OTOMStrictChild toRemoveChild = em.find(OTOMStrictChild.class, 1);
-        existingParent.getChildren().remove(toRemoveChild);
-        em.remove(toRemoveChild);
+        existingParent.getChildren().remove(toRemoveChild);// remove link from parent to child
+        em.remove(toRemoveChild);// remove the child
         Assert.assertEquals(2, existingParent.getChildren().size());// verify number of children
         flushAndClear();
 
