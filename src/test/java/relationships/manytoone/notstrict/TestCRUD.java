@@ -30,6 +30,7 @@ public class TestCRUD extends TransactionalSetup {
     @Test
     public void testCRUD() {
 
+        // verify no child is present
         verifyCorrespondingTableIsEmpty(MTOONotStrictChild.class);
 
         // insert
@@ -60,13 +61,15 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // remove
-        existing = em.find(MTOONotStrictChild.class, child.getId());
-        Assert.assertNotNull(existing);
-        em.remove(existing);
+        em.remove(em.find(MTOONotStrictChild.class, child.getId()));
         flushAndClear();
 
         // test remove
         verifyCorrespondingTableIsEmpty(MTOONotStrictChild.class);
+
+        // verify parents are unaffected
+        ReflectionAssert.assertReflectionEquals(parent1, em.find(MTOONotStrictParent.class, parent1.getId()));
+        ReflectionAssert.assertReflectionEquals(parent2, em.find(MTOONotStrictParent.class, parent2.getId()));
 
     }
 

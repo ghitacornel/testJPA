@@ -21,8 +21,12 @@ public class TestSetParentToNull extends TransactionalSetup {
 
     }
 
+    /**
+     * setting the parent to null makes the test throw an exception<br>
+     * for strict relationships children are totally dependent of their parents
+     */
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testSetParentToNullFails() {
+    public void testSetParentToNull() {
 
         // insert
         MTOOStrictChild child = new MTOOStrictChild();
@@ -32,9 +36,8 @@ public class TestSetParentToNull extends TransactionalSetup {
         em.persist(child);
         flushAndClear();
 
-        // update and set parent to null
-        MTOOStrictChild existing = em.find(MTOOStrictChild.class, child.getId());
-        existing.setParent(null);
+        // set parent to null
+        em.find(MTOOStrictChild.class, child.getId()).setParent(null);
         flushAndClear();
 
     }

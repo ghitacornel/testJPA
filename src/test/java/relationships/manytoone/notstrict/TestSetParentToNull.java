@@ -33,15 +33,15 @@ public class TestSetParentToNull extends TransactionalSetup {
         em.persist(child);
         flushAndClear();
 
-        // update and set parent to null
-        MTOONotStrictChild existing = em.find(MTOONotStrictChild.class, child.getId());
-        existing.setParent(null);
+        //  set parent to null
+        em.find(MTOONotStrictChild.class, child.getId()).setParent(null);
         flushAndClear();
 
         // test set parent to null
-        existing = em.find(MTOONotStrictChild.class, child.getId());
-        Assert.assertNull(existing.getParent());// child has no parent
-        ReflectionAssert.assertReflectionEquals(parent, em.find(MTOONotStrictParent.class, parent.getId()));// parent still exists
+        Assert.assertNull(em.find(MTOONotStrictChild.class, child.getId()).getParent());
+
+        // verify parent is unaffected
+        ReflectionAssert.assertReflectionEquals(parent, em.find(MTOONotStrictParent.class,parent.getId()));
 
     }
 

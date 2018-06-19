@@ -31,7 +31,7 @@ public class TestCRUD extends TransactionalSetup {
     @Test
     public void testCRUD() {
 
-        // assert empty
+        // verify no child is present
         verifyCorrespondingTableIsEmpty(MTOOStrictChild.class);
 
         // insert
@@ -70,6 +70,9 @@ public class TestCRUD extends TransactionalSetup {
         // test remove
         verifyCorrespondingTableIsEmpty(MTOOStrictChild.class);
 
+        // verify parents are unaffected
+        ReflectionAssert.assertReflectionEquals(parent1, em.find(MTOOStrictParent.class,parent1.getId()));
+        ReflectionAssert.assertReflectionEquals(parent2, em.find(MTOOStrictParent.class,parent2.getId()));
     }
 
 }
