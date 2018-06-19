@@ -54,6 +54,8 @@
         <class>relationships.onetomany.strict.OTOMStrictParent</class>
         <class>relationships.onetomany.joinonnopk.JONPKChild</class>
         <class>relationships.onetomany.joinonnopk.JONPKParent</class>
+        <class>relationships.onetoone.childPKequalsparentPK.PKChild</class>
+        <class>relationships.onetoone.childPKequalsparentPK.PKParent</class>
 
         <class>relationships.manytoone.notstrict.MTOONotStrictChild</class>
         <class>relationships.manytoone.notstrict.MTOONotStrictParent</class>
