@@ -53,11 +53,13 @@ public class TestRemove extends TransactionalSetup {
     @Test
     public void testRemoveTheNonOwningSideWorksOnlyWhenOwningSideLinksAreRemovedAlso() {
 
-        // remove
+        // remove links to not owning side first
         NoCascadeN existingN = em.find(NoCascadeN.class, n.getId());
         for (NoCascadeM existingM : existingN.getListWithMs()) {
             existingM.getListWithNs().remove(existingN);
         }
+
+        // remove not owning side second
         em.remove(existingN);
         flushAndClear();
 
