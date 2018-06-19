@@ -12,10 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * WARNING 1 JPA {@link Query} doesn't map always to 1 SQL query as it's the
- * case here
- *
- * @author Cornel
+ * WARNING 1 JPA {@link Query} doesn't map always to 1 SQL query as it is the case here
  */
 public class TestSelectSingleMWithRelatedNInOneQuery extends TransactionalSetup {
 
