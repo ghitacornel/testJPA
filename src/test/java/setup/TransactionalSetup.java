@@ -8,11 +8,17 @@ import org.junit.Before;
  */
 public abstract class TransactionalSetup extends Setup {
 
+    /**
+     * ensure a transaction is started before each test
+     */
     @Before
     final public void beginTransaction() {
         em.getTransaction().begin();
     }
 
+    /**
+     * ensure a transaction is rolled back after each test
+     */
     @After
     final public void rollbackTransaction() {
         if (em.getTransaction().isActive()) {
