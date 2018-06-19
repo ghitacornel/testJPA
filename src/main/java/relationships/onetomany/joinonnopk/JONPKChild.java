@@ -11,6 +11,9 @@ public class JONPKChild {
     @Column(nullable = false)
     private String name;
 
+    /**
+     * observe relationship does not use primary keys
+     */
     @ManyToOne(optional = false)
     @JoinColumn(name = "parent_name", referencedColumnName = "name")
     private JONPKParent parent;
