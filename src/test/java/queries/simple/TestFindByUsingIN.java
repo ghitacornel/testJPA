@@ -43,10 +43,10 @@ public class TestFindByUsingIN extends TransactionalSetup {
     }
 
     /**
-     * TODO always check for null or empty collections passed as parameters
-     * TODO passing null or empty collections as parameters can cause generation of corrupted SQLs having empty IN clauses
-     * TODO some JPA implementations produce corrupted SQLs, or some databases accept such SQLs and produce no results
-     * TODO make sure the database IN SQL clause does not have a limit of allowed IN values
+     * always check for null or empty collections passed as parameters
+     * passing null or empty collections as parameters can cause generation of corrupted SQLs having empty IN clauses
+     * some JPA implementations produce corrupted SQLs, or some databases accept such SQLs and produce no results
+     * make sure the database IN SQL clause does not have a limit of allowed IN values
      * sometimes a check for null or empty collection parameters avoid an SQL execution
      */
     @Test
