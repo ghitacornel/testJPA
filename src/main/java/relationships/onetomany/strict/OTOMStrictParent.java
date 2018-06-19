@@ -10,7 +10,6 @@ import java.util.List;
  * a strict parent knows and control its children
  */
 @Entity
-@NamedQuery(name = "OTOMStrictParent.findWithChildren", query = "select p from OTOMStrictParent p join fetch p.children where p.id = ?1")
 public class OTOMStrictParent {
 
     @Id

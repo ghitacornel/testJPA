@@ -36,7 +36,9 @@ public class TestLoadParentAndChildrenInOneNamedQuery extends
 
     @Test
     public void test() {
-        OTOMStrictParent existing = em.createNamedQuery("OTOMStrictParent.findWithChildren", OTOMStrictParent.class).setParameter(1, parent.getId()).getSingleResult();
+        OTOMStrictParent existing = em.createQuery("select p from OTOMStrictParent p join fetch p.children where p.id = ?1", OTOMStrictParent.class).
+                setParameter(1, parent.getId()).
+                getSingleResult();
         ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
     }
 }

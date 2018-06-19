@@ -6,9 +6,8 @@
 
 data types
 better tests with date and time comparisons
-test with fetch
 
 test 1 to many with cascade not strict
 test 1 to many with FK to Parent = PK Child
 
-tests for generated table existance
+tests for generated table existence
