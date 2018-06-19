@@ -14,7 +14,7 @@ public class TestCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testCascadePersist() {
+    public void testCascadePersistFromChildToParent() {
 
         MTOOCascadeParent parent = new MTOOCascadeParent();
         parent.setId(1);
@@ -36,7 +36,7 @@ public class TestCascade extends TransactionalSetup {
     }
 
     @Test
-    public void testCascadeRemove() {
+    public void testCascadeRemoveFromChildToParent() {
 
         MTOOCascadeParent parent = new MTOOCascadeParent();
         parent.setId(1);
@@ -56,6 +56,7 @@ public class TestCascade extends TransactionalSetup {
         flushAndClear();
 
         // verify both parent and child are removed
+        // it works because the parent is referenced by a single child already removed
         verifyCorrespondingTableIsEmpty(MTOOCascadeParent.class);
         verifyCorrespondingTableIsEmpty(MTOOCascadeChild.class);
 
@@ -84,6 +85,7 @@ public class TestCascade extends TransactionalSetup {
         flushAndClear();
 
         // remove only first child
+        // observe exception raised due to having a second child still referencing the removed parent
         em.remove(em.find(MTOOCascadeChild.class, child1.getId()));
         flushAndClear();
 
