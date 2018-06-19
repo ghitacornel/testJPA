@@ -16,6 +16,11 @@ public class NoCascadeN {
     @Column(nullable = false)
     private String name;
 
+    /**
+     * observe no cascade
+     * observe no definition of join table is required
+     * observe marking of not owning side
+     */
     @ManyToMany(mappedBy = "listWithNs")
     final private List<NoCascadeM> listWithMs = new ArrayList<>();
 

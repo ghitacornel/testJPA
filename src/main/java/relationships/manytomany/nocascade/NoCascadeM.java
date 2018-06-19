@@ -17,6 +17,8 @@ public class NoCascadeM {
      * observe override the join table definition<br>
      * observe unique constraint added on foreign keys combination<br>
      * observe not null constraints added
+     * observe no cascade
+     * this entity is the JPA owner of the relationship
      */
     @ManyToMany
     @JoinTable(
