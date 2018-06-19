@@ -5,9 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 /**
- * This class represents the ONE part of a MANY TO ONE relationship<br>
- * The parent is an independent entity<br>
- * The parent doesn't know about its children
+ * This class represents the ONE part of a MANY TO ONE relationship
  */
 @Entity
 public class MTOOStrictParent {
