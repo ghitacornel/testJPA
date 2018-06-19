@@ -77,20 +77,10 @@ public class TestPersist extends TransactionalSetup {
 
         m.getListWithNs().add(n1);
         m.getListWithNs().add(n2);
+        // DO NOT SET counterpart references
         flushAndClear();
 
         // verify
-//        {
-//            List<Object[]> list = em.createNativeQuery("select * from MN_OK").getResultList();
-//            for (Object[] objects : list) {
-//                for (Object object : objects) {
-//                    System.out.print(object + " ");
-//                }
-//                System.out.println("\n");
-//            }
-//
-//        }
-
         {// adjust the model to reflect expected changes
             n1.getListWithMs().add(m);
             n2.getListWithMs().add(m);

@@ -7,6 +7,9 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
+/**
+ * only 1 test is enough to prove the changes are propagated one way only
+ */
 public class TestPersist extends TransactionalSetup {
 
     CascadeOneSideM m1;
