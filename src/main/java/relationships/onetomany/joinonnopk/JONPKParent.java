@@ -1,12 +1,11 @@
 package relationships.onetomany.joinonnopk;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class JONPKParent implements Serializable {
+public class JONPKParent {
 
     @Id
     private Integer id;
