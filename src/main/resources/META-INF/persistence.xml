@@ -25,6 +25,11 @@
         <class>inheritance.single.InheritanceSingleTableSuperClass</class>
         <class>inheritance.InheritanceMappedSuperClass</class>
 
+        <class>inheritance.change.ConcreteClassA</class>
+        <class>inheritance.change.ConcreteClassB</class>
+        <class>inheritance.change.ConcreteSuperClass</class>
+        <class>inheritance.change.MixedContainer</class>
+
         <class>relationships.embedded.EmbeddableBean</class>
         <class>relationships.embedded.EntityWithEmbeddable</class>
 
@@ -112,8 +117,7 @@
         <class>entities.converters.EntityWithAttributeConverters</class>
         <class>entities.listener.EntityWithListener</class>
         <class>entities.projection.EntityWithProjection</class>
-        <class>queries.aggregated.Person</class>
-        <class>queries.aggregated.Country</class>
+        <class>entities.secondarytable.Employee</class>
 
         <class>lock.VersionedEntity</class>
 
@@ -123,10 +127,8 @@
         <class>queries.named.nativ.NamedNativeQueriesWithResultSetMappingDefinition</class>
         <class>queries.named.NamedQueriesDefinition</class>
 
-        <class>inheritance.change.ConcreteClassA</class>
-        <class>inheritance.change.ConcreteClassB</class>
-        <class>inheritance.change.ConcreteSuperClass</class>
-        <class>inheritance.change.MixedContainer</class>
+        <class>queries.aggregated.Person</class>
+        <class>queries.aggregated.Country</class>
 
         <class>queries.simple.SimpleQueryEntity</class>
 

@@ -9,7 +9,3 @@ data types
 test 1 to many with cascade not strict
 
 tests for generated table existence
-
-@SecondaryTable example, check eager/lazy loading
-https://antoniogoncalves.org/2008/05/20/primary-and-secondary-table-with-jpa/
-http://www.thejavageek.com/2014/09/18/jpa-secondarytable-annotation-example/
