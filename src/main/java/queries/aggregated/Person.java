@@ -1,11 +1,11 @@
-package entities.aggregated;
+package queries.aggregated;
 
 import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Country {
+public class Person {
 
     @Id
     private Integer id;
@@ -13,9 +13,12 @@ public class Country {
     @Basic(optional = false)
     private String name;
 
-    public Country(Integer id, String name) {
+    private Integer countryId;
+
+    public Person(Integer id, String name, Country country) {
         this.id = id;
         this.name = name;
+        this.countryId = country.getId();
     }
 
     public Integer getId() {
@@ -34,4 +37,11 @@ public class Country {
         this.name = name;
     }
 
+    public Integer getCountryId() {
+        return countryId;
+    }
+
+    public void setCountryId(Integer countryId) {
+        this.countryId = countryId;
+    }
 }

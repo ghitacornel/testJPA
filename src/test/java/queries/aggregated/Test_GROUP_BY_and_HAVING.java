@@ -1,4 +1,4 @@
-package entities.aggregated;
+package queries.aggregated;
 
 import org.junit.Assert;
 import org.junit.Before;
