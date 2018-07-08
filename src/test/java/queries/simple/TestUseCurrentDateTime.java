@@ -21,11 +21,13 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     EntityWithDate entityTomorrowMinusOneHour;
 
     @Before
-    public void before() {
+    public void before() throws Exception {
 
         verifyCorrespondingTableIsEmpty(EntityWithDate.class);
 
-        Date now = new Date();
+        // use a fixed date for such tests
+        Date now = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").parse("09.07.2018 10:11:12");
+
         Date yesterday;
         {
             Calendar instance = Calendar.getInstance();
@@ -82,8 +84,9 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     @Test
     public void testGetCurrent() {
 
-        EntityWithDate existing = em.createQuery("select e from EntityWithDate e where e.onlyDate = current_date", EntityWithDate.class).getSingleResult();
-        verifyEquals(entityNow, existing);
+        List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate = current_date", EntityWithDate.class).getResultList();
+        Assert.assertEquals(1, existing.size());
+        verifyEquals(entityNow, existing.get(0));
 
     }
 
