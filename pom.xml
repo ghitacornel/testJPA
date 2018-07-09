@@ -207,6 +207,23 @@
             </properties>
         </profile>
         <profile>
+            <id>postgres-jenkins</id>
+            <activation>
+                <activeByDefault>false</activeByDefault>
+            </activation>
+            <dependencies>
+                <dependency>
+                    <groupId>org.postgresql</groupId>
+                    <artifactId>postgresql</artifactId>
+                    <version>9.4-1200-jdbc41</version>
+                    <scope>test</scope>
+                </dependency>
+            </dependencies>
+            <properties>
+                <build.profile.id>postgres-jenkins</build.profile.id>
+            </properties>
+        </profile>
+        <profile>
             <id>mysql</id>
             <activation>
                 <activeByDefault>false</activeByDefault>
