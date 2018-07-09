@@ -14,6 +14,8 @@ public class EntityWithDate {
     @Id
     private Integer id;
 
+    private String name;
+
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "fullDate")
     private Date fullDate;
@@ -56,5 +58,23 @@ public class EntityWithDate {
 
     public void setOnlyTime(Date onlyTime) {
         this.onlyTime = onlyTime;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    @Override
+    public String toString() {
+        return "EntityWithDate{" +
+                "name='" + name + '\'' +
+                ", fullDate=" + fullDate +
+                ", onlyDate=" + onlyDate +
+                ", onlyTime=" + onlyTime +
+                '}';
     }
 }

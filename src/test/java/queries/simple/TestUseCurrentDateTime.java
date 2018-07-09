@@ -13,7 +13,10 @@ import java.util.List;
 
 public class TestUseCurrentDateTime extends TransactionalSetup {
 
+    Date now;
+    Date yesterday;
     Date tomorrow;
+    Date tomorrowMinusOneHour;
 
     EntityWithDate entityNow;
     EntityWithDate entityYesterday;
@@ -25,10 +28,24 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
 
         verifyCorrespondingTableIsEmpty(EntityWithDate.class);
 
-        // use a fixed date for such tests
-        Date now = new SimpleDateFormat("dd.MM.yyyy hh:mm:ss").parse("09.07.2018 10:11:12");
-
-        Date yesterday;
+        // use a fixed date taken from the database for such tests
+        {
+            {// persist a dummy
+                EntityWithDate dummy = new EntityWithDate();
+                dummy.setId(-1);
+                dummy.setName("dummy");
+                dummy.setFullDate(new Date());
+                dummy.setOnlyTime(new Date());
+                dummy.setOnlyDate(new Date());
+                persist(dummy);
+                flushAndClear();
+            }
+            now = em.createQuery("select current_timestamp from EntityWithDate e where e.id=-1", Date.class).getSingleResult();// use the dummy to get the current database timestamp
+            {// remove the dummy
+                em.remove(em.find(EntityWithDate.class, -1));
+                flushAndClear();
+            }
+        }
         {
             Calendar instance = Calendar.getInstance();
             instance.setTime(now);
@@ -41,7 +58,6 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
             instance.add(Calendar.DAY_OF_YEAR, 1);
             tomorrow = instance.getTime();
         }
-        Date tomorrowMinusOneHour;
         {
             Calendar instance = Calendar.getInstance();
             instance.setTime(now);
@@ -52,33 +68,47 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
 
         entityYesterday = new EntityWithDate();
         entityYesterday.setId(1);
+        entityYesterday.setName("entityYesterday");
         entityYesterday.setFullDate(yesterday);
-        entityYesterday.setOnlyTime(yesterday);
+        entityYesterday.setOnlyTime(stripTime(yesterday));
         entityYesterday.setOnlyDate(yesterday);
         persist(entityYesterday);
 
         entityNow = new EntityWithDate();
         entityNow.setId(2);
+        entityNow.setName("entityNow");
         entityNow.setFullDate(now);
-        entityNow.setOnlyTime(now);
+        entityNow.setOnlyTime(stripTime(now));
         entityNow.setOnlyDate(now);
         persist(entityNow);
 
         entityTomorrow = new EntityWithDate();
         entityTomorrow.setId(3);
+        entityTomorrow.setName("entityTomorrow");
         entityTomorrow.setFullDate(tomorrow);
-        entityTomorrow.setOnlyTime(tomorrow);
+        entityTomorrow.setOnlyTime(stripTime(tomorrow));
         entityTomorrow.setOnlyDate(tomorrow);
         persist(entityTomorrow);
 
         entityTomorrowMinusOneHour = new EntityWithDate();
         entityTomorrowMinusOneHour.setId(4);
+        entityTomorrowMinusOneHour.setName("entityTomorrowMinusOneHour");
         entityTomorrowMinusOneHour.setFullDate(tomorrowMinusOneHour);
-        entityTomorrowMinusOneHour.setOnlyTime(tomorrowMinusOneHour);
+        entityTomorrowMinusOneHour.setOnlyTime(stripTime(tomorrowMinusOneHour));
         entityTomorrowMinusOneHour.setOnlyDate(tomorrowMinusOneHour);
         persist(entityTomorrowMinusOneHour);
 
         flushAndClear();
+    }
+
+    private Date stripTime(Date date) {
+        Calendar instance = Calendar.getInstance();
+        instance.setTime(date);
+        instance.set(Calendar.HOUR_OF_DAY, 0);
+        instance.set(Calendar.MINUTE, 0);
+        instance.set(Calendar.SECOND, 0);
+        instance.set(Calendar.MILLISECOND, 0);
+        return instance.getTime();
     }
 
     @Test
