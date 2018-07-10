@@ -62,7 +62,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
             Calendar instance = Calendar.getInstance();
             instance.setTime(now);
             instance.add(Calendar.DAY_OF_YEAR, 1);
-            instance.add(Calendar.HOUR, -1);
+            instance.add(Calendar.HOUR_OF_DAY, -1);
             tomorrowMinusOneHour = instance.getTime();
         }
 
