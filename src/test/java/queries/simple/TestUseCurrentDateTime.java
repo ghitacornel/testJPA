@@ -115,6 +115,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetCurrent() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate = current_date", EntityWithDate.class).getResultList();
+        System.out.println(existing);// TODO
+        System.out.println(now);// TODO
         Assert.assertEquals(1, existing.size());
         verifyEquals(entityNow, existing.get(0));
 
@@ -135,6 +137,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetOnlyFuture() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate > current_date order by fullDate", EntityWithDate.class).getResultList();
+        System.out.println(existing);// TODO
+        System.out.println(now);// TODO
         Assert.assertEquals(2, existing.size());
         verifyEquals(entityTomorrowMinusOneHour, existing.get(0));
         verifyEquals(entityTomorrow, existing.get(1));
@@ -159,6 +163,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetCurrentAndPast() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate <= current_date order by fullDate", EntityWithDate.class).getResultList();
+        System.out.println(existing);// TODO
+        System.out.println(now);// TODO
         Assert.assertEquals(2, existing.size());
         verifyEquals(entityYesterday, existing.get(0));
         verifyEquals(entityNow, existing.get(1));
