@@ -116,7 +116,7 @@ public class TestOrder extends TransactionalSetup {
         persist(model);
         flushAndClear();
 
-        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value nulls first", SimpleQueryEntity.class).getResultList();
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value asc nulls first", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
         ReflectionAssert.assertReflectionEquals(model, actual);
@@ -154,7 +154,7 @@ public class TestOrder extends TransactionalSetup {
         persist(model);
         flushAndClear();
 
-        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value nulls last", SimpleQueryEntity.class).getResultList();
+        List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value asc nulls last", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
         ReflectionAssert.assertReflectionEquals(model, actual);
