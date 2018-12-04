@@ -13,6 +13,9 @@ public class Country {
     @Basic(optional = false)
     private String name;
 
+    public Country(){
+    }
+
     public Country(Integer id, String name) {
         this.id = id;
         this.name = name;

@@ -24,7 +24,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     EntityWithDate entityTomorrowMinusOneHour;
 
     @Before
-    public void before() throws Exception {
+    public void before() {
 
         verifyCorrespondingTableIsEmpty(EntityWithDate.class);
 
@@ -73,6 +73,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
         entityYesterday.setOnlyTime(stripTime(yesterday));
         entityYesterday.setOnlyDate(yesterday);
         persist(entityYesterday);
+        em.flush();
+        em.refresh(entityYesterday);
 
         entityNow = new EntityWithDate();
         entityNow.setId(2);
@@ -81,6 +83,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
         entityNow.setOnlyTime(stripTime(now));
         entityNow.setOnlyDate(now);
         persist(entityNow);
+        em.flush();
+        em.refresh(entityNow);
 
         entityTomorrow = new EntityWithDate();
         entityTomorrow.setId(3);
@@ -89,6 +93,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
         entityTomorrow.setOnlyTime(stripTime(tomorrow));
         entityTomorrow.setOnlyDate(tomorrow);
         persist(entityTomorrow);
+        em.flush();
+        em.refresh(entityTomorrow);
 
         entityTomorrowMinusOneHour = new EntityWithDate();
         entityTomorrowMinusOneHour.setId(4);
@@ -97,6 +103,8 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
         entityTomorrowMinusOneHour.setOnlyTime(stripTime(tomorrowMinusOneHour));
         entityTomorrowMinusOneHour.setOnlyDate(tomorrowMinusOneHour);
         persist(entityTomorrowMinusOneHour);
+        em.flush();
+        em.refresh(entityTomorrowMinusOneHour);
 
         flushAndClear();
     }

@@ -21,6 +21,17 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
             em.getTransaction().commit();
         }
 
+        final Runnable r = () -> {
+            System.out.println("LAUNCHING HSQL DBMANAGERSWING");
+            final String[] args = { "--url", "jdbc:hsqldb:mem:testdb" ,"--noexit"};
+            try {
+//                DatabaseManagerSwing.main(args);
+            } catch (final Exception e) {
+                System.out.println("Could not start hsqldb database manager GUI: " + e.getMessage());
+            }
+        };
+        new Thread(r).start();
+
     }
 
     /**

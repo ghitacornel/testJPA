@@ -7,7 +7,7 @@
     <persistence-unit name="examplePersistenceUnit" transaction-type="RESOURCE_LOCAL">
 
         <!-- no need to specify a persistence provider if only 1 is used -->
-        <!--<provider></provider>-->
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
         <class>entities.ids.sequence.EntityWithIdSequence</class>
         <class>entities.ids.listener.EntityWithIdListener</class>
@@ -156,10 +156,10 @@
             <!-- SQL dialect -->
             <property name="hibernate.dialect" value="${database.dialect}"/>
 
-            <property name="hibernate.hbm2ddl.auto" value="validate"/>
+            <!--<property name="hibernate.hbm2ddl.auto" value="validate"/>-->
 
             <!--<property name="javax.persistence.schema-generation.database.action" value="none"/>-->
-            <property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>
+            <!--<property name="javax.persistence.schema-generation.database.action" value="drop-and-create"/>-->
 
             <!-- generate scripts -->
             <!--<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
