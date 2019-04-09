@@ -30,6 +30,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         // verify persist
         Entity entity2 = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity2);
+        Assert.assertNotSame(initialEntity, entity2);
         ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
 
         // verify database state with a native query
@@ -51,6 +52,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         // verify update
         Entity entity3 = em.find(Entity.class, initialEntity.getId());
         Assert.assertNotNull(entity3);
+        Assert.assertNotSame(entity2, entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
         // verify database state with a native query

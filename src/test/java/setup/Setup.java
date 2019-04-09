@@ -3,7 +3,6 @@ package setup;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
-import org.unitils.inject.annotation.InjectIntoByType;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -19,7 +18,6 @@ public abstract class Setup {
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
     }
 
-    @InjectIntoByType
     protected EntityManager em;
 
     /**

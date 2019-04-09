@@ -6,12 +6,12 @@ import javax.persistence.PreUpdate;
 public class EntityListener {
 
     @PrePersist
-    public void prePersist(EntityWithListener entity) {
+    public void nameDoesNotMatterPrePersist(EntityWithListener entity) {
         entity.setPrePersist("prePersist");
     }
 
     @PreUpdate
-    public void preUpdate(EntityWithListener entity) {
+    public void nameDoesNotMatterPreUpdate(EntityWithListener entity) {
         entity.setPreUpdate("preUpdate");
     }
 
