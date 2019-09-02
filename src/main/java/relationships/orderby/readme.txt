@@ -1,0 +1,1 @@
+@OrderBy works on all kind of Java Collections that keep order and on all JPA collection relationships

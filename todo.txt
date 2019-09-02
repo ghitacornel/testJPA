@@ -1,0 +1,11 @@
+
+- better/enhanced relationship mappings
+- more criteria builder examples
+- entity graphs
+- hibernate envers
+
+data types
+
+test 1 to many with cascade not strict
+
+tests for generated table existence
