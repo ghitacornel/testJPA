@@ -38,5 +38,20 @@ public class TestEntityWithProjection extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testProjectionFullLoadDoesNotLoadTheEntityAlso() {
+
+        Assert.assertFalse(em.contains(entity));
+
+        ProjectionFull projectionFull = em.createQuery("select new entities.projection.ProjectionFull(e.id,e.name,e.value) from EntityWithProjection e where e.id = 1", ProjectionFull.class).getSingleResult();
+
+        Assert.assertFalse(em.contains(entity));
+
+        // check that this search will execute a second "find by id query"
+        // loading fully an entity instance through a projection does not load and keep the entity instance in persistence context
+        em.find(EntityWithProjection.class, 1);
+
+    }
+
 }
 
