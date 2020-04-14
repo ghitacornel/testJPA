@@ -5,8 +5,6 @@ import org.junit.Before;
 import org.junit.Test;
 import setup.TransactionalSetup;
 
-import java.util.List;
-
 public class TestGetCurrentDateTime extends TransactionalSetup {
 
     @Before
@@ -21,16 +19,12 @@ public class TestGetCurrentDateTime extends TransactionalSetup {
 
     @Test
     public void testGetCurrentAll() {
-
-        List<Object[]> result = em.createQuery("select current_date,current_time,current_timestamp from SQE").getResultList();
-        Assert.assertEquals(1, result.size());
-        Assert.assertNotNull(result.get(0)[0]);
-        Assert.assertNotNull(result.get(0)[1]);
-        Assert.assertNotNull(result.get(0)[2]);
-
-        System.out.println(result.get(0)[0]);
-        System.out.println(result.get(0)[1]);
-        System.out.println(result.get(0)[2]);
+        Object current_timestamp = em.createQuery("select current_timestamp from SQE").getSingleResult();
+        Assert.assertNotNull(current_timestamp);
+        Object current_date = em.createQuery("select current_date from SQE").getSingleResult();
+        Assert.assertNotNull(current_date);
+        Object current_time = em.createQuery("select current_time from SQE").getSingleResult();
+        Assert.assertNotNull(current_time);
     }
 
 }
