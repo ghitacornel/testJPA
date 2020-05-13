@@ -140,7 +140,7 @@ public class TestStringProcessing extends TransactionalSetup {
         persist(entity);
         flushAndClear();
 
-        Assert.assertEquals(new Integer(entity.getName().length()), em.createQuery("select length(name) from SQE where id = 1", Integer.class).getSingleResult());
+        Assert.assertEquals(Integer.valueOf(entity.getName().length()), em.createQuery("select length(name) from SQE where id = 1", Integer.class).getSingleResult());
     }
 
     @Test
@@ -153,7 +153,7 @@ public class TestStringProcessing extends TransactionalSetup {
         persist(entity);
         flushAndClear();
 
-        Assert.assertEquals(new Integer(4), em.createQuery("select locate('abc',name,2) from SQE where id = 1", Integer.class).getSingleResult());
+        Assert.assertEquals(Integer.valueOf(4), em.createQuery("select locate('abc',name,2) from SQE where id = 1", Integer.class).getSingleResult());
     }
 
 }
