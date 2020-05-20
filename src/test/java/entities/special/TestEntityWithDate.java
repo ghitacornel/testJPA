@@ -37,7 +37,7 @@ public class TestEntityWithDate extends TransactionalSetup {
         Assert.assertNotNull(persistedEntity);
         Assert.assertEquals(1, (int) persistedEntity.getId());
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:SSS");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
         Assert.assertEquals(simpleDateFormat.format(referenceDate), simpleDateFormat.format(persistedEntity.getFullDate()));
 
         SimpleDateFormat simpleDateOnlyFormat = new SimpleDateFormat("dd-MMM-yyyy");
