@@ -29,29 +29,19 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.8.1</version>
                 <configuration>
-                    <compilerArguments>
-                        <processor>org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor</processor>
-                    </compilerArguments>
+                    <annotationProcessors>
+                        <annotationProcessor>
+                            org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor
+                        </annotationProcessor>
+                    </annotationProcessors>
+                    <annotationProcessorPaths>
+                        <annotationProcessorPath>
+                                <groupId>org.hibernate</groupId>
+                                <artifactId>hibernate-jpamodelgen</artifactId>
+                                <version>5.4.16.Final</version>
+                        </annotationProcessorPath>
+                    </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>build-helper-maven-plugin</artifactId>
-                <version>3.0.0</version>
-                <executions>
-                    <execution>
-                        <id>add-source</id>
-                        <phase>generate-sources</phase>
-                        <goals>
-                            <goal>add-source</goal>
-                        </goals>
-                        <configuration>
-                            <sources>
-                                <source>target/annotations</source>
-                            </sources>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
             <!-- does not work
@@ -87,13 +77,6 @@
             <artifactId>hibernate-core</artifactId>
             <version>5.4.16.Final</version>
             <scope>test</scope>
-        </dependency>
-
-        <!-- JPA METAMODEL -->
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-jpamodelgen</artifactId>
-            <version>5.4.16.Final</version>
         </dependency>
 
         <!-- XML -->
