@@ -58,6 +58,37 @@ public class TestEntityUpdate extends TransactionalSetup {
 
     }
 
+    // observe UPDATE is issued for all fields even if only 1 was modified
+    @Test
+    public void testUpdateExistingEntityByAlteringAFetchedEntityAndOnlyASingleField() {
+
+        // fetch the entity
+        Entity originalEntity = em.find(Entity.class, initialEntity.getId());
+        Assert.assertNotNull(originalEntity);
+
+        // update
+        originalEntity.setValue(12);
+        flushAndClear();
+        // check executed queries and observe that no other specific entity manager operation operation is needed
+
+        // verify update
+        Entity updatedEntity = em.find(Entity.class, initialEntity.getId());
+        Assert.assertNotNull(updatedEntity);
+        ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
+
+        // verify database state with a native query
+        {
+            List<Object[]> data = em.createNativeQuery("select id,name,nullableValue from SimpleEntity t").getResultList();
+            Assert.assertEquals(1, data.size());
+            for (Object[] objects : data) {
+                Assert.assertEquals(1, objects[0]);
+                Assert.assertEquals("name", objects[1]);
+                Assert.assertEquals(12, objects[2]);
+            }
+        }
+
+    }
+
     @Test
     public void testUpdateExistingEntityUsingMerge() {
 
@@ -105,7 +136,7 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // merge first
         Entity newVersionMerged = em.merge(newVersionNotMerged);
-        Assert.assertNotSame(newVersionMerged,newVersionNotMerged);
+        Assert.assertNotSame(newVersionMerged, newVersionNotMerged);
 
         // merge twice and observe same object is returned even if flush was used, but not CLEAR
         {
