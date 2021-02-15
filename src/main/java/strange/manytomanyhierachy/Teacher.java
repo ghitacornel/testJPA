@@ -1,7 +1,5 @@
 package strange.manytomanyhierachy;
 
-import org.hibernate.annotations.Filter;
-import org.hibernate.annotations.FilterJoinTable;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
