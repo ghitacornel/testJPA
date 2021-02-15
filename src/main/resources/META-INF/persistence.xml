@@ -138,6 +138,10 @@
         <class>queries.bulk.BulkQueryEntity</class>
         <class>queries.bulk.BulkTarget</class>
 
+        <class>strange.manytomanyhierachy.Teacher</class>
+        <class>strange.manytomanyhierachy.Student</class>
+        <class>strange.manytomanyhierachy.StudentDistanta</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
