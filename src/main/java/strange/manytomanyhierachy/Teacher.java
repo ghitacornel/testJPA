@@ -2,6 +2,7 @@ package strange.manytomanyhierachy;
 
 import org.hibernate.annotations.Filter;
 import org.hibernate.annotations.FilterJoinTable;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -22,15 +23,15 @@ public class Teacher {
     )
     final private List<Student> students = new ArrayList<>();
 
-//    @ManyToMany
-//    @JoinTable(
-//            name = "TEACHER_STUDENT",
-//            joinColumns = {@JoinColumn(name = "id_teacher", referencedColumnName = "id")},
-//            inverseJoinColumns = {@JoinColumn(name = "id_student", referencedColumnName = "id")},
-//            uniqueConstraints = {@UniqueConstraint(name = "UK_TS_OK", columnNames = {"id_teacher", "id_student"})}
-//    )
-//    @FilterJoinTable(name = "distanta", condition = "discriminator='distanta'")
-//    final private List<StudentDistanta> studentsDistanta = new ArrayList<>();
+    @ManyToMany
+    @JoinTable(
+            name = "TEACHER_STUDENT",
+            joinColumns = {@JoinColumn(name = "id_teacher", referencedColumnName = "id")},
+            inverseJoinColumns = {@JoinColumn(name = "id_student", referencedColumnName = "id")},
+            uniqueConstraints = {@UniqueConstraint(name = "UK_TS_OK", columnNames = {"id_teacher", "id_student"})}
+    )
+    @Where(clause = "tip='distanta'")
+    final private List<StudentDistanta> studentsDistanta = new ArrayList<>();
 
     @Override
     public String toString() {
@@ -51,7 +52,7 @@ public class Teacher {
         return students;
     }
 
-//    public List<StudentDistanta> getStudentsDistanta() {
-//        return studentsDistanta;
-//    }
+    public List<StudentDistanta> getStudentsDistanta() {
+        return studentsDistanta;
+    }
 }

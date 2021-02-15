@@ -53,10 +53,10 @@ public class TEST_manytomanyhierachy extends TransactionalSetup {
         flushAndClear();
         System.out.println(em.find(Teacher.class, 1));
         System.out.println(em.find(Teacher.class, 1).getStudents());
-//        System.out.println(em.find(Teacher.class, 1).getStudentsDistanta());
+        System.out.println(em.find(Teacher.class, 1).getStudentsDistanta());
         System.out.println(em.find(Teacher.class, 2));
         System.out.println(em.find(Teacher.class, 2).getStudents());
-//        System.out.println(em.find(Teacher.class, 2).getStudentsDistanta());
+        System.out.println(em.find(Teacher.class, 2).getStudentsDistanta());
 
         System.out.println(em.find(Student.class, 1));
         System.out.println(em.find(Student.class, 1).getTeachers());
