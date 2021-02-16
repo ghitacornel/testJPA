@@ -7,7 +7,6 @@ import java.util.List;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tip")
-@DiscriminatorValue("zi")
 public class Student {
 
     @Id
