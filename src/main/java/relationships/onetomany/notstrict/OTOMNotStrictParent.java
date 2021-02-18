@@ -20,7 +20,13 @@ public class OTOMNotStrictParent {
     private String name;
 
     @OneToMany(mappedBy = "parent")
-    final private List<OTOMNotStrictChild> children = new ArrayList<>();
+    // map this as final
+    private List<OTOMNotStrictChild> children = new ArrayList<>();
+
+    // do not use setter
+    public void setChildren(List<OTOMNotStrictChild> children) {
+        this.children = children;
+    }
 
     public Integer getId() {
         return id;
