@@ -3,8 +3,8 @@ package entities.listener;
 import javax.persistence.*;
 
 @Entity
-@EntityListeners(EntityListener.class)
-public class EntityWithListener {
+// ENTITY LISTENERS are inherited
+public class EntityWithListener extends AbstractEntityWithListener {
 
     @Id
     private Integer id;
