@@ -92,7 +92,10 @@ public class TestRemove extends TransactionalSetup {
 
         BothOwnerM m2 = em.find(BothOwnerM.class, m.getId());
         m.getListWithNs().add(n3);
-        ReflectionAssert.assertReflectionEquals(m, m2, ReflectionComparatorMode.LENIENT_ORDER);
+        n3.getListWithMs().add(m);
+        m.getListWithNs().remove(n1);
+        m.getListWithNs().remove(n2);
+        ReflectionAssert.assertReflectionEquals(m, m2);
     }
 
 }
