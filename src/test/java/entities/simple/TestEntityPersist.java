@@ -74,6 +74,16 @@ public class TestEntityPersist extends TransactionalSetup {
 
     }
 
+    // verify SQL insert is not invoked
+    // data validation is performed on java model, not on the database
+    @Test(expected = javax.persistence.PersistenceException.class)
+    public void testPersistWithNullValueForNotNullFieldDoesNotTriggerSQLINSERT() {
+        Entity entity = new Entity();
+        entity.setId(1);
+        entity.setName(null);
+        em.persist(entity);
+    }
+
     /**
      * persist + flush + clear + persist again an already persisted but not managed entity => exception
      */
