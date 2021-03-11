@@ -62,6 +62,9 @@
         <class>relationships.onetomany.joinonnopk.JONPKChild</class>
         <class>relationships.onetomany.joinonnopk.JONPKParent</class>
 
+        <class>relationships.onetomany.oneside.OTOMOneSideParent</class>
+        <class>relationships.onetomany.oneside.OTOMSOneSideChild</class>
+
         <class>relationships.onetoone.childPKequalsparentPK.PKChild</class>
         <class>relationships.onetoone.childPKequalsparentPK.PKParent</class>
 
