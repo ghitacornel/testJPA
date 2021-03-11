@@ -14,7 +14,13 @@ public class BothOwnerM {
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")},
             uniqueConstraints = {@UniqueConstraint(name = "UK_MN_OK", columnNames = {"id_m", "id_n"})}
     )
-   final private List<BothOwnerN> listWithNs = new ArrayList<>();
+    // map it with final
+    private List<BothOwnerN> listWithNs = new ArrayList<>();
+
+    // do not use this setter, it overrides the proxy
+    public void setListWithNs(List<BothOwnerN> listWithNs) {
+        this.listWithNs = listWithNs;
+    }
 
     @Id
     private Integer id;
@@ -41,5 +47,6 @@ public class BothOwnerM {
     public List<BothOwnerN> getListWithNs() {
         return listWithNs;
     }
+
 
 }
