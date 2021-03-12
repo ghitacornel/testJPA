@@ -23,6 +23,9 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
         entity1.setId(1);
         entity1.setBooleanValue(true);
         entity1.setPassword("secret1");
+        entity1.setCustomType(new CustomType());
+        entity1.getCustomType().setX(1);
+        entity1.getCustomType().setY("y1");
 
         // persist
         em.persist(entity1);
@@ -50,6 +53,9 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
         // update
         entity2.setBooleanValue(false);
         entity2.setPassword("secret2");
+        entity1.setCustomType(new CustomType());
+        entity1.getCustomType().setX(2);
+        entity1.getCustomType().setY("y2");
         em.merge(entity2);
         flushAndClear();
 

@@ -181,6 +181,9 @@
                 tested in an enterprise edition usage -->
             <property name="javax.persistence.query.timeout" value="100"/>
 
+            <!-- custom attribute converters -->
+            <property name="hibernate.metadata_builder_contributor" value="entities.converters.AttributeConverterMetadataBuilderContributor"/>
+
         </properties>
     </persistence-unit>
 </persistence>

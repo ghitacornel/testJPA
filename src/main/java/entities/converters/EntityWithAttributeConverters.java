@@ -19,6 +19,9 @@ public class EntityWithAttributeConverters {
     @Convert(converter = PasswordEncrypterAttributeConverter.class)
     private String password;
 
+    @Column(nullable = false)
+    private CustomType customType;
+
     public Integer getId() {
         return id;
     }
@@ -41,5 +44,13 @@ public class EntityWithAttributeConverters {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public CustomType getCustomType() {
+        return customType;
+    }
+
+    public void setCustomType(CustomType customType) {
+        this.customType = customType;
     }
 }
