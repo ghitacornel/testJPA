@@ -72,7 +72,7 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
     }
 
     @Test(expected = javax.persistence.PersistenceException.class)
-    public void testResetChildrenListDoesNotRemoveOldChildren() {
+    public void testResetChildrenListDoesNotRemoveOldChildrenAndFails() {
 
         em.persist(parent);
         flushAndClear();

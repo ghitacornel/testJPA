@@ -20,6 +20,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
         EntityWithLOB entity1 = new EntityWithLOB();
         entity1.setId(1);
         entity1.setFileContent(new byte[]{1, 2, 3});
+        entity1.setLargeText("qwertyuiop");
 
         // persist
         em.persist(entity1);
@@ -32,6 +33,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
 
         // update
         entity2.setFileContent(new byte[]{4, 5, 6});
+        entity2.setLargeText("asdfghjkl");
         flushAndClear();
 
         // verify update

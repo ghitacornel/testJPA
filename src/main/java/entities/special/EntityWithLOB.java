@@ -16,6 +16,9 @@ public class EntityWithLOB {
     @Lob
     private byte[] fileContent;
 
+    @Lob
+    private String largeText;
+
     public byte[] getFileContent() {
         return fileContent;
     }
@@ -30,5 +33,13 @@ public class EntityWithLOB {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getLargeText() {
+        return largeText;
+    }
+
+    public void setLargeText(String largeText) {
+        this.largeText = largeText;
     }
 }
