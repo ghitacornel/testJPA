@@ -18,9 +18,18 @@ public class OTOMOneSideParent {
     @Column(nullable = false)
     private String name;
 
+    // mandatory cascade all
+    // mandatory orphanRemoval true
+    // mandatory @JoinColumn with not null
+    // mandatory final
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "parent_id", referencedColumnName = "id")
-    final private List<OTOMSOneSideChild> children = new ArrayList<>();
+    @JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = false)
+    private List<OTOMSOneSideChild> children = new ArrayList<>();
+
+    // do not use this
+    public void setChildren(List<OTOMSOneSideChild> children) {
+        this.children = children;
+    }
 
     public Integer getId() {
         return id;
