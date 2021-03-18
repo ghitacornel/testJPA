@@ -66,6 +66,15 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testWithEqualsStringOnNumeric() {
+
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where cast(e.value as string) = :value", SimpleQueryEntity.class).setParameter("value", "6").getResultList();
+        Assert.assertEquals(1, list.size());
+        ReflectionAssert.assertReflectionEquals(buildModel().get(0), list.get(0));
+
+    }
+
     /**
      * this is BAD, it is basically an equals matcher
      */
