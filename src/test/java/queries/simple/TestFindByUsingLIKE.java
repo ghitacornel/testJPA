@@ -104,9 +104,22 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
      * note the usage of %% for position match
      */
     @Test
-    public void testWithLikeClauseOK() {
+    public void testWithLikeClauseStillBadDueToSpecialCharacterAddedOnInput() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(:name)", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
+        Assert.assertEquals(3, list.size());
+        ReflectionAssert.assertReflectionEquals(buildModel().subList(2, 5), list);
+
+    }
+
+    /**
+     * note the usage of "lower" on both sides
+     * note the usage of %% for position match
+     */
+    @Test
+    public void testWithLikeClauseOK() {
+
+        List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(concat('%',:name,'%'))", SimpleQueryEntity.class).setParameter("name", "john").getResultList();
         Assert.assertEquals(3, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().subList(2, 5), list);
 
