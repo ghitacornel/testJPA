@@ -60,4 +60,18 @@ public class TestCascade extends TransactionalSetup {
         verifyCorrespondingTableIsEmpty(B.class);
 
     }
+
+    @Test
+    public void testLoadParentEagerlyLoadsChildDueToNotowningTheForeignKey() {
+
+        em.persist(parent);
+        flushAndClear();
+
+        // remove
+        A a = em.find(A.class, parent.getId());
+        System.out.println(a);
+        System.out.println(a.getB());// verify with debug that child is already loaded
+        flushAndClear();
+
+    }
 }
