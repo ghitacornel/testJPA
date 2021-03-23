@@ -36,6 +36,8 @@
                             <version>5.4.16.Final</version>
                         </annotationProcessorPath>
                     </annotationProcessorPaths>
+                    <source>16</source>
+                    <target>16</target>
                 </configuration>
             </plugin>
 
