@@ -145,6 +145,9 @@
         <class>strange.manytomanyhierachy.Student</class>
         <class>strange.manytomanyhierachy.StudentDistanta</class>
 
+        <class>entities.listener.parentchildren.ParentWithListener</class>
+        <class>entities.listener.parentchildren.ChildWithListener</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
