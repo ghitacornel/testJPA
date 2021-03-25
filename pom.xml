@@ -9,6 +9,7 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.target>16</maven.compiler.target>
         <maven.compiler.source>16</maven.compiler.source>
+        <hibernate.version>5.4.30.Final</hibernate.version>
     </properties>
 
     <build>
@@ -74,7 +75,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.29.Final</version>
+            <version>${hibernate.version}</version>
         </dependency>
 
         <!-- TESTS -->
