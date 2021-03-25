@@ -147,6 +147,8 @@
 
         <class>entities.listener.parentchildren.ParentWithListener</class>
         <class>entities.listener.parentchildren.ChildWithListener</class>
+        <class>entities.listener.circular.ParentCircularWithListener</class>
+        <class>entities.listener.circular.ChildCircularWithListener</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
