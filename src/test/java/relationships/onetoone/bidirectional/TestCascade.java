@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestCascade extends TransactionalSetup {
 
-    private A parent = buildModel();
+    private final A parent = buildModel();
 
     private A buildModel() {
 

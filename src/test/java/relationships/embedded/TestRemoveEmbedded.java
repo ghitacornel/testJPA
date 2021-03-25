@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class TestRemoveEmbedded extends TransactionalSetup {
 
-    private EntityWithEmbeddable model = buildModel();
+    private final EntityWithEmbeddable model = buildModel();
 
     @Before
     public void before() {

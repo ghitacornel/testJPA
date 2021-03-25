@@ -6,10 +6,9 @@ import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-public class TestLoadParentAndChildrenInOneNamedQuery extends
-        TransactionalSetup {
+public class TestLoadParentAndChildrenInOneNamedQuery extends TransactionalSetup {
 
-    private OTOMStrictParent parent = buildModel();
+    private final OTOMStrictParent parent = buildModel();
 
     private OTOMStrictParent buildModel() {
 

@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestSelectAll extends TransactionalSetup {
 
-    private ParentMap parent = buildModel();
+    private final ParentMap parent = buildModel();
 
     private ParentMap buildModel() {
 

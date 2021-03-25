@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestInsertParentWithNoCascadeToChildren extends TransactionalSetup {
 
-    private OTOMNotStrictParent parent = buildModel();
+    private final OTOMNotStrictParent parent = buildModel();
 
     private OTOMNotStrictParent buildModel() {
 

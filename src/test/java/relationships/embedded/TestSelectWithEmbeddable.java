@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestSelectWithEmbeddable extends TransactionalSetup {
 
-    private List<EntityWithEmbeddable> model = buildModel();
+    private final List<EntityWithEmbeddable> model = buildModel();
 
     @Before
     public void before() {

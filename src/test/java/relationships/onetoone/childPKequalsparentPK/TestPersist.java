@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestPersist extends TransactionalSetup {
 
-    private PKParent model = buildModel();
+    private final PKParent model = buildModel();
 
     private PKParent buildModel() {
 

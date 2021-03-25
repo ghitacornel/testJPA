@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
 
-    private A model = buildModel();
+    private final A model = buildModel();
 
     private A buildModel() {
 

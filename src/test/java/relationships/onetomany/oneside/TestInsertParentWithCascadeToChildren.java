@@ -10,7 +10,7 @@ import java.util.Collections;
 
 public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
-    private OTOMOneSideParent parent = buildModel();
+    private final OTOMOneSideParent parent = buildModel();
 
     private OTOMOneSideParent buildModel() {
 

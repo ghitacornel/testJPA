@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestSelectAll extends TransactionalSetup {
 
-    private List<Object> model = buildModel();
+    private final List<Object> model = buildModel();
 
     private List<Object> buildModel() {
         List<Object> objects = new ArrayList<>();

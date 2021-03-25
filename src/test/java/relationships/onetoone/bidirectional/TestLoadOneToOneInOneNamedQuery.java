@@ -7,7 +7,7 @@ import setup.TransactionalSetup;
 
 public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
 
-    private A model = buildModel();
+    private final A model = buildModel();
 
     private A buildModel() {
 
@@ -33,7 +33,9 @@ public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
     @Test
     public void testLoadParentAndChildInOneSingleQuery() {
 
-        A existing = em.createQuery("select t from A t join fetch t.b where t.id = :id", A.class).setParameter("id", 1).getSingleResult();
+        A existing = em.createQuery("select t from A t join fetch t.b where t.id = :id", A.class)
+                .setParameter("id", 1)
+                .getSingleResult();
         flushAndClear();
 
         ReflectionAssert.assertReflectionEquals(model, existing);

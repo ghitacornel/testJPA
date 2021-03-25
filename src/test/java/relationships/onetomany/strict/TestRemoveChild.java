@@ -9,7 +9,7 @@ import setup.TransactionalSetup;
 
 public class TestRemoveChild extends TransactionalSetup {
 
-    private OTOMStrictParent model = buildModel();
+    private final OTOMStrictParent model = buildModel();
 
     private OTOMStrictParent buildModel() {
 

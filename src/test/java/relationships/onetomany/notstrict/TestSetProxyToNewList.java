@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TestSetProxyToNewList extends TransactionalSetup {
 
-    private OTOMNotStrictParent parent = buildModel();
+    private final OTOMNotStrictParent parent = buildModel();
 
     private OTOMNotStrictParent buildModel() {
 

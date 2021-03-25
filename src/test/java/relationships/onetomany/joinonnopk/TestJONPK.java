@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestJONPK extends TransactionalSetup {
 
-    private JONPKParent model = buildModel();
+    private final JONPKParent model = buildModel();
 
     private JONPKParent buildModel() {
 

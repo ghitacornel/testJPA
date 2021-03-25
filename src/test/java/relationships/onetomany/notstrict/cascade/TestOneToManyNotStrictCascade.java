@@ -1,12 +1,9 @@
 package relationships.onetomany.notstrict.cascade;
 
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.onetomany.notstrict.OTOMNotStrictChild;
-import relationships.onetomany.notstrict.OTOMNotStrictParent;
 import setup.TransactionalSetup;
 
 public class TestOneToManyNotStrictCascade extends TransactionalSetup {

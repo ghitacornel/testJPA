@@ -8,7 +8,7 @@ import setup.TransactionalSetup;
 
 public class TestUpdateParentAndChildren extends TransactionalSetup {
 
-    private OTOMStrictParent parent = buildModel();
+    private final OTOMStrictParent parent = buildModel();
 
     private OTOMStrictParent buildModel() {
 
