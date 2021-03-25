@@ -33,9 +33,8 @@ public class TestEntityWithDate extends TransactionalSetup {
         flushAndClear();
 
         // verify persist
-        EntityWithDate persistedEntity = em.find(EntityWithDate.class, 1);
+        EntityWithDate persistedEntity = em.find(EntityWithDate.class, initialEntity.getId());
         Assert.assertNotNull(persistedEntity);
-        Assert.assertEquals(1, (int) persistedEntity.getId());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
         Assert.assertEquals(simpleDateFormat.format(referenceDate), simpleDateFormat.format(persistedEntity.getFullDate()));
