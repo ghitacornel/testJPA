@@ -1,5 +1,6 @@
 package queries.simple;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
@@ -61,4 +62,13 @@ public class TestFindByUsingIN extends TransactionalSetup {
 
     }
 
+    @Test
+    public void testWithNullCollectionParameter() {
+        Assert.assertTrue(em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", null).getResultList().isEmpty());
+    }
+
+    @Test
+    public void testWithEmptyCollectionParameter() {
+        Assert.assertTrue(em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", new ArrayList<>()).getResultList().isEmpty());
+    }
 }
