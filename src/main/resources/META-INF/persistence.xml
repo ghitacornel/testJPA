@@ -150,6 +150,8 @@
         <class>entities.listener.circular.ParentCircularWithListener</class>
         <class>entities.listener.circular.ChildCircularWithListener</class>
 
+        <class>entities.cached.CachedPerson</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
 
         <properties>
@@ -175,7 +177,8 @@
             <property name="hibernate.default_schema" value="${hibernate.default_schema}"/>
 
             <!--<property name="javax.persistence.schema-generation.database.action" value="none"/>-->
-            <property name="javax.persistence.schema-generation.database.action" value="${javax.persistence.schema-generation.database.action}"/>
+            <property name="javax.persistence.schema-generation.database.action"
+                      value="${javax.persistence.schema-generation.database.action}"/>
 
             <!-- generate scripts -->
             <!--<property name="javax.persistence.schema-generation.scripts.action" value="drop-and-create"/>-->
@@ -187,7 +190,11 @@
             <property name="javax.persistence.query.timeout" value="100"/>
 
             <!-- custom attribute converters -->
-            <property name="hibernate.metadata_builder_contributor" value="entities.converters.AttributeConverterMetadataBuilderContributor"/>
+            <property name="hibernate.metadata_builder_contributor"
+                      value="entities.converters.AttributeConverterMetadataBuilderContributor"/>
+
+            <!-- cache -->
+            <property name="hibernate.cache.use_second_level_cache" value="true"/>
 
         </properties>
     </persistence-unit>
