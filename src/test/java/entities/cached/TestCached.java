@@ -4,6 +4,11 @@ import org.junit.Before;
 import org.junit.Test;
 import setup.TransactionalSetup;
 
+import javax.cache.Cache;
+import javax.cache.CacheManager;
+import javax.cache.Caching;
+import javax.cache.spi.CachingProvider;
+
 public class TestCached extends TransactionalSetup {
 
     CachedPerson cachedPerson1;
@@ -29,13 +34,25 @@ public class TestCached extends TransactionalSetup {
 
     @Test
     public void testCacheHit() {
+
+        CachingProvider cachingProvider = Caching.getCachingProvider();
+        CacheManager cacheManager = cachingProvider.getCacheManager();
+        Cache<Object, Object> cache = cacheManager.getCache("entities.cached.CachedPerson");
+        System.out.println(cache);
+
+        System.out.println(em.getEntityManagerFactory().getCache().contains(CachedPerson.class, cachedPerson1.getId()));
         System.out.println("START CACHE TEST ===============================   ");
 
-        System.out.println(em.find(CachedPerson.class,cachedPerson1.getId()));
+        System.out.println(em.find(CachedPerson.class, cachedPerson1.getId()));
+        System.out.println(em.getEntityManagerFactory().getCache().contains(CachedPerson.class, cachedPerson1.getId()));
         flushAndClear();
-        System.out.println(em.find(CachedPerson.class,cachedPerson1.getId()));
+
+        System.out.println(em.find(CachedPerson.class, cachedPerson1.getId()));
+        System.out.println(em.getEntityManagerFactory().getCache().contains(CachedPerson.class, cachedPerson1.getId()));
         flushAndClear();
-        System.out.println(em.find(CachedPerson.class,cachedPerson1.getId()));
+
+        System.out.println(em.find(CachedPerson.class, cachedPerson1.getId()));
+        System.out.println(em.getEntityManagerFactory().getCache().contains(CachedPerson.class, cachedPerson1.getId()));
         flushAndClear();
 
         System.out.println("END CACHE TEST ===============================   ");

@@ -201,7 +201,6 @@
             <property name="hibernate.cache.region.factory_class" value="jcache"/>
 
             <property name="hibernate.javax.cache.provider" value="org.ehcache.jsr107.EhcacheCachingProvider"/>
-            <property name="hibernate.javax.cache.uri" value="/META-INF/ehcache.xml"/>
 
         </properties>
     </persistence-unit>
