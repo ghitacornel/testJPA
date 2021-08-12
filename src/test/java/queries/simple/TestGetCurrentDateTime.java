@@ -33,7 +33,7 @@ public class TestGetCurrentDateTime extends TransactionalSetup {
 
     @Test
     public void testGetCurrentTime() {
-        Date date = em.createQuery("select CURRENT_TIME from SQE", Date.class).getSingleResult();
+        Date date = em.createQuery("select CURRENT_TIMESTAMP from SQE", Date.class).getSingleResult();
         Assert.assertNotNull(date);
     }
 
