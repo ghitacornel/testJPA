@@ -115,6 +115,7 @@
         <class>relationships.collections.sets.onetomany.ChildSet</class>
 
         <class>entities.simple.Entity</class>
+        <class>entities.i18n.EntityI18N</class>
         <class>entities.special.EntityWithEnums</class>
         <class>entities.special.EntityWithPrimitives</class>
         <class>entities.special.EntityWithTransient</class>
