@@ -1,5 +1,7 @@
 package entities.i18n;
 
+import org.hibernate.annotations.Nationalized;
+
 import javax.persistence.*;
 
 @Entity
@@ -8,14 +10,21 @@ public class EntityI18N {
     @Id
     private Integer id;
 
+    @Nationalized// for safety enforce nvarchar
     @Column
     private String value1;
 
+    @Nationalized// for safety enforce nvarchar
     @Column
     private String value2;
 
+    @Nationalized// for safety enforce nvarchar
     @Column
     private String value3;
+
+    @Nationalized// for safety enforce nvarchar
+    @Column
+    private String value4;
 
     public Integer getId() {
         return id;
@@ -47,5 +56,13 @@ public class EntityI18N {
 
     public void setValue3(String value3) {
         this.value3 = value3;
+    }
+
+    public String getValue4() {
+        return value4;
+    }
+
+    public void setValue4(String value4) {
+        this.value4 = value4;
     }
 }

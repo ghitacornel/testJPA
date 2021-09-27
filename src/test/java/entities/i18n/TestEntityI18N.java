@@ -20,11 +20,13 @@ public class TestEntityI18N extends TransactionalSetup {
         entityI18N.setValue1("français");
         entityI18N.setValue2("Möbelträgerfüße");
         entityI18N.setValue3("русский");
+        entityI18N.setValue4("日本");
         em.persist(entityI18N);
         flushAndClear();
 
         Assert.assertEquals("français", em.find(EntityI18N.class, entityI18N.getId()).getValue1());
         Assert.assertEquals("Möbelträgerfüße", em.find(EntityI18N.class, entityI18N.getId()).getValue2());
         Assert.assertEquals("русский", em.find(EntityI18N.class, entityI18N.getId()).getValue3());
+        Assert.assertEquals("日本", em.find(EntityI18N.class, entityI18N.getId()).getValue4());
     }
 }
