@@ -7,8 +7,8 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <maven.compiler.target>16</maven.compiler.target>
-        <maven.compiler.source>16</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
     </properties>
 
     <build>
@@ -75,7 +75,7 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>5.4.32.Final</version>
+            <version>5.5.7.Final</version>
         </dependency>
         <!-- EclipseLink -->
 <!--        <dependency>-->
@@ -88,12 +88,12 @@
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-jcache</artifactId>
-            <version>5.4.30.Final</version>
+            <version>5.5.7.Final</version>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>
             <artifactId>ehcache</artifactId>
-            <version>3.8.1</version>
+            <version>3.9.6</version>
         </dependency>
 
         <!-- logging -->
