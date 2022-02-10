@@ -143,13 +143,14 @@
             <!-- https://www.h2database.com/html/main.html -->
             <id>h2</id>
             <activation>
-                <activeByDefault>true</activeByDefault>
+                <activeByDefault>false</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
                     <groupId>com.h2database</groupId>
                     <artifactId>h2</artifactId>
                     <version>2.1.210</version>
+<!--  this version works, new one fails on generating the SQL <version>1.4.200</version>-->
                     <scope>test</scope>
                 </dependency>
             </dependencies>
@@ -161,7 +162,7 @@
             <!-- http://hsqldb.org/ -->
             <id>hsqldb</id>
             <activation>
-                <activeByDefault>false</activeByDefault>
+                <activeByDefault>true</activeByDefault>
             </activation>
             <dependencies>
                 <dependency>
