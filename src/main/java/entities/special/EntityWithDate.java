@@ -17,15 +17,12 @@ public class EntityWithDate {
     private String name;
 
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "fullDate")
     private Date fullDate;
 
     @Temporal(TemporalType.DATE)
-    @Column(name = "onlyDate")
     private Date onlyDate;
 
     @Temporal(TemporalType.TIME)
-    @Column(name = "onlyTime")
     private Date onlyTime;
 
     public Integer getId() {
