@@ -1,7 +1,7 @@
 package relationships.onetoone.childPKequalsparentPK;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -24,7 +24,7 @@ public class TestPersist extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(PKParent.class);
         verifyCorrespondingTableIsEmpty(PKChild.class);

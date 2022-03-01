@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -43,7 +43,7 @@ public class TestDistinct extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -56,12 +56,12 @@ public class TestDistinct extends TransactionalSetup {
         expected.add("name 1");
         expected.add("name 2");
         expected.add("name 3");
-        Assert.assertEquals(expected, actual);
+        Assertions.assertEquals(expected, actual);
     }
 
     @Test
     public void testSelectCountDistinct() {
         Long count = em.createQuery("select count(distinct e.name) from SQE e", Long.class).getSingleResult();
-        Assert.assertEquals(3, count.longValue());
+        Assertions.assertEquals(3, count.longValue());
     }
 }

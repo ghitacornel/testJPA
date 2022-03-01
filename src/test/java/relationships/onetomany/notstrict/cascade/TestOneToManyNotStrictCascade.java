@@ -1,7 +1,7 @@
 package relationships.onetomany.notstrict.cascade;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -42,9 +42,9 @@ public class TestOneToManyNotStrictCascade extends TransactionalSetup {
         em.remove(parent1);
         flushAndClear();
 
-        Assert.assertNull(em.find(OTOMNotStrictCascadeParent.class, 1));
-        Assert.assertNotNull(em.find(OTOMNotStrictCascadeChild.class, 1));
-        Assert.assertNotNull(em.find(OTOMNotStrictCascadeChild.class, 2));
+        Assertions.assertNull(em.find(OTOMNotStrictCascadeParent.class, 1));
+        Assertions.assertNotNull(em.find(OTOMNotStrictCascadeChild.class, 1));
+        Assertions.assertNotNull(em.find(OTOMNotStrictCascadeChild.class, 2));
 
     }
 

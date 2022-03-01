@@ -1,13 +1,13 @@
 package entities.listener;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestEntityListener extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithListener.class);
     }
@@ -26,13 +26,13 @@ public class TestEntityListener extends TransactionalSetup {
 
         // verify
         EntityWithListener entity2 = em.find(EntityWithListener.class, 1);
-        Assert.assertNotNull(entity2);
-        Assert.assertEquals(entity2.getId(), entity1.getId());
-        Assert.assertEquals(entity2.getName(), entity1.getName());
+        Assertions.assertNotNull(entity2);
+        Assertions.assertEquals(entity2.getId(), entity1.getId());
+        Assertions.assertEquals(entity2.getName(), entity1.getName());
 
         // verify listener filled fields
-        Assert.assertEquals("prePersist", entity2.getPrePersist());
-        Assert.assertNull(entity2.getPreUpdate());
+        Assertions.assertEquals("prePersist", entity2.getPrePersist());
+        Assertions.assertNull(entity2.getPreUpdate());
 
         // update the entity
         entity2.setName("new name");
@@ -41,13 +41,13 @@ public class TestEntityListener extends TransactionalSetup {
 
         // verify
         EntityWithListener entity3 = em.find(EntityWithListener.class, 1);
-        Assert.assertNotNull(entity3);
-        Assert.assertEquals(entity3.getId(), entity1.getId());
-        Assert.assertEquals(entity3.getName(), entity2.getName());
+        Assertions.assertNotNull(entity3);
+        Assertions.assertEquals(entity3.getId(), entity1.getId());
+        Assertions.assertEquals(entity3.getName(), entity2.getName());
 
         // verify listener filled fields
-        Assert.assertEquals("prePersist", entity3.getPrePersist());
-        Assert.assertEquals("preUpdate", entity3.getPreUpdate());
+        Assertions.assertEquals("prePersist", entity3.getPrePersist());
+        Assertions.assertEquals("preUpdate", entity3.getPreUpdate());
 
     }
 

@@ -1,15 +1,15 @@
 package entities.listener.parentchildren;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.util.Comparator;
 
 public class TestEntityListenerPropagation extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(ParentWithListener.class);
         verifyCorrespondingTableIsEmpty(ChildWithListener.class);
@@ -39,22 +39,22 @@ public class TestEntityListenerPropagation extends TransactionalSetup {
         flushAndClear();
 
         ParentWithListener parentPersisted = em.find(ParentWithListener.class, parent.getId());
-        Assert.assertEquals(parent.getId(), parentPersisted.getId());
-        Assert.assertEquals(parent.getName(), parentPersisted.getName());
-        Assert.assertEquals("parent own set persist", parentPersisted.getTestColumnOwn());
-        Assert.assertEquals(2, parentPersisted.getChildren().size());
+        Assertions.assertEquals(parent.getId(), parentPersisted.getId());
+        Assertions.assertEquals(parent.getName(), parentPersisted.getName());
+        Assertions.assertEquals("parent own set persist", parentPersisted.getTestColumnOwn());
+        Assertions.assertEquals(2, parentPersisted.getChildren().size());
 
         parent.getChildren().sort(Comparator.comparing(ChildWithListener::getId));
 
-        Assert.assertEquals(parent.getChildren().get(0).getId(), child1.getId());
-        Assert.assertEquals(parent.getChildren().get(0).getName(), child1.getName());
-        Assert.assertEquals("child own set persist", parent.getChildren().get(0).getTestColumnOwn());
-        Assert.assertEquals("parent persist", parent.getChildren().get(0).getTestColumnOther());
+        Assertions.assertEquals(parent.getChildren().get(0).getId(), child1.getId());
+        Assertions.assertEquals(parent.getChildren().get(0).getName(), child1.getName());
+        Assertions.assertEquals("child own set persist", parent.getChildren().get(0).getTestColumnOwn());
+        Assertions.assertEquals("parent persist", parent.getChildren().get(0).getTestColumnOther());
 
-        Assert.assertEquals(parent.getChildren().get(1).getId(), child2.getId());
-        Assert.assertEquals(parent.getChildren().get(1).getName(), child2.getName());
-        Assert.assertEquals("child own set persist", parent.getChildren().get(1).getTestColumnOwn());
-        Assert.assertEquals("parent persist", parent.getChildren().get(1).getTestColumnOther());
+        Assertions.assertEquals(parent.getChildren().get(1).getId(), child2.getId());
+        Assertions.assertEquals(parent.getChildren().get(1).getName(), child2.getName());
+        Assertions.assertEquals("child own set persist", parent.getChildren().get(1).getTestColumnOwn());
+        Assertions.assertEquals("parent persist", parent.getChildren().get(1).getTestColumnOther());
 
     }
 
@@ -92,15 +92,15 @@ public class TestEntityListenerPropagation extends TransactionalSetup {
 
         // verify
         ParentWithListener parentPersisted = em.find(ParentWithListener.class, parent.getId());
-        Assert.assertEquals("parent own set update", parentPersisted.getTestColumnOwn());
-        Assert.assertEquals(2, parentPersisted.getChildren().size());
+        Assertions.assertEquals("parent own set update", parentPersisted.getTestColumnOwn());
+        Assertions.assertEquals(2, parentPersisted.getChildren().size());
 
         parent.getChildren().sort(Comparator.comparing(ChildWithListener::getId));
 
-        Assert.assertEquals("child own set update", parent.getChildren().get(0).getTestColumnOwn());
-        Assert.assertEquals("parent update", parent.getChildren().get(0).getTestColumnOther());
-        Assert.assertEquals("child own set update", parent.getChildren().get(1).getTestColumnOwn());
-        Assert.assertEquals("parent update", parent.getChildren().get(1).getTestColumnOther());
+        Assertions.assertEquals("child own set update", parent.getChildren().get(0).getTestColumnOwn());
+        Assertions.assertEquals("parent update", parent.getChildren().get(0).getTestColumnOther());
+        Assertions.assertEquals("child own set update", parent.getChildren().get(1).getTestColumnOwn());
+        Assertions.assertEquals("parent update", parent.getChildren().get(1).getTestColumnOther());
 
     }
 

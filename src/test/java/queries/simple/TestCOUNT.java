@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -36,7 +36,7 @@ public class TestCOUNT extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -45,13 +45,13 @@ public class TestCOUNT extends TransactionalSetup {
     @Test
     public void testCountAll() {
         Long count = em.createQuery("select count(*) from SQE", Long.class).getSingleResult();
-        Assert.assertEquals(buildModel().size(), count.longValue());
+        Assertions.assertEquals(buildModel().size(), count.longValue());
     }
 
     @Test
     public void testCountSome() {
         Long count = em.createQuery("select count(e) from SQE e where e.value = 2 or e.value = 3", Long.class).getSingleResult();
-        Assert.assertEquals(2, count.longValue());
+        Assertions.assertEquals(2, count.longValue());
     }
 
 }

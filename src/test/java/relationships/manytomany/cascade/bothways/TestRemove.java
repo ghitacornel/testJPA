@@ -1,8 +1,8 @@
 package relationships.manytomany.cascade.bothways;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestRemove extends TransactionalSetup {
@@ -11,7 +11,7 @@ public class TestRemove extends TransactionalSetup {
     CascadeBothWaysN n1;
     CascadeBothWaysN n2;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
 
         m = new CascadeBothWaysM();
@@ -31,10 +31,6 @@ public class TestRemove extends TransactionalSetup {
         m.getListWithNs().add(n1);
         m.getListWithNs().add(n2);
 
-    }
-
-    @Before
-    public void before() {
         persist(m);
         flushAndClear();
     }
@@ -48,9 +44,9 @@ public class TestRemove extends TransactionalSetup {
         flushAndClear();
 
         // verify cascade removal was propagated
-        Assert.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n2.getId()));
+        Assertions.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
+        Assertions.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
+        Assertions.assertNull(em.find(CascadeBothWaysN.class, n2.getId()));
 
     }
 
@@ -62,9 +58,9 @@ public class TestRemove extends TransactionalSetup {
         flushAndClear();
 
         // verify cascade removal was propagated
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysN.class, n2.getId()));
-        Assert.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
+        Assertions.assertNull(em.find(CascadeBothWaysN.class, n1.getId()));
+        Assertions.assertNull(em.find(CascadeBothWaysN.class, n2.getId()));
+        Assertions.assertNull(em.find(CascadeBothWaysM.class, m.getId()));
 
     }
 

@@ -1,7 +1,7 @@
 package relationships.manytomany.nocascade;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -10,7 +10,7 @@ public class TestRemoveLink extends TransactionalSetup {
     NoCascadeM m;
     NoCascadeN n;
 
-    @Before
+    @BeforeEach
     public void before() {
 
         m = new NoCascadeM();

@@ -1,7 +1,7 @@
 package strange.manytomanyhierachy;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TEST_manytomanyhierachy extends TransactionalSetup {
@@ -14,7 +14,7 @@ public class TEST_manytomanyhierachy extends TransactionalSetup {
     Student student4;
     StudentDistanta student5;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
         teacher1 = new Teacher();
         teacher1.setId(1);

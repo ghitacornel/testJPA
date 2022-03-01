@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -30,7 +30,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -62,7 +62,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
         // INCORRECT way to check for NULL
         // sometimes a simple check for null on server side can avoid an SQL query on database side
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value = :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
-        Assert.assertTrue(list.isEmpty());
+        Assertions.assertTrue(list.isEmpty());
 
     }
 
@@ -72,7 +72,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
         // INCORRECT way to check for NOT NULL
         // sometimes a simple check for null on server side can avoid an SQL query on database side
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value <> :value", SimpleQueryEntity.class).setParameter("value", null).getResultList();
-        Assert.assertTrue(list.isEmpty());
+        Assertions.assertTrue(list.isEmpty());
 
     }
 

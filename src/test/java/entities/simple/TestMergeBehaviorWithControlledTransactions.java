@@ -1,15 +1,15 @@
 package entities.simple;
 
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.Setup;
 
 public class TestMergeBehaviorWithControlledTransactions extends Setup {
 
-    @Before
+    @BeforeEach
     public void before() {
 
         verifyCorrespondingTableIsEmpty(Entity.class);
@@ -38,7 +38,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
     /**
      * make sure we clean the database on a different transaction
      */
-    @After
+    @AfterEach
     public void after() {
         em.getTransaction().begin();
         em.createQuery("delete from Entity t").executeUpdate();
@@ -71,7 +71,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
 
         // a second object is created and attached to the persistence context
         // since the original updated model is detached
-        Assert.assertNotSame(attachedEntity, detachedEntity);
+        Assertions.assertNotSame(attachedEntity, detachedEntity);
 
         // make further changes on the not managed instance
         detachedEntity.setName("still detached name");
@@ -86,7 +86,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
         {
             em.getTransaction().begin();
             Entity updated = em.find(Entity.class, witness.getId());
-            Assert.assertNotNull(updated);
+            Assertions.assertNotNull(updated);
             ReflectionAssert.assertReflectionEquals(attachedEntity, updated);
             em.getTransaction().commit();
         }
@@ -111,7 +111,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
 
         // a second object is not created since the original updated model is fetched first
         // hence already attached to the persistence context
-        Assert.assertSame(mergedEntity, attachedEntity);
+        Assertions.assertSame(mergedEntity, attachedEntity);
 
         // make further changes on the not managed instance
         mergedEntity.setName("newName2");
@@ -123,7 +123,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
         {
             em.getTransaction().begin();
             Entity updated = em.find(Entity.class, witness.getId());
-            Assert.assertNotNull(updated);
+            Assertions.assertNotNull(updated);
             ReflectionAssert.assertReflectionEquals(mergedEntity, updated);
             ReflectionAssert.assertReflectionEquals(attachedEntity, updated);
             ReflectionAssert.assertReflectionEquals(mergedEntity, attachedEntity);

@@ -1,8 +1,8 @@
 package queries.named.nativ;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import relationships.onetomany.strict.OTOMStrictChild;
@@ -33,7 +33,7 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(model);
         flushAndClear();
@@ -55,8 +55,8 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
             OTOMStrictChild child = (OTOMStrictChild) objects[1];
             fetchedChildren.add(child);
 
-            Assert.assertEquals(model.getId(), parent.getId());
-            Assert.assertEquals(model.getName(), parent.getName());
+            Assertions.assertEquals(model.getId(), parent.getId());
+            Assertions.assertEquals(model.getName(), parent.getName());
 
         }
 
@@ -102,8 +102,8 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
             OTOMStrictChild child = (OTOMStrictChild) objects[1];
             fetchedChildren.add(child);
 
-            Assert.assertEquals(model.getId(), parent.getId());
-            Assert.assertEquals(model.getName(), parent.getName());
+            Assertions.assertEquals(model.getId(), parent.getId());
+            Assertions.assertEquals(model.getName(), parent.getName());
 
         }
 

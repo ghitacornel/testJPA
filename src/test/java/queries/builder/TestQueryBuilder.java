@@ -1,7 +1,7 @@
 package queries.builder;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import queries.simple.SimpleQueryEntity;
 import queries.simple.SimpleQueryEntity_;
@@ -63,7 +63,7 @@ public class TestQueryBuilder extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();

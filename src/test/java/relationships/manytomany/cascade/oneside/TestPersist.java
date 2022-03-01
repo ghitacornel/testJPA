@@ -1,8 +1,8 @@
 package relationships.manytomany.cascade.oneside;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -16,7 +16,7 @@ public class TestPersist extends TransactionalSetup {
     CascadeOneSideN n1;
     CascadeOneSideN n2;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
 
         m1 = new CascadeOneSideM();
@@ -63,9 +63,9 @@ public class TestPersist extends TransactionalSetup {
         {// adjust model to reflect expected
             n1.getListWithMs().clear();
         }
-        Assert.assertNull(em.find(CascadeOneSideM.class, m1.getId()));
+        Assertions.assertNull(em.find(CascadeOneSideM.class, m1.getId()));
         ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeOneSideN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        Assert.assertNull(em.find(CascadeOneSideM.class, n2.getId()));
+        Assertions.assertNull(em.find(CascadeOneSideM.class, n2.getId()));
 
     }
 

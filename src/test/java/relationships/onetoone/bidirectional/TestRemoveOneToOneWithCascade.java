@@ -1,8 +1,8 @@
 package relationships.onetoone.bidirectional;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
@@ -24,7 +24,7 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
         return a;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         em.persist(parent);
         flushAndClear();
@@ -33,8 +33,8 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     @Test
     public void testRemovalOfParentTriggersTheRemovalOfOrphanChild() {
 
-        Assert.assertNotNull(em.find(A.class, 1));
-        Assert.assertNotNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));
+        Assertions.assertNotNull(em.find(B.class, 2));
 
         em.remove(em.find(A.class, 1));
         flushAndClear();
@@ -47,58 +47,58 @@ public class TestRemoveOneToOneWithCascade extends TransactionalSetup {
     @Test
     public void testChildIsRemovedWhenItsParentIsSetToNull() {
 
-        Assert.assertNotNull(em.find(A.class, 1));
-        Assert.assertNotNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));
+        Assertions.assertNotNull(em.find(B.class, 2));
 
         em.find(A.class, 1).setB(null);
         flushAndClear();
 
-        Assert.assertNotNull(em.find(A.class, 1));
-        Assert.assertNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));
+        Assertions.assertNull(em.find(B.class, 2));
 
     }
 
     @Test
     public void testDirectRemovalOfChildWorksWhenParentIsNotLoaded() {
 
-        Assert.assertNotNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(B.class, 2));
 
         // works since the parent was not loaded
         em.remove(em.find(B.class, 2));
         flushAndClear();
 
-        Assert.assertNotNull(em.find(A.class, 1));
-        Assert.assertNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));
+        Assertions.assertNull(em.find(B.class, 2));
 
     }
 
     @Test
     public void testDirectRemovalOfChildDoesNotWorkWhenParentWasLoaded() {
 
-        Assert.assertNotNull(em.find(A.class, 1));// loads the parent
-        Assert.assertNotNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));// loads the parent
+        Assertions.assertNotNull(em.find(B.class, 2));
 
         // it fails due to the previously loaded parent and relationship not removed
         em.remove(em.find(B.class, 2));
         flushAndClear();
 
-        Assert.assertNotNull(em.find(A.class, 1));
-        Assert.assertNotNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));
+        Assertions.assertNotNull(em.find(B.class, 2));
 
     }
 
     @Test
     public void testDirectRemovalOfChildDoesWorksWhenParentWasLoadedAndRelationshipUpdated() {
 
-        Assert.assertNotNull(em.find(A.class, 1));// loads the parent
-        Assert.assertNotNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));// loads the parent
+        Assertions.assertNotNull(em.find(B.class, 2));
 
         em.find(A.class, 1).setB(null);// update relationship
         em.remove(em.find(B.class, 2));
         flushAndClear();
 
-        Assert.assertNotNull(em.find(A.class, 1));
-        Assert.assertNull(em.find(B.class, 2));
+        Assertions.assertNotNull(em.find(A.class, 1));
+        Assertions.assertNull(em.find(B.class, 2));
 
     }
 

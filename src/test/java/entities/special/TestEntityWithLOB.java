@@ -1,14 +1,14 @@
 package entities.special;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestEntityWithLOB extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithLOB.class);
     }
@@ -28,7 +28,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
 
         // verify persist
         EntityWithLOB entity2 = em.find(EntityWithLOB.class, 1);
-        Assert.assertNotNull(entity2);
+        Assertions.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(entity1, entity2);
 
         // update
@@ -38,7 +38,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
 
         // verify update
         EntityWithLOB entity3 = em.find(EntityWithLOB.class, 1);
-        Assert.assertNotNull(entity3);
+        Assertions.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
     }

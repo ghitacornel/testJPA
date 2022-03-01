@@ -1,14 +1,18 @@
 package relationships.manytoone.strict;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import relationships.manytoone.notstrict.MTOONotStrictParent;
 import setup.TransactionalSetup;
+
+import javax.persistence.PersistenceException;
 
 public class TestSetParentToNull extends TransactionalSetup {
 
     private MTOOStrictParent parent = new MTOOStrictParent();
 
-    @Before
+    @BeforeEach
     public void before() {
 
         verifyCorrespondingTableIsEmpty(MTOOStrictChild.class);
@@ -25,7 +29,7 @@ public class TestSetParentToNull extends TransactionalSetup {
      * setting the parent to null makes the test throw an exception<br>
      * for strict relationships children are totally dependent of their parents
      */
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testSetParentToNull() {
 
         // insert
@@ -37,8 +41,9 @@ public class TestSetParentToNull extends TransactionalSetup {
         flushAndClear();
 
         // set parent to null
-        em.find(MTOOStrictChild.class, child.getId()).setParent(null);
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.find(MTOOStrictChild.class, child.getId()).setParent(null);
+            flushAndClear();
+        });
     }
 }

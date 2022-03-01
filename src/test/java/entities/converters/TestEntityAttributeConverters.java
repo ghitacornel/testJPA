@@ -1,8 +1,8 @@
 package entities.converters;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TestEntityAttributeConverters extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithAttributeConverters.class);
     }
@@ -34,20 +34,20 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,booleanValue,password from EntityWithAttributeConverters t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("Y", objects[1]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("Y", objects[1]);
 
                 // text must match since we use a fixed algorithm and private key
-                Assert.assertEquals("TvZEM7lqd+QNaJKAz5/Gkw==", objects[2]);
+                Assertions.assertEquals("TvZEM7lqd+QNaJKAz5/Gkw==", objects[2]);
 
             }
         }
 
         // verify
         EntityWithAttributeConverters entity2 = em.find(EntityWithAttributeConverters.class, entity1.getId());
-        Assert.assertNotNull(entity2);
+        Assertions.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(entity1, entity2);
 
         // update
@@ -62,20 +62,20 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,booleanValue,password from EntityWithAttributeConverters t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("N", objects[1]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("N", objects[1]);
 
                 // text must match since we use a fixed algorithm and private key
-                Assert.assertEquals("xDhSabqx5D/k0xImrZxPEg==", objects[2]);
+                Assertions.assertEquals("xDhSabqx5D/k0xImrZxPEg==", objects[2]);
 
             }
         }
 
         // verify
         EntityWithAttributeConverters entity3 = em.find(EntityWithAttributeConverters.class, entity1.getId());
-        Assert.assertNotNull(entity3);
+        Assertions.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
     }

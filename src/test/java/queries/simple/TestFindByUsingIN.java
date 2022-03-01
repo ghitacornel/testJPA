@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -37,7 +37,7 @@ public class TestFindByUsingIN extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -64,11 +64,11 @@ public class TestFindByUsingIN extends TransactionalSetup {
 
     @Test
     public void testWithNullCollectionParameter() {
-        Assert.assertTrue(em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", null).getResultList().isEmpty());
+        Assertions.assertTrue(em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", null).getResultList().isEmpty());
     }
 
     @Test
     public void testWithEmptyCollectionParameter() {
-        Assert.assertTrue(em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", new ArrayList<>()).getResultList().isEmpty());
+        Assertions.assertTrue(em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", new ArrayList<>()).getResultList().isEmpty());
     }
 }

@@ -1,6 +1,6 @@
 package relationships.orderby.sets;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 

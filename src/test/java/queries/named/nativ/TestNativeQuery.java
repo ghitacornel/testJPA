@@ -1,8 +1,8 @@
 package queries.named.nativ;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestNativeQuery extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -58,7 +58,7 @@ public class TestNativeQuery extends TransactionalSetup {
     public void testNamedQueryDefinedOnEntity() {
 
         Long count = em.createNamedQuery("EntityWithNamedNativeQuery.countAll", Long.class).getSingleResult();
-        Assert.assertEquals(5L, count.longValue());
+        Assertions.assertEquals(5L, count.longValue());
 
     }
 

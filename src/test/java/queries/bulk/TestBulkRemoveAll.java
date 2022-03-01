@@ -1,8 +1,8 @@
 package queries.bulk;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TestBulkRemoveAll extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -33,7 +33,7 @@ public class TestBulkRemoveAll extends TransactionalSetup {
         em.createQuery("delete from BulkQueryEntity").executeUpdate();
         flushAndClear();
 
-        Assert.assertTrue(em.createQuery("select t from BulkQueryEntity t").getResultList().isEmpty());
+        Assertions.assertTrue(em.createQuery("select t from BulkQueryEntity t").getResultList().isEmpty());
 
     }
 

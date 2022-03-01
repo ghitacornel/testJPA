@@ -1,7 +1,7 @@
 package relationships.onetomany.strict;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -27,7 +27,7 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(OTOMStrictParent.class);
         verifyCorrespondingTableIsEmpty(OTOMStrictChild.class);

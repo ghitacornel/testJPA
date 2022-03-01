@@ -1,8 +1,8 @@
 package entities.special;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TestEntityWithEnums extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithEnums.class);
     }
@@ -30,17 +30,17 @@ public class TestEntityWithEnums extends TransactionalSetup {
 
         // verify persist
         EntityWithEnums entity2 = em.find(EntityWithEnums.class, 1);
-        Assert.assertNotNull(entity2);
+        Assertions.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(entity1, entity2);
 
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,enum1,enum2 from EntityWithEnums t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals(SimpleEnum.ONE.name(), objects[1]);
-                Assert.assertEquals(SimpleEnum.TWO.ordinal(), objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals(SimpleEnum.ONE.name(), objects[1]);
+                Assertions.assertEquals(SimpleEnum.TWO.ordinal(), objects[2]);
             }
         }
 
@@ -52,17 +52,17 @@ public class TestEntityWithEnums extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,enum1,enum2 from EntityWithEnums t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals(SimpleEnum.THREE.name(), objects[1]);
-                Assert.assertEquals(SimpleEnum.FOUR.ordinal(), objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals(SimpleEnum.THREE.name(), objects[1]);
+                Assertions.assertEquals(SimpleEnum.FOUR.ordinal(), objects[2]);
             }
         }
 
         // verify update
         EntityWithEnums entity3 = em.find(EntityWithEnums.class, 1);
-        Assert.assertNotNull(entity3);
+        Assertions.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
     }

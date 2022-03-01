@@ -2,7 +2,7 @@ package metamodel;
 
 import entities.simple.Entity;
 import entities.simple.Entity_;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 

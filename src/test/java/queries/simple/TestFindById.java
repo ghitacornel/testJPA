@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -30,7 +30,7 @@ public class TestFindById extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -48,7 +48,7 @@ public class TestFindById extends TransactionalSetup {
     public void testFindByIdNotExistingId() {
 
         SimpleQueryEntity entity = em.find(SimpleQueryEntity.class, -1);
-        Assert.assertNull(entity);
+        Assertions.assertNull(entity);
 
     }
 

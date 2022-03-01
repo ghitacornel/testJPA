@@ -1,8 +1,8 @@
 package relationships.manytoone.notstrict;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -13,7 +13,7 @@ public class TestCRUD extends TransactionalSetup {
     private MTOONotStrictParent parent1 = new MTOONotStrictParent();
     private MTOONotStrictParent parent2 = new MTOONotStrictParent();
 
-    @Before
+    @BeforeEach
     public void before() {
 
         parent1.setId(1);
@@ -43,7 +43,7 @@ public class TestCRUD extends TransactionalSetup {
 
         // test insert
         List<MTOONotStrictChild> list = em.createQuery("select t from MTOONotStrictChild t", MTOONotStrictChild.class).getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(child, list.get(0));
         flushAndClear();
 
@@ -56,7 +56,7 @@ public class TestCRUD extends TransactionalSetup {
 
         // test update
         existing = em.find(MTOONotStrictChild.class, child.getId());
-        Assert.assertEquals("new child name", existing.getName());
+        Assertions.assertEquals("new child name", existing.getName());
         ReflectionAssert.assertReflectionEquals(parent2, existing.getParent());
         flushAndClear();
 

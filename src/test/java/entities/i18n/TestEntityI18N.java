@@ -1,13 +1,13 @@
 package entities.i18n;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestEntityI18N extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void verifyDatabaseState() {
         verifyCorrespondingTableIsEmpty(EntityI18N.class);
     }
@@ -24,9 +24,9 @@ public class TestEntityI18N extends TransactionalSetup {
         em.persist(entityI18N);
         flushAndClear();
 
-        Assert.assertEquals("français", em.find(EntityI18N.class, entityI18N.getId()).getValue1());
-        Assert.assertEquals("Möbelträgerfüße", em.find(EntityI18N.class, entityI18N.getId()).getValue2());
-        Assert.assertEquals("русский", em.find(EntityI18N.class, entityI18N.getId()).getValue3());
-        Assert.assertEquals("日本", em.find(EntityI18N.class, entityI18N.getId()).getValue4());
+        Assertions.assertEquals("français", em.find(EntityI18N.class, entityI18N.getId()).getValue1());
+        Assertions.assertEquals("Möbelträgerfüße", em.find(EntityI18N.class, entityI18N.getId()).getValue2());
+        Assertions.assertEquals("русский", em.find(EntityI18N.class, entityI18N.getId()).getValue3());
+        Assertions.assertEquals("日本", em.find(EntityI18N.class, entityI18N.getId()).getValue4());
     }
 }

@@ -1,8 +1,8 @@
 package relationships.lazyloading.manytomany;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.persistence.Persistence;
@@ -12,7 +12,7 @@ public class TestLazy extends TransactionalSetup {
     MTOMLazyM m;
     MTOMLazyN n;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         m = new MTOMLazyM();
@@ -36,11 +36,11 @@ public class TestLazy extends TransactionalSetup {
 
         MTOMLazyM existingM = em.find(MTOMLazyM.class, m.getId());
         flushAndClear();
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
 
         MTOMLazyN existingN = em.find(MTOMLazyN.class, n.getId());
         flushAndClear();
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingN.getListWithMs()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingN.getListWithMs()));
 
     }
 
@@ -55,10 +55,10 @@ public class TestLazy extends TransactionalSetup {
         existingN.getListWithMs().size();// force loading
         flushAndClear();
 
-        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
-        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingN.getListWithMs()));
-        Assert.assertEquals(1, existingM.getListWithNs().size());
-        Assert.assertEquals(1, existingN.getListWithMs().size());
+        Assertions.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingM.getListWithNs()));
+        Assertions.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingN.getListWithMs()));
+        Assertions.assertEquals(1, existingM.getListWithNs().size());
+        Assertions.assertEquals(1, existingN.getListWithMs().size());
 
     }
 

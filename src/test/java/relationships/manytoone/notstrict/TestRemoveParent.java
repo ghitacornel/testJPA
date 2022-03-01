@@ -1,9 +1,10 @@
 package relationships.manytoone.notstrict;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import relationships.manytoone.cascade.MTOOCascadeChild;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -13,7 +14,7 @@ public class TestRemoveParent extends TransactionalSetup {
     private MTOONotStrictParent parent1 = new MTOONotStrictParent();
     private MTOONotStrictParent parent2 = new MTOONotStrictParent();
 
-    @Before
+    @BeforeEach
     public void before() {
 
         verifyCorrespondingTableIsEmpty(MTOONotStrictParent.class);
@@ -45,7 +46,7 @@ public class TestRemoveParent extends TransactionalSetup {
         flushAndClear();
 
         // test remove
-        Assert.assertNull(em.find(MTOONotStrictParent.class, parent1.getId()));
+        Assertions.assertNull(em.find(MTOONotStrictParent.class, parent1.getId()));
 
         // verify the other parent is unaffected
         ReflectionAssert.assertReflectionEquals(parent2, em.find(MTOONotStrictParent.class, parent2.getId()));
@@ -57,13 +58,13 @@ public class TestRemoveParent extends TransactionalSetup {
      * even if the relationship is not a strict one JPA does not mark existing children as orphans having their
      * reference to their parent set to null
      */
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testRemoveParentWithChildren() {
-
-        //  remove parent with children
-        em.remove(em.find(MTOONotStrictParent.class, parent2.getId()));
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            //  remove parent with children
+            em.remove(em.find(MTOONotStrictParent.class, parent2.getId()));
+            flushAndClear();
+        });
     }
 
 }

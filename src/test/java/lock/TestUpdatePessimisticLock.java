@@ -1,10 +1,10 @@
 package lock;
 
 import entities.simple.Entity;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.persistence.EntityManager;
@@ -14,7 +14,7 @@ public class TestUpdatePessimisticLock extends TransactionalSetup {
 
     private Entity model = buildModel();
 
-    @Before
+    @BeforeEach
     public void before() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -24,7 +24,7 @@ public class TestUpdatePessimisticLock extends TransactionalSetup {
         entityManager.close();
     }
 
-    @After
+    @AfterEach
     public void after() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -40,7 +40,7 @@ public class TestUpdatePessimisticLock extends TransactionalSetup {
         return entity;
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void test() {
 

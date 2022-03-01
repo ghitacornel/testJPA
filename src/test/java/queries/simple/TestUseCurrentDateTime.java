@@ -1,9 +1,9 @@
 package queries.simple;
 
 import entities.special.EntityWithDate;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.text.SimpleDateFormat;
@@ -23,7 +23,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     EntityWithDate entityTomorrow;
     EntityWithDate entityTomorrowMinusOneHour;
 
-    @Before
+    @BeforeEach
     public void before() {
 
         verifyCorrespondingTableIsEmpty(EntityWithDate.class);
@@ -123,7 +123,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetCurrent() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate = current_date", EntityWithDate.class).getResultList();
-        Assert.assertEquals(1, existing.size());
+        Assertions.assertEquals(1, existing.size());
         verifyEquals(entityNow, existing.get(0));
 
     }
@@ -132,7 +132,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetCurrentAndFuture() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate >= current_date order by fullDate", EntityWithDate.class).getResultList();
-        Assert.assertEquals(3, existing.size());
+        Assertions.assertEquals(3, existing.size());
         verifyEquals(entityNow, existing.get(0));
         verifyEquals(entityTomorrowMinusOneHour, existing.get(1));
         verifyEquals(entityTomorrow, existing.get(2));
@@ -143,7 +143,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetOnlyFuture() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate > current_date order by fullDate", EntityWithDate.class).getResultList();
-        Assert.assertEquals(2, existing.size());
+        Assertions.assertEquals(2, existing.size());
         verifyEquals(entityTomorrowMinusOneHour, existing.get(0));
         verifyEquals(entityTomorrow, existing.get(1));
 
@@ -158,7 +158,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.fullDate >= ?1 order by fullDate", EntityWithDate.class).
                 setParameter(1, tomorrow).
                 getResultList();
-        Assert.assertEquals(1, existing.size());
+        Assertions.assertEquals(1, existing.size());
         verifyEquals(entityTomorrow, existing.get(0));
 
     }
@@ -167,7 +167,7 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetCurrentAndPast() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate <= current_date order by fullDate", EntityWithDate.class).getResultList();
-        Assert.assertEquals(2, existing.size());
+        Assertions.assertEquals(2, existing.size());
         verifyEquals(entityYesterday, existing.get(0));
         verifyEquals(entityNow, existing.get(1));
 
@@ -177,23 +177,23 @@ public class TestUseCurrentDateTime extends TransactionalSetup {
     public void testGetOnlyPast() {
 
         List<EntityWithDate> existing = em.createQuery("select e from EntityWithDate e where e.onlyDate < current_date order by fullDate", EntityWithDate.class).getResultList();
-        Assert.assertEquals(1, existing.size());
+        Assertions.assertEquals(1, existing.size());
         verifyEquals(entityYesterday, existing.get(0));
 
     }
 
     private void verifyEquals(EntityWithDate entity1, EntityWithDate entity2) {
 
-        Assert.assertEquals(entity1.getId(), entity2.getId());
+        Assertions.assertEquals(entity1.getId(), entity2.getId());
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss:SSS");
-        Assert.assertEquals(simpleDateFormat.format(entity1.getFullDate()), simpleDateFormat.format(entity2.getFullDate()));
+        Assertions.assertEquals(simpleDateFormat.format(entity1.getFullDate()), simpleDateFormat.format(entity2.getFullDate()));
 
         SimpleDateFormat simpleDateOnlyFormat = new SimpleDateFormat("dd-MMM-yyyy");
-        Assert.assertEquals(simpleDateOnlyFormat.format(entity1.getOnlyDate()), simpleDateOnlyFormat.format(entity2.getOnlyDate()));
+        Assertions.assertEquals(simpleDateOnlyFormat.format(entity1.getOnlyDate()), simpleDateOnlyFormat.format(entity2.getOnlyDate()));
 
         SimpleDateFormat simpleTimeOnlyFormat = new SimpleDateFormat("HH:mm:ss");
-        Assert.assertEquals(simpleTimeOnlyFormat.format(entity1.getOnlyTime()), simpleTimeOnlyFormat.format(entity2.getOnlyTime()));
+        Assertions.assertEquals(simpleTimeOnlyFormat.format(entity1.getOnlyTime()), simpleTimeOnlyFormat.format(entity2.getOnlyTime()));
     }
 
 }

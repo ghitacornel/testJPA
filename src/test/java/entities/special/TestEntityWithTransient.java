@@ -1,13 +1,13 @@
 package entities.special;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestEntityWithTransient extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithTransient.class);
     }
@@ -27,9 +27,9 @@ public class TestEntityWithTransient extends TransactionalSetup {
 
         // verify transients are not persisted as expected
         EntityWithTransient persistedEntity = em.find(EntityWithTransient.class, initialEntity.getId());
-        Assert.assertNotNull(persistedEntity);
-        Assert.assertNull(persistedEntity.getTransientBoolean());
-        Assert.assertNull(persistedEntity.getTransientInteger());
+        Assertions.assertNotNull(persistedEntity);
+        Assertions.assertNull(persistedEntity.getTransientBoolean());
+        Assertions.assertNull(persistedEntity.getTransientInteger());
 
     }
 }

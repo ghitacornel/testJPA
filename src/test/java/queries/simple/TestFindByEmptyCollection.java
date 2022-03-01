@@ -1,7 +1,7 @@
 package queries.simple;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import relationships.onetomany.strict.OTOMStrictChild;
 import relationships.onetomany.strict.OTOMStrictParent;
@@ -37,7 +37,7 @@ public class TestFindByEmptyCollection extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();

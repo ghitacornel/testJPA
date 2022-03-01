@@ -1,7 +1,7 @@
 package queries.bulk;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TestBulkSelectAndInsert extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();

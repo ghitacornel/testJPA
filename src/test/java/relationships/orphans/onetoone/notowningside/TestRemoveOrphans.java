@@ -1,8 +1,8 @@
 package relationships.orphans.onetoone.notowningside;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -11,7 +11,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     OTOOrphanNotOwningSideNotOwner notOwner;
     OTOOrphanNotOwningSideOwner owner;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         verifyCorrespondingTableIsEmpty(OTOOrphanNotOwningSideNotOwner.class);
@@ -63,7 +63,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
 
         // since we remove the part flagged as orphanRemoval the other side is removed regardless that it is the owning side
 
-        Assert.assertNull(em.find(OTOOrphanNotOwningSideOwner.class, owner.getId()));
+        Assertions.assertNull(em.find(OTOOrphanNotOwningSideOwner.class, owner.getId()));
         {// adjust model to match expectations
             notOwner.setB(null);
         }

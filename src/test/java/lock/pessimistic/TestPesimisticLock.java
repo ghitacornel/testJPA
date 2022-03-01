@@ -1,7 +1,7 @@
 package lock.pessimistic;
 
 import entities.simple.Entity;
-import org.junit.*;
+import org.junit.jupiter.api.*;
 import setup.Setup;
 
 import javax.persistence.EntityManager;
@@ -15,7 +15,7 @@ public class TestPesimisticLock extends Setup {
     /**
      * need to have data persisted in a separate committed transaction
      */
-    @Before
+    @BeforeEach
     public void before() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -28,7 +28,7 @@ public class TestPesimisticLock extends Setup {
     /**
      * database manual cleanup is required since this test is not transactional
      */
-    @After
+    @AfterEach
     public void after() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -44,7 +44,7 @@ public class TestPesimisticLock extends Setup {
         return entity;
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void test() {
 
@@ -71,7 +71,7 @@ public class TestPesimisticLock extends Setup {
 
         // if this step is reached then no exception was raised hence the test
         // failed
-        Assert.fail("No exception was raised");
+        Assertions.fail("No exception was raised");
 
     }
 

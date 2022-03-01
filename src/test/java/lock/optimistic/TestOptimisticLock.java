@@ -1,10 +1,10 @@
 package lock.optimistic;
 
 import lock.VersionedEntity;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.Setup;
 
 import javax.persistence.EntityManager;
@@ -18,7 +18,7 @@ public class TestOptimisticLock extends Setup {
     /**
      * need to have data persisted in a separate committed transaction
      */
-    @Before
+    @BeforeEach
     public void before() {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         entityManager.getTransaction().begin();
@@ -31,7 +31,7 @@ public class TestOptimisticLock extends Setup {
     /**
      * database manual cleanup is required since this test is not transactional
      */
-    @After
+    @AfterEach
     public void after() {
 
         EntityManager entityManager = entityManagerFactory.createEntityManager();
@@ -74,20 +74,20 @@ public class TestOptimisticLock extends Setup {
         } catch (RollbackException e) {
             if (e.getCause() instanceof OptimisticLockException) {
 
-                Assert.assertEquals("Error while committing the transaction", e.getMessage());
+                Assertions.assertEquals("Error while committing the transaction", e.getMessage());
 
                 // second transaction failed with expected lock exception and error message => test successful
                 return;
 
             } else {
-                Assert.fail("Unexpected cause " + e.getCause());
+                Assertions.fail("Unexpected cause " + e.getCause());
             }
         } finally {
             entityManager2.close();
         }
 
         // if this step is reached => no exception was raised => the test failed
-        Assert.fail("No exception was raised");
+        Assertions.fail("No exception was raised");
 
     }
 

@@ -1,10 +1,14 @@
 package queries.simple;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
+import javax.persistence.NoResultException;
+import javax.persistence.NonUniqueResultException;
+import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,7 +40,7 @@ public class TestExpectUniqueResult extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -48,14 +52,18 @@ public class TestExpectUniqueResult extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
     }
 
-    @Test(expected = javax.persistence.NonUniqueResultException.class)
+    @Test
     public void testUniqueResultNonUniqueSelect() {
-        em.createQuery("select e from SQE e where e.value = 2 or e.value = 3", SimpleQueryEntity.class).getSingleResult();
+        Assertions.assertThrows(NonUniqueResultException.class, () -> {
+            em.createQuery("select e from SQE e where e.value = 2 or e.value = 3", SimpleQueryEntity.class).getSingleResult();
+        });
     }
 
-    @Test(expected = javax.persistence.NoResultException.class)
+    @Test
     public void testUniqueResultNoData() {
-        em.createQuery("select e from SQE e where e.value = 4", SimpleQueryEntity.class).getSingleResult();
+        Assertions.assertThrows(NoResultException.class, () -> {
+            em.createQuery("select e from SQE e where e.value = 4", SimpleQueryEntity.class).getSingleResult();
+        });
     }
 
 }

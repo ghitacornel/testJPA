@@ -1,7 +1,7 @@
 package entities.cached;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.cache.Cache;
@@ -15,7 +15,7 @@ public class TestCached extends TransactionalSetup {
     CachedPerson cachedPerson2;
     CachedPerson cachedPerson3;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
         cachedPerson1 = new CachedPerson();
         cachedPerson1.setId(1);

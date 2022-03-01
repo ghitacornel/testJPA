@@ -1,8 +1,8 @@
 package relationships.onetoone.bidirectional;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -25,7 +25,7 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
         return a;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         em.persist(model);
         flushAndClear();
@@ -58,7 +58,7 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(existingA1.getB(), existingA2.getB());
 
         // test old B is removed
-        Assert.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
+        Assertions.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
 
     }
 
@@ -88,7 +88,7 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(newVersion.getB(), existingA2.getB());
 
         // test old B is removed
-        Assert.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
+        Assertions.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
 
     }
 }

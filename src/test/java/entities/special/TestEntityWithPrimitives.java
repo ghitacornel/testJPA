@@ -1,13 +1,13 @@
 package entities.special;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestEntityWithPrimitives extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithPrimitives.class);
     }
@@ -25,9 +25,9 @@ public class TestEntityWithPrimitives extends TransactionalSetup {
 
         // verify defaults are persisted as expected
         EntityWithPrimitives persistedEntity = em.find(EntityWithPrimitives.class, initialEntity.getId());
-        Assert.assertNotNull(persistedEntity);
-        Assert.assertFalse(persistedEntity.isaBoolean());
-        Assert.assertEquals(3, persistedEntity.getAnInt());
+        Assertions.assertNotNull(persistedEntity);
+        Assertions.assertFalse(persistedEntity.isaBoolean());
+        Assertions.assertEquals(3, persistedEntity.getAnInt());
 
     }
 }

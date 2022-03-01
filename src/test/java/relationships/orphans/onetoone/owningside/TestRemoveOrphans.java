@@ -1,8 +1,8 @@
 package relationships.orphans.onetoone.owningside;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -11,7 +11,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     OTOOrphanOwningSideNotOwner notOwner;
     OTOOrphanOwningSideOwner owner;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         verifyCorrespondingTableIsEmpty(OTOOrphanOwningSideNotOwner.class);
@@ -40,7 +40,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         em.find(OTOOrphanOwningSideOwner.class, owner.getId()).setA(null);
         flushAndClear();
 
-        Assert.assertNull(em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
+        Assertions.assertNull(em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
 
         {// adjust model to match expectations
             owner.setA(null);

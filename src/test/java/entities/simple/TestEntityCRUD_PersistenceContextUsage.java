@@ -3,10 +3,10 @@ package entities.simple;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.engine.spi.SessionFactoryImplementor;
-import org.junit.After;
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -23,7 +23,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
     // TODO check that the connection is the same as the JPA uses for the current test
     Transaction currentTransaction;
 
-    @Before
+    @BeforeEach
     public void beforeTestObtainConnectionAndTransaction() throws Exception {
 
         Session session = em.unwrap(Session.class);
@@ -37,7 +37,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
     private void VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT() throws Exception {
 
         // ensure we use the same transaction
-        Assert.assertSame(currentTransaction, em.getTransaction());
+        Assertions.assertSame(currentTransaction, em.getTransaction());
 
         // use plain old JDBC for test
         List<Object[]> data = new ArrayList<>();
@@ -52,12 +52,12 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
             }
         }
         if (!data.isEmpty()) {
-            Assert.fail("something was written in the database");
+            Assertions.fail("something was written in the database");
         }
 
     }
 
-    @After
+    @AfterEach
     public void afterTestReleaseConnectionAndTransaction() throws Exception {
         Session session = em.unwrap(Session.class);
         SessionFactoryImplementor sfi = (SessionFactoryImplementor) session.getSessionFactory();
@@ -81,7 +81,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
 
         // verify persist
         Entity entity2 = em.find(Entity.class, entity1.getId());
-        Assert.assertNotNull(entity2);
+        Assertions.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(entity1, entity2);
 
         VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT();
@@ -93,19 +93,19 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
 
         // verify update
         Entity entity3 = em.find(Entity.class, entity1.getId());
-        Assert.assertNotNull(entity3);
+        Assertions.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
         VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT();
 
         // remove
         Entity entity4 = em.find(Entity.class, entity1.getId());
-        Assert.assertNotNull(entity4);
+        Assertions.assertNotNull(entity4);
         em.remove(entity4);
         // flushAndClear();//  this time no flush and clear
 
         // verify remove
-        Assert.assertNull(em.find(Entity.class, entity1.getId()));
+        Assertions.assertNull(em.find(Entity.class, entity1.getId()));
 
         VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT();
 

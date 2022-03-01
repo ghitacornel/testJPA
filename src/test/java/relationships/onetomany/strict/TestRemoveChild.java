@@ -1,11 +1,15 @@
 package relationships.onetomany.strict;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.onetomany.oneside.OTOMOneSideParent;
 import setup.TransactionalSetup;
+
+import javax.persistence.PersistenceException;
+import java.util.Collections;
 
 public class TestRemoveChild extends TransactionalSetup {
 
@@ -28,7 +32,7 @@ public class TestRemoveChild extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         em.persist(model);
         flushAndClear();
@@ -49,16 +53,16 @@ public class TestRemoveChild extends TransactionalSetup {
 
         // child is removed since it is now an orphan
         OTOMStrictChild child = em.find(OTOMStrictChild.class, buildModel().getChildren().get(1).getId());
-        Assert.assertNull(child);
+        Assertions.assertNull(child);
 
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testRemoveChildByMakingItOrphanDoesNotWorkDueToConstraint() {
-
-        em.find(OTOMStrictParent.class, model.getId()).getChildren().get(1).setParent(null);
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.find(OTOMStrictParent.class, model.getId()).getChildren().get(1).setParent(null);
+            flushAndClear();
+        });
     }
 
     @Test
@@ -75,7 +79,7 @@ public class TestRemoveChild extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMStrictParent.class, expectedParent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
         // test child is now removed
-        Assert.assertNull(em.find(OTOMStrictChild.class, 1));
+        Assertions.assertNull(em.find(OTOMStrictChild.class, 1));
 
     }
 
@@ -83,11 +87,11 @@ public class TestRemoveChild extends TransactionalSetup {
     public void testRemoveChildWhenParentAndSiblingsAreLoadedDoesNotTriggerTheRemoval() {
 
         OTOMStrictParent existingParent = em.find(OTOMStrictParent.class, 1);
-        Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children
+        Assertions.assertEquals(3, existingParent.getChildren().size());// verify number of children
 
         OTOMStrictChild toRemoveChild = em.find(OTOMStrictChild.class, 1);
         em.remove(toRemoveChild);// remove only the child
-        Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children is the same
+        Assertions.assertEquals(3, existingParent.getChildren().size());// verify number of children is the same
         flushAndClear();
 
         // test parent and other children are unaffected
@@ -95,7 +99,7 @@ public class TestRemoveChild extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMStrictParent.class, expectedParent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
         // test child is now removed
-        Assert.assertNotNull(em.find(OTOMStrictChild.class, toRemoveChild.getId()));
+        Assertions.assertNotNull(em.find(OTOMStrictChild.class, toRemoveChild.getId()));
 
     }
 
@@ -103,12 +107,12 @@ public class TestRemoveChild extends TransactionalSetup {
     public void testRemoveChildWhenParentAndSiblingsAreLoadedWorks() {
 
         OTOMStrictParent existingParent = em.find(OTOMStrictParent.class, 1);
-        Assert.assertEquals(3, existingParent.getChildren().size());// verify number of children
+        Assertions.assertEquals(3, existingParent.getChildren().size());// verify number of children
 
         OTOMStrictChild toRemoveChild = em.find(OTOMStrictChild.class, 1);
         existingParent.getChildren().remove(toRemoveChild);// remove link from parent to child
         em.remove(toRemoveChild);// remove the child
-        Assert.assertEquals(2, existingParent.getChildren().size());// verify number of children
+        Assertions.assertEquals(2, existingParent.getChildren().size());// verify number of children
         flushAndClear();
 
         // test parent and other children are unaffected
@@ -119,7 +123,7 @@ public class TestRemoveChild extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMStrictParent.class, expectedParent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
         // test child is now removed
-        Assert.assertNull(em.find(OTOMStrictChild.class, toRemoveChild.getId()));
+        Assertions.assertNull(em.find(OTOMStrictChild.class, toRemoveChild.getId()));
 
     }
 }

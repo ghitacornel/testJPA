@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -51,7 +51,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -61,7 +61,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
     public void testWithEquals() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name = :name", SimpleQueryEntity.class).setParameter("name", "jOHn").getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().get(2), list.get(0));
 
     }
@@ -70,7 +70,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
     public void testWithEqualsStringOnNumeric() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where cast(e.value as string) = :value", SimpleQueryEntity.class).setParameter("value", "6").getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().get(0), list.get(0));
 
     }
@@ -82,7 +82,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
     public void testWithLikeClauseBAD() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "jOHn").getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().get(2), list.get(0));
 
     }
@@ -94,7 +94,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
     public void testWithLikeClauseStillBAD() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().get(3), list.get(0));
 
     }
@@ -107,7 +107,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
     public void testWithLikeClauseStillBadDueToSpecialCharacterAddedOnInput() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(:name)", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
-        Assert.assertEquals(3, list.size());
+        Assertions.assertEquals(3, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().subList(2, 5), list);
 
     }
@@ -120,7 +120,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
     public void testWithLikeClauseOK() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(concat('%',:name,'%'))", SimpleQueryEntity.class).setParameter("name", "john").getResultList();
-        Assert.assertEquals(3, list.size());
+        Assertions.assertEquals(3, list.size());
         ReflectionAssert.assertReflectionEquals(buildModel().subList(2, 5), list);
 
     }

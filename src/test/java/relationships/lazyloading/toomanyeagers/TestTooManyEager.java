@@ -1,7 +1,7 @@
 package relationships.lazyloading.toomanyeagers;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -10,7 +10,7 @@ public class TestTooManyEager extends TransactionalSetup {
 
     TMECenter center;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         center = new TMECenter();

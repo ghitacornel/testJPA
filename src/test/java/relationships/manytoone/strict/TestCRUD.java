@@ -1,8 +1,8 @@
 package relationships.manytoone.strict;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -13,7 +13,7 @@ public class TestCRUD extends TransactionalSetup {
     private MTOOStrictParent parent1 = new MTOOStrictParent();
     private MTOOStrictParent parent2 = new MTOOStrictParent();
 
-    @Before
+    @BeforeEach
     public void before() {
 
         parent1.setId(1);
@@ -44,7 +44,7 @@ public class TestCRUD extends TransactionalSetup {
 
         // test insert
         List<MTOOStrictChild> list = em.createQuery("select t from MTOOStrictChild t", MTOOStrictChild.class).getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         ReflectionAssert.assertReflectionEquals(child, list.get(0));
         flushAndClear();
 
@@ -57,13 +57,13 @@ public class TestCRUD extends TransactionalSetup {
 
         // test update
         existing = em.find(MTOOStrictChild.class, child.getId());
-        Assert.assertEquals("new child name", existing.getName());
+        Assertions.assertEquals("new child name", existing.getName());
         ReflectionAssert.assertReflectionEquals(parent2, existing.getParent());
         flushAndClear();
 
         // remove
         existing = em.find(MTOOStrictChild.class, child.getId());
-        Assert.assertNotNull(existing);
+        Assertions.assertNotNull(existing);
         em.remove(existing);
         flushAndClear();
 

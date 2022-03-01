@@ -1,8 +1,8 @@
 package relationships.embedded;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -12,7 +12,7 @@ import java.util.Date;
 
 public class TestCRUD extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void setUp() {
         verifyTableIsEmpty("EWE_Names");
         verifyTableIsEmpty("EntityWithEmbeddable_relatedEmbedded");
@@ -62,8 +62,8 @@ public class TestCRUD extends TransactionalSetup {
         // test lazy loading
         {
             EntityWithEmbeddable existing = em.find(EntityWithEmbeddable.class, model.getId());
-            Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existing.getNames()));
-            Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existing.getRelatedEmbedded()));
+            Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existing.getNames()));
+            Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existing.getRelatedEmbedded()));
         }
 
         // update
@@ -119,7 +119,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // verify remove
-        Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()));
+        Assertions.assertNull(em.find(EntityWithEmbeddable.class, model.getId()));
 
     }
 }

@@ -1,8 +1,8 @@
 package entities.special;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.text.SimpleDateFormat;
@@ -10,7 +10,7 @@ import java.util.Date;
 
 public class TestEntityWithDate extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithDate.class);
     }
@@ -34,16 +34,16 @@ public class TestEntityWithDate extends TransactionalSetup {
 
         // verify persist
         EntityWithDate persistedEntity = em.find(EntityWithDate.class, initialEntity.getId());
-        Assert.assertNotNull(persistedEntity);
+        Assertions.assertNotNull(persistedEntity);
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("dd-MMM-yyyy HH:mm:ss");
-        Assert.assertEquals(simpleDateFormat.format(referenceDate), simpleDateFormat.format(persistedEntity.getFullDate()));
+        Assertions.assertEquals(simpleDateFormat.format(referenceDate), simpleDateFormat.format(persistedEntity.getFullDate()));
 
         SimpleDateFormat simpleDateOnlyFormat = new SimpleDateFormat("dd-MMM-yyyy");
-        Assert.assertEquals(simpleDateOnlyFormat.format(referenceDate), simpleDateOnlyFormat.format(persistedEntity.getOnlyDate()));
+        Assertions.assertEquals(simpleDateOnlyFormat.format(referenceDate), simpleDateOnlyFormat.format(persistedEntity.getOnlyDate()));
 
         SimpleDateFormat simpleTimeOnlyFormat = new SimpleDateFormat("HH:mm:ss");
-        Assert.assertEquals(simpleTimeOnlyFormat.format(referenceDate), simpleTimeOnlyFormat.format(persistedEntity.getOnlyTime()));
+        Assertions.assertEquals(simpleTimeOnlyFormat.format(referenceDate), simpleTimeOnlyFormat.format(persistedEntity.getOnlyTime()));
 
     }
 }

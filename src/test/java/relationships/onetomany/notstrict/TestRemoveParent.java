@@ -1,11 +1,14 @@
 package relationships.onetomany.notstrict;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.manytoone.strict.MTOOStrictChild;
 import setup.TransactionalSetup;
+
+import javax.persistence.PersistenceException;
 
 public class TestRemoveParent extends TransactionalSetup {
 
@@ -28,7 +31,7 @@ public class TestRemoveParent extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(OTOMNotStrictParent.class);
         verifyCorrespondingTableIsEmpty(OTOMNotStrictChild.class);
@@ -37,13 +40,13 @@ public class TestRemoveParent extends TransactionalSetup {
         flushAndClear();
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testRemoveParentFailsDueToExistingChildren() {
-
-        // remove parent
-        em.remove(em.find(OTOMNotStrictParent.class, parent.getId()));
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            // remove parent
+            em.remove(em.find(OTOMNotStrictParent.class, parent.getId()));
+            flushAndClear();
+        });
     }
 
     @Test
@@ -61,7 +64,7 @@ public class TestRemoveParent extends TransactionalSetup {
         flushAndClear();
 
         // verify parent is removed
-        Assert.assertNull(em.find(OTOMNotStrictParent.class, this.parent.getId()));
+        Assertions.assertNull(em.find(OTOMNotStrictParent.class, this.parent.getId()));
 
         // verify parent children are orphaned
         {// adjust model to match expectations

@@ -1,18 +1,19 @@
 package relationships.embedded;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.persistence.Embeddable;
+import javax.persistence.PersistenceException;
 import java.util.Date;
 
 public class TestRemoveEmbedded extends TransactionalSetup {
 
     private final EntityWithEmbeddable model = buildModel();
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(model);
         flushAndClear();
@@ -30,12 +31,12 @@ public class TestRemoveEmbedded extends TransactionalSetup {
     /**
      * {@link Embeddable}s are not entities hence cannot be removed
      */
-    @Test(expected = Exception.class)
+    @Test
     public void testRemoveEmbedded() {
-
-        em.remove(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
-        flushAndClear();
-
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {
+            em.remove(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
+            flushAndClear();
+        });
     }
 
     @Test
@@ -45,8 +46,8 @@ public class TestRemoveEmbedded extends TransactionalSetup {
         existing1.setEmbedded(null);
         flushAndClear();
 
-        Assert.assertNotNull(em.find(EntityWithEmbeddable.class, model.getId()));
-        Assert.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
+        Assertions.assertNotNull(em.find(EntityWithEmbeddable.class, model.getId()));
+        Assertions.assertNull(em.find(EntityWithEmbeddable.class, model.getId()).getEmbedded());
     }
 
 }

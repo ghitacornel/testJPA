@@ -1,7 +1,7 @@
 package relationships.manytomany.cascade.bothways;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -12,7 +12,7 @@ public class TestPersist extends TransactionalSetup {
     CascadeBothWaysN n1;
     CascadeBothWaysN n2;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
 
         m1 = new CascadeBothWaysM();

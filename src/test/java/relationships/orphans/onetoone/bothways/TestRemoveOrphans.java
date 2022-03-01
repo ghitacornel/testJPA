@@ -1,7 +1,7 @@
 package relationships.orphans.onetoone.bothways;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
@@ -9,7 +9,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     OTOOrphanBothWaysNotOwner notOwner;
     OTOOrphanBothWaysOwner owner;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         verifyCorrespondingTableIsEmpty(OTOOrphanBothWaysNotOwner.class);

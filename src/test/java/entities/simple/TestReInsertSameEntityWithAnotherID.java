@@ -1,14 +1,14 @@
 package entities.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void verifyDatabaseState() {
         verifyCorrespondingTableIsEmpty(Entity.class);
     }
@@ -36,12 +36,12 @@ public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
 
         // verify 2
         Entity persisted2 = em.find(Entity.class, 2);
-        Assert.assertNotNull(persisted2);
+        Assertions.assertNotNull(persisted2);
         ReflectionAssert.assertReflectionEquals(entity, persisted2);
 
         // verify 1
         Entity persisted1 = em.find(Entity.class, 1);
-        Assert.assertNotNull(persisted1);
+        Assertions.assertNotNull(persisted1);
         {// adjust the model to reflect expected changes
             entity.setId(1);// set the old id prior to checking
         }

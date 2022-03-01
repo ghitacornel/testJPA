@@ -1,7 +1,8 @@
 package relationships.manytomany.bothowners;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -14,7 +15,7 @@ public class TestPersist extends TransactionalSetup {
     BothOwnerN n1;
     BothOwnerN n2;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
 
         m = new BothOwnerM();
@@ -36,27 +37,31 @@ public class TestPersist extends TransactionalSetup {
 
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testPersistOnlyOneSideAndFail() {
-        em.persist(m);
-        flushAndClear();
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.persist(m);
+            flushAndClear();
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testPersistPartiallyAndFail() {
-        em.persist(m);
-        em.persist(n1);
-        flushAndClear();
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.persist(m);
+            em.persist(n1);
+            flushAndClear();
+        });
     }
 
-    @Test(expected = PersistenceException.class)
+    @Test
     public void testPersistAllAndFail() {
-
-        em.persist(m);
-        em.persist(n1);
-        em.persist(n2);
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.persist(m);
+            em.persist(n1);
+            em.persist(n2);
+            flushAndClear();
+        });
     }
 
     /**

@@ -1,8 +1,8 @@
 package queries.nativ;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import queries.simple.SimpleQueryEntity;
 import setup.TransactionalSetup;
 
@@ -30,7 +30,7 @@ public class TestNativeQuery extends TransactionalSetup {
         return list;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(buildModel());
         flushAndClear();
@@ -40,10 +40,10 @@ public class TestNativeQuery extends TransactionalSetup {
     public void testSelectAllNameAndValue() {
 
         List<Object[]> data = em.createNativeQuery("select name,value from SQE where id = :id").setParameter("id", 1).getResultList();
-        Assert.assertEquals(1, data.size());
-        Assert.assertEquals(2, data.get(0).length);
-        Assert.assertEquals("name 1", data.get(0)[0]);
-        Assert.assertEquals(6, data.get(0)[1]);
+        Assertions.assertEquals(1, data.size());
+        Assertions.assertEquals(2, data.get(0).length);
+        Assertions.assertEquals("name 1", data.get(0)[0]);
+        Assertions.assertEquals(6, data.get(0)[1]);
 
     }
 

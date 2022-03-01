@@ -1,8 +1,8 @@
 package relationships.collections.sets.onetomany;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -30,7 +30,7 @@ public class TestSelectAll extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(parent, parent.getChildren());
         flushAndClear();
@@ -41,7 +41,7 @@ public class TestSelectAll extends TransactionalSetup {
 
         List<ParentSet> parents = em.createQuery("select t from ParentSet t", ParentSet.class).getResultList();
 
-        Assert.assertEquals(1, parents.size());
+        Assertions.assertEquals(1, parents.size());
         ReflectionAssert.assertReflectionEquals(parent, parents.get(0), ReflectionComparatorMode.LENIENT_ORDER);
 
     }

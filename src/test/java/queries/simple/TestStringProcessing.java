@@ -1,8 +1,8 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestStringProcessing extends TransactionalSetup {
@@ -14,7 +14,7 @@ public class TestStringProcessing extends TransactionalSetup {
     SimpleQueryEntity entity5;
     SimpleQueryEntity entity6;
 
-    @Before
+    @BeforeEach
     public void addData(){
 
         entity1 = new SimpleQueryEntity();
@@ -59,64 +59,64 @@ public class TestStringProcessing extends TransactionalSetup {
 
     @Test
     public void testCONCAT() {
-        Assert.assertEquals("abc name 1", em.createQuery("select concat('abc ',name) from SQE where id = 1", String.class).getSingleResult());
+        Assertions.assertEquals("abc name 1", em.createQuery("select concat('abc ',name) from SQE where id = 1", String.class).getSingleResult());
     }
 
     @Test
     public void testTRIM() {
-        Assert.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
-        Assert.assertEquals("name", em.createQuery("select trim(name) from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals("name", em.createQuery("select trim(name) from SQE where id = 2", String.class).getSingleResult());
     }
 
     @Test
     public void testTRIM_LEADING() {
-        Assert.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
-        Assert.assertEquals("name ", em.createQuery("select trim(leading from name) from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals("name ", em.createQuery("select trim(leading from name) from SQE where id = 2", String.class).getSingleResult());
     }
 
     @Test
     public void testTRIM_TRAILING() {
-        Assert.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
-        Assert.assertEquals(" name", em.createQuery("select trim(trailing from name) from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals(" name", em.createQuery("select trim(trailing from name) from SQE where id = 2", String.class).getSingleResult());
     }
 
     @Test// same as simple trim()
     public void testTRIM_BOTH() {
-        Assert.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
-        Assert.assertEquals("name", em.createQuery("select trim(both from name) from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals(" name ", em.createQuery("select name from SQE where id = 2", String.class).getSingleResult());
+        Assertions.assertEquals("name", em.createQuery("select trim(both from name) from SQE where id = 2", String.class).getSingleResult());
     }
 
     @Test
     public void testTRIM_BOTH_CUSTOM_CHARACTER() {
-        Assert.assertEquals("%name%", em.createQuery("select name from SQE where id = 3", String.class).getSingleResult());
-        Assert.assertEquals("name", em.createQuery("select trim(both '%' from name) from SQE where id = 3", String.class).getSingleResult());
+        Assertions.assertEquals("%name%", em.createQuery("select name from SQE where id = 3", String.class).getSingleResult());
+        Assertions.assertEquals("name", em.createQuery("select trim(both '%' from name) from SQE where id = 3", String.class).getSingleResult());
     }
 
     @Test
     public void testLOWER() {
-        Assert.assertEquals("Name", em.createQuery("select name from SQE where id = 4", String.class).getSingleResult());
-        Assert.assertEquals("name", em.createQuery("select lower(name) from SQE where id = 4", String.class).getSingleResult());
+        Assertions.assertEquals("Name", em.createQuery("select name from SQE where id = 4", String.class).getSingleResult());
+        Assertions.assertEquals("name", em.createQuery("select lower(name) from SQE where id = 4", String.class).getSingleResult());
     }
 
     @Test
     public void testUPPER() {
-        Assert.assertEquals("Name", em.createQuery("select name from SQE where id = 4", String.class).getSingleResult());
-        Assert.assertEquals("NAME", em.createQuery("select upper(name) from SQE where id = 4", String.class).getSingleResult());
+        Assertions.assertEquals("Name", em.createQuery("select name from SQE where id = 4", String.class).getSingleResult());
+        Assertions.assertEquals("NAME", em.createQuery("select upper(name) from SQE where id = 4", String.class).getSingleResult());
     }
 
     @Test
     public void testSUBSTRING() {
-        Assert.assertEquals("ame", em.createQuery("select substring(name,2,3) from SQE where id = 5", String.class).getSingleResult());
+        Assertions.assertEquals("ame", em.createQuery("select substring(name,2,3) from SQE where id = 5", String.class).getSingleResult());
     }
 
     @Test
     public void testLENGTH() {
-        Assert.assertEquals(Integer.valueOf(entity4.getName().length()), em.createQuery("select length(name) from SQE where id = 4", Integer.class).getSingleResult());
+        Assertions.assertEquals(Integer.valueOf(entity4.getName().length()), em.createQuery("select length(name) from SQE where id = 4", Integer.class).getSingleResult());
     }
 
     @Test
     public void testLOCATE() {
-        Assert.assertEquals(Integer.valueOf(4), em.createQuery("select locate('abc',name,2) from SQE where id = 6", Integer.class).getSingleResult());
+        Assertions.assertEquals(Integer.valueOf(4), em.createQuery("select locate('abc',name,2) from SQE where id = 6", Integer.class).getSingleResult());
     }
 
 }

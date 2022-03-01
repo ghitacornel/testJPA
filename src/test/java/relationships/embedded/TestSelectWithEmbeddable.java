@@ -1,7 +1,7 @@
 package relationships.embedded;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -13,7 +13,7 @@ public class TestSelectWithEmbeddable extends TransactionalSetup {
 
     private final List<EntityWithEmbeddable> model = buildModel();
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(model);
         flushAndClear();

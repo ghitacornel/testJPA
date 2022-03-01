@@ -1,12 +1,11 @@
 package relationships.manytomany.bothowners;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
-import javax.persistence.PersistenceException;
 import java.util.Collections;
 
 public class TestRemove extends TransactionalSetup {
@@ -15,7 +14,7 @@ public class TestRemove extends TransactionalSetup {
     BothOwnerN n1;
     BothOwnerN n2;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
 
         m = new BothOwnerM();
@@ -34,11 +33,6 @@ public class TestRemove extends TransactionalSetup {
         n2.getListWithMs().add(m);
         m.getListWithNs().add(n1);
         m.getListWithNs().add(n2);
-
-    }
-
-    @Before
-    public void before() {
 
         m.getListWithNs().clear();
         n1.getListWithMs().clear();

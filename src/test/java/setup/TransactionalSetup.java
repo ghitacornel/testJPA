@@ -1,7 +1,7 @@
 package setup;
 
-import org.junit.After;
-import org.junit.Before;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
 
 /**
  * Test Abstraction that controls a transaction which is started at the beginning of the test and rolled back afterwards
@@ -11,7 +11,7 @@ public abstract class TransactionalSetup extends Setup {
     /**
      * ensure a transaction is started before each test
      */
-    @Before
+    @BeforeEach
     final public void beginTransaction() {
         em.getTransaction().begin();
     }
@@ -19,7 +19,7 @@ public abstract class TransactionalSetup extends Setup {
     /**
      * ensure a transaction is rolled back after each test
      */
-    @After
+    @AfterEach
     final public void rollbackTransaction() {
         if (em.getTransaction().isActive()) {
             em.getTransaction().rollback();

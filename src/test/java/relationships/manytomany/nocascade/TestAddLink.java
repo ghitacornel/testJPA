@@ -1,7 +1,7 @@
 package relationships.manytomany.nocascade;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -10,7 +10,7 @@ public class TestAddLink extends TransactionalSetup {
     NoCascadeN n;
     NoCascadeM m;
 
-    @Before
+    @BeforeEach
     public void before() {
 
         verifyCorrespondingTableIsEmpty(NoCascadeM.class);

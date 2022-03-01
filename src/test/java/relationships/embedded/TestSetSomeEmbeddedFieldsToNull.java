@@ -1,8 +1,8 @@
 package relationships.embedded;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import java.util.Date;
@@ -11,7 +11,7 @@ public class TestSetSomeEmbeddedFieldsToNull extends TransactionalSetup {
 
     private EntityWithEmbeddable entity;
 
-    @Before
+    @BeforeEach
     public void before() {
         entity = new EntityWithEmbeddable();
         entity.setId(1);
@@ -32,9 +32,9 @@ public class TestSetSomeEmbeddedFieldsToNull extends TransactionalSetup {
         EntityWithEmbeddable existing2 = em.find(EntityWithEmbeddable.class, entity.getId());
 
         // verify
-        Assert.assertNotNull(existing2.getEmbedded());
-        Assert.assertNull(existing2.getEmbedded().getName());
-        Assert.assertNotNull(existing2.getEmbedded().getCreationDate());
+        Assertions.assertNotNull(existing2.getEmbedded());
+        Assertions.assertNull(existing2.getEmbedded().getName());
+        Assertions.assertNotNull(existing2.getEmbedded().getCreationDate());
 
     }
 }

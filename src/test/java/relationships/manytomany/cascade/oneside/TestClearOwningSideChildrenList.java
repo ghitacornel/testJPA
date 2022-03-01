@@ -1,8 +1,8 @@
 package relationships.manytomany.cascade.oneside;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -16,7 +16,7 @@ public class TestClearOwningSideChildrenList extends TransactionalSetup {
     CascadeOneSideN n1;
     CascadeOneSideN n2;
 
-    @Before
+    @BeforeEach
     public void buildModel() {
 
         m1 = new CascadeOneSideM();

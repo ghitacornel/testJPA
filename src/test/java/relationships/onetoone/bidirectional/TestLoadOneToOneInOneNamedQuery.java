@@ -1,7 +1,7 @@
 package relationships.onetoone.bidirectional;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -24,7 +24,7 @@ public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
         return a;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         em.persist(model);
         flushAndClear();

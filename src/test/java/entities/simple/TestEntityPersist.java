@@ -1,16 +1,17 @@
 package entities.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
+import javax.persistence.PersistenceException;
 import java.util.List;
 
 public class TestEntityPersist extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void verifyDatabaseState() {
         verifyCorrespondingTableIsEmpty(Entity.class);
     }
@@ -33,11 +34,11 @@ public class TestEntityPersist extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("name", objects[1]);
-                Assert.assertNull(objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("name", objects[1]);
+                Assertions.assertNull(objects[2]);
             }
         }
 
@@ -56,7 +57,7 @@ public class TestEntityPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify merge return value
-        Assert.assertNotSame(entity, mergedEntity);
+        Assertions.assertNotSame(entity, mergedEntity);
 
         // verify merge
         ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
@@ -64,11 +65,11 @@ public class TestEntityPersist extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("name", objects[1]);
-                Assert.assertNull(objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("name", objects[1]);
+                Assertions.assertNull(objects[2]);
             }
         }
 
@@ -76,18 +77,20 @@ public class TestEntityPersist extends TransactionalSetup {
 
     // verify SQL insert is not invoked
     // data validation is performed on java model, not on the database
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testPersistWithNullValueForNotNullFieldDoesNotTriggerSQLINSERT() {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName(null);
-        em.persist(entity);
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.persist(entity);
+        });
     }
 
     /**
      * persist + flush + clear + persist again an already persisted but not managed entity => exception
      */
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testPersistMultipleTimesWithOrWithoutFlushButWithAtLeastOneClearLeadsToException() {
 
         // create new entity
@@ -102,9 +105,10 @@ public class TestEntityPersist extends TransactionalSetup {
         // then clear
         em.clear();
         // then persist twice
-        em.persist(entity);
-
-        flushAndClear();
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.persist(entity);
+            flushAndClear();
+        });
 
     }
 
@@ -136,11 +140,11 @@ public class TestEntityPersist extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("name", objects[1]);
-                Assert.assertNull(objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("name", objects[1]);
+                Assertions.assertNull(objects[2]);
             }
         }
 
@@ -168,11 +172,11 @@ public class TestEntityPersist extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("new name", objects[1]);
-                Assert.assertNull(objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("new name", objects[1]);
+                Assertions.assertNull(objects[2]);
             }
         }
 
@@ -206,11 +210,11 @@ public class TestEntityPersist extends TransactionalSetup {
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id, name, nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("name", objects[1]);
-                Assert.assertNull(objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("name", objects[1]);
+                Assertions.assertNull(objects[2]);
             }
         }
 

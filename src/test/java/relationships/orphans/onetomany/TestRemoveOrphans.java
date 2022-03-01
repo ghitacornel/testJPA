@@ -1,7 +1,7 @@
 package relationships.orphans.onetomany;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -12,7 +12,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
     OTOMOrphanChild child1;
     OTOMOrphanChild child2;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         verifyCorrespondingTableIsEmpty(OTOMOrphanParent.class);

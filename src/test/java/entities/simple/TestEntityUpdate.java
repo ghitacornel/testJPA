@@ -1,8 +1,8 @@
 package entities.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -12,7 +12,7 @@ public class TestEntityUpdate extends TransactionalSetup {
 
     Entity initialEntity;
 
-    @Before
+    @BeforeEach
     public void ensureAnExistingEntityIsPresent() {
 
         verifyCorrespondingTableIsEmpty(Entity.class);
@@ -32,7 +32,7 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // fetch the entity
         Entity originalEntity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(originalEntity);
+        Assertions.assertNotNull(originalEntity);
 
         // update
         originalEntity.setName("new name");
@@ -42,17 +42,17 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // verify update
         Entity updatedEntity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(updatedEntity);
+        Assertions.assertNotNull(updatedEntity);
         ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
 
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,name,nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("new name", objects[1]);
-                Assert.assertEquals(12, objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("new name", objects[1]);
+                Assertions.assertEquals(12, objects[2]);
             }
         }
 
@@ -64,7 +64,7 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // fetch the entity
         Entity originalEntity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(originalEntity);
+        Assertions.assertNotNull(originalEntity);
 
         // update
         originalEntity.setValue(12);
@@ -73,17 +73,17 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // verify update
         Entity updatedEntity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(updatedEntity);
+        Assertions.assertNotNull(updatedEntity);
         ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
 
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,name,nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("name", objects[1]);
-                Assert.assertEquals(12, objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("name", objects[1]);
+                Assertions.assertEquals(12, objects[2]);
             }
         }
 
@@ -100,22 +100,22 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // update
         Entity mergedEntity = em.merge(newVersionOfExistingEntity);
-        Assert.assertNotSame(mergedEntity, newVersionOfExistingEntity);// observe that a new but managed entity is returned by "merge"
+        Assertions.assertNotSame(mergedEntity, newVersionOfExistingEntity);// observe that a new but managed entity is returned by "merge"
         flushAndClear();// check executed queries
 
         // verify update
         Entity entity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(entity);
+        Assertions.assertNotNull(entity);
         ReflectionAssert.assertReflectionEquals(newVersionOfExistingEntity, entity);
 
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,name,nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("new name", objects[1]);
-                Assert.assertEquals(12, objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("new name", objects[1]);
+                Assertions.assertEquals(12, objects[2]);
             }
         }
 
@@ -136,13 +136,13 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // merge first
         Entity newVersionMerged = em.merge(newVersionNotMerged);
-        Assert.assertNotSame(newVersionMerged, newVersionNotMerged);
+        Assertions.assertNotSame(newVersionMerged, newVersionNotMerged);
 
         // merge twice and observe same object is returned even if flush was used, but not CLEAR
         {
             em.flush();
             Entity newVersionMerged2 = em.merge(newVersionMerged);
-            Assert.assertSame(newVersionMerged, newVersionMerged2);
+            Assertions.assertSame(newVersionMerged, newVersionMerged2);
         }
 
         // issue a second update of the not merged new version
@@ -155,17 +155,17 @@ public class TestEntityUpdate extends TransactionalSetup {
 
         // verify which update was executed
         Entity entity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(entity);
+        Assertions.assertNotNull(entity);
         ReflectionAssert.assertReflectionEquals(newVersionMerged, entity);
 
         // verify database state with a native query
         {
             List<Object[]> data = em.createNativeQuery("select id,name,nullableValue from SimpleEntity t").getResultList();
-            Assert.assertEquals(1, data.size());
+            Assertions.assertEquals(1, data.size());
             for (Object[] objects : data) {
-                Assert.assertEquals(1, objects[0]);
-                Assert.assertEquals("new name merged", objects[1]);
-                Assert.assertEquals(12, objects[2]);
+                Assertions.assertEquals(1, objects[0]);
+                Assertions.assertEquals("new name merged", objects[1]);
+                Assertions.assertEquals(12, objects[2]);
             }
         }
 

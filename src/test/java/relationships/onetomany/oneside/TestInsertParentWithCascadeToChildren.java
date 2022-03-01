@@ -1,11 +1,14 @@
 package relationships.onetomany.oneside;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
+import relationships.onetomany.notstrict.OTOMNotStrictParent;
 import setup.TransactionalSetup;
 
+import javax.persistence.PersistenceException;
 import java.util.Collections;
 
 public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
@@ -28,7 +31,7 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(OTOMOneSideParent.class);
         verifyCorrespondingTableIsEmpty(OTOMSOneSideChild.class);
@@ -45,13 +48,16 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testInsertChildDoesNotWork() {
         OTOMSOneSideChild child = new OTOMSOneSideChild();
         child.setId(1);
         child.setName("child ");
-        em.persist(child);
-        flushAndClear();
+
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.persist(child);
+            flushAndClear();
+        });
     }
 
     @Test
@@ -71,7 +77,7 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
         ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOneSideParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testResetChildrenListDoesNotRemoveOldChildrenAndFails() {
 
         em.persist(parent);
@@ -80,8 +86,10 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
         OTOMSOneSideChild child = new OTOMSOneSideChild();
         child.setId(11);
         child.setName("child 11");
-        em.find(OTOMOneSideParent.class, parent.getId()).setChildren(Collections.singletonList(child));
-        flushAndClear();
 
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.find(OTOMOneSideParent.class, parent.getId()).setChildren(Collections.singletonList(child));
+            flushAndClear();
+        });
     }
 }

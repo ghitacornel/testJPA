@@ -1,18 +1,20 @@
 package relationships.manytomany.nocascade;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
+
+import javax.persistence.PersistenceException;
 
 public class TestRemove extends TransactionalSetup {
 
     NoCascadeM m;
     NoCascadeN n;
 
-    @Before
+    @BeforeEach
     public void before() {
 
         n = new NoCascadeN();
@@ -45,7 +47,7 @@ public class TestRemove extends TransactionalSetup {
         {// adjust model to reflect expected changes
             n.getListWithMs().remove(m);
         }
-        Assert.assertNull(em.find(NoCascadeM.class, m.getId()));
+        Assertions.assertNull(em.find(NoCascadeM.class, m.getId()));
         ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
@@ -67,18 +69,17 @@ public class TestRemove extends TransactionalSetup {
         {// adjust model to reflect expected changes
             m.getListWithNs().remove(n);
         }
-        Assert.assertNull(em.find(NoCascadeN.class, n.getId()));
+        Assertions.assertNull(em.find(NoCascadeN.class, n.getId()));
         ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
 
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testRemoveTheNonOwningSideOnlyNotWorking() {
-
-        // remove
-        em.remove(em.find(NoCascadeN.class, n.getId()));
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.remove(em.find(NoCascadeN.class, n.getId()));
+            flushAndClear();
+        });
     }
 
 }

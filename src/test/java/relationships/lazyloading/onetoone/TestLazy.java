@@ -1,8 +1,8 @@
 package relationships.lazyloading.onetoone;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.persistence.Persistence;
@@ -12,7 +12,7 @@ public class TestLazy extends TransactionalSetup {
     OTOOA a;
     OTOOB b;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         a = new OTOOA();
@@ -38,7 +38,7 @@ public class TestLazy extends TransactionalSetup {
         OTOOA existingA = em.find(OTOOA.class, a.getId());
         flushAndClear();
 
-        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingA.getB()));
+        Assertions.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingA.getB()));
 
     }
 
@@ -48,7 +48,7 @@ public class TestLazy extends TransactionalSetup {
         OTOOB existingB = em.find(OTOOB.class, b.getId());
         flushAndClear();
 
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
 
     }
 
@@ -59,7 +59,7 @@ public class TestLazy extends TransactionalSetup {
         existingB.getA().getName();// force proxy
         flushAndClear();
 
-        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
+        Assertions.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
 
     }
 
@@ -70,7 +70,7 @@ public class TestLazy extends TransactionalSetup {
         existingB.getA().getId();// try to force proxy on already loaded field
         flushAndClear();
 
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingB.getA()));
 
     }
 

@@ -1,7 +1,7 @@
 package relationships.onetomany.notstrict;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -29,7 +29,7 @@ public class TestSetProxyToNewList extends TransactionalSetup {
         return parent;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         em.persist(parent);
         persist(parent.getChildren());

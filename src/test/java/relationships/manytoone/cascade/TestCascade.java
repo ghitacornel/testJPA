@@ -1,13 +1,17 @@
 package relationships.manytoone.cascade;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
+import relationships.manytomany.nocascade.NoCascadeN;
 import setup.TransactionalSetup;
+
+import javax.persistence.PersistenceException;
 
 public class TestCascade extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void setUp() {
         verifyCorrespondingTableIsEmpty(MTOOCascadeParent.class);
         verifyCorrespondingTableIsEmpty(MTOOCascadeChild.class);
@@ -62,7 +66,7 @@ public class TestCascade extends TransactionalSetup {
 
     }
 
-    @Test(expected = javax.persistence.PersistenceException.class)
+    @Test
     public void testCascadeRemoveChildLeadsToRemovalOfParentReferencedByAnotherChildAlso() {
 
         MTOOCascadeParent parent = new MTOOCascadeParent();
@@ -86,8 +90,9 @@ public class TestCascade extends TransactionalSetup {
 
         // remove only first child
         // observe exception raised due to having a second child still referencing the removed parent
-        em.remove(em.find(MTOOCascadeChild.class, child1.getId()));
-        flushAndClear();
-
+        Assertions.assertThrows(PersistenceException.class, () -> {
+            em.remove(em.find(MTOOCascadeChild.class, child1.getId()));
+            flushAndClear();
+        });
     }
 }

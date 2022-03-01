@@ -1,7 +1,7 @@
 package queries.simple;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -76,11 +76,11 @@ public class TestOrder extends TransactionalSetup {
 
         List<Object[]> actual = em.createQuery("select e.id, e.name, e.value from SQE e order by 3").getResultList();
         Collections.reverse(model);
-        Assert.assertEquals(model.size(), actual.size());
+        Assertions.assertEquals(model.size(), actual.size());
         for (int i = 0; i < model.size(); i++) {
-            Assert.assertEquals(actual.get(i)[0],model.get(i).getId());
-            Assert.assertEquals(actual.get(i)[1],model.get(i).getName());
-            Assert.assertEquals(actual.get(i)[2],model.get(i).getValue());
+            Assertions.assertEquals(actual.get(i)[0],model.get(i).getId());
+            Assertions.assertEquals(actual.get(i)[1],model.get(i).getName());
+            Assertions.assertEquals(actual.get(i)[2],model.get(i).getValue());
         }
 
     }

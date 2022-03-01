@@ -1,8 +1,8 @@
 package entities.ids.table;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -15,7 +15,7 @@ import java.util.List;
  */
 public class TestIdTableGeneration extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityAWithIdGeneratedFromTable.class);
         verifyCorrespondingTableIsEmpty(EntityBWithIdGeneratedFromTable.class);
@@ -26,10 +26,10 @@ public class TestIdTableGeneration extends TransactionalSetup {
 
         // create new entities
         EntityAWithIdGeneratedFromTable entityA = new EntityAWithIdGeneratedFromTable();
-        Assert.assertNull(entityA.getId());
+        Assertions.assertNull(entityA.getId());
 
         EntityBWithIdGeneratedFromTable entityB = new EntityBWithIdGeneratedFromTable();
-        Assert.assertNull(entityB.getId());
+        Assertions.assertNull(entityB.getId());
 
         // persist
         em.persist(entityA);
@@ -40,14 +40,14 @@ public class TestIdTableGeneration extends TransactionalSetup {
 
         // verify exactly 1 object was persisted
         List<EntityAWithIdGeneratedFromTable> listA = em.createQuery("select t from EntityAWithIdGeneratedFromTable t", EntityAWithIdGeneratedFromTable.class).getResultList();
-        Assert.assertEquals(1, listA.size());
-        Assert.assertNotNull(entityA.getId());// verify id was generated and populated
+        Assertions.assertEquals(1, listA.size());
+        Assertions.assertNotNull(entityA.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(listA.get(0), entityA);
 
         // verify exactly 1 object was persisted
         List<EntityBWithIdGeneratedFromTable> listB = em.createQuery("select t from EntityBWithIdGeneratedFromTable t", EntityBWithIdGeneratedFromTable.class).getResultList();
-        Assert.assertEquals(1, listB.size());
-        Assert.assertNotNull(entityB.getId());// verify id was generated and populated
+        Assertions.assertEquals(1, listB.size());
+        Assertions.assertNotNull(entityB.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(listB.get(0), entityB);
 
     }

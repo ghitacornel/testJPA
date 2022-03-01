@@ -1,14 +1,14 @@
 package entities.secondarytable;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestCRUD extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void verifyDatabaseState() {
         verifyTableIsEmpty("EMPLOYEE");
         verifyTableIsEmpty("EMPLOYEE_DETAILS");
@@ -31,7 +31,7 @@ public class TestCRUD extends TransactionalSetup {
 
         // verify persist
         Employee entity2 = em.find(Employee.class, initialEntity.getId());
-        Assert.assertNotNull(entity2);
+        Assertions.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
 
         // update
@@ -43,17 +43,17 @@ public class TestCRUD extends TransactionalSetup {
 
         // verify update
         Employee entity3 = em.find(Employee.class, initialEntity.getId());
-        Assert.assertNotNull(entity3);
+        Assertions.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
         // remove
         Employee toBeRemovedEntity = em.find(Employee.class, initialEntity.getId());
-        Assert.assertNotNull(toBeRemovedEntity);
+        Assertions.assertNotNull(toBeRemovedEntity);
         em.remove(toBeRemovedEntity);
         flushAndClear();// //  mandatory check executed queries
 
         // verify remove
-        Assert.assertNull(em.find(Employee.class, initialEntity.getId()));
+        Assertions.assertNull(em.find(Employee.class, initialEntity.getId()));
 
         // verify database state with a native query
         verifyTableIsEmpty("EMPLOYEE");

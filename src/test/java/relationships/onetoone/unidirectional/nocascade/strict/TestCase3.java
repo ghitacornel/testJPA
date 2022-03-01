@@ -1,13 +1,15 @@
 package relationships.onetoone.unidirectional.nocascade.strict;
 
-import org.junit.Assert;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
+import javax.persistence.PersistenceException;
+
 public class TestCase3 extends TransactionalSetup {
 
-    @Test(expected = Exception.class)
+    @Test
     public void test_PersistOnlyTheChild_AndObserve_NoCascadeInsertIsPropagatedToTheParentHenceExceptionIsRaised() {
 
         Case3Parent parent = new Case3Parent();
@@ -19,10 +21,11 @@ public class TestCase3 extends TransactionalSetup {
         child.setName("child");
         child.setParent(parent);
 
-        // persist only the child
-        em.persist(child);
-        flushAndClear();
-
+        Assertions.assertThrows(IllegalStateException.class, () -> {
+            // persist only the child
+            em.persist(child);
+            flushAndClear();
+        });
     }
 
     @Test
@@ -109,8 +112,8 @@ public class TestCase3 extends TransactionalSetup {
         em.remove(em.find(Case3Child.class, 1));
         flushAndClear();
 
-        Assert.assertNull(em.find(Case3Child.class, 1));
-        Assert.assertNull(em.find(Case3Parent.class, 1));
+        Assertions.assertNull(em.find(Case3Child.class, 1));
+        Assertions.assertNull(em.find(Case3Parent.class, 1));
 
     }
 }

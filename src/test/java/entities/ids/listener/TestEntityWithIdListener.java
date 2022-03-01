@@ -1,8 +1,8 @@
 package entities.ids.listener;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -10,7 +10,7 @@ import java.util.List;
 
 public class TestEntityWithIdListener extends TransactionalSetup {
 
-    @Before
+    @BeforeEach
     public void before() {
         verifyCorrespondingTableIsEmpty(EntityWithIdListener.class);
     }
@@ -20,7 +20,7 @@ public class TestEntityWithIdListener extends TransactionalSetup {
 
         // create new entity
         EntityWithIdListener initialEntity = new EntityWithIdListener();
-        Assert.assertNull(initialEntity.getId());
+        Assertions.assertNull(initialEntity.getId());
 
         // persist
         em.persist(initialEntity);
@@ -28,10 +28,10 @@ public class TestEntityWithIdListener extends TransactionalSetup {
 
         // verify exactly 1 object was persisted
         List<EntityWithIdListener> list = em.createQuery("select t from EntityWithIdListener t", EntityWithIdListener.class).getResultList();
-        Assert.assertEquals(1, list.size());
+        Assertions.assertEquals(1, list.size());
         EntityWithIdListener persistedEntity = list.get(0);
 
-        Assert.assertNotNull(persistedEntity.getId());// verify id was generated and populated
+        Assertions.assertNotNull(persistedEntity.getId());// verify id was generated and populated
         ReflectionAssert.assertReflectionEquals(initialEntity, persistedEntity);
     }
 

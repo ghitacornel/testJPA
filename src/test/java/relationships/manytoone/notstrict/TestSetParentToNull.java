@@ -1,8 +1,8 @@
 package relationships.manytoone.notstrict;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
@@ -10,7 +10,7 @@ public class TestSetParentToNull extends TransactionalSetup {
 
     private MTOONotStrictParent parent = new MTOONotStrictParent();
 
-    @Before
+    @BeforeEach
     public void before() {
 
         verifyCorrespondingTableIsEmpty(MTOONotStrictChild.class);
@@ -38,7 +38,7 @@ public class TestSetParentToNull extends TransactionalSetup {
         flushAndClear();
 
         // test set parent to null
-        Assert.assertNull(em.find(MTOONotStrictChild.class, child.getId()).getParent());
+        Assertions.assertNull(em.find(MTOONotStrictChild.class, child.getId()).getParent());
 
         // verify parent is unaffected
         ReflectionAssert.assertReflectionEquals(parent, em.find(MTOONotStrictParent.class,parent.getId()));

@@ -1,8 +1,8 @@
 package relationships.lazyloading.onetomany;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.persistence.Persistence;
@@ -12,7 +12,7 @@ public class TestLazy extends TransactionalSetup {
     OTOMLazyParent parent;
     OTOMLazyChild child;
 
-    @Before
+    @BeforeEach
     public void setUp() {
 
         parent = new OTOMLazyParent();
@@ -36,11 +36,11 @@ public class TestLazy extends TransactionalSetup {
 
         OTOMLazyParent existingParent = em.find(OTOMLazyParent.class, parent.getId());
         flushAndClear();
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingParent.getChildren()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingParent.getChildren()));
 
         OTOMLazyChild existingChild = em.find(OTOMLazyChild.class, child.getId());
         flushAndClear();
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
 
     }
 
@@ -50,12 +50,12 @@ public class TestLazy extends TransactionalSetup {
         OTOMLazyParent existingParent = em.find(OTOMLazyParent.class, parent.getId());
         existingParent.getChildren().size();// force proxy
         flushAndClear();
-        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingParent.getChildren()));
+        Assertions.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingParent.getChildren()));
 
         OTOMLazyChild existingChild = em.find(OTOMLazyChild.class, child.getId());
         existingChild.getParent().getName();// force proxy
         flushAndClear();
-        Assert.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
+        Assertions.assertTrue(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
 
     }
 
@@ -66,7 +66,7 @@ public class TestLazy extends TransactionalSetup {
         existingChild.getParent().getId();// try to force proxy on already loaded field
         flushAndClear();
 
-        Assert.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
+        Assertions.assertFalse(Persistence.getPersistenceUtil().isLoaded(existingChild.getParent()));
 
     }
 

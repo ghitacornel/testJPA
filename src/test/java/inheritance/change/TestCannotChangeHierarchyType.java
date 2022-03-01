@@ -1,8 +1,8 @@
 package inheritance.change;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
@@ -35,7 +35,7 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
         return container;
     }
 
-    @Before
+    @BeforeEach
     public void before() {
         persist(model);
         flushAndClear();
@@ -64,11 +64,11 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
         // verify changed type operation has no success
         // even if a setter was provided, this discriminator is marked as not insertable, not updatable hence immutable
         MixedContainer containerFinal = em.createQuery("select t from MixedContainer t", MixedContainer.class).getSingleResult();
-        Assert.assertEquals(3, containerFinal.getConcreteSuperClass().size());
+        Assertions.assertEquals(3, containerFinal.getConcreteSuperClass().size());
 
         // should be 1 but hierarchy cannot be changed
-        Assert.assertEquals(2, containerFinal.getConcreteClassBs().size());
-        Assert.assertEquals(1, containerFinal.getConcreteClassAs().size());
+        Assertions.assertEquals(2, containerFinal.getConcreteClassBs().size());
+        Assertions.assertEquals(1, containerFinal.getConcreteClassAs().size());
 
     }
 

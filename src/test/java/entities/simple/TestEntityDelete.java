@@ -1,15 +1,15 @@
 package entities.simple;
 
-import org.junit.Assert;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 public class TestEntityDelete extends TransactionalSetup {
 
     Entity initialEntity;
 
-    @Before
+    @BeforeEach
     public void ensureAnExistingEntityIsPresent() {
 
         verifyCorrespondingTableIsEmpty(Entity.class);
@@ -30,12 +30,12 @@ public class TestEntityDelete extends TransactionalSetup {
 
         // remove
         Entity toBeRemovedEntity = em.find(Entity.class, initialEntity.getId());
-        Assert.assertNotNull(toBeRemovedEntity);
+        Assertions.assertNotNull(toBeRemovedEntity);
         em.remove(toBeRemovedEntity);
         flushAndClear();// mandatory check executed queries
 
         // verify remove
-        Assert.assertNull(em.find(Entity.class, initialEntity.getId()));
+        Assertions.assertNull(em.find(Entity.class, initialEntity.getId()));
 
         verifyCorrespondingTableIsEmpty(Entity.class);
 
