@@ -79,13 +79,7 @@ public class TestCRUD extends TransactionalSetup {
                 }
             }
             existingModel.getRelatedEmbedded().remove(toRemove);
-            EmbeddableBean toUpdate = null;
-            for (EmbeddableBean embeddableBean : existingModel.getRelatedEmbedded()) {
-                if (embeddableBean.getName().equals("name2")) {
-                    toUpdate = embeddableBean;
-                    break;
-                }
-            }
+            EmbeddableBean toUpdate = existingModel.getRelatedEmbedded().stream().filter(embeddableBean -> embeddableBean.getName().equals("name2")).findFirst().orElse(null);
             toUpdate.setName("name2updated");
         }
         flushAndClear();
@@ -102,13 +96,7 @@ public class TestCRUD extends TransactionalSetup {
                 }
             }
             model.getRelatedEmbedded().remove(toRemove);
-            EmbeddableBean toUpdate = null;
-            for (EmbeddableBean embeddableBean : model.getRelatedEmbedded()) {
-                if (embeddableBean.getName().equals("name2")) {
-                    toUpdate = embeddableBean;
-                    break;
-                }
-            }
+            EmbeddableBean toUpdate = model.getRelatedEmbedded().stream().filter(embeddableBean -> embeddableBean.getName().equals("name2")).findFirst().orElse(null);
             toUpdate.setName("name2updated");
         }
         ReflectionAssert.assertReflectionEquals(model, em.find(EntityWithEmbeddable.class, model.getId()), ReflectionComparatorMode.LENIENT_ORDER);
