@@ -14,7 +14,7 @@ import java.util.List;
 
 public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSetup {
 
-    private OTOMStrictParent model = buildModel();
+    private final OTOMStrictParent model = buildModel();
 
     private OTOMStrictParent buildModel() {
 
@@ -25,7 +25,7 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
         for (int i = 1; i <= 3; i++) {
             OTOMStrictChild child = new OTOMStrictChild();
             child.setId(i);
-            child.setName("child " + +child.getId());
+            child.setName("child " + child.getId());
             child.setParent(parent);
             parent.getChildren().add(child);
         }

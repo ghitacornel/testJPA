@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-import relationships.manytomany.nocascade.NoCascadeN;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;

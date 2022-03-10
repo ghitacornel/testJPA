@@ -8,7 +8,6 @@ import setup.TransactionalSetup;
 
 import javax.persistence.NoResultException;
 import javax.persistence.NonUniqueResultException;
-import javax.persistence.PersistenceException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,16 +53,12 @@ public class TestExpectUniqueResult extends TransactionalSetup {
 
     @Test
     public void testUniqueResultNonUniqueSelect() {
-        Assertions.assertThrows(NonUniqueResultException.class, () -> {
-            em.createQuery("select e from SQE e where e.value = 2 or e.value = 3", SimpleQueryEntity.class).getSingleResult();
-        });
+        Assertions.assertThrows(NonUniqueResultException.class, () -> em.createQuery("select e from SQE e where e.value = 2 or e.value = 3", SimpleQueryEntity.class).getSingleResult());
     }
 
     @Test
     public void testUniqueResultNoData() {
-        Assertions.assertThrows(NoResultException.class, () -> {
-            em.createQuery("select e from SQE e where e.value = 4", SimpleQueryEntity.class).getSingleResult();
-        });
+        Assertions.assertThrows(NoResultException.class, () -> em.createQuery("select e from SQE e where e.value = 4", SimpleQueryEntity.class).getSingleResult());
     }
 
 }

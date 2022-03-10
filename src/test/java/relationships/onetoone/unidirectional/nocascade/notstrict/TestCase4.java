@@ -3,10 +3,7 @@ package relationships.onetoone.unidirectional.nocascade.notstrict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-import relationships.onetoone.unidirectional.cascade.strict.Case1Child;
 import setup.TransactionalSetup;
-
-import javax.persistence.PersistenceException;
 
 public class TestCase4 extends TransactionalSetup {
 

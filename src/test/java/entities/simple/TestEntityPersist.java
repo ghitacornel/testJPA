@@ -82,9 +82,7 @@ public class TestEntityPersist extends TransactionalSetup {
         Entity entity = new Entity();
         entity.setId(1);
         entity.setName(null);
-        Assertions.assertThrows(PersistenceException.class, () -> {
-            em.persist(entity);
-        });
+        Assertions.assertThrows(PersistenceException.class, () -> em.persist(entity));
     }
 
     /**

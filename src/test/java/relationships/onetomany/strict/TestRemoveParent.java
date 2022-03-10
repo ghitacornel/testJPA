@@ -4,8 +4,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.onetomany.oneside.OTOMOneSideParent;
-import relationships.onetomany.oneside.OTOMSOneSideChild;
 import setup.TransactionalSetup;
 
 public class TestRemoveParent extends TransactionalSetup {

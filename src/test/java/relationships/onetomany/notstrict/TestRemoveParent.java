@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.manytoone.strict.MTOOStrictChild;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;

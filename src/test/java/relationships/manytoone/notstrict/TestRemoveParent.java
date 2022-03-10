@@ -4,15 +4,14 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-import relationships.manytoone.cascade.MTOOCascadeChild;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
 
 public class TestRemoveParent extends TransactionalSetup {
 
-    private MTOONotStrictParent parent1 = new MTOONotStrictParent();
-    private MTOONotStrictParent parent2 = new MTOONotStrictParent();
+    private final MTOONotStrictParent parent1 = new MTOONotStrictParent();
+    private final MTOONotStrictParent parent2 = new MTOONotStrictParent();
 
     @BeforeEach
     public void before() {

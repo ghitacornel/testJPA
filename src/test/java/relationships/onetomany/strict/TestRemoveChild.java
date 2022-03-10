@@ -5,11 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import org.unitils.reflectionassert.ReflectionComparatorMode;
-import relationships.onetomany.oneside.OTOMOneSideParent;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
-import java.util.Collections;
 
 public class TestRemoveChild extends TransactionalSetup {
 

@@ -3,14 +3,13 @@ package relationships.manytoone.strict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import relationships.manytoone.notstrict.MTOONotStrictParent;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
 
 public class TestSetParentToNull extends TransactionalSetup {
 
-    private MTOOStrictParent parent = new MTOOStrictParent();
+    private final MTOOStrictParent parent = new MTOOStrictParent();
 
     @BeforeEach
     public void before() {

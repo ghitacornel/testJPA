@@ -5,8 +5,6 @@ import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
-import javax.persistence.PersistenceException;
-
 public class TestCase3 extends TransactionalSetup {
 
     @Test

@@ -3,7 +3,6 @@ package relationships.onetoone.unidirectional.cascade.notstrict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.unitils.reflectionassert.ReflectionAssert;
-import relationships.onetomany.strict.OTOMStrictParent;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;

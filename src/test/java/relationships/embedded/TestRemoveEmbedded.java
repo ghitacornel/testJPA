@@ -6,7 +6,6 @@ import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
 import javax.persistence.Embeddable;
-import javax.persistence.PersistenceException;
 import java.util.Date;
 
 public class TestRemoveEmbedded extends TransactionalSetup {
