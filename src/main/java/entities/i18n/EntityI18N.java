@@ -11,19 +11,15 @@ public class EntityI18N {
     private Integer id;
 
     @Nationalized// for safety enforce nvarchar
-    @Column
     private String value1;
 
     @Nationalized// for safety enforce nvarchar
-    @Column
     private String value2;
 
     @Nationalized// for safety enforce nvarchar
-    @Column
     private String value3;
 
     @Nationalized// for safety enforce nvarchar
-    @Column
     private String value4;
 
     public Integer getId() {
