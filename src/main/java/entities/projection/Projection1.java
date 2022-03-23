@@ -6,7 +6,6 @@ package entities.projection;
 public class Projection1 {
 
     final private Integer id;
-
     final private String name;
 
     public Projection1(Integer id, String name) {

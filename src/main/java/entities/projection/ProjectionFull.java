@@ -10,4 +10,5 @@ public class ProjectionFull extends EntityWithProjection {
         setName(name);
         setValue(value);
     }
+
 }
