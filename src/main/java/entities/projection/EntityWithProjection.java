@@ -19,7 +19,7 @@ public class EntityWithProjection {
     @Basic(optional = false)
     private Integer value;
 
-    EntityWithProjection() {
+    public EntityWithProjection() {
         // JPA requires at least 1 no argument constructor with visibility at least default
     }
 
