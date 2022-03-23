@@ -1,11 +1,12 @@
+various JPA use cases
+
 JDBC - Java DataBase Connectivity -> a Java API
-JPA - Java Persistence Api -> a Java API
-JTA - Java Transaction API -> a Java API
+JPA  - Java Persistence Api       -> a Java API
+JTA  - Java Transaction API       -> a Java API
 
-JPA vs JDBC
+JPA wraps JDBC, is built on top of JDBC, uses JDBC
+There are multiple JPA implementations, mostly used : Hibernate and EclipseLink
 
--> JPA wraps JDBC, is built on top of JDBC, uses JDBC
--> JPA implementations -> Hibernate, EclipseLink VS JDBC implementations -> databases Java Drivers
 -> EntityManagerFactory, EntityManager, Transaction management VS DataSource, Connection, Transaction management
 -> ORM framework VS table like data
 
