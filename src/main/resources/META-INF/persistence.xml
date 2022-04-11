@@ -131,9 +131,6 @@
 
         <class>queries.named.EntityWithNamedQuery</class>
         <class>queries.named.nativ.EntityWithNamedNativeQuery</class>
-        <class>queries.named.nativ.NamedNativeQueriesDefinition</class>
-        <class>queries.named.nativ.NamedNativeQueriesWithResultSetMappingDefinition</class>
-        <class>queries.named.NamedQueriesDefinition</class>
 
         <class>queries.aggregated.Person</class>
         <class>queries.aggregated.Country</class>
