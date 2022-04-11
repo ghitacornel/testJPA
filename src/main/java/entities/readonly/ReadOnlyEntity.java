@@ -3,6 +3,12 @@ package entities.readonly;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
+/**
+ * observe no setters defined
+ * best approach is to use a listener and detach it after the load
+ *
+ * @javax.persistence.PostLoad public void detachAfterLoad(Object o) { entityManager.detach(o); }
+ */
 @Entity
 public class ReadOnlyEntity {
 
