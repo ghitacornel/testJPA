@@ -125,6 +125,7 @@
         <class>entities.listener.EntityWithListener</class>
         <class>entities.projection.EntityWithProjection</class>
         <class>entities.secondarytable.Employee</class>
+        <class>entities.readonly.ReadOnlyEntity</class>
 
         <class>lock.VersionedEntity</class>
 
