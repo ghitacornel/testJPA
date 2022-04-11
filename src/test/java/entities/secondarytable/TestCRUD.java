@@ -18,7 +18,7 @@ public class TestCRUD extends TransactionalSetup {
     public void testCreateReadUpdateReadRemoveRead() {
 
         // create new entity
-        Employee initialEntity = new Employee();
+        EntityMappedOnTwoTables initialEntity = new EntityMappedOnTwoTables();
         initialEntity.setId(1);
         initialEntity.setFirstName("first name");
         initialEntity.setLastName("last name");
@@ -30,7 +30,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();// mandatory check executed queries
 
         // verify persist
-        Employee entity2 = em.find(Employee.class, initialEntity.getId());
+        EntityMappedOnTwoTables entity2 = em.find(EntityMappedOnTwoTables.class, initialEntity.getId());
         Assertions.assertNotNull(entity2);
         ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
 
@@ -42,18 +42,18 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();// mandatory check executed queries
 
         // verify update
-        Employee entity3 = em.find(Employee.class, initialEntity.getId());
+        EntityMappedOnTwoTables entity3 = em.find(EntityMappedOnTwoTables.class, initialEntity.getId());
         Assertions.assertNotNull(entity3);
         ReflectionAssert.assertReflectionEquals(entity2, entity3);
 
         // remove
-        Employee toBeRemovedEntity = em.find(Employee.class, initialEntity.getId());
+        EntityMappedOnTwoTables toBeRemovedEntity = em.find(EntityMappedOnTwoTables.class, initialEntity.getId());
         Assertions.assertNotNull(toBeRemovedEntity);
         em.remove(toBeRemovedEntity);
         flushAndClear();// //  mandatory check executed queries
 
         // verify remove
-        Assertions.assertNull(em.find(Employee.class, initialEntity.getId()));
+        Assertions.assertNull(em.find(EntityMappedOnTwoTables.class, initialEntity.getId()));
 
         // verify database state with a native query
         verifyTableIsEmpty("EMPLOYEE");

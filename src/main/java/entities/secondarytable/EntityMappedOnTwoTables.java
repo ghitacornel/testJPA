@@ -5,7 +5,7 @@ import javax.persistence.*;
 @Entity
 @Table(name = "EMPLOYEE")
 @SecondaryTable(name = "EMPLOYEE_DETAILS", pkJoinColumns = @PrimaryKeyJoinColumn(name = "EMPLOYEE_ID"))
-public class Employee {
+public class EntityMappedOnTwoTables {
 
     @Id
     private int id;
