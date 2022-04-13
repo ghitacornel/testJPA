@@ -151,6 +151,9 @@
 
         <class>entities.cached.CachedPerson</class>
 
+        <class>relationships.unrelated.EntityLeft</class>
+        <class>relationships.unrelated.EntityRight</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
