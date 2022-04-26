@@ -3,20 +3,15 @@ package setup;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import javax.persistence.*;
 import java.util.Collection;
 
+@ExtendWith({EntityManagerFactoryExtension.class})
 public abstract class Setup {
 
-    // persistence unit name must match the persistence unit name specified in the persistence.xml file
-    private static final String PERSISTENCE_UNIT_NAME = "examplePersistenceUnit";
     protected static EntityManagerFactory entityManagerFactory;
-
-    // for faster tests we don't use @BeforeEachClass / @AfterEachClass to control this factory
-    static {
-        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-    }
 
     protected EntityManager em;
 
