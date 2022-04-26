@@ -7,16 +7,14 @@ import java.util.Map;
 @Entity
 public class OTOMOrderMapParent {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(cascade = CascadeType.PERSIST)
     @MapKey(name = "id")
     @OrderBy("name")
     final private Map<Integer, OTOMOrderMapChild> children = new LinkedHashMap<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

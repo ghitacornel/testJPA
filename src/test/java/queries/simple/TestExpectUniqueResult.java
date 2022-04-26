@@ -3,7 +3,6 @@ package queries.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import javax.persistence.NoResultException;
@@ -48,7 +47,7 @@ public class TestExpectUniqueResult extends TransactionalSetup {
     @Test
     public void testUniqueResult() {
         SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.value = 1", SimpleQueryEntity.class).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(0)).usingRecursiveComparison().isEqualTo(entity);
     }
 
     @Test

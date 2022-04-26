@@ -3,8 +3,6 @@ package queries.named.nativ;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import relationships.onetomany.strict.OTOMStrictChild;
 import relationships.onetomany.strict.OTOMStrictParent;
 import setup.TransactionalSetup;
@@ -61,7 +59,7 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
         }
 
         // verify fetched children
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), fetchedChildren, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.getChildren()).usingRecursiveComparison().isEqualTo(fetchedChildren);
 
     }
 
@@ -108,7 +106,7 @@ public class TestNamedNativeQueryWithSqlResultSetMapping extends TransactionalSe
         }
 
         // verify fetched children
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), fetchedChildren, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.getChildren()).usingRecursiveComparison().isEqualTo(fetchedChildren);
 
 
     }

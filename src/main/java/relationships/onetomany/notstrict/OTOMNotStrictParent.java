@@ -23,11 +23,6 @@ public class OTOMNotStrictParent {
     // map this as final
     private List<OTOMNotStrictChild> children = new ArrayList<>();
 
-    // do not use setter
-    public void setChildren(List<OTOMNotStrictChild> children) {
-        this.children = children;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -46,6 +41,11 @@ public class OTOMNotStrictParent {
 
     public List<OTOMNotStrictChild> getChildren() {
         return children;
+    }
+
+    // do not use setter
+    public void setChildren(List<OTOMNotStrictChild> children) {
+        this.children = children;
     }
 
 }

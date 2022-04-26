@@ -3,7 +3,6 @@ package entities.ids.table;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -42,13 +41,13 @@ public class TestIdTableGeneration extends TransactionalSetup {
         List<EntityAWithIdGeneratedFromTable> listA = em.createQuery("select t from EntityAWithIdGeneratedFromTable t", EntityAWithIdGeneratedFromTable.class).getResultList();
         Assertions.assertEquals(1, listA.size());
         Assertions.assertNotNull(entityA.getId());// verify id was generated and populated
-        ReflectionAssert.assertReflectionEquals(listA.get(0), entityA);
+        org.assertj.core.api.Assertions.assertThat(listA.get(0)).usingRecursiveComparison().isEqualTo(entityA);
 
         // verify exactly 1 object was persisted
         List<EntityBWithIdGeneratedFromTable> listB = em.createQuery("select t from EntityBWithIdGeneratedFromTable t", EntityBWithIdGeneratedFromTable.class).getResultList();
         Assertions.assertEquals(1, listB.size());
         Assertions.assertNotNull(entityB.getId());// verify id was generated and populated
-        ReflectionAssert.assertReflectionEquals(listB.get(0), entityB);
+        org.assertj.core.api.Assertions.assertThat(listB.get(0)).usingRecursiveComparison().isEqualTo(entityB);
 
     }
 

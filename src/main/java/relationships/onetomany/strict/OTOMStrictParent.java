@@ -12,14 +12,12 @@ import java.util.List;
 @Entity
 public class OTOMStrictParent {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, mappedBy = "parent")
     final private List<OTOMStrictChild> children = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

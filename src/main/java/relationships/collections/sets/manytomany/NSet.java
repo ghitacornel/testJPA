@@ -10,14 +10,12 @@ import java.util.Set;
 @Entity
 public class NSet {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany(mappedBy = "setWithNs")
     final private Set<MSet> setWithMs = new HashSet<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

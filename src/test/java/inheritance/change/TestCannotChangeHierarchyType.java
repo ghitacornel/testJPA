@@ -3,8 +3,6 @@ package inheritance.change;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestCannotChangeHierarchyType extends TransactionalSetup {
@@ -54,7 +52,7 @@ public class TestCannotChangeHierarchyType extends TransactionalSetup {
                 concreteClassA.setDiscriminator("A");
             }
         }
-        ReflectionAssert.assertReflectionEquals(model, containerInitial, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(containerInitial);
 
         // try to change an instance hierarchic type
         containerInitial.getConcreteClassBs().get(1).setDiscriminator("A");

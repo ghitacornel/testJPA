@@ -2,8 +2,6 @@ package relationships.manytomany.cascade.oneside;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 /**
@@ -45,9 +43,9 @@ public class TestClearOwningSideChildrenList extends TransactionalSetup {
         flushAndClear();
 
         // verify all is persisted
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeOneSideM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeOneSideN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeOneSideN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m1).usingRecursiveComparison().isEqualTo(em.find(CascadeOneSideM.class, m1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n1).usingRecursiveComparison().isEqualTo(em.find(CascadeOneSideN.class, n1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n2).usingRecursiveComparison().isEqualTo(em.find(CascadeOneSideN.class, n2.getId()));
 
         // get parent and clear list of children
         em.find(CascadeOneSideM.class, m1.getId()).getListWithNs().clear();
@@ -55,11 +53,11 @@ public class TestClearOwningSideChildrenList extends TransactionalSetup {
 
         // verify links are cleared
         m1.getListWithNs().clear();
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeOneSideM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m1).usingRecursiveComparison().isEqualTo(em.find(CascadeOneSideM.class, m1.getId()));
         n1.getListWithMs().clear();
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeOneSideN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(n1).usingRecursiveComparison().isEqualTo(em.find(CascadeOneSideN.class, n1.getId()));
         n2.getListWithMs().clear();
-        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeOneSideN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(n2).usingRecursiveComparison().isEqualTo(em.find(CascadeOneSideN.class, n2.getId()));
 
     }
 

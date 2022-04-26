@@ -3,7 +3,6 @@ package entities.readonly;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -29,7 +28,7 @@ public class TestReadOnlyEntityCRUD extends TransactionalSetup {
         ReadOnlyEntity entity2 = em.find(ReadOnlyEntity.class, initialEntity.getId());
         Assertions.assertNotNull(entity2);
         Assertions.assertNotSame(initialEntity, entity2);
-        ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
+        org.assertj.core.api.Assertions.assertThat(initialEntity).usingRecursiveComparison().isEqualTo(entity2);
 
         // verify database state with a native query
         {

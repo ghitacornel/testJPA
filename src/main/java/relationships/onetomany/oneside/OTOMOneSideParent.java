@@ -26,11 +26,6 @@ public class OTOMOneSideParent {
     @JoinColumn(name = "parent_id", referencedColumnName = "id", nullable = false)
     private List<OTOMSOneSideChild> children = new ArrayList<>();
 
-    // do not use this
-    public void setChildren(List<OTOMSOneSideChild> children) {
-        this.children = children;
-    }
-
     public Integer getId() {
         return id;
     }
@@ -49,6 +44,11 @@ public class OTOMOneSideParent {
 
     public List<OTOMSOneSideChild> getChildren() {
         return children;
+    }
+
+    // do not use this
+    public void setChildren(List<OTOMSOneSideChild> children) {
+        this.children = children;
     }
 
 }

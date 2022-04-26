@@ -2,7 +2,6 @@ package relationships.onetoone.unidirectional.nocascade.notstrict;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestCase4 extends TransactionalSetup {
@@ -44,8 +43,8 @@ public class TestCase4 extends TransactionalSetup {
         em.persist(child);
         flushAndClear();
 
-        ReflectionAssert.assertReflectionEquals(parent, em.find(Case4Parent.class, 1));
-        ReflectionAssert.assertReflectionEquals(child, em.find(Case4Child.class, 1));
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(Case4Parent.class, 1));
+        org.assertj.core.api.Assertions.assertThat(child).usingRecursiveComparison().isEqualTo(em.find(Case4Child.class, 1));
 
     }
 
@@ -84,9 +83,9 @@ public class TestCase4 extends TransactionalSetup {
 
         // verify child is merged
         child.setParent(original);
-        ReflectionAssert.assertReflectionEquals(child, em.find(Case4Child.class, 1));
+        org.assertj.core.api.Assertions.assertThat(child).usingRecursiveComparison().isEqualTo(em.find(Case4Child.class, 1));
         // verify parent is not merged
-        ReflectionAssert.assertReflectionEquals(original, em.find(Case4Parent.class, 1));
+        org.assertj.core.api.Assertions.assertThat(original).usingRecursiveComparison().isEqualTo(em.find(Case4Parent.class, 1));
 
     }
 
@@ -111,7 +110,7 @@ public class TestCase4 extends TransactionalSetup {
         flushAndClear();
 
         Assertions.assertNull(em.find(Case4Child.class, 1));
-        ReflectionAssert.assertReflectionEquals(parent, em.find(Case4Parent.class, 1));
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(Case4Parent.class, 1));
 
     }
 }

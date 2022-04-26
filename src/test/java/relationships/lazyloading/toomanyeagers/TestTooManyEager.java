@@ -2,8 +2,6 @@ package relationships.lazyloading.toomanyeagers;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestTooManyEager extends TransactionalSetup {
@@ -56,17 +54,17 @@ public class TestTooManyEager extends TransactionalSetup {
     public void testLoadOnMultipleSimpleRelationshipsAndOnlyOneCollectionRelationshipWorks() {
 
         TMECenter existing = em.find(TMECenter.class, center.getId());
-        ReflectionAssert.assertReflectionEquals(center, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(center).usingRecursiveComparison().isEqualTo(existing);
 
     }
 
     @Test
-    public void testFailWhenLoadingMoreThanOneCollectionRelationships(){
+    public void testFailWhenLoadingMoreThanOneCollectionRelationships() {
 
         // for this test mark this relationship "relationships.lazyloading.toomanyeagers.TMECenter.links4" as EAGER
 
         TMECenter existing = em.find(TMECenter.class, center.getId());
-        ReflectionAssert.assertReflectionEquals(center, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(center).usingRecursiveComparison().isEqualTo(existing);
 
     }
 }

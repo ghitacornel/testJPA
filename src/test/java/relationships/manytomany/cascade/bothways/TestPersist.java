@@ -2,8 +2,6 @@ package relationships.manytomany.cascade.bothways;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestPersist extends TransactionalSetup {
@@ -42,9 +40,9 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeBothWaysM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeBothWaysN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeBothWaysN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m1).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysM.class, m1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n1).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n2).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n2.getId()));
 
     }
 
@@ -56,9 +54,9 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        ReflectionAssert.assertReflectionEquals(m1, em.find(CascadeBothWaysM.class, m1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(CascadeBothWaysN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(CascadeBothWaysN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m1).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysM.class, m1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n1).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n2).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n2.getId()));
 
     }
 

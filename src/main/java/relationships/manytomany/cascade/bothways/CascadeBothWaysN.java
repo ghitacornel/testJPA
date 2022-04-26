@@ -7,14 +7,12 @@ import java.util.List;
 @Entity
 public class CascadeBothWaysN {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany(mappedBy = "listWithNs", cascade = CascadeType.ALL)
     final private List<CascadeBothWaysM> listWithMs = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

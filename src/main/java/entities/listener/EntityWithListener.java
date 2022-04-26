@@ -1,6 +1,8 @@
 package entities.listener;
 
-import javax.persistence.*;
+import javax.persistence.Basic;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 // ENTITY LISTENERS are inherited

@@ -4,7 +4,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.Setup;
 
 public class TestMergeBehaviorWithControlledTransactions extends Setup {
@@ -23,7 +22,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
 
         final Runnable r = () -> {
             System.out.println("LAUNCHING HSQL DBMANAGERSWING");
-            final String[] args = { "--url", "jdbc:hsqldb:mem:testdb" ,"--noexit"};
+            final String[] args = {"--url", "jdbc:hsqldb:mem:testdb", "--noexit"};
             try {
                 // enable database GUI from here
                 // DatabaseManagerSwing.main(args);
@@ -87,7 +86,7 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
             em.getTransaction().begin();
             Entity updated = em.find(Entity.class, witness.getId());
             Assertions.assertNotNull(updated);
-            ReflectionAssert.assertReflectionEquals(attachedEntity, updated);
+            org.assertj.core.api.Assertions.assertThat(attachedEntity).usingRecursiveComparison().isEqualTo(updated);
             em.getTransaction().commit();
         }
 
@@ -124,9 +123,9 @@ public class TestMergeBehaviorWithControlledTransactions extends Setup {
             em.getTransaction().begin();
             Entity updated = em.find(Entity.class, witness.getId());
             Assertions.assertNotNull(updated);
-            ReflectionAssert.assertReflectionEquals(mergedEntity, updated);
-            ReflectionAssert.assertReflectionEquals(attachedEntity, updated);
-            ReflectionAssert.assertReflectionEquals(mergedEntity, attachedEntity);
+            org.assertj.core.api.Assertions.assertThat(mergedEntity).usingRecursiveComparison().isEqualTo(updated);
+            org.assertj.core.api.Assertions.assertThat(attachedEntity).usingRecursiveComparison().isEqualTo(updated);
+            org.assertj.core.api.Assertions.assertThat(mergedEntity).usingRecursiveComparison().isEqualTo(attachedEntity);
             em.getTransaction().commit();
         }
 

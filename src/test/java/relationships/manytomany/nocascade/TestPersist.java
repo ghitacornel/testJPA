@@ -1,7 +1,6 @@
 package relationships.manytomany.nocascade;
 
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestPersist extends TransactionalSetup {
@@ -29,8 +28,8 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify persist
-        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
-        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(NoCascadeM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(NoCascadeN.class, n.getId()));
 
     }
 

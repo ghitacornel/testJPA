@@ -7,26 +7,21 @@ import java.util.List;
 @Entity
 public class TMECenter {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private TMELink1 link1;
-
-    @ManyToOne(fetch = FetchType.EAGER)
-    private TMELink2 link2;
-
     @OneToMany(fetch = FetchType.EAGER)
     final private List<TMELink3> links3 = new ArrayList<>();
-
     // keep this as LAZY
     // marking it as EAGER will fail the tests
     // check the reported errors when using EAGER marker
     @OneToMany(fetch = FetchType.LAZY)
     final private List<TMELink4> links4 = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private TMELink1 link1;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private TMELink2 link2;
 
     public Integer getId() {
         return id;

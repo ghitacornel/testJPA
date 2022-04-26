@@ -2,8 +2,6 @@ package inheritance.single;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -41,7 +39,7 @@ public class TestInheritanceSingleTableStrategy extends TransactionalSetup {
     public void testSelectAllEntitiesAsRootClass() {
 
         List<InheritanceSingleTableSuperClass> list = em.createQuery("select t from InheritanceSingleTableSuperClass t", InheritanceSingleTableSuperClass.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -49,7 +47,7 @@ public class TestInheritanceSingleTableStrategy extends TransactionalSetup {
     public void testSelectAllSpecificEntitiesOfTypeAFromHierarchy() {
 
         List<InheritanceSingleTableConcreteClassA> list = em.createQuery("select t from InheritanceSingleTableConcreteClassA t", InheritanceSingleTableConcreteClassA.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 3), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(0, 3)).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -57,7 +55,7 @@ public class TestInheritanceSingleTableStrategy extends TransactionalSetup {
     public void testSelectAllSpecificEntitiesOfTypeBFromHierarchy() {
 
         List<InheritanceSingleTableConcreteClassB> list = em.createQuery("select t from InheritanceSingleTableConcreteClassB t", InheritanceSingleTableConcreteClassB.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(3, model.size()), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(3, model.size())).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -65,7 +63,7 @@ public class TestInheritanceSingleTableStrategy extends TransactionalSetup {
     public void testSelectSpecificEntityOfTypeAFromHierarchy() {
 
         InheritanceSingleTableSuperClass result = em.find(InheritanceSingleTableSuperClass.class, model.get(0).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(0), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(0)).usingRecursiveComparison().isEqualTo(result);
 
     }
 
@@ -73,7 +71,7 @@ public class TestInheritanceSingleTableStrategy extends TransactionalSetup {
     public void testSelectSpecificEntityOfTypeBFromHierarchy() {
 
         InheritanceSingleTableSuperClass result = em.find(InheritanceSingleTableSuperClass.class, model.get(3).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(3), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(3)).usingRecursiveComparison().isEqualTo(result);
 
     }
 }

@@ -7,15 +7,13 @@ import java.util.Set;
 @Entity
 public class OTOMOrderSetParent {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(cascade = CascadeType.PERSIST)
     @OrderBy("name")
     final private Set<OTOMOrderSetChild> children = new LinkedHashSet<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

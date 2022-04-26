@@ -2,8 +2,6 @@ package relationships.manytomany.cascade.bothways;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestRemoveLink extends TransactionalSetup {
@@ -44,8 +42,8 @@ public class TestRemoveLink extends TransactionalSetup {
             m.getListWithNs().remove(n);
             n.getListWithMs().remove(m);
         }
-        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n.getId()));
 
     }
 
@@ -57,8 +55,8 @@ public class TestRemoveLink extends TransactionalSetup {
         flushAndClear();
 
         // verify removal of link not working
-        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n.getId()));
 
     }
 
@@ -70,8 +68,8 @@ public class TestRemoveLink extends TransactionalSetup {
         flushAndClear();
 
         // verify removal of link not working
-        ReflectionAssert.assertReflectionEquals(m, em.find(CascadeBothWaysM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n, em.find(CascadeBothWaysN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(CascadeBothWaysN.class, n.getId()));
 
     }
 

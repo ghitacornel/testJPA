@@ -2,8 +2,6 @@ package relationships.collections.maps.manytomany;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -86,7 +84,7 @@ public class TestSelectAll extends TransactionalSetup {
     public void testM() {
 
         List<MMap> list = em.createQuery("select t from MMap t", MMap.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(4, 8), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(4, 8)).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -94,7 +92,7 @@ public class TestSelectAll extends TransactionalSetup {
     public void testN() {
 
         List<NMap> list = em.createQuery("select t from NMap t", NMap.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 4), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(0, 4)).usingRecursiveComparison().isEqualTo(list);
 
     }
 }

@@ -8,12 +8,6 @@ import java.util.List;
 @Entity
 public class CascadeBothWaysM {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "CascadeBothWaysMN",
@@ -21,6 +15,10 @@ public class CascadeBothWaysM {
             inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")}
     )
     final private List<CascadeBothWaysN> listWithNs = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

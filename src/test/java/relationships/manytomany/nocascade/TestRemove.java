@@ -3,8 +3,6 @@ package relationships.manytomany.nocascade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -48,7 +46,7 @@ public class TestRemove extends TransactionalSetup {
             n.getListWithMs().remove(m);
         }
         Assertions.assertNull(em.find(NoCascadeM.class, m.getId()));
-        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(NoCascadeN.class, n.getId()));
 
     }
 
@@ -70,7 +68,7 @@ public class TestRemove extends TransactionalSetup {
             m.getListWithNs().remove(n);
         }
         Assertions.assertNull(em.find(NoCascadeN.class, n.getId()));
-        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(NoCascadeM.class, m.getId()));
 
     }
 

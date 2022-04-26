@@ -1,7 +1,6 @@
 package relationships.orderby.sets;
 
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class TestSelectAll extends TransactionalSetup {
             parent.getChildren().addAll(children);
         }
 
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrderSetParent.class, parent.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(OTOMOrderSetParent.class, parent.getId()));
 
     }
 }

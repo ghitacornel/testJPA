@@ -7,12 +7,6 @@ import java.util.List;
 @Entity
 public class NoCascadeM {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     /**
      * observe override the join table definition<br>
      * observe unique constraint added on foreign keys combination<br>
@@ -28,6 +22,10 @@ public class NoCascadeM {
             uniqueConstraints = {@UniqueConstraint(columnNames = {"id_m", "id_n"})}
     )
     final private List<NoCascadeN> listWithNs = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

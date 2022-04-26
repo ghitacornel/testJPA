@@ -1,7 +1,6 @@
 package relationships.orderby.manytomany;
 
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.Collections;
@@ -35,7 +34,7 @@ public class TestSelectAll extends TransactionalSetup {
             Collections.reverse(m.getListWithNs());
         }
 
-        ReflectionAssert.assertReflectionEquals(m, em.find(MTOMOrderM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(MTOMOrderM.class, m.getId()));
 
     }
 }

@@ -7,16 +7,14 @@ import java.util.Map;
 @Entity
 public class MMap {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany
     @JoinTable(name = "MN_MAP", joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id")}, inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id")})
     @MapKey(name = "id")
     final private Map<Integer, NMap> mapWithNs = new HashMap<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

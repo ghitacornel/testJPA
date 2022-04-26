@@ -15,7 +15,7 @@ public class Person {
 
     private Integer countryId;
 
-    public Person(){
+    public Person() {
     }
 
     public Person(Integer id, String name, Country country) {

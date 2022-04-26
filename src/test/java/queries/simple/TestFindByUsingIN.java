@@ -3,7 +3,6 @@ package queries.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -58,7 +57,7 @@ public class TestFindByUsingIN extends TransactionalSetup {
         parameter.add("name 2");
 
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e where e.name IN :names", SimpleQueryEntity.class).setParameter("names", parameter).getResultList();
-        ReflectionAssert.assertReflectionEquals(buildModel().subList(0, 2), actual);
+        org.assertj.core.api.Assertions.assertThat(buildModel().subList(0, 2)).usingRecursiveComparison().isEqualTo(actual);
 
     }
 

@@ -2,8 +2,6 @@ package relationships.onetoone.childPKequalsparentPK;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestPersist extends TransactionalSetup {
@@ -37,7 +35,7 @@ public class TestPersist extends TransactionalSetup {
         flushAndClear();
 
         PKParent existing = em.find(PKParent.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(model, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(existing);
 
     }
 }

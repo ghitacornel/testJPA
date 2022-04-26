@@ -2,8 +2,6 @@ package relationships.orphans.onetomany;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
@@ -69,7 +67,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         {// adjust model to match expectations
             child2.setParent(null);
         }
-        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanChild.class, child2.getId()));
+        org.assertj.core.api.Assertions.assertThat(child2).usingRecursiveComparison().isEqualTo(em.find(OTOMOrphanChild.class, child2.getId()));
 
     }
 
@@ -83,9 +81,9 @@ public class TestRemoveOrphans extends TransactionalSetup {
         flushAndClear();
 
         // test orphan is not removed
-        ReflectionAssert.assertReflectionEquals(child1, em.find(OTOMOrphanChild.class, child1.getId()));
-        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanChild.class, child2.getId()));
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrphanParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(child1).usingRecursiveComparison().isEqualTo(em.find(OTOMOrphanChild.class, child1.getId()));
+        org.assertj.core.api.Assertions.assertThat(child2).usingRecursiveComparison().isEqualTo(em.find(OTOMOrphanChild.class, child2.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(OTOMOrphanParent.class, parent.getId()));
 
     }
 
@@ -103,11 +101,11 @@ public class TestRemoveOrphans extends TransactionalSetup {
         {// adjust model to match expectations
             child2.setParent(null);
         }
-        ReflectionAssert.assertReflectionEquals(child2, em.find(OTOMOrphanChild.class, child2.getId()));
+        org.assertj.core.api.Assertions.assertThat(child2).usingRecursiveComparison().isEqualTo(em.find(OTOMOrphanChild.class, child2.getId()));
         {// adjust model to match expectations
             parent.getChildren().remove(1);
         }
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOrphanParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(OTOMOrphanParent.class, parent.getId()));
 
     }
 

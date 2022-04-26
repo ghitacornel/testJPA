@@ -3,7 +3,6 @@ package entities.special;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class TestEntityWithEnums extends TransactionalSetup {
         // verify persist
         EntityWithEnums entity2 = em.find(EntityWithEnums.class, 1);
         Assertions.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        org.assertj.core.api.Assertions.assertThat(entity1).usingRecursiveComparison().isEqualTo(entity2);
 
         // verify database state with a native query
         {
@@ -63,7 +62,7 @@ public class TestEntityWithEnums extends TransactionalSetup {
         // verify update
         EntityWithEnums entity3 = em.find(EntityWithEnums.class, 1);
         Assertions.assertNotNull(entity3);
-        ReflectionAssert.assertReflectionEquals(entity2, entity3);
+        org.assertj.core.api.Assertions.assertThat(entity2).usingRecursiveComparison().isEqualTo(entity3);
 
     }
 
@@ -88,6 +87,6 @@ public class TestEntityWithEnums extends TransactionalSetup {
             flushAndClear();
         }
 
-        ReflectionAssert.assertReflectionEquals(entity1, em.createQuery("select t from EntityWithEnums t where t.enum1 = entities.special.SimpleEnum.ONE").getSingleResult());
+        org.assertj.core.api.Assertions.assertThat(entity1).usingRecursiveComparison().isEqualTo(em.createQuery("select t from EntityWithEnums t where t.enum1 = entities.special.SimpleEnum.ONE").getSingleResult());
     }
 }

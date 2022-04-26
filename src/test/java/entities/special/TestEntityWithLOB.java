@@ -3,7 +3,6 @@ package entities.special;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestEntityWithLOB extends TransactionalSetup {
@@ -29,7 +28,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
         // verify persist
         EntityWithLOB entity2 = em.find(EntityWithLOB.class, 1);
         Assertions.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        org.assertj.core.api.Assertions.assertThat(entity1).usingRecursiveComparison().isEqualTo(entity2);
 
         // update
         entity2.setFileContent(new byte[]{4, 5, 6});
@@ -39,7 +38,7 @@ public class TestEntityWithLOB extends TransactionalSetup {
         // verify update
         EntityWithLOB entity3 = em.find(EntityWithLOB.class, 1);
         Assertions.assertNotNull(entity3);
-        ReflectionAssert.assertReflectionEquals(entity2, entity3);
+        org.assertj.core.api.Assertions.assertThat(entity2).usingRecursiveComparison().isEqualTo(entity3);
 
     }
 }

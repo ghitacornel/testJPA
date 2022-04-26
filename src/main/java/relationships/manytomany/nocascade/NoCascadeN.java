@@ -10,12 +10,6 @@ import java.util.List;
 @Entity
 public class NoCascadeN {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     /**
      * observe no cascade
      * observe no definition of join table is required
@@ -23,6 +17,10 @@ public class NoCascadeN {
      */
     @ManyToMany(mappedBy = "listWithNs")
     final private List<NoCascadeM> listWithMs = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

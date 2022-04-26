@@ -3,8 +3,6 @@ package relationships.onetomany.oneside;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -43,7 +41,7 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
         flushAndClear();
 
         OTOMOneSideParent existing = em.find(OTOMOneSideParent.class, parent.getId());
-        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(existing);
 
     }
 
@@ -73,7 +71,7 @@ public class TestInsertParentWithCascadeToChildren extends TransactionalSetup {
 
         // adjust
         parent.getChildren().add(child);
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMOneSideParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(OTOMOneSideParent.class, parent.getId()));
     }
 
     @Test

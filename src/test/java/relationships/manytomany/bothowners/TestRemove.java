@@ -2,8 +2,6 @@ package relationships.manytomany.bothowners;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.Collections;
@@ -51,32 +49,32 @@ public class TestRemove extends TransactionalSetup {
     }
 
     @Test
-    public void testRemoveFrom1SideWorks(){
+    public void testRemoveFrom1SideWorks() {
 
         n1.getListWithMs().add(m);
         n2.getListWithMs().add(m);
 
         BothOwnerM m1 = em.find(BothOwnerM.class, m.getId());
-        ReflectionAssert.assertReflectionEquals(m, m1, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(m1);
 
         m1.getListWithNs().remove(em.find(BothOwnerN.class, n1.getId()));
         flushAndClear();
 
         BothOwnerM m2 = em.find(BothOwnerM.class, m.getId());
         m.getListWithNs().remove(n1);
-        ReflectionAssert.assertReflectionEquals(m, m2, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(m2);
     }
 
     @Test
-    public void testSetProxyDoesNotKeepsOldOnes(){
+    public void testSetProxyDoesNotKeepsOldOnes() {
 
         n1.getListWithMs().add(m);
         n2.getListWithMs().add(m);
 
         BothOwnerM m1 = em.find(BothOwnerM.class, m.getId());
-        ReflectionAssert.assertReflectionEquals(m, m1, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(m1);
 
-        BothOwnerN n3=new BothOwnerN();
+        BothOwnerN n3 = new BothOwnerN();
         n3.setId(3);
         n3.setName("n 3 name");
         em.persist(n3);
@@ -89,7 +87,7 @@ public class TestRemove extends TransactionalSetup {
         n3.getListWithMs().add(m);
         m.getListWithNs().remove(n1);
         m.getListWithNs().remove(n2);
-        ReflectionAssert.assertReflectionEquals(m, m2);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(m2);
     }
 
 }

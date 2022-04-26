@@ -7,15 +7,13 @@ import java.util.Map;
 @Entity
 public class ParentMap {
 
-    @Id
-    private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(mappedBy = "parent")
     @MapKey(name = "id")
     final private Map<Long, ChildMap> children = new HashMap<>();
+    @Id
+    private Long id;
+    @Column(nullable = false)
+    private String name;
 
     public Long getId() {
         return id;

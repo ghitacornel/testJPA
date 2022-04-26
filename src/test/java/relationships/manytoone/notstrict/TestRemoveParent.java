@@ -3,7 +3,6 @@ package relationships.manytoone.notstrict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -48,7 +47,7 @@ public class TestRemoveParent extends TransactionalSetup {
         Assertions.assertNull(em.find(MTOONotStrictParent.class, parent1.getId()));
 
         // verify the other parent is unaffected
-        ReflectionAssert.assertReflectionEquals(parent2, em.find(MTOONotStrictParent.class, parent2.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent2).usingRecursiveComparison().isEqualTo(em.find(MTOONotStrictParent.class, parent2.getId()));
 
     }
 

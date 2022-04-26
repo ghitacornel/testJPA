@@ -3,7 +3,6 @@ package entities.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
@@ -37,7 +36,7 @@ public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
         // verify 2
         Entity persisted2 = em.find(Entity.class, 2);
         Assertions.assertNotNull(persisted2);
-        ReflectionAssert.assertReflectionEquals(entity, persisted2);
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(persisted2);
 
         // verify 1
         Entity persisted1 = em.find(Entity.class, 1);
@@ -45,7 +44,7 @@ public class TestReInsertSameEntityWithAnotherID extends TransactionalSetup {
         {// adjust the model to reflect expected changes
             entity.setId(1);// set the old id prior to checking
         }
-        ReflectionAssert.assertReflectionEquals(entity, persisted1);
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(persisted1);
 
     }
 

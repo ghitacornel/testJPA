@@ -3,7 +3,6 @@ package relationships.orphans.onetoone.owningside;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestRemoveOrphans extends TransactionalSetup {
@@ -45,7 +44,7 @@ public class TestRemoveOrphans extends TransactionalSetup {
         {// adjust model to match expectations
             owner.setA(null);
         }
-        ReflectionAssert.assertReflectionEquals(owner, em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
+        org.assertj.core.api.Assertions.assertThat(owner).usingRecursiveComparison().isEqualTo(em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
 
     }
 
@@ -57,8 +56,8 @@ public class TestRemoveOrphans extends TransactionalSetup {
         flushAndClear();
 
         // observe nothing happens since A is not the owning side
-        ReflectionAssert.assertReflectionEquals(notOwner, em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
-        ReflectionAssert.assertReflectionEquals(owner, em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
+        org.assertj.core.api.Assertions.assertThat(notOwner).usingRecursiveComparison().isEqualTo(em.find(OTOOrphanOwningSideNotOwner.class, notOwner.getId()));
+        org.assertj.core.api.Assertions.assertThat(owner).usingRecursiveComparison().isEqualTo(em.find(OTOOrphanOwningSideOwner.class, owner.getId()));
 
     }
 }

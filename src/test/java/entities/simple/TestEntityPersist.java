@@ -3,7 +3,6 @@ package entities.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -29,7 +28,7 @@ public class TestEntityPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify persist
-        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {
@@ -60,7 +59,7 @@ public class TestEntityPersist extends TransactionalSetup {
         Assertions.assertNotSame(entity, mergedEntity);
 
         // verify merge
-        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {
@@ -133,7 +132,7 @@ public class TestEntityPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify persist
-        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {
@@ -165,7 +164,7 @@ public class TestEntityPersist extends TransactionalSetup {
         flushAndClear();
 
         // verify new changes to the managed entity are propagated to the database
-        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {
@@ -203,7 +202,7 @@ public class TestEntityPersist extends TransactionalSetup {
         {// adjust model to reflect expected changes
             entity.setName("name");
         }
-        ReflectionAssert.assertReflectionEquals(entity, em.find(Entity.class, entity.getId()));
+        org.assertj.core.api.Assertions.assertThat(entity).usingRecursiveComparison().isEqualTo(em.find(Entity.class, entity.getId()));
 
         // verify database state with a native query
         {

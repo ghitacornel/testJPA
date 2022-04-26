@@ -3,8 +3,6 @@ package relationships.manytomany.bothowners;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -91,9 +89,9 @@ public class TestPersist extends TransactionalSetup {
             n2.getListWithMs().add(m);
             em.flush();
         }
-        ReflectionAssert.assertReflectionEquals(m, em.find(BothOwnerM.class, m.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n1, em.find(BothOwnerN.class, n1.getId()), ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(n2, em.find(BothOwnerN.class, n2.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(BothOwnerM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n1).usingRecursiveComparison().isEqualTo(em.find(BothOwnerN.class, n1.getId()));
+        org.assertj.core.api.Assertions.assertThat(n2).usingRecursiveComparison().isEqualTo(em.find(BothOwnerN.class, n2.getId()));
 
     }
 

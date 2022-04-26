@@ -2,7 +2,6 @@ package queries.simple;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import relationships.onetomany.strict.OTOMStrictChild;
 import relationships.onetomany.strict.OTOMStrictParent;
 import setup.TransactionalSetup;
@@ -47,7 +46,7 @@ public class TestFindByEmptyCollection extends TransactionalSetup {
     public void testFindByEmptyCollection() {
 
         OTOMStrictParent existing = em.createQuery("select t from OTOMStrictParent t where t.children IS EMPTY", OTOMStrictParent.class).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(parent1, existing);
+        org.assertj.core.api.Assertions.assertThat(parent1).usingRecursiveComparison().isEqualTo(existing);
 
     }
 

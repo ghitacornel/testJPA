@@ -2,7 +2,6 @@ package relationships.manytomany.nocascade;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestRemoveLink extends TransactionalSetup {
@@ -38,8 +37,8 @@ public class TestRemoveLink extends TransactionalSetup {
         flushAndClear();
 
         // validate link not removed
-        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
-        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(NoCascadeM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(NoCascadeN.class, n.getId()));
 
     }
 
@@ -51,8 +50,8 @@ public class TestRemoveLink extends TransactionalSetup {
         flushAndClear();
 
         // validate link not removed
-        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
-        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(NoCascadeN.class, n.getId()));
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(NoCascadeM.class, m.getId()));
 
     }
 
@@ -71,8 +70,8 @@ public class TestRemoveLink extends TransactionalSetup {
             m.getListWithNs().remove(n);
             n.getListWithMs().remove(m);
         }
-        ReflectionAssert.assertReflectionEquals(n, em.find(NoCascadeN.class, n.getId()));
-        ReflectionAssert.assertReflectionEquals(m, em.find(NoCascadeM.class, m.getId()));
+        org.assertj.core.api.Assertions.assertThat(n).usingRecursiveComparison().isEqualTo(em.find(NoCascadeN.class, n.getId()));
+        org.assertj.core.api.Assertions.assertThat(m).usingRecursiveComparison().isEqualTo(em.find(NoCascadeM.class, m.getId()));
 
     }
 

@@ -2,7 +2,6 @@ package relationships.embedded;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -36,7 +35,7 @@ public class TestSelectWithEmbeddable extends TransactionalSetup {
     public void testSelectAll() {
 
         List<EntityWithEmbeddable> existing = em.createQuery("select t from EntityWithEmbeddable t order by id", EntityWithEmbeddable.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model, existing);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(existing);
 
     }
 
@@ -50,7 +49,7 @@ public class TestSelectWithEmbeddable extends TransactionalSetup {
             embeddableBeans.add(entityWithEmbeddable.getEmbedded());
         }
 
-        ReflectionAssert.assertReflectionEquals(embeddableBeans, existing);
+        org.assertj.core.api.Assertions.assertThat(embeddableBeans).usingRecursiveComparison().isEqualTo(existing);
 
     }
 
@@ -63,7 +62,7 @@ public class TestSelectWithEmbeddable extends TransactionalSetup {
 
         EntityWithEmbeddable existing = em.createQuery("select t from EntityWithEmbeddable t where t.embedded = :embedded", EntityWithEmbeddable.class).setParameter("embedded", embedded).getSingleResult();
 
-        ReflectionAssert.assertReflectionEquals(model.get(0), existing);
+        org.assertj.core.api.Assertions.assertThat(model.get(0)).usingRecursiveComparison().isEqualTo(existing);
 
     }
 }

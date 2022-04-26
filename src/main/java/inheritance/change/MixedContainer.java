@@ -12,20 +12,17 @@ import java.util.List;
 @Entity
 public class MixedContainer extends InheritanceMappedSuperClass {
 
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "reference_id")
     final private List<ConcreteSuperClass> concreteSuperClass = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, targetEntity = ConcreteClassA.class)
     @JoinColumn(name = "reference_id_a")
     final private List<ConcreteClassA> concreteClassAs = new ArrayList<>();
-
     @OneToMany(cascade = CascadeType.ALL, targetEntity = ConcreteClassB.class)
     @JoinColumn(name = "reference_id_b")
     final private List<ConcreteClassB> concreteClassBs = new ArrayList<>();
+    @Column(nullable = false)
+    private String name;
 
     public String getName() {
         return name;

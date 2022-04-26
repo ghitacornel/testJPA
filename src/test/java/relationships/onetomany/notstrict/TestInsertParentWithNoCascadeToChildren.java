@@ -2,8 +2,6 @@ package relationships.onetomany.notstrict;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestInsertParentWithNoCascadeToChildren extends TransactionalSetup {
@@ -45,7 +43,7 @@ public class TestInsertParentWithNoCascadeToChildren extends TransactionalSetup 
             parent.getChildren().clear();
         }
         OTOMNotStrictParent existing = em.find(OTOMNotStrictParent.class, parent.getId());
-        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(existing);
 
     }
 }

@@ -2,8 +2,6 @@ package relationships.onetomany.strict;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestRemoveParent extends TransactionalSetup {
@@ -59,7 +57,7 @@ public class TestRemoveParent extends TransactionalSetup {
         verifyCorrespondingTableIsEmpty(OTOMStrictChild.class);
 
         parent.getChildren().clear();
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(OTOMStrictParent.class, parent.getId()));
 
     }
 }

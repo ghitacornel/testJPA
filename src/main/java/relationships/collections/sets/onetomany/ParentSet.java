@@ -1,20 +1,21 @@
 package relationships.collections.sets.onetomany;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
 public class ParentSet {
 
-    @Id
-    private Long id;
-
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(mappedBy = "parent")
     final private Set<ChildSet> children = new HashSet<>();
+    @Id
+    private Long id;
+    @Column(nullable = false)
+    private String name;
 
     public Long getId() {
         return id;

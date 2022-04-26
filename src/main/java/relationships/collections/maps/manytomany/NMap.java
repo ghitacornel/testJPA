@@ -7,15 +7,13 @@ import java.util.Map;
 @Entity
 public class NMap {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany(mappedBy = "mapWithNs")
     @MapKey(name = "id")
     final private Map<Integer, MMap> mapWithMs = new HashMap<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

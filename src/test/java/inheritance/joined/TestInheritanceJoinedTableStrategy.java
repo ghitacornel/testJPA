@@ -2,8 +2,6 @@ package inheritance.joined;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -46,7 +44,7 @@ public class TestInheritanceJoinedTableStrategy extends TransactionalSetup {
     public void testSelectAllEntitiesAsRootClass() {
 
         List<InheritanceJoinedTablesSuperClass> list = em.createQuery("select t from InheritanceJoinedTablesSuperClass t", InheritanceJoinedTablesSuperClass.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -54,7 +52,7 @@ public class TestInheritanceJoinedTableStrategy extends TransactionalSetup {
     public void testSelectAllSpecificEntitiesOfTypeAFromHierarchy() {
 
         List<InheritanceJoinedTablesConcreteClassA> list = em.createQuery("select t from InheritanceJoinedTablesConcreteClassA t", InheritanceJoinedTablesConcreteClassA.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 3), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(0, 3)).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -62,7 +60,7 @@ public class TestInheritanceJoinedTableStrategy extends TransactionalSetup {
     public void testSelectAllSpecificEntitiesOfTypeBFromHierarchy() {
 
         List<InheritanceJoinedTablesConcreteClassB> list = em.createQuery("select t from InheritanceJoinedTablesConcreteClassB t", InheritanceJoinedTablesConcreteClassB.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(3, 6), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(3, 6)).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -70,7 +68,7 @@ public class TestInheritanceJoinedTableStrategy extends TransactionalSetup {
     public void testSelectSpecificEntityOfTypeAFromHierarchy() {
 
         InheritanceJoinedTablesSuperClass result = em.find(InheritanceJoinedTablesSuperClass.class, model.get(0).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(0), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(0)).usingRecursiveComparison().isEqualTo(result);
 
     }
 
@@ -78,7 +76,7 @@ public class TestInheritanceJoinedTableStrategy extends TransactionalSetup {
     public void testSelectSpecificEntityOfTypeBFromHierarchy() {
 
         InheritanceJoinedTablesSuperClass result = em.find(InheritanceJoinedTablesSuperClass.class, model.get(3).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(3), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(3)).usingRecursiveComparison().isEqualTo(result);
 
     }
 
@@ -86,7 +84,7 @@ public class TestInheritanceJoinedTableStrategy extends TransactionalSetup {
     public void testSelectSpecificEntityOfTypeParentFromHierarchy() {
 
         InheritanceJoinedTablesSuperClass result = em.find(InheritanceJoinedTablesSuperClass.class, model.get(6).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(6), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(6)).usingRecursiveComparison().isEqualTo(result);
 
     }
 

@@ -2,7 +2,6 @@ package queries.simple;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -56,7 +55,7 @@ public class TestSelectWithParameters extends TransactionalSetup {
 
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -67,7 +66,7 @@ public class TestSelectWithParameters extends TransactionalSetup {
 
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(1));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -75,15 +74,15 @@ public class TestSelectWithParameters extends TransactionalSetup {
     public void testSelectAllWithPositionParameter() {
 
         SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 3").getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(2), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(2)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 
     @Test
     public void testSelectAllWithPositionParameters() {
 
-        SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.value = ?2 and e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 4").setParameter(2,3).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(3), entity);
+        SimpleQueryEntity entity = em.createQuery("select e from SQE e where e.value = ?2 and e.name = ?1", SimpleQueryEntity.class).setParameter(1, "name 4").setParameter(2, 3).getSingleResult();
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(3)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 

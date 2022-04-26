@@ -3,8 +3,6 @@ package relationships.onetomany.notstrict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestRemoveChild extends TransactionalSetup {
@@ -46,7 +44,7 @@ public class TestRemoveChild extends TransactionalSetup {
         {// adjust model to reflect expected changes
             expectedParent.getChildren().remove(0);
         }
-        ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMNotStrictParent.class, expectedParent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(expectedParent).usingRecursiveComparison().isEqualTo(em.find(OTOMNotStrictParent.class, expectedParent.getId()));
 
         // test child is now removed
         Assertions.assertNull(em.find(OTOMNotStrictChild.class, 1));
@@ -68,7 +66,7 @@ public class TestRemoveChild extends TransactionalSetup {
         {// adjust model to reflect expected changes
             expectedParent.getChildren().remove(0);
         }
-        ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMNotStrictParent.class, expectedParent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(expectedParent).usingRecursiveComparison().isEqualTo(em.find(OTOMNotStrictParent.class, expectedParent.getId()));
 
         // test child is now removed
         Assertions.assertNull(em.find(OTOMNotStrictChild.class, 1));

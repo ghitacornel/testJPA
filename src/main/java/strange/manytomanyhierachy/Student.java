@@ -10,12 +10,6 @@ import java.util.List;
 @DiscriminatorColumn(name = "tip")
 public class Student {
 
-    @Id
-    private Integer id;
-
-    @Column(name = "tip", insertable = false, updatable = false)
-    private String tip;
-
     @ManyToMany
     @JoinTable(
             name = "TEACHER_STUDENT",
@@ -24,6 +18,10 @@ public class Student {
             uniqueConstraints = {@UniqueConstraint(name = "UK_TS_OK", columnNames = {"id_teacher", "id_student"})}
     )
     final private List<Teacher> teachers = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(name = "tip", insertable = false, updatable = false)
+    private String tip;
 
     @Override
     public String toString() {

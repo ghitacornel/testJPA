@@ -3,7 +3,6 @@ package relationships.manytoone.notstrict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestSetParentToNull extends TransactionalSetup {
@@ -41,7 +40,7 @@ public class TestSetParentToNull extends TransactionalSetup {
         Assertions.assertNull(em.find(MTOONotStrictChild.class, child.getId()).getParent());
 
         // verify parent is unaffected
-        ReflectionAssert.assertReflectionEquals(parent, em.find(MTOONotStrictParent.class,parent.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(MTOONotStrictParent.class, parent.getId()));
 
     }
 

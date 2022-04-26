@@ -2,8 +2,6 @@ package relationships.onetoone.bidirectional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestCascade extends TransactionalSetup {
@@ -40,8 +38,8 @@ public class TestCascade extends TransactionalSetup {
 
         // verify cascade persist
         A existing = em.find(A.class, parent.getId());
-        ReflectionAssert.assertReflectionEquals(parent, existing, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(parent.getB(), existing.getB());
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(existing);
+        org.assertj.core.api.Assertions.assertThat(parent.getB()).usingRecursiveComparison().isEqualTo(existing.getB());
 
     }
 

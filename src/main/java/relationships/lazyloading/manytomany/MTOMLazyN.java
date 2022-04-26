@@ -10,14 +10,12 @@ import java.util.List;
 @Entity
 public class MTOMLazyN {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany(mappedBy = "listWithNs")
     final private List<MTOMLazyM> listWithMs = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

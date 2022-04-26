@@ -2,8 +2,6 @@ package queries.bulk;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -48,7 +46,7 @@ public class TestBulkSelectAndInsert extends TransactionalSetup {
         flushAndClear();
 
         // verify
-        ReflectionAssert.assertReflectionEquals(buildExpectedModel(), em.createQuery("select t from BulkTarget t", BulkTarget.class).getResultList(), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(buildExpectedModel()).usingRecursiveComparison().isEqualTo(em.createQuery("select t from BulkTarget t", BulkTarget.class).getResultList());
 
     }
 

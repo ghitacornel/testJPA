@@ -2,8 +2,6 @@ package queries.bulk;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -43,7 +41,7 @@ public class TestBulkUpdateAll extends TransactionalSetup {
         for (BulkQueryEntity entity : model) {
             entity.setName(entity.getName() + entity.getName());
         }
-        ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(list);
 
     }
 

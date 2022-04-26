@@ -7,15 +7,13 @@ import java.util.List;
 @Entity
 public class MTOMOrderM {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @ManyToMany(cascade = CascadeType.PERSIST)
     @OrderBy("name")
     final private List<MTOMOrderN> listWithNs = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

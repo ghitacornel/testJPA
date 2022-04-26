@@ -2,8 +2,6 @@ package relationships.onetomany.notstrict.cascade;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestOneToManyNotStrictCascade extends TransactionalSetup {
@@ -30,9 +28,9 @@ public class TestOneToManyNotStrictCascade extends TransactionalSetup {
         em.persist(parent);
         flushAndClear();
 
-        ReflectionAssert.assertReflectionEquals(em.find(OTOMNotStrictCascadeParent.class, 1), parent, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(em.find(OTOMNotStrictCascadeChild.class, 1), child1, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(em.find(OTOMNotStrictCascadeChild.class, 2), child2, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(em.find(OTOMNotStrictCascadeParent.class, 1)).usingRecursiveComparison().isEqualTo(parent);
+        org.assertj.core.api.Assertions.assertThat(em.find(OTOMNotStrictCascadeChild.class, 1)).usingRecursiveComparison().isEqualTo(child1);
+        org.assertj.core.api.Assertions.assertThat(em.find(OTOMNotStrictCascadeChild.class, 2)).usingRecursiveComparison().isEqualTo(child2);
         flushAndClear();
 
         // NO CASCADE ON DELETE => remove links first, both ways

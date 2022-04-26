@@ -7,16 +7,6 @@ import java.util.List;
 @Entity
 public class EntityWithEmbeddable {
 
-    @Id
-    private Integer id;
-
-    /**
-     * simple embeddable usage
-     * simulates ONE TO ONE one side mapping STRICT
-     */
-    @Embedded
-    private EmbeddableBean embedded;
-
     /**
      * primitive embeddable usage
      */
@@ -24,13 +14,20 @@ public class EntityWithEmbeddable {
     @JoinTable(name = "EWE_Names", joinColumns = {@JoinColumn(name = "parent_id", referencedColumnName = "id")})
     // can override default table and foreign keys
     final private List<String> names = new ArrayList<>();
-
     /**
      * collection of embeddable usage
      * simulates ONE TO MANY one side mapping STRICT
      */
     @ElementCollection
     final private List<EmbeddableBean> relatedEmbedded = new ArrayList<>();
+    @Id
+    private Integer id;
+    /**
+     * simple embeddable usage
+     * simulates ONE TO ONE one side mapping STRICT
+     */
+    @Embedded
+    private EmbeddableBean embedded;
 
     public Integer getId() {
         return id;

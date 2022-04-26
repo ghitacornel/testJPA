@@ -8,14 +8,12 @@ import java.util.List;
 @Entity
 public class JONPKParent implements Serializable {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false, unique = true)
-    private String name;
-
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "parent")
     final private List<JONPKChild> children = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false, unique = true)
+    private String name;
 
     public Integer getId() {
         return id;

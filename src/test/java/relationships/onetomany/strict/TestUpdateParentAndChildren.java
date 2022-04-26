@@ -2,8 +2,6 @@ package relationships.onetomany.strict;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestUpdateParentAndChildren extends TransactionalSetup {
@@ -76,7 +74,7 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
         }
 
         OTOMStrictParent existing2 = em.find(OTOMStrictParent.class, parent.getId());
-        ReflectionAssert.assertReflectionEquals(parent, existing2, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(existing2);
 
     }
 
@@ -100,7 +98,7 @@ public class TestUpdateParentAndChildren extends TransactionalSetup {
 
         // verify results
         //observe existing children but not loaded are removed
-        ReflectionAssert.assertReflectionEquals(newVersionOfParent, em.find(OTOMStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(newVersionOfParent).usingRecursiveComparison().isEqualTo(em.find(OTOMStrictParent.class, parent.getId()));
 
     }
 }

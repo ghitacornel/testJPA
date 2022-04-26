@@ -1,6 +1,9 @@
 package relationships.lazyloading.toomanyeagers;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class TMELink3 {
@@ -29,7 +32,7 @@ public class TMELink3 {
     public void setName(String name) {
         this.name = name;
     }
-    
+
     @Override
     public String toString() {
         return "[" + this.getClass() + "|" + id + "|" + name + "]";

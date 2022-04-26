@@ -3,7 +3,6 @@ package relationships.onetoone.bidirectional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
@@ -54,8 +53,8 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
         flushAndClear();
 
         A existingA2 = em.find(A.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(existingA1, existingA2);
-        ReflectionAssert.assertReflectionEquals(existingA1.getB(), existingA2.getB());
+        org.assertj.core.api.Assertions.assertThat(existingA1).usingRecursiveComparison().isEqualTo(existingA2);
+        org.assertj.core.api.Assertions.assertThat(existingA1.getB()).usingRecursiveComparison().isEqualTo(existingA2.getB());
 
         // test old B is removed
         Assertions.assertEquals(1, em.createQuery("select t from B t").getResultList().size());
@@ -84,8 +83,8 @@ public class TestUpdateOneToOneWithCascade extends TransactionalSetup {
         flushAndClear();
 
         A existingA2 = em.find(A.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(newVersion, existingA2);
-        ReflectionAssert.assertReflectionEquals(newVersion.getB(), existingA2.getB());
+        org.assertj.core.api.Assertions.assertThat(newVersion).usingRecursiveComparison().isEqualTo(existingA2);
+        org.assertj.core.api.Assertions.assertThat(newVersion.getB()).usingRecursiveComparison().isEqualTo(existingA2.getB());
 
         // test old B is removed
         Assertions.assertEquals(1, em.createQuery("select t from B t").getResultList().size());

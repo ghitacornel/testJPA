@@ -3,7 +3,6 @@ package entities.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -43,7 +42,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         // verify update
         Entity updatedEntity = em.find(Entity.class, initialEntity.getId());
         Assertions.assertNotNull(updatedEntity);
-        ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
+        org.assertj.core.api.Assertions.assertThat(originalEntity).usingRecursiveComparison().isEqualTo(updatedEntity);
 
         // verify database state with a native query
         {
@@ -74,7 +73,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         // verify update
         Entity updatedEntity = em.find(Entity.class, initialEntity.getId());
         Assertions.assertNotNull(updatedEntity);
-        ReflectionAssert.assertReflectionEquals(originalEntity, updatedEntity);
+        org.assertj.core.api.Assertions.assertThat(originalEntity).usingRecursiveComparison().isEqualTo(updatedEntity);
 
         // verify database state with a native query
         {
@@ -106,7 +105,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         // verify update
         Entity entity = em.find(Entity.class, initialEntity.getId());
         Assertions.assertNotNull(entity);
-        ReflectionAssert.assertReflectionEquals(newVersionOfExistingEntity, entity);
+        org.assertj.core.api.Assertions.assertThat(newVersionOfExistingEntity).usingRecursiveComparison().isEqualTo(entity);
 
         // verify database state with a native query
         {
@@ -156,7 +155,7 @@ public class TestEntityUpdate extends TransactionalSetup {
         // verify which update was executed
         Entity entity = em.find(Entity.class, initialEntity.getId());
         Assertions.assertNotNull(entity);
-        ReflectionAssert.assertReflectionEquals(newVersionMerged, entity);
+        org.assertj.core.api.Assertions.assertThat(newVersionMerged).usingRecursiveComparison().isEqualTo(entity);
 
         // verify database state with a native query
         {

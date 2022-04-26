@@ -2,7 +2,6 @@ package relationships.onetoone.bidirectional;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
@@ -38,8 +37,8 @@ public class TestLoadOneToOneInOneNamedQuery extends TransactionalSetup {
                 .getSingleResult();
         flushAndClear();
 
-        ReflectionAssert.assertReflectionEquals(model, existing);
-        ReflectionAssert.assertReflectionEquals(model.getB(), existing.getB());
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(existing);
+        org.assertj.core.api.Assertions.assertThat(model.getB()).usingRecursiveComparison().isEqualTo(existing.getB());
 
     }
 }

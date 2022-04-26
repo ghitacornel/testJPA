@@ -2,7 +2,6 @@ package queries.simple;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class TestOrder extends TransactionalSetup {
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by e.id desc", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
-        ReflectionAssert.assertReflectionEquals(model, actual);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(actual);
 
     }
 
@@ -78,9 +77,9 @@ public class TestOrder extends TransactionalSetup {
         Collections.reverse(model);
         Assertions.assertEquals(model.size(), actual.size());
         for (int i = 0; i < model.size(); i++) {
-            Assertions.assertEquals(actual.get(i)[0],model.get(i).getId());
-            Assertions.assertEquals(actual.get(i)[1],model.get(i).getName());
-            Assertions.assertEquals(actual.get(i)[2],model.get(i).getValue());
+            Assertions.assertEquals(actual.get(i)[0], model.get(i).getId());
+            Assertions.assertEquals(actual.get(i)[1], model.get(i).getName());
+            Assertions.assertEquals(actual.get(i)[2], model.get(i).getValue());
         }
 
     }
@@ -119,7 +118,7 @@ public class TestOrder extends TransactionalSetup {
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value asc nulls first", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
-        ReflectionAssert.assertReflectionEquals(model, actual);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(actual);
 
     }
 
@@ -157,7 +156,7 @@ public class TestOrder extends TransactionalSetup {
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by value asc nulls last", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
-        ReflectionAssert.assertReflectionEquals(model, actual);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(actual);
 
     }
 
@@ -192,7 +191,7 @@ public class TestOrder extends TransactionalSetup {
         List<SimpleQueryEntity> actual = em.createQuery("select e from SQE e order by e.name desc, value asc", SimpleQueryEntity.class).getResultList();
 
         Collections.reverse(model);
-        ReflectionAssert.assertReflectionEquals(model, actual);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(actual);
 
     }
 

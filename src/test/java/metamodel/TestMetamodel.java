@@ -3,7 +3,6 @@ package metamodel;
 import entities.simple.Entity;
 import entities.simple.Entity_;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -30,7 +29,7 @@ public class TestMetamodel extends TransactionalSetup {
 
         Entity actualData = em.createQuery(cq).getSingleResult();
 
-        ReflectionAssert.assertReflectionEquals(initialEntity, actualData);
+        org.assertj.core.api.Assertions.assertThat(initialEntity).usingRecursiveComparison().isEqualTo(actualData);
 
     }
 }

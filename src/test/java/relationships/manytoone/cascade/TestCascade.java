@@ -3,7 +3,6 @@ package relationships.manytoone.cascade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import javax.persistence.PersistenceException;
@@ -33,8 +32,8 @@ public class TestCascade extends TransactionalSetup {
         flushAndClear();
 
         // verify both parent and child are persisted
-        ReflectionAssert.assertReflectionEquals(child, em.find(MTOOCascadeChild.class, child.getId()));
-        ReflectionAssert.assertReflectionEquals(parent, em.find(MTOOCascadeParent.class, parent.getId()));
+        org.assertj.core.api.Assertions.assertThat(child).usingRecursiveComparison().isEqualTo(em.find(MTOOCascadeChild.class, child.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(MTOOCascadeParent.class, parent.getId()));
 
     }
 

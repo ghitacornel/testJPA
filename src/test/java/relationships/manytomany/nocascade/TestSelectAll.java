@@ -2,8 +2,6 @@ package relationships.manytomany.nocascade;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -85,12 +83,12 @@ public class TestSelectAll extends TransactionalSetup {
     @Test
     public void testSelectAllM() {
         List<NoCascadeM> list = em.createQuery("select t from NoCascadeM t", NoCascadeM.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(4, 8), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(4, 8)).usingRecursiveComparison().isEqualTo(list);
     }
 
     @Test
     public void testSelectAllN() {
         List<NoCascadeN> list = em.createQuery("select t from NoCascadeN t", NoCascadeN.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 4), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(0, 4)).usingRecursiveComparison().isEqualTo(list);
     }
 }

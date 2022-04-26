@@ -2,8 +2,6 @@ package relationships.collections.sets.manytomany;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -58,18 +56,18 @@ public class TestSelectAll extends TransactionalSetup {
             m4.setName("m 4 name");
             objects.add(m4);
 
-            n1.getSetWithMs().add( m1);
-            m1.getSetWithNs().add( n1);
+            n1.getSetWithMs().add(m1);
+            m1.getSetWithNs().add(n1);
 
-            n2.getSetWithMs().add( m2);
-            n2.getSetWithMs().add( m3);
-            n3.getSetWithMs().add( m2);
-            n3.getSetWithMs().add( m3);
+            n2.getSetWithMs().add(m2);
+            n2.getSetWithMs().add(m3);
+            n3.getSetWithMs().add(m2);
+            n3.getSetWithMs().add(m3);
 
-            m2.getSetWithNs().add( n2);
-            m2.getSetWithNs().add( n3);
-            m3.getSetWithNs().add( n2);
-            m3.getSetWithNs().add( n3);
+            m2.getSetWithNs().add(n2);
+            m2.getSetWithNs().add(n3);
+            m3.getSetWithNs().add(n2);
+            m3.getSetWithNs().add(n3);
 
         }
 
@@ -86,7 +84,7 @@ public class TestSelectAll extends TransactionalSetup {
     public void testM() {
 
         List<MSet> list = em.createQuery("select t from MSet t", MSet.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(4, 8), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(4, 8)).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -94,7 +92,7 @@ public class TestSelectAll extends TransactionalSetup {
     public void testN() {
 
         List<NSet> list = em.createQuery("select t from NSet t", NSet.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 4), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(0, 4)).usingRecursiveComparison().isEqualTo(list);
 
     }
 }

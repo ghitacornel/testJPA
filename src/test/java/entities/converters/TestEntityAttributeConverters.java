@@ -3,7 +3,6 @@ package entities.converters;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -48,7 +47,7 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
         // verify
         EntityWithAttributeConverters entity2 = em.find(EntityWithAttributeConverters.class, entity1.getId());
         Assertions.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        org.assertj.core.api.Assertions.assertThat(entity1).usingRecursiveComparison().isEqualTo(entity2);
 
         // update
         entity2.setBooleanValue(false);
@@ -76,7 +75,7 @@ public class TestEntityAttributeConverters extends TransactionalSetup {
         // verify
         EntityWithAttributeConverters entity3 = em.find(EntityWithAttributeConverters.class, entity1.getId());
         Assertions.assertNotNull(entity3);
-        ReflectionAssert.assertReflectionEquals(entity2, entity3);
+        org.assertj.core.api.Assertions.assertThat(entity2).usingRecursiveComparison().isEqualTo(entity3);
 
     }
 

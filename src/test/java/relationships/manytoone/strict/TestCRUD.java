@@ -3,7 +3,6 @@ package relationships.manytoone.strict;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -45,7 +44,7 @@ public class TestCRUD extends TransactionalSetup {
         // test insert
         List<MTOOStrictChild> list = em.createQuery("select t from MTOOStrictChild t", MTOOStrictChild.class).getResultList();
         Assertions.assertEquals(1, list.size());
-        ReflectionAssert.assertReflectionEquals(child, list.get(0));
+        org.assertj.core.api.Assertions.assertThat(child).usingRecursiveComparison().isEqualTo(list.get(0));
         flushAndClear();
 
         // update
@@ -58,7 +57,7 @@ public class TestCRUD extends TransactionalSetup {
         // test update
         existing = em.find(MTOOStrictChild.class, child.getId());
         Assertions.assertEquals("new child name", existing.getName());
-        ReflectionAssert.assertReflectionEquals(parent2, existing.getParent());
+        org.assertj.core.api.Assertions.assertThat(parent2).usingRecursiveComparison().isEqualTo(existing.getParent());
         flushAndClear();
 
         // remove
@@ -71,8 +70,8 @@ public class TestCRUD extends TransactionalSetup {
         verifyCorrespondingTableIsEmpty(MTOOStrictChild.class);
 
         // verify parents are unaffected
-        ReflectionAssert.assertReflectionEquals(parent1, em.find(MTOOStrictParent.class,parent1.getId()));
-        ReflectionAssert.assertReflectionEquals(parent2, em.find(MTOOStrictParent.class,parent2.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent1).usingRecursiveComparison().isEqualTo(em.find(MTOOStrictParent.class, parent1.getId()));
+        org.assertj.core.api.Assertions.assertThat(parent2).usingRecursiveComparison().isEqualTo(em.find(MTOOStrictParent.class, parent2.getId()));
     }
 
 }

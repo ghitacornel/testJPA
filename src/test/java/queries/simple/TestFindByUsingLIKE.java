@@ -3,7 +3,6 @@ package queries.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -62,7 +61,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name = :name", SimpleQueryEntity.class).setParameter("name", "jOHn").getResultList();
         Assertions.assertEquals(1, list.size());
-        ReflectionAssert.assertReflectionEquals(buildModel().get(2), list.get(0));
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(2)).usingRecursiveComparison().isEqualTo(list.get(0));
 
     }
 
@@ -71,7 +70,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where cast(e.value as string) = :value", SimpleQueryEntity.class).setParameter("value", "6").getResultList();
         Assertions.assertEquals(1, list.size());
-        ReflectionAssert.assertReflectionEquals(buildModel().get(0), list.get(0));
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(0)).usingRecursiveComparison().isEqualTo(list.get(0));
 
     }
 
@@ -83,7 +82,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "jOHn").getResultList();
         Assertions.assertEquals(1, list.size());
-        ReflectionAssert.assertReflectionEquals(buildModel().get(2), list.get(0));
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(2)).usingRecursiveComparison().isEqualTo(list.get(0));
 
     }
 
@@ -95,7 +94,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.name like :name", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
         Assertions.assertEquals(1, list.size());
-        ReflectionAssert.assertReflectionEquals(buildModel().get(3), list.get(0));
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(3)).usingRecursiveComparison().isEqualTo(list.get(0));
 
     }
 
@@ -108,7 +107,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(:name)", SimpleQueryEntity.class).setParameter("name", "%john%").getResultList();
         Assertions.assertEquals(3, list.size());
-        ReflectionAssert.assertReflectionEquals(buildModel().subList(2, 5), list);
+        org.assertj.core.api.Assertions.assertThat(buildModel().subList(2, 5)).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -121,7 +120,7 @@ public class TestFindByUsingLIKE extends TransactionalSetup {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where lower(e.name) like lower(concat('%',:name,'%'))", SimpleQueryEntity.class).setParameter("name", "john").getResultList();
         Assertions.assertEquals(3, list.size());
-        ReflectionAssert.assertReflectionEquals(buildModel().subList(2, 5), list);
+        org.assertj.core.api.Assertions.assertThat(buildModel().subList(2, 5)).usingRecursiveComparison().isEqualTo(list);
 
     }
 }

@@ -3,7 +3,6 @@ package entities.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -31,7 +30,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         Entity entity2 = em.find(Entity.class, initialEntity.getId());
         Assertions.assertNotNull(entity2);
         Assertions.assertNotSame(initialEntity, entity2);
-        ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
+        org.assertj.core.api.Assertions.assertThat(initialEntity).usingRecursiveComparison().isEqualTo(entity2);
 
         // verify database state with a native query
         {
@@ -53,7 +52,7 @@ public class TestEntityCRUD extends TransactionalSetup {
         Entity entity3 = em.find(Entity.class, initialEntity.getId());
         Assertions.assertNotNull(entity3);
         Assertions.assertNotSame(entity2, entity3);
-        ReflectionAssert.assertReflectionEquals(entity2, entity3);
+        org.assertj.core.api.Assertions.assertThat(entity2).usingRecursiveComparison().isEqualTo(entity3);
 
         // verify database state with a native query
         {

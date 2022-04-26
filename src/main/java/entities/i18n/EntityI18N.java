@@ -2,7 +2,8 @@ package entities.i18n;
 
 import org.hibernate.annotations.Nationalized;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class EntityI18N {

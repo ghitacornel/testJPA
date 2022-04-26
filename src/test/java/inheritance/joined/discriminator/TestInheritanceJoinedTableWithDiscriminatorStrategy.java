@@ -2,8 +2,6 @@ package inheritance.joined.discriminator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -11,7 +9,7 @@ import java.util.List;
 
 public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends TransactionalSetup {
 
-    private List<InheritanceJoinedTablesDiscriminatorSuperClass> model = buildModel();
+    private final List<InheritanceJoinedTablesDiscriminatorSuperClass> model = buildModel();
 
     private static List<InheritanceJoinedTablesDiscriminatorSuperClass> buildModel() {
         List<InheritanceJoinedTablesDiscriminatorSuperClass> list = new ArrayList<>();
@@ -46,7 +44,7 @@ public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends Transac
     public void testSelectAllEntitiesAsRootClass() {
 
         List<InheritanceJoinedTablesDiscriminatorSuperClass> list = em.createQuery("select t from InheritanceJoinedTablesDiscriminatorSuperClass t", InheritanceJoinedTablesDiscriminatorSuperClass.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model, list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -54,7 +52,7 @@ public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends Transac
     public void testSelectAllSpecificEntitiesOfTypeAFromHierarchy() {
 
         List<InheritanceJoinedTablesDiscriminatorConcreteClassA> list = em.createQuery("select t from InheritanceJoinedTablesDiscriminatorConcreteClassA t", InheritanceJoinedTablesDiscriminatorConcreteClassA.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(0, 3), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(0, 3)).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -62,7 +60,7 @@ public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends Transac
     public void testSelectAllSpecificEntitiesOfTypeBFromHierarchy() {
 
         List<InheritanceJoinedTablesDiscriminatorConcreteClassB> list = em.createQuery("select t from InheritanceJoinedTablesDiscriminatorConcreteClassB t", InheritanceJoinedTablesDiscriminatorConcreteClassB.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(model.subList(3, 6), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model.subList(3, 6)).usingRecursiveComparison().ignoringCollectionOrder().isEqualTo(list);
 
     }
 
@@ -70,7 +68,7 @@ public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends Transac
     public void testSelectSpecificEntityOfTypeAFromHierarchy() {
 
         InheritanceJoinedTablesDiscriminatorSuperClass result = em.find(InheritanceJoinedTablesDiscriminatorSuperClass.class, model.get(0).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(0), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(0)).usingRecursiveComparison().isEqualTo(result);
 
     }
 
@@ -78,7 +76,7 @@ public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends Transac
     public void testSelectSpecificEntityOfTypeBFromHierarchy() {
 
         InheritanceJoinedTablesDiscriminatorSuperClass result = em.find(InheritanceJoinedTablesDiscriminatorSuperClass.class, model.get(3).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(3), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(3)).usingRecursiveComparison().isEqualTo(result);
 
     }
 
@@ -86,7 +84,7 @@ public class TestInheritanceJoinedTableWithDiscriminatorStrategy extends Transac
     public void testSelectSpecificEntityOfTypeParentFromHierarchy() {
 
         InheritanceJoinedTablesDiscriminatorSuperClass result = em.find(InheritanceJoinedTablesDiscriminatorSuperClass.class, model.get(6).getId());
-        ReflectionAssert.assertReflectionEquals(model.get(6), result);
+        org.assertj.core.api.Assertions.assertThat(model.get(6)).usingRecursiveComparison().isEqualTo(result);
 
     }
 

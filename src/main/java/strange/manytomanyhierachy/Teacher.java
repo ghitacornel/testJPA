@@ -9,9 +9,6 @@ import java.util.List;
 @Entity
 public class Teacher {
 
-    @Id
-    private Integer id;
-
     @ManyToMany
     @JoinTable(
             name = "TEACHER_STUDENT",
@@ -20,7 +17,6 @@ public class Teacher {
             uniqueConstraints = {@UniqueConstraint(name = "UK_TS_OK", columnNames = {"id_teacher", "id_student"})}
     )
     final private List<Student> students = new ArrayList<>();
-
     @ManyToMany
     @JoinTable(
             name = "TEACHER_STUDENT",
@@ -30,6 +26,8 @@ public class Teacher {
     )
     @Where(clause = "tip='distanta'")
     final private List<StudentDistanta> studentsDistanta = new ArrayList<>();
+    @Id
+    private Integer id;
 
     @Override
     public String toString() {

@@ -9,10 +9,9 @@ import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 
 public class EntityManagerFactoryExtension implements BeforeAllCallback, ExtensionContext.Store.CloseableResource {
 
-    private static boolean started = false;
-
     // persistence unit name must match the persistence unit name specified in the persistence.xml file
     private static final String PERSISTENCE_UNIT_NAME = "examplePersistenceUnit";
+    private static boolean started = false;
 
     @Override
     public void beforeAll(ExtensionContext context) {

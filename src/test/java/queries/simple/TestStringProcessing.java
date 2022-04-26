@@ -15,7 +15,7 @@ public class TestStringProcessing extends TransactionalSetup {
     SimpleQueryEntity entity6;
 
     @BeforeEach
-    public void addData(){
+    public void addData() {
 
         entity1 = new SimpleQueryEntity();
         entity1.setId(1);

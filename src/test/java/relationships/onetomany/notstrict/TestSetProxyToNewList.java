@@ -2,7 +2,6 @@ package relationships.onetomany.notstrict;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -39,7 +38,7 @@ public class TestSetProxyToNewList extends TransactionalSetup {
     @Test
     public void testSetProxyDoesNotRemoveExistingChildren() {
         OTOMNotStrictParent parent1 = em.find(OTOMNotStrictParent.class, parent.getId());
-        ReflectionAssert.assertReflectionEquals(parent, parent1);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(parent1);
 
         List<OTOMNotStrictChild> newChildren = new ArrayList<>();
         OTOMNotStrictChild child4 = new OTOMNotStrictChild();
@@ -61,7 +60,7 @@ public class TestSetProxyToNewList extends TransactionalSetup {
         OTOMNotStrictParent parent2 = em.find(OTOMNotStrictParent.class, parent.getId());
         // observe all old children are still present along with the new children
         parent.getChildren().addAll(newChildren);
-        ReflectionAssert.assertReflectionEquals(parent, parent2);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(parent2);
 
     }
 }

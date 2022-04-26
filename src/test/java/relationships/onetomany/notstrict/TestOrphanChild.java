@@ -2,8 +2,6 @@ package relationships.onetomany.notstrict;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestOrphanChild extends TransactionalSetup {
@@ -44,11 +42,11 @@ public class TestOrphanChild extends TransactionalSetup {
         // test parent and other children are unaffected
         OTOMNotStrictParent expectedParent = buildModel();
         expectedParent.getChildren().remove(1);
-        ReflectionAssert.assertReflectionEquals(expectedParent, em.find(OTOMNotStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(expectedParent).usingRecursiveComparison().isEqualTo(em.find(OTOMNotStrictParent.class, parent.getId()));
 
         // test child is now orphan
         OTOMNotStrictChild child = em.find(OTOMNotStrictChild.class, toRemoveChild.getId());
-        ReflectionAssert.assertReflectionEquals(toRemoveChild, child);
+        org.assertj.core.api.Assertions.assertThat(toRemoveChild).usingRecursiveComparison().isEqualTo(child);
 
     }
 
@@ -59,7 +57,7 @@ public class TestOrphanChild extends TransactionalSetup {
         flushAndClear();
 
         // test nothing happened
-        ReflectionAssert.assertReflectionEquals(parent, em.find(OTOMNotStrictParent.class, parent.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(parent).usingRecursiveComparison().isEqualTo(em.find(OTOMNotStrictParent.class, parent.getId()));
 
     }
 

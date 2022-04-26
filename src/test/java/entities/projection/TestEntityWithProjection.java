@@ -43,7 +43,7 @@ public class TestEntityWithProjection extends TransactionalSetup {
 
         Assertions.assertFalse(em.contains(entity));
 
-        ProjectionFull projectionFull = em.createQuery("select new entities.projection.ProjectionFull(e.id,e.name,e.value) from EntityWithProjection e where e.id = 1", ProjectionFull.class).getSingleResult();
+        em.createQuery("select new entities.projection.ProjectionFull(e.id,e.name,e.value) from EntityWithProjection e where e.id = 1", ProjectionFull.class).getSingleResult();
 
         Assertions.assertFalse(em.contains(entity));
 

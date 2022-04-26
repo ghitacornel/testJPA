@@ -1,10 +1,11 @@
 package relationships.orderby.maps;
 
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 
 public class TestSelectAll extends TransactionalSetup {
 
@@ -53,7 +54,7 @@ public class TestSelectAll extends TransactionalSetup {
 
         }
 
-        ReflectionAssert.assertReflectionEquals(expected, em.find(OTOMOrderMapParent.class, parent.getId()));
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(em.find(OTOMOrderMapParent.class, parent.getId()));
 
     }
 }

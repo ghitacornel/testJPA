@@ -3,7 +3,6 @@ package entities.ids.listener;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class TestEntityWithIdListener extends TransactionalSetup {
         EntityWithIdListener persistedEntity = list.get(0);
 
         Assertions.assertNotNull(persistedEntity.getId());// verify id was generated and populated
-        ReflectionAssert.assertReflectionEquals(initialEntity, persistedEntity);
+        org.assertj.core.api.Assertions.assertThat(initialEntity).usingRecursiveComparison().isEqualTo(persistedEntity);
     }
 
 }

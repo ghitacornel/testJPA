@@ -2,7 +2,6 @@ package queries.builder;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import queries.simple.SimpleQueryEntity;
 import queries.simple.SimpleQueryEntity_;
 import setup.TransactionalSetup;
@@ -81,7 +80,7 @@ public class TestQueryBuilder extends TransactionalSetup {
 
         SimpleQueryEntity entity = typedQuery.getSingleResult();
 
-        ReflectionAssert.assertReflectionEquals(buildModel().get(2), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(2)).usingRecursiveComparison().isEqualTo(entity);
     }
 
     @Test
@@ -96,7 +95,7 @@ public class TestQueryBuilder extends TransactionalSetup {
 
         SimpleQueryEntity entity = typedQuery.getSingleResult();
 
-        ReflectionAssert.assertReflectionEquals(buildModel().get(3), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(3)).usingRecursiveComparison().isEqualTo(entity);
     }
 
 }

@@ -3,7 +3,6 @@ package entities.secondarytable;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 public class TestCRUD extends TransactionalSetup {
@@ -32,7 +31,7 @@ public class TestCRUD extends TransactionalSetup {
         // verify persist
         EntityMappedOnTwoTables entity2 = em.find(EntityMappedOnTwoTables.class, initialEntity.getId());
         Assertions.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(initialEntity, entity2);
+        org.assertj.core.api.Assertions.assertThat(initialEntity).usingRecursiveComparison().isEqualTo(entity2);
 
         // update
         entity2.setFirstName("first name updated");
@@ -44,7 +43,7 @@ public class TestCRUD extends TransactionalSetup {
         // verify update
         EntityMappedOnTwoTables entity3 = em.find(EntityMappedOnTwoTables.class, initialEntity.getId());
         Assertions.assertNotNull(entity3);
-        ReflectionAssert.assertReflectionEquals(entity2, entity3);
+        org.assertj.core.api.Assertions.assertThat(entity2).usingRecursiveComparison().isEqualTo(entity3);
 
         // remove
         EntityMappedOnTwoTables toBeRemovedEntity = em.find(EntityMappedOnTwoTables.class, initialEntity.getId());

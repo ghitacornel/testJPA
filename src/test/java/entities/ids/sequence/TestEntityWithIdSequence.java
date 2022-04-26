@@ -3,7 +3,6 @@ package entities.ids.sequence;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.List;
@@ -32,7 +31,7 @@ public class TestEntityWithIdSequence extends TransactionalSetup {
         EntityWithIdSequence existing = list.get(0);
 
         Assertions.assertNotNull(existing.getId());// verify id was generated and populated
-        ReflectionAssert.assertReflectionEquals(model, existing);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(existing);
     }
 
 }

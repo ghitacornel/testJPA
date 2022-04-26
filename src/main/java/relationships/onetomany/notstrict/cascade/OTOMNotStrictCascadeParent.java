@@ -7,14 +7,12 @@ import java.util.List;
 @Entity
 public class OTOMNotStrictCascadeParent {
 
-    @Id
-    private Integer id;
-
-    @Column(nullable = false)
-    private String name;
-
     @OneToMany(mappedBy = "parent", cascade = CascadeType.PERSIST)
     final private List<OTOMNotStrictCascadeChild> children = new ArrayList<>();
+    @Id
+    private Integer id;
+    @Column(nullable = false)
+    private String name;
 
     public Integer getId() {
         return id;

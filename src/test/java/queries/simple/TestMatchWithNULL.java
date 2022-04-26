@@ -3,7 +3,6 @@ package queries.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -42,7 +41,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NOT NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -52,7 +51,7 @@ public class TestMatchWithNULL extends TransactionalSetup {
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e where e.value IS NULL", SimpleQueryEntity.class).getResultList();
         List<SimpleQueryEntity> expected = new ArrayList<>();
         expected.add(buildModel().get(1));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(list);
 
     }
 

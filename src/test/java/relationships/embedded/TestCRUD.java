@@ -3,8 +3,6 @@ package relationships.embedded;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.Persistence;
@@ -56,7 +54,7 @@ public class TestCRUD extends TransactionalSetup {
         flushAndClear();
 
         // test persist
-        ReflectionAssert.assertReflectionEquals(model, em.find(EntityWithEmbeddable.class, model.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(em.find(EntityWithEmbeddable.class, model.getId()));
         flushAndClear();
 
         // test lazy loading
@@ -99,7 +97,7 @@ public class TestCRUD extends TransactionalSetup {
             EmbeddableBean toUpdate = model.getRelatedEmbedded().stream().filter(embeddableBean -> embeddableBean.getName().equals("name2")).findFirst().orElse(null);
             toUpdate.setName("name2updated");
         }
-        ReflectionAssert.assertReflectionEquals(model, em.find(EntityWithEmbeddable.class, model.getId()), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(em.find(EntityWithEmbeddable.class, model.getId()));
         flushAndClear();
 
         // remove

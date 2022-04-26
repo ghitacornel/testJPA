@@ -3,7 +3,6 @@ package queries.named;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -35,7 +34,7 @@ public class TestNamedQuery extends TransactionalSetup {
 
         List<EntityWithNamedQuery> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -43,7 +42,7 @@ public class TestNamedQuery extends TransactionalSetup {
     public void testWithOrderParameters() {
 
         EntityWithNamedQuery entity = em.createNamedQuery("EntityWithNamedQuery.findById", EntityWithNamedQuery.class).setParameter(1, 1).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(0)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 
@@ -51,7 +50,7 @@ public class TestNamedQuery extends TransactionalSetup {
     public void testNamedQueryDefinedSeparately() {
 
         EntityWithNamedQuery entity = em.createNamedQuery("EntityWithNamedQuery.findByExactName", EntityWithNamedQuery.class).setParameter("name", "name 2").getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(1)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 

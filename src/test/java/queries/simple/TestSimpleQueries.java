@@ -2,8 +2,6 @@ package queries.simple;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -90,7 +88,7 @@ public class TestSimpleQueries extends TransactionalSetup {
     public void testSelectAll() {
 
         List<SimpleQueryEntity> list = em.createQuery("select e from SQE e", SimpleQueryEntity.class).getResultList();
-        ReflectionAssert.assertReflectionEquals(buildModel(), list, ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(buildModel()).usingRecursiveComparison().isEqualTo(list);
 
     }
 
@@ -103,7 +101,7 @@ public class TestSimpleQueries extends TransactionalSetup {
         List<SimpleQueryEntity> expected = buildModel();
         Collections.reverse(expected);
         expected = expected.subList(1, 4);
-        ReflectionAssert.assertReflectionEquals(expected, actual);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
 
     }
 
@@ -115,7 +113,7 @@ public class TestSimpleQueries extends TransactionalSetup {
         // verify, order is important
         List<SimpleQueryEntity> expected = buildModel();
         expected = expected.subList(0, 4);
-        ReflectionAssert.assertReflectionEquals(expected, actual);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
 
     }
 
@@ -127,7 +125,7 @@ public class TestSimpleQueries extends TransactionalSetup {
         // verify, order is important
         List<SimpleQueryEntity> expected = buildModel();
         expected = expected.subList(0, 4);
-        ReflectionAssert.assertReflectionEquals(expected, actual);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(actual);
 
     }
 }

@@ -3,8 +3,6 @@ package relationships.manytomany.nocascade;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 import javax.persistence.Query;
@@ -30,9 +28,9 @@ public class TestSelectSingleMWithRelatedNInOneQuery extends TransactionalSetup 
         NoCascadeM m = em.createQuery("select t from NoCascadeM t join fetch t.listWithNs where t.id=1", NoCascadeM.class).getSingleResult();
 
         Assertions.assertNotNull(m);
-        ReflectionAssert.assertReflectionEquals(model.get(4), m);
+        org.assertj.core.api.Assertions.assertThat(model.get(4)).usingRecursiveComparison().isEqualTo(m);
         List<NoCascadeN> expected = new ArrayList<>();
         expected.add((NoCascadeN) model.get(0));
-        ReflectionAssert.assertReflectionEquals(expected, m.getListWithNs(), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(m.getListWithNs());
     }
 }

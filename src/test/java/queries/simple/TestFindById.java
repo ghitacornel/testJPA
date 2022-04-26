@@ -3,7 +3,6 @@ package queries.simple;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -40,7 +39,7 @@ public class TestFindById extends TransactionalSetup {
     public void testFindByIdExistingId() {
 
         SimpleQueryEntity entity = em.find(SimpleQueryEntity.class, 1);
-        ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(0)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 

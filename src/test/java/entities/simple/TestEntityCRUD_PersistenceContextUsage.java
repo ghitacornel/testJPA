@@ -7,7 +7,6 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.sql.Connection;
@@ -82,7 +81,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
         // verify persist
         Entity entity2 = em.find(Entity.class, entity1.getId());
         Assertions.assertNotNull(entity2);
-        ReflectionAssert.assertReflectionEquals(entity1, entity2);
+        org.assertj.core.api.Assertions.assertThat(entity1).usingRecursiveComparison().isEqualTo(entity2);
 
         VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT();
 
@@ -94,7 +93,7 @@ public class TestEntityCRUD_PersistenceContextUsage extends TransactionalSetup {
         // verify update
         Entity entity3 = em.find(Entity.class, entity1.getId());
         Assertions.assertNotNull(entity3);
-        ReflectionAssert.assertReflectionEquals(entity2, entity3);
+        org.assertj.core.api.Assertions.assertThat(entity2).usingRecursiveComparison().isEqualTo(entity3);
 
         VERIFY_NO_DATA_IS_WRITTEN_IN_THE_DATABASE_WITHIN_THE_SAME_TRANSACTION_DUE_TO_PERSISTENCE_CONTEXT();
 

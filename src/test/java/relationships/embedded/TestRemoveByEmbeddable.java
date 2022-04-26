@@ -2,7 +2,6 @@ package relationships.embedded;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -41,7 +40,7 @@ public class TestRemoveByEmbeddable extends TransactionalSetup {
 
         em.createQuery("delete from EntityWithEmbeddable t where t.embedded = :embedded").setParameter("embedded", embedded).executeUpdate();
 
-        ReflectionAssert.assertReflectionEquals(model.subList(1, model.size()), em.createQuery("select t from EntityWithEmbeddable t", EntityWithEmbeddable.class).getResultList());
+        org.assertj.core.api.Assertions.assertThat(model.subList(1, model.size())).usingRecursiveComparison().isEqualTo(em.createQuery("select t from EntityWithEmbeddable t", EntityWithEmbeddable.class).getResultList());
 
     }
 }

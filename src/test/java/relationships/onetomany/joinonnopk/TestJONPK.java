@@ -2,8 +2,6 @@ package relationships.onetomany.joinonnopk;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
-import org.unitils.reflectionassert.ReflectionComparatorMode;
 import setup.TransactionalSetup;
 
 public class TestJONPK extends TransactionalSetup {
@@ -40,8 +38,8 @@ public class TestJONPK extends TransactionalSetup {
         flushAndClear();
 
         JONPKParent existing = em.find(JONPKParent.class, model.getId());
-        ReflectionAssert.assertReflectionEquals(model, existing, ReflectionComparatorMode.LENIENT_ORDER);
-        ReflectionAssert.assertReflectionEquals(model.getChildren(), existing.getChildren(), ReflectionComparatorMode.LENIENT_ORDER);
+        org.assertj.core.api.Assertions.assertThat(model).usingRecursiveComparison().isEqualTo(existing);
+        org.assertj.core.api.Assertions.assertThat(model.getChildren()).usingRecursiveComparison().isEqualTo(existing.getChildren());
 
     }
 }

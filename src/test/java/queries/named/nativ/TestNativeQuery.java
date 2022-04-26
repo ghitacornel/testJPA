@@ -3,7 +3,6 @@ package queries.named.nativ;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.unitils.reflectionassert.ReflectionAssert;
 import setup.TransactionalSetup;
 
 import java.util.ArrayList;
@@ -35,14 +34,14 @@ public class TestNativeQuery extends TransactionalSetup {
 
         List<EntityWithNamedNativeQuery> expected = new ArrayList<>();
         expected.add(buildModel().get(0));
-        ReflectionAssert.assertReflectionEquals(expected, list);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(list);
     }
 
     @Test
     public void testWithOrderParameters() {
 
         EntityWithNamedNativeQuery entity = em.createNamedQuery("EntityWithNamedNativeQuery.findByIdNative", EntityWithNamedNativeQuery.class).setParameter(1, 1).getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(0), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(0)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 
@@ -50,7 +49,7 @@ public class TestNativeQuery extends TransactionalSetup {
     public void testNamedQueryDefinedSeparately() {
 
         EntityWithNamedNativeQuery entity = em.createNamedQuery("EntityWithNamedNativeQuery.findByExactNameNative", EntityWithNamedNativeQuery.class).setParameter(1, "name 2").getSingleResult();
-        ReflectionAssert.assertReflectionEquals(buildModel().get(1), entity);
+        org.assertj.core.api.Assertions.assertThat(buildModel().get(1)).usingRecursiveComparison().isEqualTo(entity);
 
     }
 
@@ -69,7 +68,7 @@ public class TestNativeQuery extends TransactionalSetup {
         List<EntityWithNamedNativeQuery> existingData = em.createNativeQuery("select * from EntityWithNamedNativeQuery", EntityWithNamedNativeQuery.class).getResultList();
 
         // test fetch all works as expected
-        ReflectionAssert.assertReflectionEquals(buildModel(), existingData);
+        org.assertj.core.api.Assertions.assertThat(buildModel()).usingRecursiveComparison().isEqualTo(existingData);
 
         // alter fetched data
         for (EntityWithNamedNativeQuery entity : existingData) {
@@ -86,7 +85,7 @@ public class TestNativeQuery extends TransactionalSetup {
         for (EntityWithNamedNativeQuery entity : expected) {
             entity.setName("new name " + entity.getId());
         }
-        ReflectionAssert.assertReflectionEquals(expected, alteredData);
+        org.assertj.core.api.Assertions.assertThat(expected).usingRecursiveComparison().isEqualTo(alteredData);
 
 
     }

@@ -16,15 +16,8 @@ public class BothOwnerM {
     )
     // map it with final
     private List<BothOwnerN> listWithNs = new ArrayList<>();
-
-    // do not use this setter, it overrides the proxy
-    public void setListWithNs(List<BothOwnerN> listWithNs) {
-        this.listWithNs = listWithNs;
-    }
-
     @Id
     private Integer id;
-
     @Column(nullable = false)
     private String name;
 
@@ -46,6 +39,11 @@ public class BothOwnerM {
 
     public List<BothOwnerN> getListWithNs() {
         return listWithNs;
+    }
+
+    // do not use this setter, it overrides the proxy
+    public void setListWithNs(List<BothOwnerN> listWithNs) {
+        this.listWithNs = listWithNs;
     }
 
 
