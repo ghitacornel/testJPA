@@ -1,6 +1,6 @@
 package relationships.collections.maps.manytomany;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.HashMap;
 import java.util.Map;
 

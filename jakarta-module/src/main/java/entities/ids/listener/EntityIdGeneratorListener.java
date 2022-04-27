@@ -1,6 +1,6 @@
 package entities.ids.listener;
 
-import javax.persistence.PrePersist;
+import jakarta.persistence.PrePersist;
 import java.util.UUID;
 
 /**

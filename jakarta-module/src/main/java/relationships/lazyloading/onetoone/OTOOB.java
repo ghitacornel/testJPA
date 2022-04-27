@@ -1,6 +1,6 @@
 package relationships.lazyloading.onetoone;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class OTOOB {

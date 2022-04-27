@@ -1,6 +1,6 @@
 package relationships.lazyloading.onetomany;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class OTOMLazyChild {

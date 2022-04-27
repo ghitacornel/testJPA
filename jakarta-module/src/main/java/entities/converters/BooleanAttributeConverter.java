@@ -1,6 +1,6 @@
 package entities.converters;
 
-import javax.persistence.AttributeConverter;
+import jakarta.persistence.AttributeConverter;
 
 /**
  * convert a boolean to-from Y-N

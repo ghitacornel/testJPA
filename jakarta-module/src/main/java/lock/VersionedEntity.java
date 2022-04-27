@@ -1,8 +1,8 @@
 package lock;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Version;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Version;
 
 /**
  * a simple versioned {@link Entity} is used for optimistic lock

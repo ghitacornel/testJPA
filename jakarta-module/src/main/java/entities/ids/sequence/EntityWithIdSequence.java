@@ -1,6 +1,6 @@
 package entities.ids.sequence;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @SequenceGenerator(name = "generatorName", sequenceName = "ids")

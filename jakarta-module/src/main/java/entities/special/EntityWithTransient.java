@@ -1,8 +1,8 @@
 package entities.special;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Transient;
 
 /**
  * transient fields are not processed by JPA

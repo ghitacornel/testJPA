@@ -3,7 +3,7 @@ package setup;
 import org.junit.jupiter.api.extension.BeforeAllCallback;
 import org.junit.jupiter.api.extension.ExtensionContext;
 
-import javax.persistence.Persistence;
+import jakarta.persistence.Persistence;
 
 import static org.junit.jupiter.api.extension.ExtensionContext.Namespace.GLOBAL;
 

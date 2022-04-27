@@ -1,6 +1,6 @@
 package relationships.manytoone.cascade;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * Cascading with this kind of relationship is bad since the parents are supposed to be independent

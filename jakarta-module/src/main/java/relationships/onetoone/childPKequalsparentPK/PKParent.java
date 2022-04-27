@@ -1,6 +1,6 @@
 package relationships.onetoone.childPKequalsparentPK;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class PKParent {

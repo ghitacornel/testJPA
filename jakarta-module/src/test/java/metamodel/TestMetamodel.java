@@ -1,13 +1,13 @@
 package metamodel;
 
 import entities.simple.Entity;
-import entities.simple.Entity_;
+//import entities.simple.Entity_;
 import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
+import jakarta.persistence.criteria.CriteriaBuilder;
+import jakarta.persistence.criteria.CriteriaQuery;
+import jakarta.persistence.criteria.Root;
 
 public class TestMetamodel extends TransactionalSetup {
 
@@ -25,7 +25,7 @@ public class TestMetamodel extends TransactionalSetup {
         CriteriaBuilder cb = em.getCriteriaBuilder();
         CriteriaQuery<Entity> cq = cb.createQuery(Entity.class);
         Root<Entity> from = cq.from(Entity.class);
-        cq.where(cb.equal(from.get(Entity_.name), "name"));
+//        cq.where(cb.equal(from.get(Entity_.name), "name"));
 
         Entity actualData = em.createQuery(cq).getSingleResult();
 

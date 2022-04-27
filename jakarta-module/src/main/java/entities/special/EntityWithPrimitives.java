@@ -1,7 +1,7 @@
 package entities.special;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 /**
  * WARNING : do not use primitives for NULL database columns <br>

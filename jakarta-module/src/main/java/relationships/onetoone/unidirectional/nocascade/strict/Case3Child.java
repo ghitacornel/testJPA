@@ -1,6 +1,6 @@
 package relationships.onetoone.unidirectional.nocascade.strict;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class Case3Child {

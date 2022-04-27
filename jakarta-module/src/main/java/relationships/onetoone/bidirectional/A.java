@@ -1,6 +1,6 @@
 package relationships.onetoone.bidirectional;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class A {

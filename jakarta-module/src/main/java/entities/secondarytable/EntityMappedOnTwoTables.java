@@ -1,6 +1,6 @@
 package entities.secondarytable;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "EMPLOYEE")

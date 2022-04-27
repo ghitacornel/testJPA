@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
-import javax.persistence.Persistence;
+import jakarta.persistence.Persistence;
 import java.util.Date;
 
 public class TestCRUD extends TransactionalSetup {

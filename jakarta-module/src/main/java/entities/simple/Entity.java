@@ -1,17 +1,17 @@
 package entities.simple;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Column;
+import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 /**
- * a simple {@link javax.persistence.Entity}<br>
+ * a simple {@link jakarta.persistence.Entity}<br>
  * JPA offers well defined default mappings<br>
  * GOOD PRACTICE : ensure used database objects are controlled through JPA annotations and JPA defaults are not used<br>
  * this way code refactoring can be used over entities and entities mappings without affecting database used objects
  */
-@javax.persistence.Entity
+@jakarta.persistence.Entity
 @Table(name = "SimpleEntity")// override default table name
 public class Entity {
 

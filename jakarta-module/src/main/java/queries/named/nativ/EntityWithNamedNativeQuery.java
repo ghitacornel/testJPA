@@ -3,7 +3,7 @@ package queries.named.nativ;
 import relationships.onetomany.strict.OTOMStrictChild;
 import relationships.onetomany.strict.OTOMStrictParent;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 
 @NamedQuery(name = "EntityWithNamedNativeQuery.countAll", query = "select count(*) from EntityWithNamedNativeQuery t")

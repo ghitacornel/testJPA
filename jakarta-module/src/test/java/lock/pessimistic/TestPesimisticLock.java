@@ -4,9 +4,9 @@ import entities.simple.Entity;
 import org.junit.jupiter.api.*;
 import setup.Setup;
 
-import javax.persistence.EntityManager;
-import javax.persistence.LockModeType;
-import javax.persistence.LockTimeoutException;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.LockModeType;
+import jakarta.persistence.LockTimeoutException;
 
 public class TestPesimisticLock extends Setup {
 

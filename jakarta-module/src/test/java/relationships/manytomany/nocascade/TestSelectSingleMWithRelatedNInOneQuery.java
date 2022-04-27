@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
-import javax.persistence.Query;
+import jakarta.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 

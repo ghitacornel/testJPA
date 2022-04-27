@@ -1,8 +1,8 @@
 package relationships.manytoone.cascade;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 /**
  * Cascading with this kind of relationship is bad since the parents are supposed to be independent

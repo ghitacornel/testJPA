@@ -1,9 +1,9 @@
 package queries.named;
 
-import javax.persistence.Basic;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQuery;
+import jakarta.persistence.Basic;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.NamedQuery;
 
 @NamedQuery(name = "EntityWithNamedQuery.findByName", query = "select t from EntityWithNamedQuery t where lower(t.name) like :name")
 @NamedQuery(name = "EntityWithNamedQuery.findById", query = "select t from EntityWithNamedQuery t where t.id = ?1")

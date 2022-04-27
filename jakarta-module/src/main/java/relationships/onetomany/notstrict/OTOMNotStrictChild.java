@@ -1,6 +1,6 @@
 package relationships.onetomany.notstrict;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * This class represents the MANY part of a ONE TO MANY relationship

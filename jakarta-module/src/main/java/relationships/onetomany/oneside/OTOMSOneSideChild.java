@@ -1,8 +1,8 @@
 package relationships.onetomany.oneside;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 
 /**
  * This class represents the MANY part of a ONE TO MANY relationship

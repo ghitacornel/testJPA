@@ -1,6 +1,6 @@
 package entities.special;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class EntityWithLOB {

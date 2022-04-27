@@ -1,6 +1,6 @@
 package entities.ids.table;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class EntityBWithIdGeneratedFromTable {

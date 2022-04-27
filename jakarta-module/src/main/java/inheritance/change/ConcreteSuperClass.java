@@ -2,7 +2,7 @@ package inheritance.change;
 
 import inheritance.InheritanceMappedSuperClass;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 /**
  * not all inheritance types are supported<br>

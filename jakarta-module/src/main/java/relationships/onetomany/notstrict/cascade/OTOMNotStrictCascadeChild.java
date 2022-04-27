@@ -1,6 +1,6 @@
 package relationships.onetomany.notstrict.cascade;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 
 @Entity
 public class OTOMNotStrictCascadeChild {

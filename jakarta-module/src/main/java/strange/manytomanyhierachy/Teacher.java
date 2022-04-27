@@ -2,7 +2,7 @@ package strange.manytomanyhierachy;
 
 import org.hibernate.annotations.Where;
 
-import javax.persistence.*;
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
