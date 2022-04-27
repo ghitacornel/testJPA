@@ -3,7 +3,7 @@ package queries.builder;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import queries.simple.SimpleQueryEntity;
-//import queries.simple.SimpleQueryEntity_;
+import queries.simple.SimpleQueryEntity_;
 import setup.TransactionalSetup;
 
 import jakarta.persistence.TypedQuery;
@@ -90,7 +90,7 @@ public class TestQueryBuilder extends TransactionalSetup {
 
         CriteriaQuery<SimpleQueryEntity> query = criteriaBuilder.createQuery(SimpleQueryEntity.class);
         Root<SimpleQueryEntity> from = query.from(SimpleQueryEntity.class);
-//        query.where(criteriaBuilder.equal(from.get(SimpleQueryEntity_.name), "name 4"));
+        query.where(criteriaBuilder.equal(from.get(SimpleQueryEntity_.name), "name 4"));
         TypedQuery<SimpleQueryEntity> typedQuery = em.createQuery(query);
 
         SimpleQueryEntity entity = typedQuery.getSingleResult();

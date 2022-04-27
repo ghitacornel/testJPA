@@ -39,7 +39,7 @@ public class TestEntityWithEnums extends TransactionalSetup {
             for (Object[] objects : data) {
                 Assertions.assertEquals(1, objects[0]);
                 Assertions.assertEquals(SimpleEnum.ONE.name(), objects[1]);
-                Assertions.assertEquals(SimpleEnum.TWO.ordinal(), objects[2]);
+                Assertions.assertEquals(SimpleEnum.TWO.ordinal() + "", objects[2] + "");
             }
         }
 
@@ -55,7 +55,7 @@ public class TestEntityWithEnums extends TransactionalSetup {
             for (Object[] objects : data) {
                 Assertions.assertEquals(1, objects[0]);
                 Assertions.assertEquals(SimpleEnum.THREE.name(), objects[1]);
-                Assertions.assertEquals(SimpleEnum.FOUR.ordinal(), objects[2]);
+                Assertions.assertEquals(SimpleEnum.FOUR.ordinal() + "", objects[2] + "");
             }
         }
 
