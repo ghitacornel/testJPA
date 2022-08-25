@@ -148,6 +148,7 @@
         <class>entities.listener.circular.ChildCircularWithListener</class>
 
         <class>entities.cached.CachedPerson</class>
+        <class>queries.sum.EntityForSum</class>
 
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>

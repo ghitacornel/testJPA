@@ -154,6 +154,8 @@
         <class>relationships.unrelated.EntityLeft</class>
         <class>relationships.unrelated.EntityRight</class>
 
+        <class>queries.sum.EntityForSum</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
