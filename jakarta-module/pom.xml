@@ -73,7 +73,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-core</artifactId>
-            <version>6.1.0.Final</version>
+            <version>6.1.2.Final</version>
         </dependency>
         <!-- EclipseLink -->
         <!--        <dependency>-->
@@ -86,7 +86,7 @@
         <dependency>
             <groupId>org.hibernate.orm</groupId>
             <artifactId>hibernate-jcache</artifactId>
-            <version>6.1.0.Final</version>
+            <version>6.1.2.Final</version>
         </dependency>
         <dependency>
             <groupId>org.ehcache</groupId>
