@@ -17,12 +17,13 @@ public class NoCascadeM {
     @ManyToMany
     @JoinTable(
             name = "NoCascadeMN",
-            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "id", nullable = false)},
-            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "id", nullable = false)},
+            joinColumns = {@JoinColumn(name = "id_m", referencedColumnName = "NoCascadeM_ID", nullable = false)},
+            inverseJoinColumns = {@JoinColumn(name = "id_n", referencedColumnName = "NoCascadeN_ID", nullable = false)},
             uniqueConstraints = {@UniqueConstraint(columnNames = {"id_m", "id_n"})}
     )
     final private List<NoCascadeN> listWithNs = new ArrayList<>();
     @Id
+    @Column(name = "NoCascadeM_ID")
     private Integer id;
     @Column(nullable = false)
     private String name;

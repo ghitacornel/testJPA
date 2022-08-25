@@ -18,6 +18,7 @@ public class NoCascadeN {
     @ManyToMany(mappedBy = "listWithNs")
     final private List<NoCascadeM> listWithMs = new ArrayList<>();
     @Id
+    @Column(name = "NoCascadeN_ID")
     private Integer id;
     @Column(nullable = false)
     private String name;
