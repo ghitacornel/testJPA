@@ -156,6 +156,8 @@
 
         <class>queries.sum.EntityForSum</class>
 
+        <class>relationships.ofelements.ParentOfElements</class>
+
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <shared-cache-mode>ENABLE_SELECTIVE</shared-cache-mode>
 
