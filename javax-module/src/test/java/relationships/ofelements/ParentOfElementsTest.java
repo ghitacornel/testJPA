@@ -32,14 +32,17 @@ public class ParentOfElementsTest extends TransactionalSetup {
             notMatched.setName("parent of elements not matched");
             notMatched.setElements(new HashSet<>());
             notMatched.getElements().add("1");
+            notMatched.getElements().add("twos");
             em.persist(notMatched);
         }
 
         em.persist(parent);
 
-        String query = "select p from ParentOfElements p where p.id = 1";
+        String query = "select p from ParentOfElements p join p.elements e where e like :name";
 
-        List<ParentOfElements> parentOfElements = em.createQuery(query, ParentOfElements.class).getResultList();
+        List<ParentOfElements> parentOfElements = em.createQuery(query, ParentOfElements.class)
+                .setParameter("name", "two")
+                .getResultList();
         Assertions.assertEquals(1, parentOfElements.size());
         Assertions.assertEquals(parent.getId(), parentOfElements.get(0).getId());
 
