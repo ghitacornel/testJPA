@@ -5,8 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import setup.TransactionalSetup;
 
-import java.util.List;
-
 public class TestEntitySelectNullNotNull extends TransactionalSetup {
 
     @BeforeEach
