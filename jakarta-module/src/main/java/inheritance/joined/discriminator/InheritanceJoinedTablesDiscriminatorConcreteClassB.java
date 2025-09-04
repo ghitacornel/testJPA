@@ -1,13 +1,11 @@
 package inheritance.joined.discriminator;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.PrimaryKeyJoinColumn;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "IerarhieJoinedDiscriminatorB")
 @PrimaryKeyJoinColumn(name = "id", referencedColumnName = "id")
+@DiscriminatorValue("JoinChildB")
 public class InheritanceJoinedTablesDiscriminatorConcreteClassB extends InheritanceJoinedTablesDiscriminatorSuperClass {
 
     @Column(nullable = false)

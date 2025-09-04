@@ -13,6 +13,7 @@ import jakarta.persistence.*;
 @Table(name = "IerarhieJoinedDiscriminator")
 @Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name = "discriminator", length = 100)// observe specified discriminator to use
+@DiscriminatorValue("JoinParent")
 public class InheritanceJoinedTablesDiscriminatorSuperClass extends InheritanceMappedSuperClass {
 
     @Column(nullable = false)
